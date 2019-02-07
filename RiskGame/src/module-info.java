@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author Hemanshu
+ * @author Hemanshu and Vikram
  *
  */
 module RiskGame {
