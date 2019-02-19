@@ -1,12 +1,56 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Hemanshu
+ * @date 2019-02-19
+ */
 public class Country {
     int id;
     String countryName;
     String ParentContinent;
     List<String> adjacentCountries =  new ArrayList<>();
     int numberOfSoldiers;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+    public String getParentContinent() {
+        return ParentContinent;
+    }
+
+    public void setParentContinent(String parentContinent) {
+        ParentContinent = parentContinent;
+    }
+
+    public List<String> getAdjacentCountries() {
+        return adjacentCountries;
+    }
+
+    public void setAdjacentCountries(List<String> adjacentCountries) {
+        this.adjacentCountries = adjacentCountries;
+    }
+
+    public int getNumberOfSoldiers() {
+        return numberOfSoldiers;
+    }
+
+    public void setNumberOfSoldiers(int numberOfSoldiers) {
+        this.numberOfSoldiers = numberOfSoldiers;
+    }
 
     public Country(int id, String name){
         this.id = id;
