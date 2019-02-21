@@ -31,13 +31,17 @@ public class GameDriver {
         Scanner input1 = new Scanner(System.in);
         localvariable = input1.nextInt();
         if(localvariable == 1){
-
+//            CreateMap();
         } else if (localvariable == 2) {
-
+//            LoadMap();
         }else{
             System.out.println("Please enter Relevant option");
         }
     }
+
+
+
+
 
 
     
