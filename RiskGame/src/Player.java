@@ -1,11 +1,11 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Hemanshu
- * @date 2019-02-19
+ * @date 2019-02-12 
  */
-public class Player {
+public class Player 
+{
     List<String> Cards= new ArrayList<>();
     List<String> countriesOwned= new ArrayList<>();
     boolean alive;

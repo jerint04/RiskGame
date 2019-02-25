@@ -1,8 +1,7 @@
-import java.sql.SQLOutput;
+import java.util.Arrays;
 import java.util.*;
-
 /**
- * @author Hemanshu
+ * @author Vikram
  * @date 2019-02-20
  */
 public class CreateMap {
