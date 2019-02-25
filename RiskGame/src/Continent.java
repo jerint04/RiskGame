@@ -9,7 +9,7 @@ public class Continent {
 	String continentName;
 	int controlValue;
 	List<String> Countries= new ArrayList<>();
-	List<String> Continents= new ArrayList<>();
+	List<String> AdjacentContinents = new ArrayList<>();
 	
 	public Continent(String name , int point) {
 		this.continentName = name;
@@ -40,12 +40,12 @@ public class Continent {
         Countries = countries;
     }
 
-    public List<String> getContinents() {
-        return Continents;
+    public List<String> getAdjacentContinents() {
+        return AdjacentContinents;
     }
 
-    public void setContinents(List<String> continents) {
-        Continents = continents;
+    public void setAdjacentContinents(List<String> adjacentContinents) {
+        AdjacentContinents = adjacentContinents;
     }
 
     public void InsertCountry(String countryName) {

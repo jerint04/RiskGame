@@ -52,9 +52,15 @@ public class Country {
         this.numberOfSoldiers = numberOfSoldiers;
     }
 
-    public Country(int id, String name){
+    public Country(int id, String CountryName){
         this.id = id;
-        this.countryName = name;
+        this.countryName = CountryName;
+    }
+
+    public Country(int id, String CountryName, String ContinentName){
+        this.id = id;
+        this.countryName = CountryName;
+        this.ParentContinent = ContinentName;
     }
 
     public void addAdjacentCountry(String name){

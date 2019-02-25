@@ -31,7 +31,7 @@ public class GameDriver {
         Scanner input1 = new Scanner(System.in);
         localvariable = input1.nextInt();
         if(localvariable == 1){
-//            CreateMap();
+            CreateMap();
         } else if (localvariable == 2) {
 //            LoadMap();
         }else{
@@ -41,6 +41,33 @@ public class GameDriver {
 
 
 
+    public static void CreateMap(){
+        boolean exit= true;
+        while(exit) {
+            System.out.println("1. Create Continent");
+            System.out.println("2. Create Country");
+            System.out.println("3. Add Neighbour");
+            System.out.println("4. Exit");
+            System.out.println("Enter the task you want to perform :");
+            Scanner in = new Scanner(System.in);
+            int val = in.nextInt();
+            switch(val){
+                case 1: CreateMap.createContinent();
+                    break;
+                case 2: CreateMap.createCountry();
+                    break;
+                case 3:
+                    GraphNew.printGraph();
+                    GraphNew.addNeighbour();
+                    GraphNew.printGraph();
+                    break;
+                case 4:
+                    exit = false;
+                    break;
+            }
+
+        }
+    }
 
 
 
