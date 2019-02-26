@@ -1,3 +1,7 @@
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 /**
  * @author Jerin
@@ -33,7 +37,6 @@ public class ReadMap {
                     readCountriesFromFile = true;
                     continue;
                 }
-
                 if (readContinentsFromFile) {
                     String[] parsedContinentArray = readLine.split("=");
                     Continent continent = new Continent(Helper.getContinentCountId(), parsedContinentArray[0],
@@ -62,8 +65,6 @@ public class ReadMap {
             System.out.println(e);
         }
     }
-
-
 
 
 
