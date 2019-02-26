@@ -6,6 +6,7 @@ import java.util.List;
  * @date 2019-02-19
  */
 public class Continent {
+    int continentId;
 	String continentName;
 	int controlValue;
 	List<String> Countries= new ArrayList<>();
@@ -15,6 +16,12 @@ public class Continent {
 		this.continentName = name;
 		this.controlValue = point;
 	}
+
+    public Continent(int id,String name , int point) {
+        this.continentId = id;
+	    this.continentName = name;
+        this.controlValue = point;
+    }
 
     public String getContinentName() {
         return continentName;

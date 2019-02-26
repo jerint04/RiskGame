@@ -1,55 +1,71 @@
 import java.util.*;
-
-/*import com.risk.model.Continent;
-import com.risk.model.Country;
-*/
+/**
+ * @author Jerin
+ */
 import java.io.*;
 public class ReadMap {
 
-	public static void main(String args[]) {
-		try {
-			
-			 boolean getContinents = false;
-	            boolean getCountries = false;
-	            HashMap<String, Integer> Continent = new HashMap<String, Integer>();
+/*    public static void main(String[] args) {
+        readMap();
+        System.out.println("Countinent List : " + CreateMap.ContinentList );
+        System.out.println("Country List : "  + CreateMap.countryIdHashMap );
+    }*/
 
-			File file = new File("\\E:\\example.map");
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));	
+    public static void readMap() {
+        try {
+            boolean readContinentsFromFile = false;
+            boolean readCountriesFromFile = false;
+            String filePath = "Asia.map";
+            File file = new File(filePath);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String readLine;
-            int continentID = 0;
-            int countryID = 0;
+            int continentID = Helper.getContinentCountId();
+            int countryID = Helper.getCountryCountId();
+
             while ((readLine = bufferedReader.readLine()) != null) {
                 if (readLine.trim().length() == 0)
                     continue;
                 else if ((readLine.trim()).equals("[Continents]")) {
-                    getContinents = true;
+                    readContinentsFromFile = true;
                     continue;
                 } else if ((readLine.trim()).equals("[Territories]")) {
-                    getContinents = false;
-                    getCountries = true;
+                    readContinentsFromFile = false;
+                    readCountriesFromFile = true;
                     continue;
                 }
 
-                if (getContinents) {
-                	String[] ContinentsArray = readLine.split("=");
-                	System.out.println(ContinentsArray[0]+ " "+ ContinentsArray[1]);
-
-                	Continent.put(ContinentsArray[0], Integer.parseInt(ContinentsArray[1]));
-                	}
-                else if (getCountries) {
-                    String[] TerritoriesArray = readLine.split(",");
-                    String continentName = TerritoriesArray[3];
-                    Country country = new Country(countryID++, TerritoriesArray[0]);
-                    System.out.println(countryID+ " "+ TerritoriesArray[0]);
-                    
+                if (readContinentsFromFile) {
+                    String[] parsedContinentArray = readLine.split("=");
+                    Continent continent = new Continent(Helper.getContinentCountId(), parsedContinentArray[0],
+                            Integer.parseInt(parsedContinentArray[1]));
+                    CreateMap.ContinentList.add(continent);
+                    CreateMap.continentHashMap.put(parsedContinentArray[0], continent);
+                } else if (readCountriesFromFile) {
+                    String[] parsedCountryList = readLine.split(",");
+                    String continentName = parsedCountryList[3];
+                    Country country = new Country(Helper.getNewCountryCountId(), parsedCountryList[0],continentName);
+                    country.setxCoordinate(Integer.parseInt(parsedCountryList[1]));
+                    country.setyCoordinate(Integer.parseInt(parsedCountryList[2]));
+                    int p = 0;
+                    for (String neighborCountry : parsedCountryList) {
+                        if (p > 3) {
+                            country.addAdjacentCountry(neighborCountry);
+                        }
+                        p++;
+                    }
+                    CreateMap.countryIdHashMap.put(Helper.getCountryCountId() , parsedCountryList[0]);
+                    CreateMap.countryHashMap.put(parsedCountryList[0],country);
                 }
-            
             }
-		}
-		catch (Exception e) {
-			System.out.println("sorry");
-			// handle exception
-		}
-	}
-	
+            bufferedReader.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+
+
+
+
+
 }

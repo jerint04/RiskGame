@@ -11,6 +11,24 @@ public class Country {
     String ParentContinent;
     List<String> adjacentCountries =  new ArrayList<>();
     int numberOfSoldiers;
+    int xCoordinate;
+    int yCoordinate;
+
+    public int getxCoordinate() {
+        return xCoordinate;
+    }
+
+    public void setxCoordinate(int xCoordinate) {
+        this.xCoordinate = xCoordinate;
+    }
+
+    public int getyCoordinate() {
+        return yCoordinate;
+    }
+
+    public void setyCoordinate(int yCoordinate) {
+        this.yCoordinate = yCoordinate;
+    }
 
     public int getId() {
         return id;
