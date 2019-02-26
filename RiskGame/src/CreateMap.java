@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.*;
+
 /**
  * @author Vikram
  * @date 2019-02-20
@@ -7,8 +8,11 @@ import java.util.*;
 public class CreateMap {
 
     static ArrayList<Continent> ContinentList = new ArrayList<Continent>();
-    static ArrayList<Country> CountryList = new ArrayList<Country>();
+    static ArrayList<Country> CountryList = new ArrayList<Country>(); // This is redundant we might not use it. just created for timebeing
     static HashMap<Integer, String> countryIdHashMap = new HashMap<>();
+    static HashMap<String, Country> countryHashMap = new HashMap<>();
+    static HashMap<Integer, String> continentIdHashMap = new HashMap<>(); //THis is redundant we might not use it. just created for timebeing
+    static HashMap<String, Continent> continentHashMap = new HashMap<>();
 
     public static void createContinent() {
         System.out.println("Please Enter the Continent Name :");
@@ -16,7 +20,9 @@ public class CreateMap {
         String continentName = input.nextLine();
         System.out.println("Please Enter Control Value :");
         int controlValue = input.nextInt();
-        ContinentList.add(new Continent(continentName, controlValue));
+        Continent temp = new Continent(continentName, controlValue);
+        ContinentList.add(temp);
+        continentHashMap.put(continentName, temp);
     }
 
     public static void createCountry() {
@@ -26,8 +32,36 @@ public class CreateMap {
         System.out.println("Please Enter Continent it Belongs :");
         String continentBelongsTo = input.nextLine();
         int id = Helper.getNewCountryCountId();
-        CountryList.add(new Country(id, countryName, continentBelongsTo));
+        Country temp = new Country(id, countryName, continentBelongsTo);
+        CountryList.add(temp);
         countryIdHashMap.put(id, countryName);
+        countryHashMap.put(countryName, temp);
+        addCountriesInContinent(countryName , continentBelongsTo);
+    }
+
+
+
+    public static void addAdjacentNeighbourCountriesUsingCoordinates(int i, int j) {
+        String countryXname = countryIdHashMap.get(i);
+        String countryYname = countryIdHashMap.get(j);
+        Country countryX = countryHashMap.get(countryXname);
+//        Country countryY = countryHashMap.get(countryYname);
+        countryX.addAdjacentCountry(countryYname);
+//        countryY.addAdjacentCountry(countryXname);
+    }
+
+    public static void addAdjacentNeighbourCountriesUsingNames(String Source, String Destination) {
+//        String countryXname = countryIdHashMap.get(i);
+//        String countryYname =  countryIdHashMap.get(j);
+        Country countryX = countryHashMap.get(Source);
+//        Country countryY = countryHashMap.get(Destination);
+        countryX.addAdjacentCountry(Destination);
+//        countryY.addAdjacentCountry(countryXname);
+    }
+
+    public static void addCountriesInContinent(String countryName, String Continent) {
+        Continent temp = continentHashMap.get(Continent);
+        temp.InsertCountry(countryName);
     }
 }
 
@@ -46,9 +80,9 @@ class GraphNew {
         int x = in.nextInt();
         System.out.println("Enter y value to Make add neighbour :");
         int y = in.nextInt();
-        if(x <= Helper.getCountryCountId() && y <= Helper.getCountryCountId()){
+        if (x <= Helper.getCountryCountId() && y <= Helper.getCountryCountId()) {
             countryMatrix[x][y] = 1;
-        } else{
+        } else {
             System.out.println("Enter Correct x and y values !");
         }
 
@@ -58,21 +92,36 @@ class GraphNew {
         if (Helper.getCountryCountId() != 0) {
             for (int i = 0; i <= Helper.getCountryCountId(); i++) {
                 for (int j = 0; j <= Helper.getCountryCountId(); j++) {
-                    if(i==0 && j==0){
+                    if (i == 0 && j == 0) {
                         System.out.print("Country");
-                    }else if (i == 0) {
+                    } else if (i == 0) {
                         if (j != 0)
                             System.out.print(CreateMap.countryIdHashMap.get(j) + "(" + j + ") ");
                     } else if (j == 0) {
                         if (i != 0)
-                            System.out.print(CreateMap.countryIdHashMap.get(i) + "(" + i+ ") ");
+                            System.out.print(CreateMap.countryIdHashMap.get(i) + "(" + i + ") ");
                     } else {
-                        System.out.print(countryMatrix[i][j]+" ");
+                        System.out.print(countryMatrix[j][i] + " ");
                     }
                 }
                 System.out.println("");
             }
-        }else{
+        } else {
+            System.out.println("Array is empty !");
+        }
+    }
+
+    public static void readFromGraph() {
+        if (Helper.getCountryCountId() != 0) {
+            for (int i = 0; i <= Helper.getCountryCountId(); i++) {
+                for (int j = 0; j <= Helper.getCountryCountId(); j++) {
+                    if (i != 0 || j != 0) {
+                        if(countryMatrix[j][i]==1)
+                            CreateMap.addAdjacentNeighbourCountriesUsingCoordinates(j,i);
+                    }
+                }
+            }
+        } else {
             System.out.println("Array is empty !");
         }
     }
@@ -124,7 +173,6 @@ class GraphNew {
         int numV = Helper.getCountryCountId();
         if (v >= numV) {
             System.out.println("Can not Iterate through the list");
-            ;
         }
         List<Integer> neighbors = new ArrayList<Integer>();
         for (int i = 0; i < numV; i++) {

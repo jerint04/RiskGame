@@ -62,6 +62,7 @@ public class GameDriver {
                     GraphNew.printGraph();
                     break;
                 case 4:
+                    GraphNew.readFromGraph();
                     exit = false;
                     break;
             }
