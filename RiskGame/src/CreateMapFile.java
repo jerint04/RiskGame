@@ -4,12 +4,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+
+
 /**
  * @author Hemanshu
  * @date 2019-02-25
  */
 public class CreateMapFile {
-    public void createFile() {
+    public static void createFile() {
         StringBuffer fileData = new StringBuffer();
         fileData.append("[Map]\r\n");
         fileData.append("author=Concordia Students\r\n");
@@ -40,9 +42,10 @@ public class CreateMapFile {
         BufferedWriter writer = null;
         try {
             //Delete temporary file
-            Path tempFilePath = Paths.get("./assets/maps"+ "temp" + ".map");
+            String currentDirectory = System.getProperty("user.dir");
+            Path tempFilePath = Paths.get(currentDirectory+"/RiskGame/assets//maps//"+ "temp"+".map" );
             Files.deleteIfExists(tempFilePath);
-            writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8);
+            writer = Files.newBufferedWriter(tempFilePath, StandardCharsets.UTF_8);
             writer.write(new String(fileData));
             writer.close();
         } catch (Exception e) {

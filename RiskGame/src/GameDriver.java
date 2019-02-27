@@ -1,4 +1,6 @@
+import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -9,7 +11,7 @@ import java.util.Scanner;
 public class GameDriver {
     static int playerNumber;
     static ArrayList<Player> PlayerList = new ArrayList<Player>();
-
+    public static Scanner sc=new Scanner(System.in);
 
     public static void InitialisePlayers(){
         System.out.println("Number of Players who want to play :");
@@ -21,11 +23,32 @@ public class GameDriver {
             System.out.println("Player "+(i+1)+" name :");
             String name = input.next();
             PlayerList.add(new Player(name));
+
+
         }
 
 
     }
 
+    public static void LoadMap(){
+        List<String> getFileName=new ArrayList<String>();
+        File[] filesName = new File(System.getProperty("user.dir")+"/RiskGame/assets/maps").listFiles();
+
+        System.out.println(filesName.length);
+
+        for (File getFilename : filesName) {
+            if (getFilename.isFile()) {
+                getFileName.add(getFilename.getName());
+            }
+        }
+        for(int i = 0; i < getFileName.size(); i++){
+            System.out.println(getFileName.get(i));
+        }
+        System.out.println("Enter the map name you want to load");
+        String mapName=sc.nextLine();
+        String currentDirectory = System.getProperty("user.dir");
+        ReadMap.readMap(currentDirectory+"/RiskGame/assets/maps/"+ mapName+".map");
+    }
     public static void StartOrLoadGame(){
         System.out.println("Select 1 to Start the game and create map, Select 2 to Load the Game :");
         int localvariable;
@@ -34,7 +57,7 @@ public class GameDriver {
         if(localvariable == 1){
             CreateMap();
         } else if (localvariable == 2) {
-//            LoadMap();
+          LoadMap();
         }else{
             System.out.println("Please enter Relevant option");
         }

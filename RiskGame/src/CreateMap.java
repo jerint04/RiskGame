@@ -120,6 +120,7 @@ class GraphNew {
                             CreateMap.addAdjacentNeighbourCountriesUsingCoordinates(j,i);
                     }
                 }
+            CreateMapFile.createFile();
             }
         } else {
             System.out.println("Array is empty !");

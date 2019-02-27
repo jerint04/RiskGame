@@ -1,18 +1,11 @@
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
 /**
  * @author Jerin
  * @date 22-February-2019
  */
-
-import java.io.*;
-
-
-
-//testing the doc how to create doc file in the idea
 public class ReadMap {
 
 /*    public static void main(String[] args) {
@@ -21,11 +14,11 @@ public class ReadMap {
         System.out.println("Country List : "  + CreateMap.countryIdHashMap );
     }*/
 
-    public static void readMap() {
+    public static void readMap(String getFileName) {
         try {
             boolean readContinentsFromFile = false;
             boolean readCountriesFromFile = false;
-            String filePath = "Asia.map";
+            String filePath = getFileName;
             File file = new File(filePath);
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String readLine;
