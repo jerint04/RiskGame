@@ -22,7 +22,6 @@ public class Country {
      * @param ContinentName, x co-ordinate of the country
      *
      */
-
     public Country(int id, String CountryName, String ContinentName)
     {
         this.id = id;

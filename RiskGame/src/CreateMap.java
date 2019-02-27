@@ -8,7 +8,7 @@ import java.util.*;
 public class CreateMap {
 
     static ArrayList<Continent> ContinentList = new ArrayList<Continent>();
-    static ArrayList<Country> CountryList = new ArrayList<Country>(); // This is redundant we might not use it. just created for timebeing
+    static ArrayList<String> CountryList = new ArrayList<String>(); // This is redundant we might not use it. just created for timebeing
     static HashMap<Integer, String> countryIdHashMap = new HashMap<>();
     static HashMap<String, Country> countryHashMap = new HashMap<>();
     static HashMap<Integer, String> continentIdHashMap = new HashMap<>(); //THis is redundant we might not use it. just created for timebeing
@@ -33,12 +33,11 @@ public class CreateMap {
         String continentBelongsTo = input.nextLine();
         int id = Helper.getNewCountryCountId();
         Country temp = new Country(id, countryName, continentBelongsTo);
-        CountryList.add(temp);
+        CountryList.add(countryName);
         countryIdHashMap.put(id, countryName);
         countryHashMap.put(countryName, temp);
-        addCountriesInContinent(countryName , continentBelongsTo);
+        addCountriesInContinent(countryName, continentBelongsTo);
     }
-
 
 
     public static void addAdjacentNeighbourCountriesUsingCoordinates(int i, int j) {
@@ -70,9 +69,17 @@ public class CreateMap {
  * Creation of Adjacency Matrix
  * */
 class GraphNew {
-    static int[][] countryMatrix = new int[100][100];
+    static int maxSize = 100;
+    static int[][] countryMatrix = new int[maxSize][maxSize];
     static int size;
 
+    public static void initializeCountryMatrix() {
+        for (int i = 0; i < maxSize; i++) {
+            for (int j = 0; j < maxSize; j++) {
+                countryMatrix[i][j] = 0;
+            }
+        }
+    }
 
     public static void addNeighbour() {
         Scanner in = new Scanner(System.in);
@@ -116,11 +123,11 @@ class GraphNew {
             for (int i = 0; i <= Helper.getCountryCountId(); i++) {
                 for (int j = 0; j <= Helper.getCountryCountId(); j++) {
                     if (i != 0 || j != 0) {
-                        if(countryMatrix[j][i]==1)
-                            CreateMap.addAdjacentNeighbourCountriesUsingCoordinates(j,i);
+                        if (countryMatrix[j][i] == 1)
+                            CreateMap.addAdjacentNeighbourCountriesUsingCoordinates(j, i);
                     }
                 }
-            CreateMapFile.createFile();
+                CreateMapFile.createFile();
             }
         } else {
             System.out.println("Array is empty !");
@@ -183,5 +190,6 @@ class GraphNew {
         }
         return neighbors;
     }
+
 
 }

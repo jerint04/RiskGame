@@ -43,7 +43,7 @@ public class CreateMapFile {
         try {
             //Delete temporary file
             String currentDirectory = System.getProperty("user.dir");
-            Path tempFilePath = Paths.get(currentDirectory+"/RiskGame/assets//maps//"+ "temp"+".map" );
+            Path tempFilePath = Paths.get(currentDirectory+"/RiskGame/assets//maps/"+ "temp"+".map" );
             Files.deleteIfExists(tempFilePath);
             writer = Files.newBufferedWriter(tempFilePath, StandardCharsets.UTF_8);
             writer.write(new String(fileData));

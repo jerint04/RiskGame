@@ -32,7 +32,7 @@ public class GameDriver {
 
     public static void LoadMap(){
         List<String> getFileName=new ArrayList<String>();
-        File[] filesName = new File(System.getProperty("user.dir")+"/RiskGame/assets/maps").listFiles();
+        File[] filesName = new File("./assets/maps").listFiles();
 
         System.out.println(filesName.length);
 
@@ -44,10 +44,10 @@ public class GameDriver {
         for(int i = 0; i < getFileName.size(); i++){
             System.out.println(getFileName.get(i));
         }
-        System.out.println("Enter the map name you want to load");
+        System.out.println("Enter the map name you want to load (Only name, without extension) :");
         String mapName=sc.nextLine();
-        String currentDirectory = System.getProperty("user.dir");
-        ReadMap.readMap(currentDirectory+"/RiskGame/assets/maps/"+ mapName+".map");
+//        String currentDirectory = System.getProperty("user.dir");
+        ReadMap.readMap("./assets/maps/"+ mapName+".map");
     }
     public static void StartOrLoadGame(){
         System.out.println("Select 1 to Start the game and create map, Select 2 to Load the Game :");
