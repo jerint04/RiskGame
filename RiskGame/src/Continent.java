@@ -5,7 +5,8 @@ import java.util.List;
  * @author Vikram
  * @date 2019-02-19
  */
-public class Continent {
+public class Continent
+{
     int continentId;
 	String continentName;
 	int controlValue;
@@ -23,43 +24,53 @@ public class Continent {
         this.controlValue = point;
     }
 
-    public String getContinentName() {
+    public String getContinentName()
+    {
         return continentName;
     }
 
-    public void setContinentName(String continentName) {
+    public void setContinentName(String continentName)
+    {
         this.continentName = continentName;
     }
 
-    public int getControlValue() {
+    public int getControlValue()
+    {
         return controlValue;
     }
 
-    public void setControlValue(int controlValue) {
+    public void setControlValue(int controlValue)
+    {
         this.controlValue = controlValue;
     }
 
-    public List<String> getCountries() {
+    public List<String> getCountries()
+    {
         return Countries;
     }
 
-    public void setCountries(List<String> countries) {
+    public void setCountries(List<String> countries)
+    {
         Countries = countries;
     }
 
-    public List<String> getAdjacentContinents() {
+    public List<String> getAdjacentContinents()
+    {
         return AdjacentContinents;
     }
 
-    public void setAdjacentContinents(List<String> adjacentContinents) {
+    public void setAdjacentContinents(List<String> adjacentContinents)
+    {
         AdjacentContinents = adjacentContinents;
     }
 
-    public void InsertCountry(String countryName) {
+    public void InsertCountry(String countryName)
+    {
 		this.Countries.add(countryName);
 	}
 
-	public void RemoveCountry(String countryName){
+	public void RemoveCountry(String countryName)
+    {
 		this.Countries.remove(new String("countryName"));
 	}
 
