@@ -14,6 +14,23 @@ public class Country {
     int xCoordinate;
     int yCoordinate;
 
+    /**
+     *  This is a Constructor for Country class which sets countryName, id and continentName
+     *
+     * @param id ,id of the country
+     * @param CountryName,name of the country
+     * @param ContinentName, x co-ordinate of the country
+     *
+     */
+
+    public Country(int id, String CountryName, String ContinentName)
+    {
+        this.id = id;
+        this.countryName = CountryName;
+        this.ParentContinent = ContinentName;
+    }
+
+
     public int getxCoordinate()
     {
         return xCoordinate;
@@ -88,21 +105,6 @@ public class Country {
     {
         this.id = id;
         this.countryName = CountryName;
-    }
-    /**
-     *  This is a Constructor for Country class which sets countryName, id and continentName
-     *
-     * @param id ,id of the country
-     * @param CountryName,name of the country
-     * @param ContinentName, x co-ordinate of the country
-     *
-     */
-
-    public Country(int id, String CountryName, String ContinentName)
-    {
-        this.id = id;
-        this.countryName = CountryName;
-        this.ParentContinent = ContinentName;
     }
 
     public void addAdjacentCountry(String name)
