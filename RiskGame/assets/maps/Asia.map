@@ -17,10 +17,10 @@ Persia=8
 
 
 [Territories]
-Saudi Arabia,77,295,Arabian Peninsula,Yemen,Omen,United Arab Emigrants,Qatar,Buhrain,Kuwait,Iraq,Jordan
+Saudi Arabia,77,295,Arabian Peninsula,Yemen,Omen,United Arab Emigrants,Qatar,Bahrain,Kuwait,Iraq,Jordan
 Kuwait,105,251,Arabian Peninsula,Saudi Arabia,Iraq,Iran
-Buhrain,120,277,Arabian Peninsula,Saudi Arabia,Qatar
-Qatar,119,301,Arabian Peninsula,Buhrain,Saudi Arabia,United Arab Emigrants
+Bahrain,120,277,Arabian Peninsula,Saudi Arabia,Qatar
+Qatar,119,301,Arabian Peninsula,Bahrain,Saudi Arabia,United Arab Emigrants
 United Arab Emigrants,146,311,Arabian Peninsula,Qatar,Saudi Arabia,Omen
 Omen,157,343,Arabian Peninsula,United Arab Emigrants,Saudi Arabia,Yemen
 Yemen,89,361,Arabian Peninsula,Saudi Arabia,Omen
@@ -33,7 +33,7 @@ Jordan,48,225,Asia Minor,Israel,Syria,Iraq,Saudi Arabia
 Lebanon,42,200,Asia Minor,Cyprus,Syria,Israel
 Israel,33,219,Asia Minor,Cyprus,Lebanon,Jordan,Syria
 
-Russia,363,81,North Asia,Japan,North Korea,China,Mongolia,Kazakhstan,Georgia,Azerbaijan
+Russia,363,81,North Asia,Japan,North Korea,China,Mongolia,Kazakhstan,Georgia,Azerbaijan,Belarus
 Japan,678,141,North Asia,Russia,North Korea,South Korea
 North Korea,593,152,North Asia,China,Russia,Japan,South Korea
 South Korea,618,181,North Asia,North Korea,Japan
