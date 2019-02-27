@@ -4,6 +4,7 @@ import java.util.Scanner;
 /**
  * @author Hemanshu
  * @date 2019-02-22
+ * This is the main File that will run all the code using main function
  */
 public class GameDriver {
     static int playerNumber;
