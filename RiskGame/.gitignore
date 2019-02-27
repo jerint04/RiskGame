@@ -3,3 +3,6 @@
 .settings
 .classpath
 .project
+RiskGame.iml
+**.iml
+vcs.xml
