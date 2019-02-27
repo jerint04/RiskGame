@@ -12,7 +12,7 @@ import java.io.*;
 
 
 
-//testing the doc file
+//testing the doc how to create doc file in the idea
 public class ReadMap {
 
 /*    public static void main(String[] args) {
