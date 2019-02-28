@@ -13,7 +13,6 @@ public class Country {
     int numberOfSoldiers;
     int xCoordinate;
     int yCoordinate;
-    String playerId;
 
     /**
      *  This is a Constructor for Country class which sets countryName, id and continentName
@@ -23,6 +22,7 @@ public class Country {
      * @param ContinentName, x co-ordinate of the country
      *
      */
+
     public Country(int id, String CountryName, String ContinentName)
     {
         this.id = id;
@@ -94,14 +94,6 @@ public class Country {
     public int getNumberOfSoldiers()
     {
         return numberOfSoldiers;
-    }
-
-    public String getPlayerId() {
-        return playerId;
-    }
-
-    public void setPlayerId(String playerId) {
-        this.playerId = playerId;
     }
 
     public void setNumberOfSoldiers(int numberOfSoldiers)

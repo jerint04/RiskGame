@@ -5,7 +5,9 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
+ * Map Class
  * @author Jerin
+ * @version 1.0.0
  * @date 22-February-2019
  */
 public class ReadMap {
@@ -15,7 +17,11 @@ public class ReadMap {
         System.out.println("Countinent List : " + CreateMap.ContinentList );
         System.out.println("Country List : "  + CreateMap.countryIdHashMap );
     }*/
-
+    /**
+     * This function loads the Map into the memory
+     * @param getFileName,
+     *
+     */
     public static void readMap(String getFileName) {
         try {
             boolean readContinentsFromFile = false;
@@ -51,13 +57,19 @@ public class ReadMap {
                     country.setxCoordinate(Integer.parseInt(parsedCountryList[1]));
                     country.setyCoordinate(Integer.parseInt(parsedCountryList[2]));
                     int p = 0;
+                    // p is initialized to get neighbouring countries
                     for (String neighborCountry : parsedCountryList) {
                         if (p > 3) {
                             country.addAdjacentCountry(neighborCountry);
                         }
                         p++;
                     }
-
+                /**
+                 * This adds a Country to the Country list
+                 *
+                 * @param parsedCountryList[],
+                 *            arrayList of the Country
+                 */
                     CreateMap.CountryList.add(parsedCountryList[0]);
                     CreateMap.countryIdHashMap.put(Helper.getCountryCountId(), parsedCountryList[0]);
                     CreateMap.countryHashMap.put(parsedCountryList[0], country);
@@ -72,6 +84,9 @@ public class ReadMap {
         GraphNew.printGraph();
     }
 
+    /**
+     * This function creates adjacent Countries
+     */
     public static void createAdjacentMatrix() {
         for (String a : CreateMap.CountryList) {
             Country xTemp = CreateMap.countryHashMap.get(a);
@@ -86,6 +101,11 @@ public class ReadMap {
         }
     }
 
+    /**
+     * This function gets the country value
+     * @param hm,
+     * @param value ,
+     */
     public static int getKeyFromValue(Map hm, String value) {
         int i = 0;
 
