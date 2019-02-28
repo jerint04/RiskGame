@@ -4,14 +4,17 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
+ * GameDriver Class
  * @author Hemanshu
+ * @version 1.0.0
  * @date 2019-02-22
- * This is the main File that will run all the code using main function
+ * Includes main() method of the program
  */
 public class GameDriver {
     static int playerNumber;
     static ArrayList<Player> PlayerList = new ArrayList<Player>();
     public static Scanner sc = new Scanner(System.in);
+
 
     public static void InitialisePlayers() {
         System.out.println("Number of Players who want to play :");
@@ -50,6 +53,9 @@ public class GameDriver {
         ReadMap.readMap("./assets/maps/" + mapName + ".map");
     }
 
+    /**
+    * This method will perform operation required to start or load a game
+    */
     public static void StartOrLoadGame() {
         System.out.println("Select 1 to Start the game and create map, Select 2 to Load the Game :");
         int localvariable;
@@ -64,7 +70,9 @@ public class GameDriver {
         }
     }
 
-
+    /**
+     * This method will perform operation to create a map
+     */
     public static void CreateMap() {
         boolean exit = true;
         while (exit) {
@@ -96,7 +104,10 @@ public class GameDriver {
         }
     }
 
-
+    /**
+     * This is the main() method of the program
+     * Entry point of the Execution of the whole program
+     */
     public static void main(String[] args) {
         InitialisePlayers();
 //        StartOrLoadGame();
