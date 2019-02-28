@@ -85,12 +85,13 @@ public class ReadMap {
     public static void createAdjacentMatrix() {
         for (String a : CreateMap.CountryList) {
             Country xTemp = CreateMap.countryHashMap.get(a);
-            int xo = getKeyFromValue(CreateMap.countryIdHashMap, xTemp.getCountryName());
+            Object xo = getKeyFromValue(CreateMap.countryIdHashMap, xTemp.getCountryName());
             int x = (Integer) xo;
             for (String adjacentCountryName : xTemp.getAdjacentCountries()) {
                 Country yTemp = CreateMap.countryHashMap.get(adjacentCountryName);
-                int yo = getKeyFromValue(CreateMap.countryHashMap, yTemp.getCountryName());
+                Object yo = getKeyFromValue(CreateMap.countryIdHashMap, yTemp.getCountryName());
                 int y = (Integer) yo;
+                System.out.println(y+" "+x);
                 GraphNew.countryMatrix[y][x] = 1;
             }
         }
@@ -101,25 +102,15 @@ public class ReadMap {
      * @param hm,
      * @param value ,
      */
-    public static int getKeyFromValue(Map hm, String value) {
-        int i = 0;
-
+    public static Object getKeyFromValue(Map hm, String value) {
         Iterator it = hm.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
-            System.out.println(pair.getKey() + " = " + pair.getValue());
-//            if () {
-//                return i+1;
-//            }
-
-            i++;
-
-            it.remove(); // avoids a ConcurrentModificationException
+//            System.out.println(pair.getKey() + " = " + pair.getValue());
+            if (pair.getValue().equals(value)) {
+                return pair.getKey();
+            }
         }
-       /*
-        for (String o : hm.keySet()) {
-
-        }*/
         return -1;
     }
 }
