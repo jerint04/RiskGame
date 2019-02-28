@@ -99,7 +99,9 @@ public class GameDriver {
 
     public static void main(String[] args) {
         InitialisePlayers();
-        StartOrLoadGame();
-        Player.assigningCountries();
+//        StartOrLoadGame();
+//        Player.assigningCountries();
+
+        Player.initialisationInfantory();
     }
 }

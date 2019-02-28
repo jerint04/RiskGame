@@ -5,10 +5,13 @@ import java.util.*;
  * @date 2019-02-12
  */
 public class Player {
-    List<String> Cards = new ArrayList<>();
-    List<String> countriesOwned = new ArrayList<>();
+    static List<String> Cards = new ArrayList<>();
+    static List<String> countriesOwned = new ArrayList<>();
     boolean alive;
+
+
     String Name;
+    public static int numberOfInfantary;
     public static int numberOfPlayers = GameDriver.PlayerList.size();
     public static HashMap<String, HashMap<String, Integer>> countryAssignedToPlayers = new HashMap<>();
     public static HashMap<String, Integer> countryAssigning = new HashMap<>();
@@ -18,11 +21,11 @@ public class Player {
         Name = name;
     }
 
-    public List<String> getCards() {
+    public static List<String> getCards() {
         return Cards;
     }
 
-    public List<String> getCountriesOwned() {
+    public static List<String> getCountriesOwned() {
         return countriesOwned;
     }
 
@@ -50,6 +53,15 @@ public class Player {
         Name = name;
     }
 
+    public static void setNumberOfInfantary(int numberOfInfantary) {
+        Player.numberOfInfantary = numberOfInfantary;
+    }
+
+    public int getNumberOfInfantary() {
+        return numberOfInfantary;
+    }
+
+
     public static void assigningCountries() {
         Random numberGenerator = new Random();
 
@@ -74,4 +86,29 @@ public class Player {
         }
 
     }
+
+    public static void initialisationInfantory() {
+        if (GameDriver.PlayerList.size() == 3) {
+            for (int i = 0; i < GameDriver.PlayerList.size(); i++) {
+                GameDriver.PlayerList.get(i).setNumberOfInfantary(35);
+            }
+
+        } else if (GameDriver.PlayerList.size() == 4) {
+            for (int i = 0; i < GameDriver.PlayerList.size(); i++) {
+                GameDriver.PlayerList.get(i).setNumberOfInfantary(30);
+            }
+        } else if (GameDriver.PlayerList.size() == 5) {
+            for (int i = 0; i < GameDriver.PlayerList.size(); i++) {
+                GameDriver.PlayerList.get(i).setNumberOfInfantary(25);
+            }
+
+        } else if (GameDriver.PlayerList.size() == 6) {
+            for (int i = 0; i < GameDriver.PlayerList.size(); i++) {
+                GameDriver.PlayerList.get(i).setNumberOfInfantary(20);
+            }
+
+        }
+    }
+
 }
+
