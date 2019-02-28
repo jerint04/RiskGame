@@ -64,12 +64,7 @@ public class ReadMap {
                         }
                         p++;
                     }
-                /**
-                 * This adds a Country to the Country list
-                 *
-                 * @param parsedCountryList[],
-                 *            arrayList of the Country
-                 */
+
                     CreateMap.CountryList.add(parsedCountryList[0]);
                     CreateMap.countryIdHashMap.put(Helper.getCountryCountId(), parsedCountryList[0]);
                     CreateMap.countryHashMap.put(parsedCountryList[0], country);
