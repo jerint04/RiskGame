@@ -11,9 +11,11 @@ public class Country {
     String countryName;
     String ParentContinent;
     List<String> adjacentCountries =  new ArrayList<>();
-    int numberOfSoldiers;
+    int numberOfSoldiers=0;
     int xCoordinate;
     int yCoordinate;
+    Integer PlayerId;
+
 
     /**
      *  This is a Constructor for Country class which sets countryName, id and continentName
@@ -30,6 +32,13 @@ public class Country {
         this.ParentContinent = ContinentName;
     }
 
+    public Integer getPlayerId() {
+        return PlayerId;
+    }
+
+    public void setPlayerId(Integer playerId) {
+        PlayerId = playerId;
+    }
 
     public int getxCoordinate()
     {

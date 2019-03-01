@@ -1,10 +1,12 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
 /**
  * GameDriver Class
+ *
  * @author Hemanshu
  * @version 1.0.0
  * @date 2019-02-22
@@ -13,6 +15,7 @@ import java.util.Scanner;
 public class GameDriver {
     static int playerNumber;
     static ArrayList<Player> PlayerList = new ArrayList<Player>();
+    static HashMap<Integer, Player> playerHashMap = new HashMap<>();
     public static Scanner sc = new Scanner(System.in);
 
 
@@ -25,8 +28,9 @@ public class GameDriver {
         for (int i = 0; i < playerNumber; i++) {
             System.out.println("Player " + (i + 1) + " name :");
             String name = input.next();
-            PlayerList.add(new Player(name));
-
+            Player play = new Player(i, name);
+            PlayerList.add(play);
+            playerHashMap.put(i, play);
 
         }
 
@@ -35,7 +39,8 @@ public class GameDriver {
 
     public static void LoadMap() {
         List<String> getFileName = new ArrayList<String>();
-        File[] filesName = new File("./assets/maps").listFiles();
+        //File[] filesName = new File("./assets/maps").listFiles();
+        File[] filesName = new File(System.getProperty("user.dir") + "/RiskGame/assets/maps").listFiles();
 
         System.out.println(filesName.length);
 
@@ -49,13 +54,15 @@ public class GameDriver {
         }
         System.out.println("Enter the map name you want to load (Only name, without extension) :");
         String mapName = sc.nextLine();
-//        String currentDirectory = System.getProperty("user.dir");
-        ReadMap.readMap("./assets/maps/" + mapName + ".map");
+        String currentDirectory = System.getProperty("user.dir");
+        // ReadMap.readMap("./assets/maps/" + mapName + ".map");
+        ReadMap.readMap(currentDirectory + "/RiskGame/assets/maps/" + mapName + ".map");
+
     }
 
     /**
-    * This method will perform operation required to start or load a game
-    */
+     * This method will perform operation required to start or load a game
+     */
     public static void StartOrLoadGame() {
         System.out.println("Select 1 to Start the game and create map, Select 2 to Load the Game :");
         int localvariable;
@@ -104,15 +111,30 @@ public class GameDriver {
         }
     }
 
+
+    public static void assigningCountriesToPlayers() {
+
+        for (String countryName : CreateMap.countryHashMap.keySet()) {
+            int playerId = CreateMap.countryHashMap.get(countryName).getPlayerId();
+            Player temp = playerHashMap.get(playerId);
+            temp.countriesOwned.add(countryName);
+        }
+
+        for (int p : playerHashMap.keySet()) {
+            System.out.println(playerHashMap.get(p).getCountriesOwned());
+        }
+
+    }
+
     /**
      * This is the main() method of the program
      * Entry point of the Execution of the whole program
      */
     public static void main(String[] args) {
         InitialisePlayers();
-//        StartOrLoadGame();
-//        Player.assigningCountries();
-
+        StartOrLoadGame();
         Player.initialisationInfantory();
+        Player.assigningCountries();
+        assigningCountriesToPlayers();
     }
 }

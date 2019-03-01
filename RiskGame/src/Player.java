@@ -2,37 +2,43 @@ import java.util.*;
 
 /**
  * Player Class
+ *
  * @author Hemanshu
  * @version 1.0.0
  * @date 2019-02-12
  */
 public class Player {
     static List<String> Cards = new ArrayList<>();
-    static List<String> countriesOwned = new ArrayList<>();
+    List<String> countriesOwned = new ArrayList<>();
     boolean alive;
-
-
     String Name;
-    public static int numberOfInfantary;
+    int playerId;
+    int numberOfInfantary;
     public static int numberOfPlayers = GameDriver.PlayerList.size();
-    public static HashMap<String, HashMap<String, Integer>> countryAssignedToPlayers = new HashMap<>();
-    public static HashMap<String, Integer> countryAssigning = new HashMap<>();
+    public static HashMap<String, List<String>> countryAssignedToPlayers = new HashMap<>();
+//    public HashMap<String, Integer> countryAssigning = new HashMap<>();
 
     /**
      * This is a constructor of Player Class which sets player Name
      *
-     * @param name,
-     *           name of the player
+     * @param name, name of the player
      */
     public Player(String name) {
         this.alive = true;
         Name = name;
     }
 
+    public Player(int playerId, String name) {
+        this.playerId = playerId;
+        this.alive = true;
+        Name = name;
+    }
+
+
     /**
      * Get player cards
      *
-     * @return Cards,list of cards of player
+     * @return Cards, list of cards of player
      */
     public static List<String> getCards() {
         return Cards;
@@ -41,9 +47,9 @@ public class Player {
     /**
      * Get Countries owned
      *
-     * @return countriesOwned,list of Countries owned by the player
+     * @return countriesOwned, list of Countries owned by the player
      */
-    public static List<String> getCountriesOwned() {
+    public List<String> getCountriesOwned() {
 
         return countriesOwned;
     }
@@ -71,8 +77,7 @@ public class Player {
     /**
      * Add card to player
      *
-     * @param cards,
-     *            type of card
+     * @param cards, type of card
      */
     public void setCards(List<String> cards) {
         Cards = cards;
@@ -82,7 +87,6 @@ public class Player {
      * This method is used to set Countries owned by the player
      *
      * @param countriesOwned,
-     *
      */
     public void setCountriesOwned(List<String> countriesOwned) {
 
@@ -92,8 +96,7 @@ public class Player {
     /**
      * This method is used to set status of the player
      *
-     * @param alive,
-     *           if player is alive else false
+     * @param alive, if player is alive else false
      */
     public void setAlive(boolean alive) {
         this.alive = alive;
@@ -102,8 +105,7 @@ public class Player {
     /**
      * This method is used to set name of the player
      *
-     * @param name,
-     *           name of the player
+     * @param name, name of the player
      */
     public void setName(String name) {
         Name = name;
@@ -112,29 +114,48 @@ public class Player {
     /**
      * This method is used to set the number of infantary of the player
      *
-     * @param numberOfInfantary,
-     *           number of the Infantary of the player
+     * @param numberOfInfantary, number of the Infantary of the player
      */
-    public static void setNumberOfInfantary(int numberOfInfantary) {
+    public void setNumberOfInfantary(int numberOfInfantary) {
 
-        Player.numberOfInfantary = numberOfInfantary;
+        this.numberOfInfantary = numberOfInfantary;
     }
 
     /**
      * This method is used to get the number of infantary of the player
      *
      * @return numberOfInfantary,
-     *           returning the number of the Infantary of the player
+     * returning the number of the Infantary of the player
      */
     public int getNumberOfInfantary() {
 
         return numberOfInfantary;
     }
 
+    public int getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(int playerId) {
+        this.playerId = playerId;
+    }
+
+    public static int getNumberOfPlayers() {
+        return numberOfPlayers;
+    }
+
+    public static void setNumberOfPlayers(int numberOfPlayers) {
+        Player.numberOfPlayers = numberOfPlayers;
+    }
+
     /**
      * Assigns the current country to player
      */
     public static void assigningCountries() {
+        int numberofInfantary;
+        HashMap<String, List<String>> countryAssignedToPlayers = new HashMap<>();
+        List<String> nameOfCountry[] = new ArrayList[GameDriver.PlayerList.size()];
+
         Random numberGenerator = new Random();
 
         for (int j = 0; j < CreateMap.countryIdHashMap.size(); j++) {
@@ -143,21 +164,40 @@ public class Player {
                 int number = numberGenerator.nextInt((CreateMap.countryIdHashMap.size() - 1) + 1) + 1;
 
                 String countryName = CreateMap.countryIdHashMap.get(number);
-                String playerName = GameDriver.PlayerList.get(i).getName();
+                int playerId = GameDriver.PlayerList.get(i).getPlayerId();
                 if (CreateMap.countryHashMap.get(countryName).getPlayerId() == null) {
-                    CreateMap.countryHashMap.get(countryName).setPlayerId(playerName);
+                    int count = 0;
+                    count++;
+                    CreateMap.countryHashMap.get(countryName).setPlayerId(playerId);
+                    CreateMap.countryHashMap.get(countryName).setNumberOfSoldiers(count);
+
+                    //nameOfCountry.add(countryName);
+                    //GameDriver.PlayerList.get(i).setCountriesOwned(nameOfCountry);
+                    // countryAssignedToPlayers.put(playerName,nameOfCountry);
+                     /*numberofInfantary = GameDriver.PlayerList.get(i).getNumberOfInfantary();
+                    numberofInfantary=numberofInfantary-count;
+                    GameDriver.PlayerList.get(i).setNumberOfInfantary(numberofInfantary );
+*/
+
                 }
             }
         }
+
 
         for (int j = 1; j <= CreateMap.countryIdHashMap.size(); j++) {
 
             String countryName = CreateMap.countryIdHashMap.get(j);
 
-            System.out.println("player details" + CreateMap.countryHashMap.get(countryName).getPlayerId() + " country name " + countryName);
+            System.out.println("player details :" + j + CreateMap.countryHashMap.get(countryName).getPlayerId() + " country name :" + countryName + " army count :" + CreateMap.countryHashMap.get(countryName).getNumberOfSoldiers());
         }
-
+        /*for (int i = 0; i < GameDriver.PlayerList.size(); i++) {
+            GameDriver.PlayerList.get(i).getName();
+            //countryAssignedToPlayers.get(GameDriver.PlayerList.get(i).getName());
+            //System.out.println(" name :"+GameDriver.PlayerList.get(i).getName() + "number of infantary "+ countryAssignedToPlayers.get(GameDriver.PlayerList.get(i).getName()));
+            System.out.println("Country assigned to players :" + GameDriver.PlayerList.get(i).getCountriesOwned());
+        }*/
     }
+
 
     /**
      * This method is used to intialise infantary of the player
@@ -183,7 +223,10 @@ public class Player {
             }
 
         }
+
+        for (int i = 0; i < GameDriver.PlayerList.size(); i++) {
+
+        }
+
     }
-
 }
-

@@ -6,6 +6,7 @@ import java.util.Map;
 
 /**
  * Map Class
+ *
  * @author Jerin
  * @version 1.0.0
  * @date 22-February-2019
@@ -17,10 +18,11 @@ public class ReadMap {
         System.out.println("Countinent List : " + CreateMap.ContinentList );
         System.out.println("Country List : "  + CreateMap.countryIdHashMap );
     }*/
+
     /**
      * This function loads the Map into the memory
-     * @param getFileName,
      *
+     * @param getFileName,
      */
     public static void readMap(String getFileName) {
         try {
@@ -71,6 +73,9 @@ public class ReadMap {
                 }
             }
             bufferedReader.close();
+
+            Player.assigningCountries();
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -91,7 +96,7 @@ public class ReadMap {
                 Country yTemp = CreateMap.countryHashMap.get(adjacentCountryName);
                 Object yo = getKeyFromValue(CreateMap.countryIdHashMap, yTemp.getCountryName());
                 int y = (Integer) yo;
-                System.out.println(y+" "+x);
+                System.out.println(y + " " + x);
                 GraphNew.countryMatrix[y][x] = 1;
             }
         }
@@ -99,13 +104,14 @@ public class ReadMap {
 
     /**
      * This function gets the country value
+     *
      * @param hm,
      * @param value ,
      */
     public static Object getKeyFromValue(Map hm, String value) {
         Iterator it = hm.entrySet().iterator();
         while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
+            Map.Entry pair = (Map.Entry) it.next();
 //            System.out.println(pair.getKey() + " = " + pair.getValue());
             if (pair.getValue().equals(value)) {
                 return pair.getKey();

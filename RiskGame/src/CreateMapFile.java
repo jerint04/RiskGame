@@ -5,7 +5,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 
-
 /**
  * @author Hemanshu
  * @date 2019-02-25
@@ -38,18 +37,18 @@ public class CreateMapFile {
             }
         }
         /*Writing Map to disk*/
-        Path path = Paths.get("./assets/maps" );
+        Path path = Paths.get("./assets/maps");
         BufferedWriter writer = null;
         try {
             //Delete temporary file
             String currentDirectory = System.getProperty("user.dir");
-            Path tempFilePath = Paths.get(currentDirectory+"/RiskGame/assets//maps/"+ "temp"+".map" );
+            Path tempFilePath = Paths.get(currentDirectory + "/RiskGame/assets//maps/" + "temp" + ".map");
             Files.deleteIfExists(tempFilePath);
             writer = Files.newBufferedWriter(tempFilePath, StandardCharsets.UTF_8);
             writer.write(new String(fileData));
             writer.close();
         } catch (Exception e) {
-            System.out.println("Exception :"+ e);
+            System.out.println("Exception :" + e);
         }
         System.out.println(fileData);
     }
