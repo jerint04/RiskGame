@@ -1,8 +1,7 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Map Class
@@ -50,7 +49,7 @@ public class ReadMap {
                     String[] parsedContinentArray = readLine.split("=");
                     Continent continent = new Continent(Helper.getContinentCountId(), parsedContinentArray[0],
                             Integer.parseInt(parsedContinentArray[1]));
-                    CreateMap.ContinentList.add(continent);
+                    CreateMap.ContinentList.add(parsedContinentArray[0]);
                     CreateMap.continentHashMap.put(parsedContinentArray[0], continent);
                 } else if (readCountriesFromFile) {
                     String[] parsedCountryList = readLine.split(",");
@@ -66,7 +65,7 @@ public class ReadMap {
                         }
                         p++;
                     }
-
+                    CreateMap.continentHashMap.get(parsedCountryList[3]).insertCountry(parsedCountryList[0]);
                     CreateMap.CountryList.add(parsedCountryList[0]);
                     CreateMap.countryIdHashMap.put(Helper.getCountryCountId(), parsedCountryList[0]);
                     CreateMap.countryHashMap.put(parsedCountryList[0], country);
@@ -118,5 +117,58 @@ public class ReadMap {
             }
         }
         return -1;
+    }
+
+
+
+
+
+    public static boolean validateMap() {
+        boolean emptyContinent = false;
+        boolean aloneCountry = false;
+
+        /*To check if the Continent is Empty. Continent should have at least a single country*/
+        for (String name : CreateMap.ContinentList) {
+            Continent currentContinent = CreateMap.continentHashMap.get(name);
+            if (currentContinent.getCountries().isEmpty() == true) {
+                emptyContinent = true;
+                System.out.println("Continent "+ name+" has no countries in it.");
+                return false;
+            }
+        }
+
+        /*To check if the country is isolated or not */
+        for (String countryName : CreateMap.countryHashMap.keySet()) {
+            Country everyCountry = CreateMap.countryHashMap.get(countryName);
+            if (everyCountry.getAdjacentCountries().isEmpty() == true) {
+                aloneCountry = true;
+                System.out.println("Country "+ countryName+" has no adjacent countries in it.");
+                return false;
+            }
+        }
+
+        /*check for duplicate countries in continent*//*
+        if(!aloneCountry) {
+            List<List<String>> lists = new ArrayList<List<String>>();
+            for (String countryName : CreateMap.countryHashMap.keySet()) {
+                Country everyCountry = CreateMap.countryHashMap.get(countryName);
+                lists.add(everyCountry.getAdjacentCountries());
+            }
+            List<String> commons = new ArrayList<String>();
+            commons.addAll(lists.get(1));
+            for (ListIterator<List<String>> iter = lists.listIterator(1); iter.hasNext(); ) {
+                commons.retainAll(iter.next());
+            }
+            System.out.println(commons);
+//            System.out.println(lists.get(1));
+
+        }*/
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+        readMap("./assets/maps/Asia.map");
+        System.out.println(validateMap());
     }
 }

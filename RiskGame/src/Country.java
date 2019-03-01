@@ -16,9 +16,10 @@ public class Country {
     int yCoordinate;
     Integer PlayerId;
 
+    boolean isVisited;
 
     /**
-     *  This is a Constructor for Country class which sets countryName, id and continentName
+     * This is a Constructor for Country class which sets countryName, id and continentName
      *
      * @param id ,id of the country
      * @param CountryName,name of the country
@@ -30,6 +31,13 @@ public class Country {
         this.id = id;
         this.countryName = CountryName;
         this.ParentContinent = ContinentName;
+        this.isVisited = false;
+    }
+
+    public Country(int id, String CountryName) {
+        this.id = id;
+        this.countryName = CountryName;
+        this.isVisited = false;
     }
 
     public Integer getPlayerId() {
@@ -40,89 +48,67 @@ public class Country {
         PlayerId = playerId;
     }
 
-    public int getxCoordinate()
-    {
+    public int getxCoordinate() {
         return xCoordinate;
     }
 
-    public void setxCoordinate(int xCoordinate)
-    {
+    public void setxCoordinate(int xCoordinate) {
         this.xCoordinate = xCoordinate;
     }
 
-    public int getyCoordinate()
-    {
+    public int getyCoordinate() {
         return yCoordinate;
     }
 
-    public void setyCoordinate(int yCoordinate)
-    {
+    public void setyCoordinate(int yCoordinate) {
         this.yCoordinate = yCoordinate;
     }
 
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
-    public void setId(int id)
-    {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getCountryName()
-    {
+    public String getCountryName() {
         return countryName;
     }
 
-    public void setCountryName(String countryName)
-    {
+    public void setCountryName(String countryName) {
         this.countryName = countryName;
     }
 
-    public String getParentContinent()
-    {
+    public String getParentContinent() {
         return ParentContinent;
     }
 
-    public void setParentContinent(String parentContinent)
-    {
+    public void setParentContinent(String parentContinent) {
         ParentContinent = parentContinent;
     }
 
-    public List<String> getAdjacentCountries()
-    {
+    public List<String> getAdjacentCountries() {
         return adjacentCountries;
     }
 
-    public void setAdjacentCountries(List<String> adjacentCountries)
-    {
+    public void setAdjacentCountries(List<String> adjacentCountries) {
         this.adjacentCountries = adjacentCountries;
     }
 
-    public int getNumberOfSoldiers()
-    {
+    public int getNumberOfSoldiers() {
         return numberOfSoldiers;
     }
 
-    public void setNumberOfSoldiers(int numberOfSoldiers)
-    {
+    public void setNumberOfSoldiers(int numberOfSoldiers) {
         this.numberOfSoldiers = numberOfSoldiers;
     }
 
-    public Country(int id, String CountryName)
-    {
-        this.id = id;
-        this.countryName = CountryName;
-    }
-
-    public void addAdjacentCountry(String name)
-    {
+    public void addAdjacentCountry(String name) {
         this.adjacentCountries.add(name);
     }
 
-    public void removeAdjacentCountry(String name)
-    {
+    public void removeAdjacentCountry(String name) {
         this.adjacentCountries.remove(new String(name));
     }
 }

@@ -7,12 +7,13 @@ import java.util.*;
  */
 public class CreateMap {
 
-    static ArrayList<Continent> ContinentList = new ArrayList<Continent>();
+    static ArrayList<String> ContinentList = new ArrayList<String>();
+    static HashMap<String, Continent> continentHashMap = new HashMap<>();
+    static HashMap<Integer, String> continentIdHashMap = new HashMap<>(); //THis is redundant we might not use it. just created for timebeing
+
     static ArrayList<String> CountryList = new ArrayList<String>(); // This is redundant we might not use it. just created for timebeing
     static HashMap<Integer, String> countryIdHashMap = new HashMap<>();
     static HashMap<String, Country> countryHashMap = new HashMap<>();
-    static HashMap<Integer, String> continentIdHashMap = new HashMap<>(); //THis is redundant we might not use it. just created for timebeing
-    static HashMap<String, Continent> continentHashMap = new HashMap<>();
 
     public static void createContinent() {
         System.out.println("Please Enter the Continent Name :");
@@ -21,7 +22,7 @@ public class CreateMap {
         System.out.println("Please Enter Control Value :");
         int controlValue = input.nextInt();
         Continent temp = new Continent(continentName, controlValue);
-        ContinentList.add(temp);
+        ContinentList.add(continentName);
         continentHashMap.put(continentName, temp);
     }
 
@@ -60,7 +61,7 @@ public class CreateMap {
 
     public static void addCountriesInContinent(String countryName, String Continent) {
         Continent temp = continentHashMap.get(Continent);
-        temp.InsertCountry(countryName);
+        temp.insertCountry(countryName);
     }
 }
 

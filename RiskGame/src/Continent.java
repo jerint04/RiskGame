@@ -64,7 +64,7 @@ public class Continent
         AdjacentContinents = adjacentContinents;
     }
 
-    public void InsertCountry(String countryName)
+    public void insertCountry(String countryName)
     {
 		this.Countries.add(countryName);
 	}

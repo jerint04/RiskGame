@@ -20,16 +20,16 @@ public class CreateMapFile {
         fileData.append("warn=yes\r\n");
 
         fileData.append("[Continents]\r\n");
-        for (Continent continentObject : CreateMap.ContinentList) {
-            fileData.append(continentObject.getContinentName() + "=" + continentObject.getControlValue()
+        for (String continentString : CreateMap.ContinentList) {
+            fileData.append( CreateMap.continentHashMap.get(continentString).getContinentName() + "=" + CreateMap.continentHashMap.get(continentString).getControlValue()
                     + "\r\n");
         }
         fileData.append("\n[Territories]\r\n");
-        for (Continent continentObject : CreateMap.ContinentList) {
-            for (String countryName : continentObject.getCountries()) {
+        for (String continentString  : CreateMap.ContinentList) {
+            for (String countryName : CreateMap.continentHashMap.get(continentString).getCountries()) {
                 Country temp = CreateMap.countryHashMap.get(countryName);
                 fileData.append(temp.getCountryName() + "," + temp.getxCoordinate() + ","
-                        + temp.getyCoordinate() + "," + continentObject.getContinentName());
+                        + temp.getyCoordinate() + "," + CreateMap.continentHashMap.get(continentString).getContinentName());
                 for (String adjacentCountries : temp.getAdjacentCountries()) {
                     fileData.append("," + adjacentCountries);
                 }
