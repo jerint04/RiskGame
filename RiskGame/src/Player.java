@@ -8,6 +8,7 @@ import java.util.*;
  * @date 2019-02-12
  */
 public class Player {
+    
     static List<String> Cards = new ArrayList<>();
     List<String> countriesOwned = new ArrayList<>();
     boolean alive;
@@ -178,6 +179,7 @@ public class Player {
      * Assigns the current country to player
      */
     public static void assigningCountries() {
+        
         int numberofInfantary;
         HashMap<String, List<String>> countryAssignedToPlayers = new HashMap<>();
         List<String> nameOfCountry[] = new ArrayList[GameDriver.PlayerList.size()];
