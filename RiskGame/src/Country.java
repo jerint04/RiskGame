@@ -3,6 +3,7 @@ import java.util.List;
 
 /**
  * @author Hemanshu
+ * @version 1.0.0
  * @date 2019-02-19
  */
 public class Country {
@@ -19,10 +20,9 @@ public class Country {
      *
      * @param id ,id of the country
      * @param CountryName,name of the country
-     * @param ContinentName, x co-ordinate of the country
+     * @param ContinentName, name of the continent
      *
      */
-
     public Country(int id, String CountryName, String ContinentName)
     {
         this.id = id;
