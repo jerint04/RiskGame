@@ -15,7 +15,9 @@ public class GameDriver {
     static HashMap<Integer, Player> playerHashMap = new HashMap<>();
     public static Scanner sc = new Scanner(System.in);
 
-
+    /**
+     * This method is used to intialise the players into the game
+     */
     public static void InitialisePlayers() {
         System.out.println("Number of Players who want to play :");
         Scanner input = new Scanner(System.in);
@@ -34,6 +36,9 @@ public class GameDriver {
 
     }
 
+    /**
+     * This method will load a map
+     */
     public static void LoadMap() {
         List<String> getFileName = new ArrayList<String>();
         //File[] filesName = new File("./assets/maps").listFiles();
@@ -108,7 +113,9 @@ public class GameDriver {
         }
     }
 
-
+    /**
+     * This method assigns Countries to the players
+     */
     public static void assigningCountriesToPlayers() {
 
         for (String countryName : CreateMap.countryHashMap.keySet()) {
