@@ -28,12 +28,17 @@ public class Player {
         Name = name;
     }
 
+    /**
+     * This is a constructor of Player Class which sets player Id and player Name
+     *
+     * @param name, name of the player
+     * @param playerId, id of the player
+     */
     public Player(int playerId, String name) {
         this.playerId = playerId;
         this.alive = true;
         Name = name;
     }
-
 
     /**
      * Get player cards
@@ -125,25 +130,46 @@ public class Player {
      * This method is used to get the number of infantary of the player
      *
      * @return numberOfInfantary,
-     * returning the number of the Infantary of the player
+     *                  returning the number of the Infantary of the player
      */
     public int getNumberOfInfantary() {
 
         return numberOfInfantary;
     }
 
+    /**
+     * This method is used to get player id
+     *
+     * @return playerId int
+     */
     public int getPlayerId() {
         return playerId;
     }
 
+    /**
+     * This method is used to set player id
+     *
+     * @param playerId,
+     *          Id of the player
+     */
     public void setPlayerId(int playerId) {
         this.playerId = playerId;
     }
 
+    /**
+     * This method is used to get number of players
+     *
+     * @return numberOfPlayers int
+     */
     public static int getNumberOfPlayers() {
         return numberOfPlayers;
     }
 
+    /**
+     * This method is used to set number of players
+     *
+     * @param numberOfPlayers
+     */
     public static void setNumberOfPlayers(int numberOfPlayers) {
         Player.numberOfPlayers = numberOfPlayers;
     }
