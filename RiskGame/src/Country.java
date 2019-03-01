@@ -31,6 +31,19 @@ public class Country {
     }
 
     /**
+     *  This is a Constructor for Country class which sets countryName and id
+     *
+     * @param id ,id of the country
+     * @param CountryName,name of the country
+     *
+     */
+    public Country(int id, String CountryName)
+    {
+        this.id = id;
+        this.countryName = CountryName;
+    }
+
+    /**
      *  This method gets x-coordinate
      *
      * @return xCoordinate int
@@ -166,10 +179,9 @@ public class Country {
     }
 
     /**
-     *  This method gets the number of soldie Countries
+     *  This method gets the number of soldiers
      *
-     * @param adjacentCountries,
-     *              adds the list of adjacent countries
+     * @return numberOfSoldiers int
      *
      */
     public int getNumberOfSoldiers()
@@ -177,22 +189,37 @@ public class Country {
         return numberOfSoldiers;
     }
 
+    /**
+     *  This method sets the number of soldiers
+     *
+     * @param numberOfSoldiers,
+     *              the total number of soldiers
+     *
+     */
     public void setNumberOfSoldiers(int numberOfSoldiers)
     {
         this.numberOfSoldiers = numberOfSoldiers;
     }
 
-    public Country(int id, String CountryName)
-    {
-        this.id = id;
-        this.countryName = CountryName;
-    }
-
+    /**
+     *  This method adds adjacent country
+     *
+     * @param name,
+     *           name of the adjacent country
+     *
+     */
     public void addAdjacentCountry(String name)
     {
         this.adjacentCountries.add(name);
     }
 
+    /**
+     *  This method removes adjacent country
+     *
+     * @param name,
+     *           name of the adjacent country
+     *
+     */
     public void removeAdjacentCountry(String name)
     {
         this.adjacentCountries.remove(new String(name));
