@@ -10,218 +10,196 @@ public class Country {
     int id;
     String countryName;
     String ParentContinent;
-    List<String> adjacentCountries =  new ArrayList<>();
+    List<String> adjacentCountries = new ArrayList<>();
     int numberOfSoldiers;
     int xCoordinate;
     int yCoordinate;
+    Integer PlayerId;
+    boolean isVisited;
 
     /**
-     *  This is a Constructor for Country class which sets countryName, id and continentName
+     * This is a Constructor for Country class which sets countryName, id and continentName
      *
-     * @param id ,id of the country
+     * @param id               ,id of the country
      * @param CountryName,name of the country
-     * @param ContinentName, name of the continent
-     *
+     * @param ContinentName,   name of the continent
      */
-    public Country(int id, String CountryName, String ContinentName)
-    {
+    public Country(int id, String CountryName, String ContinentName) {
         this.id = id;
         this.countryName = CountryName;
         this.ParentContinent = ContinentName;
     }
 
     /**
-     *  This is a Constructor for Country class which sets countryName and id
+     * This is a Constructor for Country class which sets countryName and id
      *
-     * @param id ,id of the country
+     * @param id               ,id of the country
      * @param CountryName,name of the country
-     *
      */
-    public Country(int id, String CountryName)
-    {
+    public Country(int id, String CountryName) {
         this.id = id;
         this.countryName = CountryName;
     }
 
     /**
-     *  This method gets x-coordinate
+     * This method gets x-coordinate
      *
      * @return xCoordinate int
-     *
      */
-    public int getxCoordinate()
-    {
+    public int getxCoordinate() {
         return xCoordinate;
     }
 
     /**
-     *  This method sets x-coordinate
+     * This method sets x-coordinate
      *
      * @param xCoordinate
-     *
      */
-    public void setxCoordinate(int xCoordinate)
-    {
+    public void setxCoordinate(int xCoordinate) {
         this.xCoordinate = xCoordinate;
     }
 
     /**
-     *  This method gets y-coordinate
+     * This method gets y-coordinate
      *
      * @return yCoordinate int
-     *
      */
-    public int getyCoordinate()
-    {
+    public int getyCoordinate() {
         return yCoordinate;
     }
 
     /**
-     *  This method sets y-coordinate
+     * This method sets y-coordinate
      *
      * @param yCoordinate
-     *
      */
-    public void setyCoordinate(int yCoordinate)
-    {
+    public void setyCoordinate(int yCoordinate) {
         this.yCoordinate = yCoordinate;
     }
 
     /**
-     *  This method gets Country id
+     * This method gets Country id
      *
      * @return id, int
-     *
      */
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
     /**
-     *  This method sets Country id
+     * This method sets Country id
      *
-     * @param  id, int
-     *
+     * @param id, int
      */
-    public void setId(int id)
-    {
+    public void setId(int id) {
         this.id = id;
     }
 
     /**
-     *  This method gets Country name
+     * This method gets Country name
      *
      * @return countryName, String
-     *
      */
-    public String getCountryName()
-    {
+    public String getCountryName() {
         return countryName;
     }
 
     /**
-     *  This method sets Country name
+     * This method sets Country name
      *
-     * @param countryName,
-     *                  name of the Country
-     *
+     * @param countryName, name of the Country
      */
-    public void setCountryName(String countryName)
-    {
+    public void setCountryName(String countryName) {
         this.countryName = countryName;
     }
 
     /**
-     *  This method gets ParentContinent
+     * This method gets ParentContinent
      *
      * @return ParentContinent, String
-     *
      */
-    public String getParentContinent()
-    {
+    public String getParentContinent() {
         return ParentContinent;
     }
 
     /**
-     *  This method sets ParentContinent
+     * This method sets ParentContinent
      *
      * @param parentContinent
-     *
      */
-    public void setParentContinent(String parentContinent)
-    {
+    public void setParentContinent(String parentContinent) {
         ParentContinent = parentContinent;
     }
 
     /**
-     *  This method gets Adjacent Countries
+     * This method gets Adjacent Countries
      *
      * @return adjacentCountries,
-     *              returns the list of adjacent countries
-     *
+     * returns the list of adjacent countries
      */
-    public List<String> getAdjacentCountries()
-    {
+    public List<String> getAdjacentCountries() {
         return adjacentCountries;
     }
 
     /**
-     *  This method sets Adjacent Countries
+     * This method sets Adjacent Countries
      *
-     * @param adjacentCountries,
-     *              adds the list of adjacent countries
-     *
+     * @param adjacentCountries, adds the list of adjacent countries
      */
-    public void setAdjacentCountries(List<String> adjacentCountries)
-    {
+    public void setAdjacentCountries(List<String> adjacentCountries) {
         this.adjacentCountries = adjacentCountries;
     }
 
     /**
-     *  This method gets the number of soldiers
+     * This method gets the number of soldiers
      *
      * @return numberOfSoldiers int
-     *
      */
-    public int getNumberOfSoldiers()
-    {
+    public int getNumberOfSoldiers() {
         return numberOfSoldiers;
     }
 
     /**
-     *  This method sets the number of soldiers
+     * This method sets the number of soldiers
      *
-     * @param numberOfSoldiers,
-     *              the total number of soldiers
-     *
+     * @param numberOfSoldiers, the total number of soldiers
      */
-    public void setNumberOfSoldiers(int numberOfSoldiers)
-    {
+    public void setNumberOfSoldiers(int numberOfSoldiers) {
         this.numberOfSoldiers = numberOfSoldiers;
     }
 
     /**
-     *  This method adds adjacent country
+     * This method adds adjacent country
      *
-     * @param name,
-     *           name of the adjacent country
-     *
+     * @param name, name of the adjacent country
      */
-    public void addAdjacentCountry(String name)
-    {
+    public void addAdjacentCountry(String name) {
         this.adjacentCountries.add(name);
     }
 
     /**
-     *  This method removes adjacent country
+     * This method removes adjacent country
      *
-     * @param name,
-     *           name of the adjacent country
-     *
+     * @param name, name of the adjacent country
      */
-    public void removeAdjacentCountry(String name)
-    {
+    public void removeAdjacentCountry(String name) {
         this.adjacentCountries.remove(new String(name));
     }
+
+    public boolean isVisited() {
+        return isVisited;
+    }
+
+    public void setVisited(boolean visited) {
+        isVisited = visited;
+    }
+
+    public Integer getPlayerId() {
+        return PlayerId;
+    }
+
+    public void setPlayerId(Integer playerId) {
+        PlayerId = playerId;
+    }
+
 }

@@ -147,7 +147,7 @@ public class ReadMap {
             }
         }
 
-        /*check for duplicate countries in continent*//*
+        /* Todo : coorect this part : check for duplicate countries in continent*//*
         if(!aloneCountry) {
             List<List<String>> lists = new ArrayList<List<String>>();
             for (String countryName : CreateMap.countryHashMap.keySet()) {
@@ -163,12 +163,60 @@ public class ReadMap {
 //            System.out.println(lists.get(1));
 
         }*/
-
+        System.out.println("Is Map Connected :" + ReadMap.checkIsMapConnected());
         return true;
     }
 
-    public static void main(String[] args) {
+
+    /*
+    * mapHierarchyModel for me would be the countryHashMap
+    * */
+    public static boolean checkIsMapConnected() {
+        boolean isConnected = true;
+        Set<String> keyNames = CreateMap.countryHashMap.keySet();
+        Country firstCountryInTheList = CreateMap.countryHashMap.get(keyNames.toArray()[0]);
+        dfsUsingStack(firstCountryInTheList);
+        for (String countryName : keyNames ) {
+            if (CreateMap.countryHashMap.get(countryName).isVisited())
+                CreateMap.countryHashMap.get(countryName).setVisited(false);
+            else {
+                isConnected = false;
+                break;
+            }
+        }
+        if (!isConnected) {
+            /*mapHierarchyModel.setErrorMsg("Map is not connected !!");
+            mapHierarchyModel.setValErrorFlag(true);*/
+            System.out.println("Map is not connected !");
+        }
+        return isConnected;
+    }
+
+
+    private static void dfsUsingStack(Country countryModel) {
+        Stack<Country> stack = new Stack<Country>();
+        stack.add(countryModel);
+        countryModel.setVisited(true);
+        while (!stack.isEmpty()) {
+            Country element = stack.pop();
+//			System.out.println("DFS CountryName: " + element.getCountryName() + " ");
+            List<String> neighbourNames = element.getAdjacentCountries();
+            List<Country> neighbours = new ArrayList<>();
+            for (String neighbourName : neighbourNames) {
+                neighbours.add((CreateMap.countryHashMap.get(neighbourName)));
+            }
+            for (int i = 0; i < neighbours.size(); i++) {
+                Country n = neighbours.get(i);
+                if (n != null && !n.isVisited()) {
+                    stack.add(n);
+                    n.setVisited(true);
+                }
+            }
+        }
+    }
+
+   /* public static void main(String[] args) {
         readMap("./assets/maps/Asia.map");
         System.out.println(validateMap());
-    }
+    }*/
 }
