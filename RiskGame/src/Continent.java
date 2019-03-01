@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class Continent
     int continentId;
 	String continentName;
 	int controlValue;
+	
 	List<String> Countries= new ArrayList<>();
 	List<String> AdjacentContinents = new ArrayList<>();
 	
