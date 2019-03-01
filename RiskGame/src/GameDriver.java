@@ -1,8 +1,5 @@
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * GameDriver Class
@@ -121,9 +118,33 @@ public class GameDriver {
         }
 
         for (int p : playerHashMap.keySet()) {
-            System.out.println(playerHashMap.get(p).getCountriesOwned());
+            playerHashMap.get(p).numberOfInfantary=playerHashMap.get(p).numberOfInfantary-playerHashMap.get(p).countriesOwned.size();
+            System.out.println(playerHashMap.get(p).getCountriesOwned() + " size of infantory "+playerHashMap.get(p).numberOfInfantary+ " country owned" +playerHashMap.get(p).countriesOwned.size());
         }
 
+        for(int p : playerHashMap.keySet()){
+            while(playerHashMap.get(p).numberOfInfantary != 0 ){
+                int size= playerHashMap.get(p).countriesOwned.size();
+                Random numberGenerator = new Random();
+                int number = numberGenerator.nextInt((size));
+                String countryNameToIncrementArmy = playerHashMap.get(p).countriesOwned.get(number);
+                CreateMap.countryHashMap.get(countryNameToIncrementArmy).numberOfSoldiers++;
+                playerHashMap.get(p).numberOfInfantary--;
+            }
+
+        }
+
+        for (int p : playerHashMap.keySet()) {
+            playerHashMap.get(p).numberOfInfantary=playerHashMap.get(p).numberOfInfantary-playerHashMap.get(p).countriesOwned.size();
+            System.out.println(playerHashMap.get(p).getCountriesOwned() + " size of infantory "+playerHashMap.get(p).numberOfInfantary+ " country owned" +playerHashMap.get(p).countriesOwned.size());
+        }
+
+        for (int j = 1; j <= CreateMap.countryIdHashMap.size(); j++) {
+
+            String countryName = CreateMap.countryIdHashMap.get(j);
+
+            System.out.println("player details :" + j + CreateMap.countryHashMap.get(countryName).getPlayerId() + " country name :" + countryName + " army count :" + CreateMap.countryHashMap.get(countryName).getNumberOfSoldiers());
+        }
     }
 
     /**
