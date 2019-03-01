@@ -33,7 +33,7 @@ public class Country {
     /**
      * This is a Constructor for Country class which sets countryName and id
      *
-     * @param id               ,id of the country
+     * @param id ,id of the country
      * @param CountryName,name of the country
      */
     public Country(int id, String CountryName) {
@@ -186,18 +186,38 @@ public class Country {
         this.adjacentCountries.remove(new String(name));
     }
 
+    /**
+     * This method returns whether the country is visited or not
+     *
+     * @return isVisited, returns a boolean value
+     */
     public boolean isVisited() {
         return isVisited;
     }
 
+    /**
+     * This method sets the status of the country visited
+     *
+     * @param  visited, assigns a boolean value
+     */
     public void setVisited(boolean visited) {
         isVisited = visited;
     }
 
+    /**
+     * This method gets the player Id
+     *
+     * @return PlayerId Integer
+     */
     public Integer getPlayerId() {
         return PlayerId;
     }
 
+    /**
+     * This method sets the player Id
+     *
+     * @param  playerId, id of the Player
+     */
     public void setPlayerId(Integer playerId) {
         PlayerId = playerId;
     }
