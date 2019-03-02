@@ -151,27 +151,35 @@ public class GameDriver {
         }
     }
     }
-
+        /**
+         * This method calculates infantry
+         */
         public static int calculateInfantry()
-    {
-        int calculateInfanrty=0;
-        for (int p : playerHashMap.keySet())
         {
-            calculateInfanrty=calculateInfanrty+playerHashMap.get(p).numberOfInfantary;
+            int calculateInfanrty=0;
+            for (int p : playerHashMap.keySet())
+            {
+                calculateInfanrty=calculateInfanrty+playerHashMap.get(p).numberOfInfantary;
+            }
+            return calculateInfanrty;
+            }
+
+            /**
+             * This method adds infantry to the Country
+             */
+            public static void addInfantoryToCountry(String countryName,int playerId,int infantoryNumber){
+                CreateMap.countryHashMap.get(countryName).setPlayerId(playerId);
+                CreateMap.countryHashMap.get(countryName).setNumberOfSoldiers(infantoryNumber);
         }
-        return calculateInfanrty;
-        }
 
+        /**
+         * This method performs reinforcement Phase
+         */
+        public static void reinforcementPhase(){
 
-    public static void addInfantoryToCountry(String countryName,int playerId,int infantoryNumber){
-        CreateMap.countryHashMap.get(countryName).setPlayerId(playerId);
-        CreateMap.countryHashMap.get(countryName).setNumberOfSoldiers(infantoryNumber);
-    }
-public static void reinforcemntPhase(){
+                for(int k:playerHashMap.keySet()){
 
-        for(int k:playerHashMap.keySet()){
-
-            playerHashMap.get(k).numberOfInfantary = (playerHashMap.get(k).countriesOwned.size()/3);
+                    playerHashMap.get(k).numberOfInfantary = (playerHashMap.get(k).countriesOwned.size()/3);
         }
 
 }
