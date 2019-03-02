@@ -140,6 +140,7 @@ class GraphNew {
         if(this.size == -1)
             this.size = 0;
         countryMatrix = new int[size][size];*/
+
         for (int[] single : countryMatrix)
             Arrays.fill(single, 0);
     }

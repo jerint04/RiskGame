@@ -9,6 +9,7 @@ import java.util.*;
  * @date 2019-02-22
  * Includes main() method of the program
  */
+
 public class GameDriver {
     static int playerNumber;
     static ArrayList<Player> PlayerList = new ArrayList<Player>();
@@ -166,11 +167,19 @@ public class GameDriver {
         CreateMap.countryHashMap.get(countryName).setPlayerId(playerId);
         CreateMap.countryHashMap.get(countryName).setNumberOfSoldiers(infantoryNumber);
     }
+public static void reinforcemntPhase(){
 
+        for(int k:playerHashMap.keySet()){
+
+            playerHashMap.get(k).numberOfInfantary = (playerHashMap.get(k).countriesOwned.size()/3);
+        }
+
+}
     /**
      * This is the main() method of the program
      * Entry point of the Execution of the whole program
      */
+
     public static void main(String[] args) {
         InitialisePlayers();
         StartOrLoadGame();
