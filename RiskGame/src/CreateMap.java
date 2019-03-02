@@ -2,7 +2,10 @@ import java.util.Arrays;
 import java.util.*;
 
 /**
+ * CreateMap Class
+ *
  * @author Vikram
+ * @version 1.0.0
  * @date 2019-02-20
  */
 public class CreateMap {
@@ -15,6 +18,9 @@ public class CreateMap {
     static HashMap<Integer, String> countryIdHashMap = new HashMap<>();
     static HashMap<String, Country> countryHashMap = new HashMap<>();
 
+    /**
+     * This method creates Continent
+     */
     public static void createContinent() {
         System.out.println("Please Enter the Continent Name :");
         Scanner input = new Scanner(System.in);
@@ -26,6 +32,9 @@ public class CreateMap {
         continentHashMap.put(continentName, temp);
     }
 
+    /**
+     * This method creates Country
+     */
     public static void createCountry() {
         System.out.println("Please Enter the Country Name :");
         Scanner input = new Scanner(System.in);
@@ -40,7 +49,12 @@ public class CreateMap {
         addCountriesInContinent(countryName, continentBelongsTo);
     }
 
-
+    /**
+     * This method adds adjacent neighbour Countries using x,y coordinates
+     *
+     * @param i, x-coordinate
+     * @param j, y-coordinate
+     */
     public static void addAdjacentNeighbourCountriesUsingCoordinates(int i, int j) {
         String countryXname = countryIdHashMap.get(i);
         String countryYname = countryIdHashMap.get(j);
