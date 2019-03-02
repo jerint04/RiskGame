@@ -125,33 +125,46 @@ public class GameDriver {
         }
 
         for (int p : playerHashMap.keySet()) {
-            playerHashMap.get(p).numberOfInfantary=playerHashMap.get(p).numberOfInfantary-playerHashMap.get(p).countriesOwned.size();
-            System.out.println(playerHashMap.get(p).getCountriesOwned() + " size of infantory "+playerHashMap.get(p).numberOfInfantary+ " country owned" +playerHashMap.get(p).countriesOwned.size());
+            playerHashMap.get(p).numberOfInfantary = playerHashMap.get(p).numberOfInfantary - playerHashMap.get(p).countriesOwned.size();
+            System.out.println(playerHashMap.get(p).getCountriesOwned() + " size of infantory " + playerHashMap.get(p).numberOfInfantary + " country owned" + playerHashMap.get(p).countriesOwned.size());
         }
 
-        for(int p : playerHashMap.keySet()){
-            while(playerHashMap.get(p).numberOfInfantary != 0 ){
-                int size= playerHashMap.get(p).countriesOwned.size();
-                Random numberGenerator = new Random();
-                int number = numberGenerator.nextInt((size));
-                String countryNameToIncrementArmy = playerHashMap.get(p).countriesOwned.get(number);
-                CreateMap.countryHashMap.get(countryNameToIncrementArmy).numberOfSoldiers++;
-                playerHashMap.get(p).numberOfInfantary--;
-            }
 
-        }
-
+        while (calculateInfantry()!=0){
         for (int p : playerHashMap.keySet()) {
-            playerHashMap.get(p).numberOfInfantary=playerHashMap.get(p).numberOfInfantary-playerHashMap.get(p).countriesOwned.size();
-            System.out.println(playerHashMap.get(p).getCountriesOwned() + " size of infantory "+playerHashMap.get(p).numberOfInfantary+ " country owned" +playerHashMap.get(p).countriesOwned.size());
+            System.out.println("Name of the players :" + playerHashMap.get(p).getName() + " size of remaining infantory :" + playerHashMap.get(p).numberOfInfantary + " number of country owned" + playerHashMap.get(p).countriesOwned.size());
+            // playerHashMap.get(p).numberOfInfantary=playerHashMap.get(p).numberOfInfantary-playerHashMap.get(p).countriesOwned.size();
+            int i = 0;
+            if (playerHashMap.get(p).numberOfInfantary != 0) {
+                for (String countryName : playerHashMap.get(p).getCountriesOwned()) {
+                    System.out.println(i + ":" + countryName);
+                    i = i + 1;
+                }
+
+                System.out.println("enter the number of armies to be allocated and the serial number of the country");
+                int numOfArmies = sc.nextInt();
+                int countrySerialNum = sc.nextInt();
+                addInfantoryToCountry(playerHashMap.get(p).countriesOwned.get(countrySerialNum), p, numOfArmies);
+                playerHashMap.get(p).numberOfInfantary = playerHashMap.get(p).numberOfInfantary - numOfArmies;
+            }
+        }
+    }
+    }
+
+        public static int calculateInfantry()
+    {
+        int calculateInfanrty=0;
+        for (int p : playerHashMap.keySet())
+        {
+            calculateInfanrty=calculateInfanrty+playerHashMap.get(p).numberOfInfantary;
+        }
+        return calculateInfanrty;
         }
 
-        for (int j = 1; j <= CreateMap.countryIdHashMap.size(); j++) {
 
-            String countryName = CreateMap.countryIdHashMap.get(j);
-
-            System.out.println("player details :" + j + CreateMap.countryHashMap.get(countryName).getPlayerId() + " country name :" + countryName + " army count :" + CreateMap.countryHashMap.get(countryName).getNumberOfSoldiers());
-        }
+    public static void addInfantoryToCountry(String countryName,int playerId,int infantoryNumber){
+        CreateMap.countryHashMap.get(countryName).setPlayerId(playerId);
+        CreateMap.countryHashMap.get(countryName).setNumberOfSoldiers(infantoryNumber);
     }
 
     /**

@@ -198,14 +198,7 @@ public class Player {
                     count++;
                     CreateMap.countryHashMap.get(countryName).setPlayerId(playerId);
                     CreateMap.countryHashMap.get(countryName).setNumberOfSoldiers(count);
-
-                    //nameOfCountry.add(countryName);
-                    //GameDriver.PlayerList.get(i).setCountriesOwned(nameOfCountry);
-                    // countryAssignedToPlayers.put(playerName,nameOfCountry);
-                     /*numberofInfantary = GameDriver.PlayerList.get(i).getNumberOfInfantary();
-                    numberofInfantary=numberofInfantary-count;
-                    GameDriver.PlayerList.get(i).setNumberOfInfantary(numberofInfantary );
-*/
+                    //addInfantoryToCountry(countryName,playerId,count);
 
                 }
             }
@@ -225,7 +218,6 @@ public class Player {
             System.out.println("Country assigned to players :" + GameDriver.PlayerList.get(i).getCountriesOwned());
         }*/
     }
-
 
     /**
      * This method is used to intialise infantary of the player
