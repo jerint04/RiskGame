@@ -14,7 +14,7 @@ public class ReadMap {
 
 /*    public static void main(String[] args) {
         readMap();
-        System.out.println("Countinent List : " + CreateMap.ContinentList );
+        System.out.println("Continent List : " + CreateMap.ContinentList );
         System.out.println("Country List : "  + CreateMap.countryIdHashMap );
     }*/
 
@@ -120,9 +120,6 @@ public class ReadMap {
     }
 
 
-
-
-
     public static boolean validateMap() {
         boolean emptyContinent = false;
         boolean aloneCountry = false;
@@ -132,7 +129,7 @@ public class ReadMap {
             Continent currentContinent = CreateMap.continentHashMap.get(name);
             if (currentContinent.getCountries().isEmpty() == true) {
                 emptyContinent = true;
-                System.out.println("Continent "+ name+" has no countries in it.");
+                System.out.println("Continent " + name + " has no countries in it.");
                 return false;
             }
         }
@@ -142,7 +139,7 @@ public class ReadMap {
             Country everyCountry = CreateMap.countryHashMap.get(countryName);
             if (everyCountry.getAdjacentCountries().isEmpty() == true) {
                 aloneCountry = true;
-                System.out.println("Country "+ countryName+" has no adjacent countries in it.");
+                System.out.println("Country " + countryName + " has no adjacent countries in it.");
                 return false;
             }
         }
@@ -168,15 +165,12 @@ public class ReadMap {
     }
 
 
-    /*
-    * mapHierarchyModel for me would be the countryHashMap
-    * */
     public static boolean checkIsMapConnected() {
         boolean isConnected = true;
         Set<String> keyNames = CreateMap.countryHashMap.keySet();
         Country firstCountryInTheList = CreateMap.countryHashMap.get(keyNames.toArray()[0]);
         dfsUsingStack(firstCountryInTheList);
-        for (String countryName : keyNames ) {
+        for (String countryName : keyNames) {
             if (CreateMap.countryHashMap.get(countryName).isVisited())
                 CreateMap.countryHashMap.get(countryName).setVisited(false);
             else {
@@ -185,8 +179,6 @@ public class ReadMap {
             }
         }
         if (!isConnected) {
-            /*mapHierarchyModel.setErrorMsg("Map is not connected !!");
-            mapHierarchyModel.setValErrorFlag(true);*/
             System.out.println("Map is not connected !");
         }
         return isConnected;

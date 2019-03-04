@@ -33,7 +33,7 @@ public class Country {
     /**
      * This is a Constructor for Country class which sets countryName and id
      *
-     * @param id ,id of the country
+     * @param id               ,id of the country
      * @param CountryName,name of the country
      */
     public Country(int id, String CountryName) {
@@ -198,7 +198,7 @@ public class Country {
     /**
      * This method sets the status of the country visited
      *
-     * @param  visited, assigns a boolean value
+     * @param visited, assigns a boolean value
      */
     public void setVisited(boolean visited) {
         isVisited = visited;
@@ -216,7 +216,7 @@ public class Country {
     /**
      * This method sets the player Id
      *
-     * @param  playerId, id of the Player
+     * @param playerId, id of the Player
      */
     public void setPlayerId(Integer playerId) {
         PlayerId = playerId;

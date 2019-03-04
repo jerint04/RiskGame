@@ -4,41 +4,40 @@ import java.util.List;
 
 /**
  * Continent Class
- * 
+ *
  * @author Vikram
  * @version 1.0.0
  * @date 2019-02-19
  */
-public class Continent
-{
+public class Continent {
     int continentId;
-	String continentName;
-	int controlValue;
-	
-	List<String> Countries= new ArrayList<>();
-	List<String> AdjacentContinents = new ArrayList<>();
+    String continentName;
+    int controlValue;
+
+    List<String> Countries = new ArrayList<>();
+    List<String> AdjacentContinents = new ArrayList<>();
 
     /**
      * This is a constructor of Continent Class which sets Continent name and control value
      *
-     * @param name, name of the Continent
+     * @param name,  name of the Continent
      * @param point, control value
      */
-	public Continent(String name , int point) {
-		this.continentName = name;
-		this.controlValue = point;
-	}
+    public Continent(String name, int point) {
+        this.continentName = name;
+        this.controlValue = point;
+    }
 
     /**
      * This is a constructor of Continent Class which sets Continent id, Continent name and control value
      *
-     * @param name, name of the Continent
+     * @param name,  name of the Continent
      * @param point, control value
-     * @param id, id of the Continent
+     * @param id,    id of the Continent
      */
-    public Continent(int id,String name , int point) {
+    public Continent(int id, String name, int point) {
         this.continentId = id;
-	    this.continentName = name;
+        this.continentName = name;
         this.controlValue = point;
     }
 
@@ -47,8 +46,7 @@ public class Continent
      *
      * @return continentName String
      */
-    public String getContinentName()
-    {
+    public String getContinentName() {
         return continentName;
     }
 
@@ -57,8 +55,7 @@ public class Continent
      *
      * @param continentName, name of the Continent
      */
-    public void setContinentName(String continentName)
-    {
+    public void setContinentName(String continentName) {
         this.continentName = continentName;
     }
 
@@ -67,8 +64,7 @@ public class Continent
      *
      * @return continentName String
      */
-    public int getControlValue()
-    {
+    public int getControlValue() {
         return controlValue;
     }
 
@@ -77,8 +73,7 @@ public class Continent
      *
      * @param controlValue
      */
-    public void setControlValue(int controlValue)
-    {
+    public void setControlValue(int controlValue) {
         this.controlValue = controlValue;
     }
 
@@ -87,19 +82,16 @@ public class Continent
      *
      * @return continentName String
      */
-    public List<String> getCountries()
-    {
+    public List<String> getCountries() {
         return Countries;
     }
 
     /**
      * This method sets Countries
      *
-     * @param countries,
-     *          lists the countries
+     * @param countries, lists the countries
      */
-    public void setCountries(List<String> countries)
-    {
+    public void setCountries(List<String> countries) {
         Countries = countries;
     }
 
@@ -108,8 +100,7 @@ public class Continent
      *
      * @return AdjacentContinents List<String>
      */
-    public List<String> getAdjacentContinents()
-    {
+    public List<String> getAdjacentContinents() {
         return AdjacentContinents;
     }
 
@@ -118,8 +109,7 @@ public class Continent
      *
      * @param adjacentContinents
      */
-    public void setAdjacentContinents(List<String> adjacentContinents)
-    {
+    public void setAdjacentContinents(List<String> adjacentContinents) {
         AdjacentContinents = adjacentContinents;
     }
 
@@ -128,19 +118,17 @@ public class Continent
      *
      * @param countryName, name of the Country
      */
-    public void insertCountry(String countryName)
-    {
-		this.Countries.add(countryName);
-	}
+    public void insertCountry(String countryName) {
+        this.Countries.add(countryName);
+    }
 
     /**
      * This method removes a Country
      *
      * @param countryName, name of the Country
      */
-	public void RemoveCountry(String countryName)
-    {
-		this.Countries.remove(new String("countryName"));
-	}
+    public void RemoveCountry(String countryName) {
+        this.Countries.remove(new String("countryName"));
+    }
 
 }

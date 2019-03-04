@@ -32,6 +32,55 @@ public class CreateMap {
         continentHashMap.put(continentName, temp);
     }
 
+    /*todo : test this function thoroughly &&&   THROw THE ERRORS FOR THIS ONE AND return THE BOOLEAN to know if successfully  deleted or not*/
+    public static void removeCountry() {
+        System.out.println("Select the Country number to remove from the list:");
+        for (int key : CreateMap.countryIdHashMap.keySet()) {
+            System.out.println(key + " " + CreateMap.countryIdHashMap.get(key));
+        }
+        Scanner input = new Scanner(System.in);
+        int countryKey = input.nextInt();
+        String countryNameToDelete = CreateMap.countryIdHashMap.get(countryKey);
+        Country toDelete = CreateMap.countryHashMap.get(countryNameToDelete);
+        String continentBelongingTo = toDelete.getParentContinent();
+        CreateMap.countryHashMap.remove(countryNameToDelete);
+        CreateMap.countryIdHashMap.remove(countryKey);
+        /*Removing the country from the continent*/
+        CreateMap.ContinentList.remove(countryNameToDelete); /*todo : this line seems to be wrong*/
+        toDelete = null;
+        CreateMap.continentHashMap.get(continentBelongingTo).Countries.remove(countryNameToDelete);
+        // Removing the country from the adjacent countries list
+        for (String key : CreateMap.countryHashMap.keySet()) {
+            if (CreateMap.countryHashMap.get(key).getAdjacentCountries().contains(countryNameToDelete)) {
+                CreateMap.countryHashMap.get(key).getAdjacentCountries().remove(countryNameToDelete);
+            }
+        }
+    }
+
+
+    public static void removeContinent() {
+        System.out.println("Write the name of the Continent you want to delete:");
+        for (String key : CreateMap.ContinentList) {
+            System.out.println(key);
+        }
+        Scanner input = new Scanner(System.in);
+        String continent = input.nextLine();
+        if (CreateMap.continentHashMap.containsKey(continent)) {
+            if (CreateMap.continentHashMap.get(continent).Countries.isEmpty()) {
+                CreateMap.continentHashMap.remove(continent);
+                CreateMap.ContinentList.remove(continent);
+                System.out.println("Successfully Deleted Continent :" + continent);
+            } else {
+                System.out.println("Can not delete the Continent, need to delete the countries in the Continent first");
+                for (String countries : CreateMap.continentHashMap.get(continent).getCountries()) {
+                    System.out.println(countries);
+                }
+            }
+        } else {
+            System.out.println("Please enter correct Continent");
+        }
+    }
+
     /**
      * This method creates Country
      */
@@ -154,7 +203,6 @@ class GraphNew {
         if(this.size == -1)
             this.size = 0;
         countryMatrix = new int[size][size];*/
-
         for (int[] single : countryMatrix)
             Arrays.fill(single, 0);
     }
