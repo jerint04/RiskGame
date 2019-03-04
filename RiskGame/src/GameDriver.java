@@ -14,7 +14,7 @@ public class GameDriver {
     static int playerNumber;
     static ArrayList<Player> PlayerList = new ArrayList<Player>();
     static HashMap<Integer, Player> playerHashMap = new HashMap<>();
-    public static Scanner sc = new Scanner(System.in);
+
 
     /**
      * This method is used to intialise the players into the game
@@ -41,6 +41,7 @@ public class GameDriver {
      * This method will load a map
      */
     public static void LoadMap() {
+        Scanner sc = new Scanner(System.in);
         List<String> getFileName = new ArrayList<String>();
         //File[] filesName = new File("./assets/maps").listFiles();
         File[] filesName = new File(System.getProperty("user.dir") + "/RiskGame/assets/maps").listFiles();
@@ -118,6 +119,7 @@ public class GameDriver {
      * This method assigns Countries to the players
      */
     public static void assigningCountriesToPlayers() {
+        Scanner sc = new Scanner(System.in);
 
         for (String countryName : CreateMap.countryHashMap.keySet()) {
             int playerId = CreateMap.countryHashMap.get(countryName).getPlayerId();

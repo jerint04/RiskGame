@@ -12,10 +12,9 @@ import java.util.*;
  */
 public class ReadMap {
 
-/*    public static void main(String[] args) {
-        readMap();
-        System.out.println("Continent List : " + CreateMap.ContinentList );
-        System.out.println("Country List : "  + CreateMap.countryIdHashMap );
+  /*  public static void main(String[] args) {
+        readMap("./assets/maps/Asia.map");
+        validateMap();
     }*/
 
     /**
@@ -79,26 +78,35 @@ public class ReadMap {
             System.out.println(e);
         }
         GraphNew.initializeCountryMatrix();
-        createAdjacentMatrix();
-        GraphNew.printGraph();
+        boolean adjacencyMatrixCreation = createAdjacentMatrix();
+        if (adjacencyMatrixCreation)
+            GraphNew.printGraph();
     }
 
     /**
      * This function creates adjacent Countries
      */
-    public static void createAdjacentMatrix() {
-        for (String a : CreateMap.CountryList) {
-            Country xTemp = CreateMap.countryHashMap.get(a);
-            Object xo = getKeyFromValue(CreateMap.countryIdHashMap, xTemp.getCountryName());
-            int x = (Integer) xo;
-            for (String adjacentCountryName : xTemp.getAdjacentCountries()) {
-                Country yTemp = CreateMap.countryHashMap.get(adjacentCountryName);
-                Object yo = getKeyFromValue(CreateMap.countryIdHashMap, yTemp.getCountryName());
-                int y = (Integer) yo;
-                System.out.println(y + " " + x);
-                GraphNew.countryMatrix[y][x] = 1;
+    public static boolean createAdjacentMatrix() {
+        try {
+            for (String a : CreateMap.CountryList) {
+                Country xTemp = CreateMap.countryHashMap.get(a);
+                Object xo = getKeyFromValue(CreateMap.countryIdHashMap, xTemp.getCountryName());
+                int x = (Integer) xo;
+                for (String adjacentCountryName : xTemp.getAdjacentCountries()) {
+                    Country yTemp = CreateMap.countryHashMap.get(adjacentCountryName);
+                    Object yo = getKeyFromValue(CreateMap.countryIdHashMap, yTemp.getCountryName());
+                    int y = (Integer) yo;
+                    System.out.println(y + " " + x);
+                    GraphNew.countryMatrix[y][x] = 1;
+                }
             }
+        } catch (Exception e) {
+            System.out.println("Map is Invalid, Please correct the Map file");
+            System.out.println(e);
+            return false;
         }
+        System.out.println("Adjacency Matrix Created Successfully");
+        return true;
     }
 
     /**
@@ -122,7 +130,7 @@ public class ReadMap {
     /**
      * This function is used to validate the map
      *
-     * @return  false ,returns a boolean value
+     * @return false ,returns a boolean value
      */
     public static boolean validateMap() {
         boolean emptyContinent = false;
@@ -148,22 +156,19 @@ public class ReadMap {
             }
         }
 
-        /* Todo : coorect this part : check for duplicate countries in continent*//*
-        if(!aloneCountry) {
-            List<List<String>> lists = new ArrayList<List<String>>();
-            for (String countryName : CreateMap.countryHashMap.keySet()) {
-                Country everyCountry = CreateMap.countryHashMap.get(countryName);
-                lists.add(everyCountry.getAdjacentCountries());
-            }
-            List<String> commons = new ArrayList<String>();
-            commons.addAll(lists.get(1));
-            for (ListIterator<List<String>> iter = lists.listIterator(1); iter.hasNext(); ) {
-                commons.retainAll(iter.next());
-            }
-            System.out.println(commons);
-//            System.out.println(lists.get(1));
 
-        }*/
+        if (!aloneCountry) {
+            Set tempSet = new HashSet();
+            for (String continentName : CreateMap.continentHashMap.keySet()) {
+                List<String> countries = CreateMap.continentHashMap.get(continentName).getCountries();
+                for (String country : countries) {
+                    if (!tempSet.add(country)) {
+                        System.out.println("Country " + country + " present in 2 continents !");
+                        return false;
+                    }
+                }
+            }
+        }
         System.out.println("Is Map Connected :" + ReadMap.checkIsMapConnected());
         return true;
     }
@@ -219,8 +224,4 @@ public class ReadMap {
         }
     }
 
-   /* public static void main(String[] args) {
-        readMap("./assets/maps/Asia.map");
-        System.out.println(validateMap());
-    }*/
 }
