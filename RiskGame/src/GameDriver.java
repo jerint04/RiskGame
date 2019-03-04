@@ -226,13 +226,8 @@ Scanner sc=new Scanner(System.in);
     public static void main(String[] args) {
         InitialisePlayers();
         StartOrLoadGame();
-        Player temp = playerHashMap.get(0);
-        temp.countriesOwned.add("a");
-        temp.countriesOwned.add("b");
-        temp.countriesOwned.add("c");
-        receivingNumberOfArmies(0);
-        /*Player.initialisationInfantory();
+        Player.initialisationInfantory();
         Player.assigningCountries();
-        assigningCountriesToPlayers();*/
+        assigningCountriesToPlayers();
     }
 }
