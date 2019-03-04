@@ -133,58 +133,91 @@ public class GameDriver {
         }
 
 
-        while (calculateInfantry()!=0){
-        for (int p : playerHashMap.keySet()) {
-            System.out.println("Name of the players :" + playerHashMap.get(p).getName() + " size of remaining infantory :" + playerHashMap.get(p).numberOfInfantary + " number of country owned" + playerHashMap.get(p).countriesOwned.size());
-            // playerHashMap.get(p).numberOfInfantary=playerHashMap.get(p).numberOfInfantary-playerHashMap.get(p).countriesOwned.size();
-            int i = 0;
-            if (playerHashMap.get(p).numberOfInfantary != 0) {
-                for (String countryName : playerHashMap.get(p).getCountriesOwned()) {
-                    System.out.println(i + ":" + countryName);
-                    i = i + 1;
+        while (calculateInfantry() != 0) {
+            for (int p : playerHashMap.keySet()) {
+                System.out.println("Name of the players :" + playerHashMap.get(p).getName() + " size of remaining infantory :" + playerHashMap.get(p).numberOfInfantary + " number of country owned" + playerHashMap.get(p).countriesOwned.size());
+                // playerHashMap.get(p).numberOfInfantary=playerHashMap.get(p).numberOfInfantary-playerHashMap.get(p).countriesOwned.size();
+                int i = 0;
+                if (playerHashMap.get(p).numberOfInfantary != 0) {
+                    for (String countryName : playerHashMap.get(p).getCountriesOwned()) {
+                        System.out.println(i + ":" + countryName);
+                        i = i + 1;
+                    }
+
+                    System.out.println("enter the number of armies to be allocated and the serial number of the country");
+                    int numOfArmies = sc.nextInt();
+                    int countrySerialNum = sc.nextInt();
+                    addInfantoryToCountry(playerHashMap.get(p).countriesOwned.get(countrySerialNum), p, numOfArmies);
+                    playerHashMap.get(p).numberOfInfantary = playerHashMap.get(p).numberOfInfantary - numOfArmies;
                 }
-
-                System.out.println("enter the number of armies to be allocated and the serial number of the country");
-                int numOfArmies = sc.nextInt();
-                int countrySerialNum = sc.nextInt();
-                addInfantoryToCountry(playerHashMap.get(p).countriesOwned.get(countrySerialNum), p, numOfArmies);
-                playerHashMap.get(p).numberOfInfantary = playerHashMap.get(p).numberOfInfantary - numOfArmies;
             }
         }
     }
+
+    /**
+     * This method calculates infantry
+     */
+    public static int calculateInfantry() {
+        int calculateInfanrty = 0;
+        for (int p : playerHashMap.keySet()) {
+            calculateInfanrty = calculateInfanrty + playerHashMap.get(p).numberOfInfantary;
+        }
+        return calculateInfanrty;
     }
-        /**
-         * This method calculates infantry
-         */
-        public static int calculateInfantry()
-        {
-            int calculateInfanrty=0;
-            for (int p : playerHashMap.keySet())
-            {
-                calculateInfanrty=calculateInfanrty+playerHashMap.get(p).numberOfInfantary;
-            }
-            return calculateInfanrty;
-            }
 
-            /**
-             * This method adds infantry to the Country
-             */
-            public static void addInfantoryToCountry(String countryName,int playerId,int infantoryNumber){
-                CreateMap.countryHashMap.get(countryName).setPlayerId(playerId);
-                CreateMap.countryHashMap.get(countryName).setNumberOfSoldiers(infantoryNumber);
+    /**
+     * This method adds infantry to the Country
+     */
+    public static void addInfantoryToCountry(String countryName, int playerId, int infantoryNumber) {
+        CreateMap.countryHashMap.get(countryName).setPlayerId(playerId);
+        CreateMap.countryHashMap.get(countryName).setNumberOfSoldiers(infantoryNumber);
+    }
+
+    /**
+     * This method performs reinforcement Phase
+     */
+    public static void reinforcementPhase() {
+
+        for (int k : playerHashMap.keySet()) {
+
+            playerHashMap.get(k).numberOfInfantary = (playerHashMap.get(k).countriesOwned.size() / 3);
         }
 
-        /**
-         * This method performs reinforcement Phase
-         */
-        public static void reinforcementPhase(){
+    }
 
-                for(int k:playerHashMap.keySet()){
+    /*
+    Calculating armies according to the risk rule that is  calculating using number of territories occupied
 
-                    playerHashMap.get(k).numberOfInfantary = (playerHashMap.get(k).countriesOwned.size()/3);
+     */
+    public static void receivingNumberOfArmies(int playerId) {
+Scanner sc=new Scanner(System.in);
+        Player temp = playerHashMap.get(playerId);
+        playerHashMap.get(playerId).numberOfInfantary = +(playerHashMap.get(playerId).countriesOwned.size() / 3);
+        for (String key : CreateMap.continentHashMap.keySet()) {
+            Continent tempContinent = CreateMap.continentHashMap.get(key);
+            if (temp.countriesOwned.containsAll(tempContinent.Countries)) {
+                playerHashMap.get(playerId).numberOfInfantary = +tempContinent.controlValue;
+            }
         }
 
-}
+        System.out.println(" Infantory for the current players is : " + playerHashMap.get(playerId).numberOfInfantary);
+
+        while (playerHashMap.get(playerId).numberOfInfantary != 0) {
+            int i = 0;
+            for (String countryName : playerHashMap.get(playerId).getCountriesOwned()) {
+                System.out.println(i + ":" + countryName);
+                i = i + 1;
+            }
+            System.out.println("enter the number of armies to be allocated and the serial number of the country");
+            int numOfArmies = sc.nextInt();
+            int countrySerialNum = sc.nextInt();
+            addInfantoryToCountry(playerHashMap.get(playerId).countriesOwned.get(countrySerialNum), playerId, numOfArmies);
+            playerHashMap.get(playerId).numberOfInfantary = playerHashMap.get(playerId).numberOfInfantary - numOfArmies;
+        }
+        }
+
+
+
     /**
      * This is the main() method of the program
      * Entry point of the Execution of the whole program
@@ -193,8 +226,13 @@ public class GameDriver {
     public static void main(String[] args) {
         InitialisePlayers();
         StartOrLoadGame();
-        Player.initialisationInfantory();
+        Player temp = playerHashMap.get(0);
+        temp.countriesOwned.add("a");
+        temp.countriesOwned.add("b");
+        temp.countriesOwned.add("c");
+        receivingNumberOfArmies(0);
+        /*Player.initialisationInfantory();
         Player.assigningCountries();
-        assigningCountriesToPlayers();
+        assigningCountriesToPlayers();*/
     }
 }

@@ -1,4 +1,5 @@
 
+/*
 import static org.junit.Assert.*;
 
 import org.junit.After;
@@ -10,6 +11,7 @@ import org.junit.Test;
 import javax.swing.plaf.synth.SynthScrollBarUI;
 
 
+*/
 /**
  * The class <code>TestCountry</code> contains tests for the class
  * <code> {@link Country}</code>
@@ -17,7 +19,8 @@ import javax.swing.plaf.synth.SynthScrollBarUI;
  * @author Vikram
  * @version 1.0.0
  *
- */
+ *//*
+
 
 public class TestCountry {
 
@@ -25,9 +28,11 @@ public class TestCountry {
     Player player;
     Continent continent;
 
-    /**
+    */
+/**
      * Test case Initialization for TestCountry
-     */
+     *//*
+
 
     @Before
     public void beforeTestCountry()
@@ -35,9 +40,11 @@ public class TestCountry {
         country = new Country(1,"India","Asia");
     }
 
-    /**
+    */
+/**
      * Test case to tests x value is correct
-     */
+     *//*
+
 
     @Test
     public void TestGetX() {
@@ -64,9 +71,11 @@ public class TestCountry {
     }
 
 
-    /**
+    */
+/**
      * Test case to tests x value is correct
-     */
+     *//*
+
 
     @Test
     public void TestGetY() {
@@ -84,9 +93,11 @@ public class TestCountry {
         System.out.println(id);
         assertEquals(1, id);
     }
-    /**
+    */
+/**
      * returning in int
-     */
+     *//*
+
     @Test
     public void TestNumberOfSoldiers() {
         System.out.println("NumberOfSoldiers");
@@ -96,12 +107,14 @@ public class TestCountry {
     }
 
 
-    /**
+    */
+/**
      * Perform post-test clean-up.
      *
      * @throws Exception
      *             if the clean-up fails for some reason
-     */
+     *//*
+
 
     @After
     public void TearDown() throws Exception {
@@ -112,3 +125,4 @@ public class TestCountry {
 }
 
 
+*/
