@@ -119,7 +119,11 @@ public class ReadMap {
         return -1;
     }
 
-
+    /**
+     * This function is used to validate the map
+     *
+     * @return  false ,returns a boolean value
+     */
     public static boolean validateMap() {
         boolean emptyContinent = false;
         boolean aloneCountry = false;
@@ -164,7 +168,11 @@ public class ReadMap {
         return true;
     }
 
-
+    /**
+     * This function checks the whether the map is connected or not
+     *
+     * @return isConnected , returns a boolean value
+     */
     public static boolean checkIsMapConnected() {
         boolean isConnected = true;
         Set<String> keyNames = CreateMap.countryHashMap.keySet();
@@ -184,7 +192,11 @@ public class ReadMap {
         return isConnected;
     }
 
-
+    /**
+     * This function performs dfs using Stack
+     *
+     * @param countryModel, Country type reference
+     */
     private static void dfsUsingStack(Country countryModel) {
         Stack<Country> stack = new Stack<Country>();
         stack.add(countryModel);
