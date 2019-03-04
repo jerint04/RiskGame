@@ -32,6 +32,9 @@ public class CreateMap {
         continentHashMap.put(continentName, temp);
     }
 
+    /**
+     * This method deletes the country
+     */
     /*todo : test this function thoroughly &&&   THROw THE ERRORS FOR THIS ONE AND return THE BOOLEAN to know if successfully  deleted or not*/
     public static void removeCountry() {
         System.out.println("Select the Country number to remove from the list:");
@@ -58,6 +61,9 @@ public class CreateMap {
     }
 
 
+    /**
+     * This method deletes the Continent
+     */
     public static void removeContinent() {
         System.out.println("Write the name of the Continent you want to delete:");
         for (String key : CreateMap.ContinentList) {
@@ -113,6 +119,12 @@ public class CreateMap {
 //        countryY.addAdjacentCountry(countryXname);
     }
 
+    /**
+     * This method adds adjacent neighbour Countries using their names
+     *
+     * @param Source, String
+     * @param Destination, String
+     */
     public static void addAdjacentNeighbourCountriesUsingNames(String Source, String Destination) {
 //        String countryXname = countryIdHashMap.get(i);
 //        String countryYname =  countryIdHashMap.get(j);
@@ -122,6 +134,12 @@ public class CreateMap {
 //        countryY.addAdjacentCountry(countryXname);
     }
 
+    /**
+     * This method adds Countries in Continent
+     *
+     * @param countryName, name of the Country
+     * @param Continent, name of the Continent to be added
+     */
     public static void addCountriesInContinent(String countryName, String Continent) {
         Continent temp = continentHashMap.get(Continent);
         temp.insertCountry(countryName);
@@ -129,14 +147,19 @@ public class CreateMap {
 }
 
 
-/*
+/**
+ * GraphName Class
  * Creation of Adjacency Matrix
+ *
  * */
 class GraphNew {
     static int maxSize = 100;
     static int[][] countryMatrix = new int[maxSize][maxSize];
     static int size;
 
+    /**
+     * This method initializes Country Matrix
+     */
     public static void initializeCountryMatrix() {
         for (int i = 0; i < maxSize; i++) {
             for (int j = 0; j < maxSize; j++) {
@@ -145,6 +168,9 @@ class GraphNew {
         }
     }
 
+    /**
+     * This method adds Neighbour Country
+     */
     public static void addNeighbour() {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter x value to Make add neighbour :");
@@ -159,6 +185,9 @@ class GraphNew {
 
     }
 
+    /**
+     * This method is used to display the Graph
+     */
     public static void printGraph() {
         if (Helper.getCountryCountId() != 0) {
             for (int i = 0; i <= Helper.getCountryCountId(); i++) {
@@ -182,6 +211,9 @@ class GraphNew {
         }
     }
 
+    /**
+     * This method is used to read from Graph
+     */
     public static void readFromGraph() {
         if (Helper.getCountryCountId() != 0) {
             for (int i = 0; i <= Helper.getCountryCountId(); i++) {
@@ -198,6 +230,9 @@ class GraphNew {
         }
     }
 
+    /**
+     * Constructor of GraphNew Class, used to initialize countryMatrix, 2-D array
+     */
     GraphNew() {
         /*this.size = Helper.getCountryCountId();
         if(this.size == -1)
@@ -214,18 +249,30 @@ class GraphNew {
 //            Arrays.fill(single, 0);
 //    }
 
+    /**
+     * This method is used to create new graph with the existing co-ordinates
+     */
     public static void createNewGraphWithOldValues() {
         size = Helper.getCountryCountId();
 
 
     }
 
+    /**
+     * This method is used to add source and destination values to Country Matrix
+     * @param source, int
+     * @param destination, int
+     */
     public void add(int source, int destination) {
         countryMatrix[source][destination] = 1;
         countryMatrix[destination][source] = 1;
     }
 
-
+    /**
+     * This method is used to find adjacent country
+     * @param index, int
+     * @return adjacent, returns list of adjacent country index
+     */
     public ArrayList<Integer> findAdjacent(int index) {
         ArrayList<Integer> adjacent = new ArrayList<Integer>();
         for (int i = 1; i < Helper.getCountryCountId(); i++) {
@@ -235,12 +282,23 @@ class GraphNew {
         return adjacent;
     }
 
+    /**
+     * This method is used to check whether the country is connected or not
+     * @param source, int
+     * @param destination, int
+     * @return false, boolean
+     */
     public boolean isConnected(int source, int destination) {
         if (countryMatrix[source][destination] == 1 || countryMatrix[destination][source] == 1)
             return true;
         return false;
     }
 
+    /**
+     * This method is used to get the neighbors of the Country
+     * @param v, id of the Country
+     * @return neighbours, lists the neighboring countries
+     */
     public List<Integer> getNeighbors(int v) {
         int numV = Helper.getCountryCountId();
         if (v >= numV) {
