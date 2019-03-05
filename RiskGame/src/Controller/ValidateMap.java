@@ -40,7 +40,7 @@ public class ValidateMap {
             Country everyCountry = GameModel.countryHashMap.get(countryName);
             if (everyCountry.getAdjacentCountries().isEmpty() == true) {
                 aloneCountry = true;
-                System.out.println("Model.Country " + countryName + " has no adjacent countries in it.");
+                System.out.println("Country " + countryName + " has no adjacent countries in it.");
                 return false;
             }
         }
@@ -52,7 +52,7 @@ public class ValidateMap {
                 List<String> countries = GameModel.continentHashMap.get(continentName).getCountries();
                 for (String country : countries) {
                     if (!tempSet.add(country)) {
-                        System.out.println("Model.Country " + country + " present in 2 continents !");
+                        System.out.println("Country " + country + " present in 2 continents !");
                         return false;
                     }
                 }

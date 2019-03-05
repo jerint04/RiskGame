@@ -17,10 +17,10 @@ import java.util.*;
 public class CreateMap {
 
     /**
-     * This method creates Model.Continent
+     * This method creates Continent
      */
     public static void createContinent() {
-        System.out.println("Please Enter the Model.Continent Name :");
+        System.out.println("Please Enter the Continent Name :");
         Scanner input = new Scanner(System.in);
         String continentName = input.nextLine();
         System.out.println("Please Enter Control Value :");
@@ -35,7 +35,7 @@ public class CreateMap {
      */
     /*todo : test this function thoroughly &&&   THROw THE ERRORS FOR THIS ONE AND return THE BOOLEAN to know if successfully  deleted or not*/
     public static void removeCountry() {
-        System.out.println("Select the Model.Country number to remove from the list:");
+        System.out.println("Select the Country number to remove from the list:");
         for (int key : GameModel.countryIdHashMap.keySet()) {
             System.out.println(key + " " + GameModel.countryIdHashMap.get(key));
         }
@@ -60,10 +60,10 @@ public class CreateMap {
 
 
     /**
-     * This method deletes the Model.Continent
+     * This method deletes the Continent
      */
     public static void removeContinent() {
-        System.out.println("Write the name of the Model.Continent you want to delete:");
+        System.out.println("Write the name of the Continent you want to delete:");
         for (String key : GameModel.ContinentList) {
             System.out.println(key);
         }
@@ -73,26 +73,26 @@ public class CreateMap {
             if (GameModel.continentHashMap.get(continent).Countries.isEmpty()) {
                 GameModel.continentHashMap.remove(continent);
                 GameModel.ContinentList.remove(continent);
-                System.out.println("Successfully Deleted Model.Continent :" + continent);
+                System.out.println("Successfully Deleted Continent :" + continent);
             } else {
-                System.out.println("Can not delete the Model.Continent, need to delete the countries in the Model.Continent first");
+                System.out.println("Can not delete the Continent, need to delete the countries in the Model.Continent first");
                 for (String countries : GameModel.continentHashMap.get(continent).getCountries()) {
                     System.out.println(countries);
                 }
             }
         } else {
-            System.out.println("Please enter correct Model.Continent");
+            System.out.println("Please enter correct Continent");
         }
     }
 
     /**
-     * This method creates Model.Country
+     * This method creates Country
      */
     public static void createCountry() {
-        System.out.println("Please Enter the Model.Country Name :");
+        System.out.println("Please Enter the Country Name :");
         Scanner input = new Scanner(System.in);
         String countryName = input.nextLine();
-        System.out.println("Please Enter Model.Continent it Belongs :");
+        System.out.println("Please Enter Continent it Belongs :");
         String continentBelongsTo = input.nextLine();
         int id = Helper.getNewCountryCountId();
         Country temp = new Country(id, countryName, continentBelongsTo);
@@ -133,10 +133,10 @@ public class CreateMap {
     }
 
     /**
-     * This method adds Countries in Model.Continent
+     * This method adds Countries in Continent
      *
-     * @param countryName, name of the Model.Country
-     * @param Continent, name of the Model.Continent to be added
+     * @param countryName, name of the Country
+     * @param Continent, name of the Continent to be added
      */
     public static void addCountriesInContinent(String countryName, String Continent) {
         Model.Continent temp = GameModel.continentHashMap.get(Continent);

@@ -86,7 +86,7 @@ public class CountryAdjacencyMatrix {
                             CreateMap.addAdjacentNeighbourCountriesUsingCoordinates(j, i);
                     }
                 }
-                createFile();
+
             }
         } else {
             System.out.println("Array is empty !");

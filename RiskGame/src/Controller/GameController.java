@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static Controller.CreateMapFile.createFile;
+
 /**
  * @author Hemanshu
  * @date 2019-03-05
@@ -71,8 +73,8 @@ public class GameController {
     public static void CreateMap() {
         boolean exit = true;
         while (exit) {
-            System.out.println("1. Create Model.Continent");
-            System.out.println("2. Create Model.Country");
+            System.out.println("1. Create Continent");
+            System.out.println("2. Create Country");
             System.out.println("3. Add Neighbour");
             System.out.println("4. Exit");
             System.out.println("Enter the task you want to perform :");
@@ -90,23 +92,23 @@ public class GameController {
                     CountryAdjacencyMatrix.addNeighbour();
                     CountryAdjacencyMatrix.printGraph();
                     break;
-                case 4:
-                    CreateMap.removeCountry(); /*TODO : Test this*/
+               /* case 4:
+                    CreateMap.removeCountry(); *//*TODO : Test this*//*
                     break;
                 case 5:
-                    CreateMap.removeContinent(); /* TODO : test this*/
-                    break;
-                case 6:
+                    CreateMap.removeContinent(); *//* TODO : test this*//*
+                    break;*/
+                case 4:
                     /*TODO Validate the graph ..... Need to test this*/
+                    CountryAdjacencyMatrix.readFromGraph();
                     if (ValidateMap.validateMap()) {
-                        CountryAdjacencyMatrix.readFromGraph();
+                        createFile();
                         exit = false;
                     } else {
                         System.out.println("Map is invalid , Please correct the Map");
                     }
                     break;
             }
-
         }
     }
 
