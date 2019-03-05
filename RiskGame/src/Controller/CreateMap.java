@@ -101,6 +101,24 @@ public class CreateMap {
         GameModel.countryHashMap.put(countryName, temp);
         addCountriesInContinent(countryName, continentBelongsTo);
     }
+    public static void multipleCountryInput(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter counties using in single line using comma seprated");
+        String multipleCountry=input.nextLine();
+        System.out.println("Please Enter Continent it Belongs :");
+        String continentBelongsTo = input.nextLine();
+        String countrySplit[]=multipleCountry.split(",");
+        for(String splitingCountryName:countrySplit){
+            int id = Helper.getNewCountryCountId();
+            Country temp = new Country(id, splitingCountryName, continentBelongsTo);
+            GameModel.CountryList.add(splitingCountryName);
+            GameModel.countryIdHashMap.put(id, splitingCountryName);
+            GameModel.countryHashMap.put(splitingCountryName, temp);
+            addCountriesInContinent(splitingCountryName, continentBelongsTo);
+        }
+
+
+    }
 
     /**
      * This method adds adjacent neighbour Countries using x,y coordinates

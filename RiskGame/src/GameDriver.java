@@ -21,15 +21,14 @@ public class GameDriver {
         GameController.StartOrLoadGame();
         GameController.InitialisePlayers();
         /*TODO : validate player info*/
-
-
         GameController.initialisationInfantry();
         GameController.assigningCountries();
         GameController.assigningCountriesToPlayers();
-
+        for (int playerId : GameModel.countryIdHashMap.keySet()) {
+            GameController.armyCalculationDuringReinforcement(playerId);
+        }
         /*TODO in loop (don't know the exit condition right now)  REINFORCEMENT PART*/
         /*start the loop*/
-//        GameController.armyCalculationDuringReinforcement(p1);
 /*        armyPlacementDuringReinforcemet(p1);
 
         fortificationPhase();*/

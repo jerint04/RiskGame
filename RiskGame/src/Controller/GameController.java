@@ -1,14 +1,15 @@
 package Controller;
 
-import Model.Country;
-
 import Model.Continent;
 import Model.CountryAdjacencyMatrix;
 import Model.GameModel;
 import Model.Player;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 import static Controller.CreateMapFile.createFile;
 
@@ -24,7 +25,7 @@ public class GameController {
     public static void LoadMap() {
         Scanner sc = new Scanner(System.in);
         List<String> getFileName = new ArrayList<String>();
-        File[] filesName = new File("./assets/maps").listFiles();
+        File[] filesName = new File("./RiskGame/assets/maps").listFiles();
         //File[] filesName = new File(System.getProperty("user.dir") + "/RiskGame/assets/maps").listFiles();
 
         System.out.println(filesName.length);
@@ -39,7 +40,7 @@ public class GameController {
         }
         System.out.println("Enter the map name you want to load (Only name, without extension) :");
         String mapName = sc.nextLine();
-        if (ReadMap.readMap("./assets/maps/" + mapName + ".map")) {
+        if (ReadMap.readMap("./RiskGame/assets/maps/" + mapName + ".map")) {
             ValidateMap.validateMap();
         } else {
             System.out.println("Not able to read map successfully. Please check you Map Format");
@@ -72,8 +73,9 @@ public class GameController {
         while (exit) {
             System.out.println("1. Create Continent");
             System.out.println("2. Create Country");
-            System.out.println("3. Add Neighbour");
-            System.out.println("4. Exit");
+            System.out.println("3 .Enter multiple countries in single line(using comma separated)");
+            System.out.println("4. Add Neighbour");
+            System.out.println("5. Exit");
             System.out.println("Enter the task you want to perform :");
             Scanner in = new Scanner(System.in);
             int val = in.nextInt();
@@ -85,6 +87,9 @@ public class GameController {
                     CreateMap.createCountry();
                     break;
                 case 3:
+                    CreateMap.multipleCountryInput();
+                break;
+                case 4:
                     CountryAdjacencyMatrix.printGraph();
                     CountryAdjacencyMatrix.addNeighbour();
                     CountryAdjacencyMatrix.printGraph();
@@ -95,7 +100,7 @@ public class GameController {
                 case 5:
                     CreateMap.removeContinent(); *//* TODO : test this*//*
                     break;*/
-                case 4:
+                case 5:
                     /*TODO Validate the graph ..... Need to test this*/
                     CountryAdjacencyMatrix.readFromGraph();
                     if (ValidateMap.validateMap()) {
@@ -123,7 +128,7 @@ public class GameController {
 
         for (int p : GameModel.playerHashMap.keySet()) {
             GameModel.playerHashMap.get(p).numberOfInfantry = GameModel.playerHashMap.get(p).numberOfInfantry - GameModel.playerHashMap.get(p).countriesOwned.size();
-            System.out.println(GameModel.playerHashMap.get(p).getCountriesOwned() + " size of infantry " + GameModel.playerHashMap.get(p).numberOfInfantry + " country owned" + GameModel.playerHashMap.get(p).countriesOwned.size());
+            System.out.println("Countries owned by the player -->"+GameModel.playerHashMap.get(p).getCountriesOwned() + " Size of infantry after allocating -->" + GameModel.playerHashMap.get(p).numberOfInfantry + " Total country owned by the player -->" + GameModel.playerHashMap.get(p).countriesOwned.size());
         }
 
 
@@ -285,7 +290,7 @@ public class GameController {
         }
         for (int j : GameModel.countryIdHashMap.keySet()) {
             String countryName = GameModel.countryIdHashMap.get(j);
-            System.out.println("count:" + j + " player id :" + GameModel.countryHashMap.get(countryName).getPlayerId() + " country name :" + countryName + " army count :" + GameModel.countryHashMap.get(countryName).getNumberOfSoldiers());
+            System.out.println( j + ":"+ " Player id -->" + GameModel.countryHashMap.get(countryName).getPlayerId() + " Country name owned by the player is  -->" + countryName + " Initial army allocated in the country -->" + GameModel.countryHashMap.get(countryName).getNumberOfSoldiers());
         }
     }
 

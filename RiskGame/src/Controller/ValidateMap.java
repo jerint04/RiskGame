@@ -113,8 +113,25 @@ public class ValidateMap {
         }
     }
 
+    public static boolean validationOfPlayersAndCountiesNumber() {
+        boolean countryValidation = false;
+        if (GameModel.PlayerList.size() == 3 && GameModel.CountryList.size() >= 6) {
+            countryValidation = true;
+        } else if (GameModel.PlayerList.size() == 4 && GameModel.CountryList.size() >= 6) {
+            countryValidation = true;
 
-/*TODO: Fortification finish this function in the end*/
+        } else if (GameModel.PlayerList.size() == 5 && GameModel.CountryList.size() >= 6) {
+            countryValidation = true;
+
+
+        } else if (GameModel.PlayerList.size() == 6 && GameModel.CountryList.size() >= 6) {
+            countryValidation = true;
+        }
+
+        return countryValidation;
+    }
+
+    /*TODO: Fortification finish this function in the end*/
     public static void dfsToFindNeighbouringCountryForPlayer(Country countryModel, Player p) {
         Stack<Country> stack = new Stack<Country>();
         stack.add(countryModel);
