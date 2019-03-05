@@ -189,8 +189,8 @@ public class GameDriver {
     Calculating armies according to the risk rule that is  calculating using number of territories occupied
 
      */
-    public static void receivingNumberOfArmies(int playerId) {
-Scanner sc=new Scanner(System.in);
+    public static void armyCalculationDuringReinforcement(int playerId) {
+        Scanner sc = new Scanner(System.in);
         Player temp = playerHashMap.get(playerId);
         playerHashMap.get(playerId).numberOfInfantary = +(playerHashMap.get(playerId).countriesOwned.size() / 3);
         for (String key : CreateMap.continentHashMap.keySet()) {
@@ -200,6 +200,11 @@ Scanner sc=new Scanner(System.in);
             }
         }
 
+
+    }
+
+    public static void armyPlacementDuringReinforcemet(int playerId) {
+        Scanner sc=new Scanner(System.in);
         System.out.println(" Infantory for the current players is : " + playerHashMap.get(playerId).numberOfInfantary);
 
         while (playerHashMap.get(playerId).numberOfInfantary != 0) {
@@ -214,9 +219,7 @@ Scanner sc=new Scanner(System.in);
             addInfantoryToCountry(playerHashMap.get(playerId).countriesOwned.get(countrySerialNum), playerId, numOfArmies);
             playerHashMap.get(playerId).numberOfInfantary = playerHashMap.get(playerId).numberOfInfantary - numOfArmies;
         }
-        }
-
-
+    }
 
     /**
      * This is the main() method of the program
