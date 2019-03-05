@@ -41,7 +41,7 @@ public class GameController {
         String currentDirectory = System.getProperty("user.dir");
         // Controller.ReadMap.readMap("./assets/maps/" + mapName + ".map");
         if (ReadMap.readMap(currentDirectory + "/RiskGame/assets/maps/" + mapName + ".map")) {
-            ReadMap.validateMap();
+            ValidateMap.validateMap();
         } else {
             System.out.println("Not able to read map successfully. Please check you Map Format");
         }
@@ -98,7 +98,7 @@ public class GameController {
                     break;
                 case 6:
                     /*TODO Validate the graph ..... Need to test this*/
-                    if (ReadMap.validateMap()) {
+                    if (ValidateMap.validateMap()) {
                         CountryAdjacencyMatrix.readFromGraph();
                         exit = false;
                     } else {
@@ -238,7 +238,7 @@ public class GameController {
                     break;
                 case 6:
                     /*TODO Validate the graph ..... Need to test this*/
-                    if (ReadMap.validateMap()) {
+                    if (ValidateMap.validateMap()) {
                         CountryAdjacencyMatrix.readFromGraph();
                         exit = false;
                     } else {
