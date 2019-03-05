@@ -123,17 +123,17 @@ public class GameController {
         }
 
         for (int p : GameModel.playerHashMap.keySet()) {
-            GameModel.playerHashMap.get(p).numberOfInfantary = GameModel.playerHashMap.get(p).numberOfInfantary - GameModel.playerHashMap.get(p).countriesOwned.size();
-            System.out.println(GameModel.playerHashMap.get(p).getCountriesOwned() + " size of infantory " + GameModel.playerHashMap.get(p).numberOfInfantary + " country owned" + GameModel.playerHashMap.get(p).countriesOwned.size());
+            GameModel.playerHashMap.get(p).numberOfInfantry = GameModel.playerHashMap.get(p).numberOfInfantry - GameModel.playerHashMap.get(p).countriesOwned.size();
+            System.out.println(GameModel.playerHashMap.get(p).getCountriesOwned() + " size of infantory " + GameModel.playerHashMap.get(p).numberOfInfantry + " country owned" + GameModel.playerHashMap.get(p).countriesOwned.size());
         }
 
 
         while (calculateInfantry() != 0) {
             for (int p : GameModel.playerHashMap.keySet()) {
-                System.out.println("Name of the players :" + GameModel.playerHashMap.get(p).getName() + " size of remaining infantory :" + GameModel.playerHashMap.get(p).numberOfInfantary + " number of country owned" + GameModel.playerHashMap.get(p).countriesOwned.size());
-                // playerHashMap.get(p).numberOfInfantary=playerHashMap.get(p).numberOfInfantary-playerHashMap.get(p).countriesOwned.size();
+                System.out.println("Name of the players :" + GameModel.playerHashMap.get(p).getName() + " size of remaining infantory :" + GameModel.playerHashMap.get(p).numberOfInfantry + " number of country owned" + GameModel.playerHashMap.get(p).countriesOwned.size());
+                // playerHashMap.get(p).numberOfInfantry=playerHashMap.get(p).numberOfInfantry-playerHashMap.get(p).countriesOwned.size();
                 int i = 0;
-                if (GameModel.playerHashMap.get(p).numberOfInfantary != 0) {
+                if (GameModel.playerHashMap.get(p).numberOfInfantry != 0) {
                     for (String countryName : GameModel.playerHashMap.get(p).getCountriesOwned()) {
                         System.out.println(i + ":" + countryName);
                         i = i + 1;
@@ -143,7 +143,7 @@ public class GameController {
                     int numOfArmies = sc.nextInt();
                     int countrySerialNum = sc.nextInt();
                     addInfantoryToCountry(GameModel.playerHashMap.get(p).countriesOwned.get(countrySerialNum), p, numOfArmies);
-                    GameModel.playerHashMap.get(p).numberOfInfantary = GameModel.playerHashMap.get(p).numberOfInfantary - numOfArmies;
+                    GameModel.playerHashMap.get(p).numberOfInfantry = GameModel.playerHashMap.get(p).numberOfInfantry - numOfArmies;
                 }
             }
         }
@@ -155,7 +155,7 @@ public class GameController {
     public static int calculateInfantry() {
         int calculateInfanrty = 0;
         for (int p : GameModel.playerHashMap.keySet()) {
-            calculateInfanrty = calculateInfanrty + GameModel.playerHashMap.get(p).numberOfInfantary;
+            calculateInfanrty = calculateInfanrty + GameModel.playerHashMap.get(p).numberOfInfantry;
         }
         return calculateInfanrty;
     }
@@ -174,11 +174,11 @@ public class GameController {
     public static void armyCalculationDuringReinforcement(int playerId) {
         Scanner sc = new Scanner(System.in);
         Player temp = GameModel.playerHashMap.get(playerId);
-        GameModel.playerHashMap.get(playerId).numberOfInfantary = +(GameModel.playerHashMap.get(playerId).countriesOwned.size() / 3);
+        GameModel.playerHashMap.get(playerId).numberOfInfantry = +(GameModel.playerHashMap.get(playerId).countriesOwned.size() / 3);
         for (String key : GameModel.continentHashMap.keySet()) {
             Continent tempContinent = GameModel.continentHashMap.get(key);
             if (temp.countriesOwned.containsAll(tempContinent.Countries)) {
-                GameModel.playerHashMap.get(playerId).numberOfInfantary = +tempContinent.controlValue;
+                GameModel.playerHashMap.get(playerId).numberOfInfantry = +tempContinent.controlValue;
             }
         }
 
@@ -187,9 +187,9 @@ public class GameController {
 
     public static void armyPlacementDuringReinforcemet(int playerId) {
         Scanner sc=new Scanner(System.in);
-        System.out.println(" Infantory for the current players is : " + GameModel.playerHashMap.get(playerId).numberOfInfantary);
+        System.out.println(" Infantory for the current players is : " + GameModel.playerHashMap.get(playerId).numberOfInfantry);
 
-        while (GameModel.playerHashMap.get(playerId).numberOfInfantary != 0) {
+        while (GameModel.playerHashMap.get(playerId).numberOfInfantry != 0) {
             int i = 0;
             for (String countryName : GameModel.playerHashMap.get(playerId).getCountriesOwned()) {
                 System.out.println(i + ":" + countryName);
@@ -199,7 +199,7 @@ public class GameController {
             int numOfArmies = sc.nextInt();
             int countrySerialNum = sc.nextInt();
             addInfantoryToCountry(GameModel.playerHashMap.get(playerId).countriesOwned.get(countrySerialNum), playerId, numOfArmies);
-            GameModel.playerHashMap.get(playerId).numberOfInfantary = GameModel.playerHashMap.get(playerId).numberOfInfantary - numOfArmies;
+            GameModel.playerHashMap.get(playerId).numberOfInfantry = GameModel.playerHashMap.get(playerId).numberOfInfantry - numOfArmies;
         }
     }
 

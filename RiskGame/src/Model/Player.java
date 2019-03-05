@@ -16,10 +16,8 @@ public class Player {
     public boolean alive;
     public  String Name;
     public int playerId;
-    public int numberOfInfantary;
+    public int numberOfInfantry;
     public static int numberOfPlayers = GameModel.PlayerList.size();
-    public static HashMap<String, List<String>> countryAssignedToPlayers = new HashMap<>();
-//    public HashMap<String, Integer> countryAssigning = new HashMap<>();
 
     /**
      * This is a constructor of Model.Player Class which sets player Name
@@ -122,22 +120,22 @@ public class Player {
     /**
      * This method is used to set the number of infantary of the player
      *
-     * @param numberOfInfantary, number of the Infantary of the player
+     * @param numberOfInfantry, number of the Infantary of the player
      */
-    public void setNumberOfInfantary(int numberOfInfantary) {
+    public void setNumberOfInfantry(int numberOfInfantry) {
 
-        this.numberOfInfantary = numberOfInfantary;
+        this.numberOfInfantry = numberOfInfantry;
     }
 
     /**
      * This method is used to get the number of infantary of the player
      *
-     * @return numberOfInfantary,
+     * @return numberOfInfantry,
      *                  returning the number of the Infantary of the player
      */
-    public int getNumberOfInfantary() {
+    public int getNumberOfInfantry() {
 
-        return numberOfInfantary;
+        return numberOfInfantry;
     }
 
     /**

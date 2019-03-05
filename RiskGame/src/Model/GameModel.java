@@ -60,12 +60,6 @@ public class GameModel {
 
             System.out.println("player details :" + j + countryHashMap.get(countryName).getPlayerId() + " country name :" + countryName + " army count :" + countryHashMap.get(countryName).getNumberOfSoldiers());
         }
-        /*for (int i = 0; i < GameDriver.PlayerList.size(); i++) {
-            GameDriver.PlayerList.get(i).getName();
-            //countryAssignedToPlayers.get(GameDriver.PlayerList.get(i).getName());
-            //System.out.println(" name :"+GameDriver.PlayerList.get(i).getName() + "number of infantary "+ countryAssignedToPlayers.get(GameDriver.PlayerList.get(i).getName()));
-            System.out.println("Model.Country assigned to players :" + GameDriver.PlayerList.get(i).getCountriesOwned());
-        }*/
     }
 
     /**
@@ -74,28 +68,22 @@ public class GameModel {
     public static void initialisationInfantry() {
         if (PlayerList.size() == 3) {
             for (int i = 0; i < PlayerList.size(); i++) {
-                PlayerList.get(i).setNumberOfInfantary(35);
+                PlayerList.get(i).setNumberOfInfantry(35);
             }
 
         } else if (PlayerList.size() == 4) {
             for (int i = 0; i < PlayerList.size(); i++) {
-                PlayerList.get(i).setNumberOfInfantary(30);
+                PlayerList.get(i).setNumberOfInfantry(30);
             }
         } else if (PlayerList.size() == 5) {
             for (int i = 0; i < PlayerList.size(); i++) {
-                PlayerList.get(i).setNumberOfInfantary(25);
+                PlayerList.get(i).setNumberOfInfantry(25);
             }
 
         } else if (PlayerList.size() == 6) {
             for (int i = 0; i < PlayerList.size(); i++) {
-                PlayerList.get(i).setNumberOfInfantary(20);
+                PlayerList.get(i).setNumberOfInfantry(20);
             }
-
         }
-
-        for (int i = 0; i < PlayerList.size(); i++) {
-
-        }
-
     }
 }
