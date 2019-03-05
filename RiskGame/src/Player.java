@@ -222,7 +222,7 @@ public class Player {
     /**
      * This method is used to intialise infantary of the player
      */
-    public static void initialisationInfantory() {
+    public static void initialisationInfantry() {
         if (GameDriver.PlayerList.size() == 3) {
             for (int i = 0; i < GameDriver.PlayerList.size(); i++) {
                 GameDriver.PlayerList.get(i).setNumberOfInfantary(35);

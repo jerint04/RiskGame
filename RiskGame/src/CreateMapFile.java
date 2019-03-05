@@ -1,4 +1,3 @@
-
 import java.io.BufferedWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -44,7 +43,7 @@ public class CreateMapFile {
         BufferedWriter writer = null;
         try {
             //Delete temporary file
-            String currentDirectory = System.getProperty("user.dir");
+            String currentDirectory = System.getProperty("user.dir"); /*TODO  take input of file name*/
             Path tempFilePath = Paths.get(currentDirectory + "/RiskGame/assets//maps/" + "temp" + ".map");
             Files.deleteIfExists(tempFilePath);
             writer = Files.newBufferedWriter(tempFilePath, StandardCharsets.UTF_8);

@@ -60,7 +60,11 @@ public class GameDriver {
         String mapName = sc.nextLine();
         String currentDirectory = System.getProperty("user.dir");
         // ReadMap.readMap("./assets/maps/" + mapName + ".map");
-        ReadMap.readMap(currentDirectory + "/RiskGame/assets/maps/" + mapName + ".map");
+        if (ReadMap.readMap(currentDirectory + "/RiskGame/assets/maps/" + mapName + ".map")) {
+            ReadMap.validateMap();
+        } else {
+            System.out.println("Not able to read map successfully. Please check you Map Format");
+        }
 
     }
 
@@ -107,8 +111,19 @@ public class GameDriver {
                     GraphNew.printGraph();
                     break;
                 case 4:
-                    GraphNew.readFromGraph();
-                    exit = false;
+                    CreateMap.removeCountry(); /*TODO : Test this*/
+                    break;
+                case 5:
+                    CreateMap.removeContinent(); /* TODO : test this*/
+                    break;
+                case 6:
+                    /*TODO Validate the graph ..... Need to test this*/
+                    if (ReadMap.validateMap()) {
+                        GraphNew.readFromGraph();
+                        exit = false;
+                    } else {
+                        System.out.println("Map is invalid , Please correct the Map");
+                    }
                     break;
             }
 
@@ -173,22 +188,10 @@ public class GameDriver {
         CreateMap.countryHashMap.get(countryName).setNumberOfSoldiers(infantoryNumber);
     }
 
+
     /**
-     * This method performs reinforcement Phase
-     */
-    public static void reinforcementPhase() {
-
-        for (int k : playerHashMap.keySet()) {
-
-            playerHashMap.get(k).numberOfInfantary = (playerHashMap.get(k).countriesOwned.size() / 3);
-        }
-
-    }
-
-    /*
-    Calculating armies according to the risk rule that is  calculating using number of territories occupied
-
-     */
+    *Calculating armies according to the risk rule that is  calculating using number of territories occupied
+    */
     public static void armyCalculationDuringReinforcement(int playerId) {
         Scanner sc = new Scanner(System.in);
         Player temp = playerHashMap.get(playerId);
@@ -221,16 +224,78 @@ public class GameDriver {
         }
     }
 
+
+    /**
+     * This method will perform operations to edit a loaded map
+     */
+    public static void EditMap() {
+        boolean exit = true;
+        while (exit) {
+            System.out.println("1. Create Continent");
+            System.out.println("2. Create Country");
+            System.out.println("3. Add Neighbour");
+            System.out.println("4. Delete Country");
+            System.out.println("5. Delete Continent");
+            System.out.println("6. Exit");
+            System.out.println("Enter the task you want to perform :");
+            Scanner in = new Scanner(System.in);
+            int val = in.nextInt();
+            switch (val) {
+                case 1:
+                    CreateMap.createContinent();
+                    break;
+                case 2:
+                    CreateMap.createCountry();
+                    break;
+                case 3:
+                    GraphNew.printGraph();
+                    GraphNew.addNeighbour();
+                    GraphNew.printGraph();
+                    break;
+                case 4:
+                    CreateMap.removeCountry(); /*TODO : Test this*/
+                    break;
+                case 5:
+                    CreateMap.removeContinent(); /* TODO : test this*/
+                    break;
+                case 6:
+                    /*TODO Validate the graph ..... Need to test this*/
+                    if (ReadMap.validateMap()) {
+                        GraphNew.readFromGraph();
+                        exit = false;
+                    } else {
+                        System.out.println("Map is invalid , Please correct the Map");
+                    }
+                    break;
+            }
+
+        }
+    }
+
+
+
+
     /**
      * This is the main() method of the program
      * Entry point of the Execution of the whole program
      */
-
     public static void main(String[] args) {
-        InitialisePlayers();
         StartOrLoadGame();
-        Player.initialisationInfantory();
+        InitialisePlayers();
+        /*TODO : validate player info*/
+
+//      TODO : Test this part
+        Player.initialisationInfantry();
         Player.assigningCountries();
         assigningCountriesToPlayers();
+
+        /*TODO in loop (don't know the exit condition right now)  REINFORCEMENT PART*/
+        /*start the loop*/
+        /*armyCalculationDuringReinforcement(p1);
+        armyPlacementDuringReinforcemet(p1);
+
+        fortificationPhase();*/
+//        end the loop
+
     }
 }

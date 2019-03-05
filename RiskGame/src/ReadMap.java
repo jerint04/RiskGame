@@ -22,7 +22,7 @@ public class ReadMap {
      *
      * @param getFileName,
      */
-    public static void readMap(String getFileName) {
+    public static boolean readMap(String getFileName) {
         try {
             boolean readContinentsFromFile = false;
             boolean readCountriesFromFile = false;
@@ -76,11 +76,13 @@ public class ReadMap {
 
         } catch (Exception e) {
             System.out.println(e);
+            return false;
         }
         GraphNew.initializeCountryMatrix();
         boolean adjacencyMatrixCreation = createAdjacentMatrix();
         if (adjacencyMatrixCreation)
             GraphNew.printGraph();
+        return true;
     }
 
     /**
