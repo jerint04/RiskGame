@@ -1,3 +1,7 @@
+package Controller;
+
+import Model.*;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -48,8 +52,8 @@ public class ReadMap {
                     String[] parsedContinentArray = readLine.split("=");
                     Continent continent = new Continent(Helper.getContinentCountId(), parsedContinentArray[0],
                             Integer.parseInt(parsedContinentArray[1]));
-                    CreateMap.ContinentList.add(parsedContinentArray[0]);
-                    CreateMap.continentHashMap.put(parsedContinentArray[0], continent);
+                    GameModel.ContinentList.add(parsedContinentArray[0]);
+                    GameModel.continentHashMap.put(parsedContinentArray[0], continent);
                 } else if (readCountriesFromFile) {
                     String[] parsedCountryList = readLine.split(",");
                     String continentName = parsedCountryList[3];
@@ -64,24 +68,24 @@ public class ReadMap {
                         }
                         p++;
                     }
-                    CreateMap.continentHashMap.get(parsedCountryList[3]).insertCountry(parsedCountryList[0]);
-                    CreateMap.CountryList.add(parsedCountryList[0]);
-                    CreateMap.countryIdHashMap.put(Helper.getCountryCountId(), parsedCountryList[0]);
-                    CreateMap.countryHashMap.put(parsedCountryList[0], country);
+                    GameModel.continentHashMap.get(parsedCountryList[3]).insertCountry(parsedCountryList[0]);
+                    GameModel.CountryList.add(parsedCountryList[0]);
+                    GameModel.countryIdHashMap.put(Helper.getCountryCountId(), parsedCountryList[0]);
+                    GameModel.countryHashMap.put(parsedCountryList[0], country);
                 }
             }
             bufferedReader.close();
 
-            Player.assigningCountries();
+            GameModel.assigningCountries();
 
         } catch (Exception e) {
             System.out.println(e);
             return false;
         }
-        GraphNew.initializeCountryMatrix();
+        CountryAdjacencyMatrix.initializeCountryMatrix();
         boolean adjacencyMatrixCreation = createAdjacentMatrix();
         if (adjacencyMatrixCreation)
-            GraphNew.printGraph();
+            CountryAdjacencyMatrix.printGraph();
         return true;
     }
 
@@ -90,16 +94,16 @@ public class ReadMap {
      */
     public static boolean createAdjacentMatrix() {
         try {
-            for (String a : CreateMap.CountryList) {
-                Country xTemp = CreateMap.countryHashMap.get(a);
-                Object xo = getKeyFromValue(CreateMap.countryIdHashMap, xTemp.getCountryName());
+            for (String a : GameModel.CountryList) {
+                Country xTemp = GameModel.countryHashMap.get(a);
+                Object xo = getKeyFromValue(GameModel.countryIdHashMap, xTemp.getCountryName());
                 int x = (Integer) xo;
                 for (String adjacentCountryName : xTemp.getAdjacentCountries()) {
-                    Country yTemp = CreateMap.countryHashMap.get(adjacentCountryName);
-                    Object yo = getKeyFromValue(CreateMap.countryIdHashMap, yTemp.getCountryName());
+                    Country yTemp = GameModel.countryHashMap.get(adjacentCountryName);
+                    Object yo = getKeyFromValue(GameModel.countryIdHashMap, yTemp.getCountryName());
                     int y = (Integer) yo;
                     System.out.println(y + " " + x);
-                    GraphNew.countryMatrix[y][x] = 1;
+                    CountryAdjacencyMatrix.countryMatrix[y][x] = 1;
                 }
             }
         } catch (Exception e) {
@@ -138,22 +142,22 @@ public class ReadMap {
         boolean emptyContinent = false;
         boolean aloneCountry = false;
 
-        /*To check if the Continent is Empty. Continent should have at least a single country*/
-        for (String name : CreateMap.ContinentList) {
-            Continent currentContinent = CreateMap.continentHashMap.get(name);
+        /*To check if the Model.Continent is Empty. Model.Continent should have at least a single country*/
+        for (String name : GameModel.ContinentList) {
+            Continent currentContinent = GameModel.continentHashMap.get(name);
             if (currentContinent.getCountries().isEmpty() == true) {
                 emptyContinent = true;
-                System.out.println("Continent " + name + " has no countries in it.");
+                System.out.println("Model.Continent " + name + " has no countries in it.");
                 return false;
             }
         }
 
         /*To check if the country is isolated or not */
-        for (String countryName : CreateMap.countryHashMap.keySet()) {
-            Country everyCountry = CreateMap.countryHashMap.get(countryName);
+        for (String countryName : GameModel.countryHashMap.keySet()) {
+            Country everyCountry = GameModel.countryHashMap.get(countryName);
             if (everyCountry.getAdjacentCountries().isEmpty() == true) {
                 aloneCountry = true;
-                System.out.println("Country " + countryName + " has no adjacent countries in it.");
+                System.out.println("Model.Country " + countryName + " has no adjacent countries in it.");
                 return false;
             }
         }
@@ -161,11 +165,11 @@ public class ReadMap {
 
         if (!aloneCountry) {
             Set tempSet = new HashSet();
-            for (String continentName : CreateMap.continentHashMap.keySet()) {
-                List<String> countries = CreateMap.continentHashMap.get(continentName).getCountries();
+            for (String continentName : GameModel.continentHashMap.keySet()) {
+                List<String> countries = GameModel.continentHashMap.get(continentName).getCountries();
                 for (String country : countries) {
                     if (!tempSet.add(country)) {
-                        System.out.println("Country " + country + " present in 2 continents !");
+                        System.out.println("Model.Country " + country + " present in 2 continents !");
                         return false;
                     }
                 }
@@ -182,12 +186,12 @@ public class ReadMap {
      */
     public static boolean checkIsMapConnected() {
         boolean isConnected = true;
-        Set<String> keyNames = CreateMap.countryHashMap.keySet();
-        Country firstCountryInTheList = CreateMap.countryHashMap.get(keyNames.toArray()[0]);
+        Set<String> keyNames = GameModel.countryHashMap.keySet();
+        Country firstCountryInTheList = GameModel.countryHashMap.get(keyNames.toArray()[0]);
         dfsUsingStack(firstCountryInTheList);
         for (String countryName : keyNames) {
-            if (CreateMap.countryHashMap.get(countryName).isVisited())
-                CreateMap.countryHashMap.get(countryName).setVisited(false);
+            if (GameModel.countryHashMap.get(countryName).isVisited())
+                GameModel.countryHashMap.get(countryName).setVisited(false);
             else {
                 isConnected = false;
                 break;
@@ -202,7 +206,7 @@ public class ReadMap {
     /**
      * This function performs dfs using Stack
      *
-     * @param countryModel, Country type reference
+     * @param countryModel, Model.Country type reference
      */
     private static void dfsUsingStack(Country countryModel) {
         Stack<Country> stack = new Stack<Country>();
@@ -214,7 +218,7 @@ public class ReadMap {
             List<String> neighbourNames = element.getAdjacentCountries();
             List<Country> neighbours = new ArrayList<>();
             for (String neighbourName : neighbourNames) {
-                neighbours.add((CreateMap.countryHashMap.get(neighbourName)));
+                neighbours.add((GameModel.countryHashMap.get(neighbourName)));
             }
             for (int i = 0; i < neighbours.size(); i++) {
                 Country n = neighbours.get(i);

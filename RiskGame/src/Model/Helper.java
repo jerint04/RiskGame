@@ -1,5 +1,7 @@
+package Model;
+
 /**
- * Helper Class
+ * Model.Helper Class
  * @author Hemanshu
  * @version 1.0.0
  * @date 2019-02-22
@@ -22,7 +24,7 @@ public class Helper {
      * This function sets the continent CountID of the continent.
      *
      * @param  continentCountId,
-     *                  countId of the Continent
+     *                  countId of the Model.Continent
      */
     public static void setContinentCountId(int continentCountId) {
         Helper.continentCountId = continentCountId;
@@ -32,7 +34,7 @@ public class Helper {
      * This function returns the new continent CountID
      *
      * @return  continentCountId,
-     *                  countId of the Continent
+     *                  countId of the Model.Continent
      */
     public static int getNewContinentCountId() {
         continentCountId = continentCountId +1;
@@ -40,30 +42,30 @@ public class Helper {
     }
 
     /**
-     * This function returns the CountID of the Country
+     * This function returns the CountID of the Model.Country
      *
      * @return  countryCountId,
-     *                  countId of the Country
+     *                  countId of the Model.Country
      */
     public static int getCountryCountId() {
         return countryCountId;
     }
 
     /**
-     * This function sets the CountID of the Country
+     * This function sets the CountID of the Model.Country
      *
      * @param countryCountId,
-     *                  countId of the Country
+     *                  countId of the Model.Country
      */
     public static void setCountryCountId(int countryCountId) {
         Helper.countryCountId = countryCountId;
     }
 
     /**
-     * This function returns the new CountID of the Country
+     * This function returns the new CountID of the Model.Country
      *
      * @return  countryCountId,
-     *                  countId of the Country
+     *                  countId of the Model.Country
      */
     public static int getNewCountryCountId() {
         countryCountId = countryCountId +1;

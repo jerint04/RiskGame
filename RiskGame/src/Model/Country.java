@@ -1,26 +1,28 @@
+package Model;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Country Class
+ * Model.Country Class
  * 
  * @author Hemanshu
  * @version 1.0.0
  * @date 2019-02-19
  */
 public class Country {
-    int id;
-    String countryName;
-    String ParentContinent;
-    List<String> adjacentCountries = new ArrayList<>();
-    int numberOfSoldiers;
-    int xCoordinate;
-    int yCoordinate;
-    Integer PlayerId;
-    boolean isVisited;
+    public int id;
+    public String countryName;
+    public String ParentContinent;
+    public List<String> adjacentCountries = new ArrayList<>();
+    public int numberOfSoldiers;
+    public int xCoordinate;
+    public int yCoordinate;
+    public Integer PlayerId;
+    public boolean isVisited;
 
     /**
-     * This is a Constructor for Country class which sets countryName, id and continentName
+     * This is a Constructor for Model.Country class which sets countryName, id and continentName
      *
      * @param id               ,id of the country
      * @param CountryName,name of the country
@@ -33,7 +35,7 @@ public class Country {
     }
 
     /**
-     * This is a Constructor for Country class which sets countryName and id
+     * This is a Constructor for Model.Country class which sets countryName and id
      *
      * @param id               ,id of the country
      * @param CountryName,name of the country
@@ -80,7 +82,7 @@ public class Country {
     }
 
     /**
-     * This method gets Country id
+     * This method gets Model.Country id
      *
      * @return id, int
      */
@@ -89,7 +91,7 @@ public class Country {
     }
 
     /**
-     * This method sets Country id
+     * This method sets Model.Country id
      *
      * @param id, int
      */
@@ -98,7 +100,7 @@ public class Country {
     }
 
     /**
-     * This method gets Country name
+     * This method gets Model.Country name
      *
      * @return countryName, String
      */
@@ -107,9 +109,9 @@ public class Country {
     }
 
     /**
-     * This method sets Country name
+     * This method sets Model.Country name
      *
-     * @param countryName, name of the Country
+     * @param countryName, name of the Model.Country
      */
     public void setCountryName(String countryName) {
         this.countryName = countryName;
@@ -218,7 +220,7 @@ public class Country {
     /**
      * This method sets the player Id
      *
-     * @param playerId, id of the Player
+     * @param playerId, id of the Model.Player
      */
     public void setPlayerId(Integer playerId) {
         PlayerId = playerId;

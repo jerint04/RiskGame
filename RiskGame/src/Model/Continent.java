@@ -1,26 +1,27 @@
+package Model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Continent Class
+ * Model.Continent Class
  *
  * @author Vikram
  * @version 1.0.0
  * @date 2019-02-19
  */
 public class Continent {
-    int continentId;
-    String continentName;
-    int controlValue;
+    public int continentId;
+    public String continentName;
+    public int controlValue;
 
-    List<String> Countries = new ArrayList<>();
-    List<String> AdjacentContinents = new ArrayList<>();
+    public List<String> Countries = new ArrayList<>();
+    public List<String> AdjacentContinents = new ArrayList<>();
 
     /**
-     * This is a constructor of Continent Class which sets Continent name and control value
+     * This is a constructor of Model.Continent Class which sets Model.Continent name and control value
      *
-     * @param name,  name of the Continent
+     * @param name,  name of the Model.Continent
      * @param point, control value
      */
     public Continent(String name, int point) {
@@ -29,11 +30,11 @@ public class Continent {
     }
 
     /**
-     * This is a constructor of Continent Class which sets Continent id, Continent name and control value
+     * This is a constructor of Model.Continent Class which sets Model.Continent id, Model.Continent name and control value
      *
-     * @param name,  name of the Continent
+     * @param name,  name of the Model.Continent
      * @param point, control value
-     * @param id,    id of the Continent
+     * @param id,    id of the Model.Continent
      */
     public Continent(int id, String name, int point) {
         this.continentId = id;
@@ -42,7 +43,7 @@ public class Continent {
     }
 
     /**
-     * This method Gets Continent name
+     * This method Gets Model.Continent name
      *
      * @return continentName String
      */
@@ -51,16 +52,16 @@ public class Continent {
     }
 
     /**
-     * This method sets Continent name
+     * This method sets Model.Continent name
      *
-     * @param continentName, name of the Continent
+     * @param continentName, name of the Model.Continent
      */
     public void setContinentName(String continentName) {
         this.continentName = continentName;
     }
 
     /**
-     * This method Gets Continent control value
+     * This method Gets Model.Continent control value
      *
      * @return continentName String
      */
@@ -69,7 +70,7 @@ public class Continent {
     }
 
     /**
-     * This method sets Continent control value
+     * This method sets Model.Continent control value
      *
      * @param controlValue
      */
@@ -78,7 +79,7 @@ public class Continent {
     }
 
     /**
-     * This method Gets Continent name
+     * This method Gets Model.Continent name
      *
      * @return continentName String
      */
@@ -114,18 +115,18 @@ public class Continent {
     }
 
     /**
-     * This method adds a Country
+     * This method adds a Model.Country
      *
-     * @param countryName, name of the Country
+     * @param countryName, name of the Model.Country
      */
     public void insertCountry(String countryName) {
         this.Countries.add(countryName);
     }
 
     /**
-     * This method removes a Country
+     * This method removes a Model.Country
      *
-     * @param countryName, name of the Country
+     * @param countryName, name of the Model.Country
      */
     public void RemoveCountry(String countryName) {
         this.Countries.remove(new String("countryName"));

@@ -1,3 +1,8 @@
+package Controller;
+
+import Model.Country;
+import Model.GameModel;
+
 import java.io.BufferedWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -6,7 +11,7 @@ import java.nio.file.Paths;
 
 
 /**
- * CreateMapFile Class
+ * Controller.CreateMapFile Class
  * @author Hemanshu
  * @version 1.0.0
  * @date 2019-02-25
@@ -22,16 +27,16 @@ public class CreateMapFile {
         fileData.append("warn=yes\r\n");
 
         fileData.append("[Continents]\r\n");
-        for (String continentString : CreateMap.ContinentList) {
-            fileData.append( CreateMap.continentHashMap.get(continentString).getContinentName() + "=" + CreateMap.continentHashMap.get(continentString).getControlValue()
+        for (String continentString : GameModel.ContinentList) {
+            fileData.append( GameModel.continentHashMap.get(continentString).getContinentName() + "=" + GameModel.continentHashMap.get(continentString).getControlValue()
                     + "\r\n");
         }
         fileData.append("\n[Territories]\r\n");
-        for (String continentString  : CreateMap.ContinentList) {
-            for (String countryName : CreateMap.continentHashMap.get(continentString).getCountries()) {
-                Country temp = CreateMap.countryHashMap.get(countryName);
+        for (String continentString  : GameModel.ContinentList) {
+            for (String countryName : GameModel.continentHashMap.get(continentString).getCountries()) {
+                Country temp = GameModel.countryHashMap.get(countryName);
                 fileData.append(temp.getCountryName() + "," + temp.getxCoordinate() + ","
-                        + temp.getyCoordinate() + "," + CreateMap.continentHashMap.get(continentString).getContinentName());
+                        + temp.getyCoordinate() + "," + GameModel.continentHashMap.get(continentString).getContinentName());
                 for (String adjacentCountries : temp.getAdjacentCountries()) {
                     fileData.append("," + adjacentCountries);
                 }

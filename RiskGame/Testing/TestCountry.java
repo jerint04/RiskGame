@@ -14,7 +14,7 @@ import javax.swing.plaf.synth.SynthScrollBarUI;
 */
 /**
  * The class <code>TestCountry</code> contains tests for the class
- * <code> {@link Country}</code>
+ * <code> {@link Model.Country}</code>
  *
  * @author Vikram
  * @version 1.0.0
@@ -24,9 +24,9 @@ import javax.swing.plaf.synth.SynthScrollBarUI;
 
 public class TestCountry {
 
-    Country country;
-    Player player;
-    Continent continent;
+    Model.Country country;
+    Model.Player player;
+    Model.Continent continent;
 
     */
 /**
@@ -37,7 +37,7 @@ public class TestCountry {
     @Before
     public void beforeTestCountry()
     {
-        country = new Country(1,"India","Asia");
+        country = new Model.Country(1,"India","Asia");
     }
 
     */
