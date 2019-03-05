@@ -5,7 +5,6 @@ import Model.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.*;
 
 /**
  * Map Class
@@ -76,61 +75,15 @@ public class ReadMap {
             }
             bufferedReader.close();
 
-            GameModel.assigningCountries();
-
         } catch (Exception e) {
             System.out.println(e);
             return false;
         }
         CountryAdjacencyMatrix.initializeCountryMatrix();
-        boolean adjacencyMatrixCreation = createAdjacentMatrix();
+        boolean adjacencyMatrixCreation = CountryAdjacencyMatrix.createAdjacentMatrix();
         if (adjacencyMatrixCreation)
             CountryAdjacencyMatrix.printGraph();
         return true;
-    }
-
-    /**
-     * This function creates adjacent Countries
-     */
-    public static boolean createAdjacentMatrix() {
-        try {
-            for (String a : GameModel.CountryList) {
-                Country xTemp = GameModel.countryHashMap.get(a);
-                Object xo = getKeyFromValue(GameModel.countryIdHashMap, xTemp.getCountryName());
-                int x = (Integer) xo;
-                for (String adjacentCountryName : xTemp.getAdjacentCountries()) {
-                    Country yTemp = GameModel.countryHashMap.get(adjacentCountryName);
-                    Object yo = getKeyFromValue(GameModel.countryIdHashMap, yTemp.getCountryName());
-                    int y = (Integer) yo;
-                    System.out.println(y + " " + x);
-                    CountryAdjacencyMatrix.countryMatrix[y][x] = 1;
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Map is Invalid, Please correct the Map file");
-            System.out.println(e);
-            return false;
-        }
-        System.out.println("Adjacency Matrix Created Successfully");
-        return true;
-    }
-
-    /**
-     * This function gets the country value
-     *
-     * @param hm,
-     * @param value ,
-     */
-    public static Object getKeyFromValue(Map hm, String value) {
-        Iterator it = hm.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry) it.next();
-//            System.out.println(pair.getKey() + " = " + pair.getValue());
-            if (pair.getValue().equals(value)) {
-                return pair.getKey();
-            }
-        }
-        return -1;
     }
 
 }

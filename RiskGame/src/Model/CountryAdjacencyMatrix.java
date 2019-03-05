@@ -1,13 +1,6 @@
 package Model;
 import Controller.CreateMap;
-import Model.GameModel;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-
-import static Controller.CreateMapFile.createFile;
+import java.util.*;
 
 /**
  * @author Hemanshu
@@ -56,7 +49,7 @@ public class CountryAdjacencyMatrix {
             for (int i = 0; i <= Helper.getCountryCountId(); i++) {
                 for (int j = 0; j <= Helper.getCountryCountId(); j++) {
                     if (i == 0 && j == 0) {
-                        System.out.print("Model.Country");
+                        System.out.print("Country");
                     } else if (i == 0) {
                         if (j != 0)
                             System.out.print(GameModel.countryIdHashMap.get(j) + "(" + j + ") ");
@@ -111,8 +104,6 @@ public class CountryAdjacencyMatrix {
      */
     public static void createNewGraphWithOldValues() {
         size = Helper.getCountryCountId();
-
-
     }
 
     /**
@@ -169,6 +160,50 @@ public class CountryAdjacencyMatrix {
         }
         return neighbors;
     }
+
+    /**
+     * This function creates adjacent Countries
+     */
+    public static boolean createAdjacentMatrix() {
+        try {
+            for (String a : GameModel.CountryList) {
+                Country xTemp = GameModel.countryHashMap.get(a);
+                Object xo = getKeyFromValue(GameModel.countryIdHashMap, xTemp.getCountryName());
+                int x = (Integer) xo;
+                for (String adjacentCountryName : xTemp.getAdjacentCountries()) {
+                    Country yTemp = GameModel.countryHashMap.get(adjacentCountryName);
+                    Object yo = getKeyFromValue(GameModel.countryIdHashMap, yTemp.getCountryName());
+                    int y = (Integer) yo;
+                    countryMatrix[x][y] = 1;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Map is Invalid, Please correct the Map file");
+            System.out.println(e);
+            return false;
+        }
+        System.out.println("Adjacency Matrix Created Successfully");
+        return true;
+    }
+
+    /**
+     * This function gets the country value
+     *
+     * @param hm,
+     * @param value ,
+     */
+    public static Object getKeyFromValue(Map hm, String value) {
+        Iterator it = hm.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+//            System.out.println(pair.getKey() + " = " + pair.getValue());
+            if (pair.getValue().equals(value)) {
+                return pair.getKey();
+            }
+        }
+        return -1;
+    }
+
 
 
 }
