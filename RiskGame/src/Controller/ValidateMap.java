@@ -131,28 +131,6 @@ public class ValidateMap {
         return countryValidation;
     }
 
-    /*TODO: Fortification finish this function in the end*/
-    public static void dfsToFindNeighbouringCountryForPlayer(Country countryModel, Player p) {
-        Stack<Country> stack = new Stack<Country>();
-        stack.add(countryModel);
-        countryModel.setVisited(true);
-        while (!stack.isEmpty()) {
-            Country element = stack.pop();
-//			System.out.println("DFS CountryName: " + element.getCountryName() + " ");
-            List<String> neighbourNames = element.getAdjacentCountries();
-            List<Country> neighbours = new ArrayList<>();
-            for (String neighbourName : neighbourNames) {
 
-                neighbours.add((GameModel.countryHashMap.get(neighbourName)));
-            }
-            for (int i = 0; i < neighbours.size(); i++) {
-                Country n = neighbours.get(i);
-                if (n != null && !n.isVisited()) {
-                    stack.add(n);
-                    n.setVisited(true);
-                }
-            }
-        }
-    }
 
 }
