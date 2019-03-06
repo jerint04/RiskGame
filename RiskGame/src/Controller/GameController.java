@@ -129,9 +129,6 @@ public class GameController {
             System.out.println("Countries owned by the player -->" + GameModel.playerHashMap.get(p).getCountriesOwned() + " Size of infantry after allocating -->" + GameModel.playerHashMap.get(p).numberOfInfantry + " Total country owned by the player -->" + GameModel.playerHashMap.get(p).countriesOwned.size());
         }
 
-        /**
-         * This helps in allocating armies to the countries in round robin fashion
-         */
 
         while (calculateInfantry() != 0) {
             for (int p : GameModel.playerHashMap.keySet()) {
@@ -189,11 +186,6 @@ public class GameController {
 
     }
 
-    /**
-     *
-     * @param playerId
-     * Takes the player id from the user and helps in allocating armies to the terriotories
-     */
     public static void armyPlacementDuringReinforcemet(int playerId) {
         Scanner sc = new Scanner(System.in);
         System.out.println(" Infantory for the current players is : " + GameModel.playerHashMap.get(playerId).numberOfInfantry);
