@@ -117,14 +117,14 @@ public class ValidateMap {
         boolean countryValidation = false;
         if (GameModel.PlayerList.size() == 3 && GameModel.CountryList.size() >= 6) {
             countryValidation = true;
-        } else if (GameModel.PlayerList.size() == 4 && GameModel.CountryList.size() >= 6) {
+        } else if (GameModel.PlayerList.size() == 4 && GameModel.CountryList.size() >= 8) {
             countryValidation = true;
 
-        } else if (GameModel.PlayerList.size() == 5 && GameModel.CountryList.size() >= 6) {
+        } else if (GameModel.PlayerList.size() == 5 && GameModel.CountryList.size() >= 10) {
             countryValidation = true;
 
 
-        } else if (GameModel.PlayerList.size() == 6 && GameModel.CountryList.size() >= 6) {
+        } else if (GameModel.PlayerList.size() == 6 && GameModel.CountryList.size() >= 12) {
             countryValidation = true;
         }
 

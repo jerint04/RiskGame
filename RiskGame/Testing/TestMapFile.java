@@ -35,7 +35,7 @@ import static junit.framework.TestCase.assertEquals;
         public void TestCase1()
         {
             //String mapName="trial";
-            filename ="E:/JavaPrograms/RiskGame/RiskGame/assets/maps/trial.map";
+            filename ="E:/APP/RiskGame/RiskGame/assets/maps/trial.map";
             boolean value=ReadMap.readMap(filename);
             //boolean value= ValidateMap.validateMap();
             String s1=Boolean.toString(value);
@@ -48,7 +48,7 @@ import static junit.framework.TestCase.assertEquals;
     public void TestCase2()
     {
         //String mapName="trial";
-        filename ="E:/JavaPrograms/RiskGame/RiskGame/assets/maps/Asia.map";
+        filename ="E:/APP/RiskGame/RiskGame/assets/maps/Asia.map";
         boolean value=ReadMap.readMap(filename);
                 //boolean value= ValidateMap.validateMap();
                 String s1=Boolean.toString(value);

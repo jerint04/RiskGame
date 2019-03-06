@@ -14,8 +14,8 @@ public class Player {
     public static List<String> Cards = new ArrayList<>();
     public  List<String> countriesOwned = new ArrayList<>();
     public boolean alive;
-    public  String Name;
-    public int playerId;
+    public static String Name;
+    public static int playerId;
     public int numberOfInfantry;
     public static int numberOfPlayers = GameModel.PlayerList.size();
 
@@ -75,7 +75,7 @@ public class Player {
      *
      * @return name String
      */
-    public String getName() {
+    public static String getName() {
 
         return Name;
     }
@@ -143,7 +143,7 @@ public class Player {
      *
      * @return playerId int
      */
-    public int getPlayerId() {
+    public static int getPlayerId() {
         return playerId;
     }
 
