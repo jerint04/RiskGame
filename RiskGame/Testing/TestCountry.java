@@ -1,25 +1,19 @@
-
-/*
-import static org.junit.Assert.*;
-
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import javax.swing.plaf.synth.SynthScrollBarUI;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-
-*/
 /**
+ *
  * The class <code>TestCountry</code> contains tests for the class
  * <code> {@link Model.Country}</code>
  *
  * @author Vikram
  * @version 1.0.0
  *
- *//*
+ */
 
 
 public class TestCountry {
@@ -28,10 +22,10 @@ public class TestCountry {
     Model.Player player;
     Model.Continent continent;
 
-    */
+
 /**
      * Test case Initialization for TestCountry
-     *//*
+     */
 
 
     @Before
@@ -40,10 +34,10 @@ public class TestCountry {
         country = new Model.Country(1,"India","Asia");
     }
 
-    */
+
 /**
      * Test case to tests x value is correct
-     *//*
+     */
 
 
     @Test
@@ -53,6 +47,7 @@ public class TestCountry {
         System.out.println(x);
         assertEquals(0, x);
     }
+
     @Test
     public void TestCountryName()
     {
@@ -71,10 +66,10 @@ public class TestCountry {
     }
 
 
-    */
+
 /**
      * Test case to tests x value is correct
-     *//*
+     */
 
 
     @Test
@@ -93,10 +88,10 @@ public class TestCountry {
         System.out.println(id);
         assertEquals(1, id);
     }
-    */
+
 /**
      * returning in int
-     *//*
+     */
 
     @Test
     public void TestNumberOfSoldiers() {
@@ -107,13 +102,13 @@ public class TestCountry {
     }
 
 
-    */
+
 /**
      * Perform post-test clean-up.
      *
      * @throws Exception
      *             if the clean-up fails for some reason
-     *//*
+     */
 
 
     @After
@@ -125,4 +120,4 @@ public class TestCountry {
 }
 
 
-*/
+

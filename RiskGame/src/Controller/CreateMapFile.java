@@ -44,7 +44,11 @@ public class CreateMapFile {
                 fileData.append("\r\n");
             }
         }
-        /*Writing Map to disk*/
+        /*
+        *Writing Map to disk on a specific file location
+        *
+        *
+        * */
         Path path = Paths.get("./assets/maps");
         BufferedWriter writer = null;
         try {

@@ -101,6 +101,9 @@ public class CreateMap {
         GameModel.countryHashMap.put(countryName, temp);
         addCountriesInContinent(countryName, continentBelongsTo);
     }
+    /**
+     * This method helps in taking input of multiple countries in single line seprated by comma
+     */
     public static void multipleCountryInput(){
         Scanner input = new Scanner(System.in);
         System.out.println("Enter counties using in single line using comma seprated");
