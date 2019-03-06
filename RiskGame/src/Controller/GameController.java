@@ -1,11 +1,6 @@
 package Controller;
 
-import Model.Country;
-
-import Model.Continent;
-import Model.CountryAdjacencyMatrix;
-import Model.GameModel;
-import Model.Player;
+import Model.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -27,7 +22,7 @@ public class GameController {
     public static void LoadMap() {
         Scanner sc = new Scanner(System.in);
         List<String> getFileName = new ArrayList<String>();
-        File[] filesName = new File("./assets/maps").listFiles();
+        File[] filesName = new File(Helper.pathName).listFiles();
         //File[] filesName = new File(System.getProperty("user.dir") + "/RiskGame/assets/maps").listFiles();
 
         System.out.println(filesName.length);
@@ -42,7 +37,7 @@ public class GameController {
         }
         System.out.println("Enter the map name you want to load (Only name, without extension) :");
         String mapName = sc.nextLine();
-        if (ReadMap.readMap("./assets/maps/" + mapName + ".map")) {
+        if (ReadMap.readMap(Helper.pathName+"/"+mapName + ".map")) {
             ValidateMap.validateMap();
         } else {
             System.out.println("Not able to read map successfully. Please check you Map Format");

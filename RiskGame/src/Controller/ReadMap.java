@@ -26,6 +26,8 @@ public class ReadMap {
      * @param getFileName,
      */
     public static boolean readMap(String getFileName) {
+        boolean didContinentsRead = false;
+        boolean didCountriesRead = false;
         try {
             boolean readContinentsFromFile = false;
             boolean readCountriesFromFile = false;
@@ -41,9 +43,11 @@ public class ReadMap {
                     continue;
                 else if ((readLine.trim()).equals("[Continents]")) {
                     readContinentsFromFile = true;
+                    didContinentsRead = true;
                     continue;
                 } else if ((readLine.trim()).equals("[Territories]")) {
                     readContinentsFromFile = false;
+                    didCountriesRead  = true;
                     readCountriesFromFile = true;
                     continue;
                 }
@@ -79,10 +83,18 @@ public class ReadMap {
             System.out.println(e);
             return false;
         }
-        CountryAdjacencyMatrix.initializeCountryMatrix();
-        boolean adjacencyMatrixCreation = CountryAdjacencyMatrix.createAdjacentMatrix();
-        if (adjacencyMatrixCreation)
-            CountryAdjacencyMatrix.printGraph();
+        if(didContinentsRead && didCountriesRead) {
+            CountryAdjacencyMatrix.initializeCountryMatrix();
+            boolean adjacencyMatrixCreation = CountryAdjacencyMatrix.createAdjacentMatrix();
+            if (adjacencyMatrixCreation)
+                CountryAdjacencyMatrix.printGraph();
+        }else{
+            if(didContinentsRead)
+                System.out.println("Error in Map File Read: Did not Parse Continents List");
+            if(didCountriesRead)
+                System.out.println("Error in Map File Read: Did not Parse Countries List");
+            return false;
+        }
         return true;
     }
 

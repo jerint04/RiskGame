@@ -1,19 +1,16 @@
-[Map]
+[map]
 author=Concordia Students
 image=
 wrap=yes
 scroll=horizontal
 warn=yes
-[Continents]
-as=5
-eu=8
 
-[Territories]
+[territorie]
 in,0,0,as,pak,ban,china
 pak,0,0,as,ban
 ban,0,0,as,in,china
-china,0,0,as,in,rus
+china,0,0
 rus,0,0,eu,in,uk
 uk,0,0,eu,rus,fr
 fr,0,0,eu,rus,pol
-pol,0,0,eu,china,rus,uk
+pol,0,0,eu
