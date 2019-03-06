@@ -3,12 +3,10 @@ package Controller;
 import Model.*;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 import static Controller.CreateMapFile.createFile;
+import static Model.GameModel.playerHashMap;
 
 /**
  * @author Hemanshu
@@ -23,10 +21,7 @@ public class GameController {
         Scanner sc = new Scanner(System.in);
         List<String> getFileName = new ArrayList<String>();
         File[] filesName = new File(Helper.pathName).listFiles();
-        //File[] filesName = new File(System.getProperty("user.dir") + "/RiskGame/assets/maps").listFiles();
-
         System.out.println(filesName.length);
-
         for (File getFilename : filesName) {
             if (getFilename.isFile()) {
                 getFileName.add(getFilename.getName());
@@ -37,7 +32,7 @@ public class GameController {
         }
         System.out.println("Enter the map name you want to load (Only name, without extension) :");
         String mapName = sc.nextLine();
-        if (ReadMap.readMap(Helper.pathName+"/"+mapName + ".map")) {
+        if (ReadMap.readMap(Helper.pathName + "/" + mapName + ".map")) {
             ValidateMap.validateMap();
         } else {
             System.out.println("Not able to read map successfully. Please check you Map Format");
@@ -92,14 +87,7 @@ public class GameController {
                     CountryAdjacencyMatrix.addNeighbour();
                     CountryAdjacencyMatrix.printGraph();
                     break;
-               /* case 4:
-                    CreateMap.removeCountry(); *//*TODO : Test this*//*
-                    break;
                 case 5:
-                    CreateMap.removeContinent(); *//* TODO : test this*//*
-                    break;*/
-                case 5:
-                    /*TODO Validate the graph ..... Need to test this*/
                     CountryAdjacencyMatrix.readFromGraph();
                     if (ValidateMap.validateMap()) {
                         createFile();
@@ -118,33 +106,35 @@ public class GameController {
     public static void assigningCountriesToPlayers() {
         Scanner sc = new Scanner(System.in);
 
+//      Assigning All the Countries to corresponding Players
         for (String countryName : GameModel.countryHashMap.keySet()) {
             int playerId = GameModel.countryHashMap.get(countryName).getPlayerId();
-            Player temp = GameModel.playerHashMap.get(playerId);
+            Player temp = playerHashMap.get(playerId);
             temp.countriesOwned.add(countryName);
         }
 
-        for (int p : GameModel.playerHashMap.keySet()) {
-            GameModel.playerHashMap.get(p).numberOfInfantry = GameModel.playerHashMap.get(p).numberOfInfantry - GameModel.playerHashMap.get(p).countriesOwned.size();
-            System.out.println("Countries owned by the player -->" + GameModel.playerHashMap.get(p).getCountriesOwned() + " Size of infantry after allocating -->" + GameModel.playerHashMap.get(p).numberOfInfantry + " Total country owned by the player -->" + GameModel.playerHashMap.get(p).countriesOwned.size());
+        for (int p : playerHashMap.keySet()) {
+            playerHashMap.get(p).numberOfInfantry = playerHashMap.get(p).numberOfInfantry - playerHashMap.get(p).countriesOwned.size();
+            System.out.println("Countries owned by the player -->" + playerHashMap.get(p).getCountriesOwned() + " Size of infantry after allocating -->" + playerHashMap.get(p).numberOfInfantry + " Total country owned by the player -->" + playerHashMap.get(p).countriesOwned.size());
         }
 
 
         while (calculateInfantry() != 0) {
-            for (int p : GameModel.playerHashMap.keySet()) {
-                System.out.println("Name of the players :" + GameModel.playerHashMap.get(p).getName() + " size of remaining infantory :" + GameModel.playerHashMap.get(p).numberOfInfantry + " number of country owned" + GameModel.playerHashMap.get(p).countriesOwned.size());
+            for (int p : playerHashMap.keySet()) {
+                System.out.println("Name of the players :" + playerHashMap.get(p).getName() + " size of remaining infantry :" + playerHashMap.get(p).numberOfInfantry + " number of country owned" + playerHashMap.get(p).countriesOwned.size());
                 int i = 0;
-                if (GameModel.playerHashMap.get(p).numberOfInfantry != 0) {
-                    for (String countryName : GameModel.playerHashMap.get(p).getCountriesOwned()) {
-                        System.out.println(i + ":" + countryName);
+                if (playerHashMap.get(p).numberOfInfantry != 0) {
+                    for (String countryName : playerHashMap.get(p).getCountriesOwned()) {
+                        System.out.println(i + ":" + countryName + "->" + GameModel.countryHashMap.get(countryName).getNumberOfSoldiers());
                         i = i + 1;
                     }
 
-                    System.out.println("enter the number of armies to be allocated and the serial number of the country");
+                    System.out.println("Enter the number of armies to be allocated :");
                     int numOfArmies = sc.nextInt();
+                    System.out.println("Enter the serial number of the country");
                     int countrySerialNum = sc.nextInt();
-                    addInfantoryToCountry(GameModel.playerHashMap.get(p).countriesOwned.get(countrySerialNum), p, numOfArmies);
-                    GameModel.playerHashMap.get(p).numberOfInfantry = GameModel.playerHashMap.get(p).numberOfInfantry - numOfArmies;
+                    addInfantryToCountry(playerHashMap.get(p).countriesOwned.get(countrySerialNum), p, numOfArmies);
+                    playerHashMap.get(p).numberOfInfantry = playerHashMap.get(p).numberOfInfantry - numOfArmies;
                 }
             }
         }
@@ -155,8 +145,8 @@ public class GameController {
      */
     public static int calculateInfantry() {
         int calculateInfanrty = 0;
-        for (int p : GameModel.playerHashMap.keySet()) {
-            calculateInfanrty = calculateInfanrty + GameModel.playerHashMap.get(p).numberOfInfantry;
+        for (int p : playerHashMap.keySet()) {
+            calculateInfanrty = calculateInfanrty + playerHashMap.get(p).numberOfInfantry;
         }
         return calculateInfanrty;
     }
@@ -164,43 +154,42 @@ public class GameController {
     /**
      * This method adds infantry to the Model.Country
      */
-    public static void addInfantoryToCountry(String countryName, int playerId, int infantoryNumber) {
+    public static void addInfantryToCountry(String countryName, int playerId, int infantryNumber) {
         GameModel.countryHashMap.get(countryName).setPlayerId(playerId);
-        GameModel.countryHashMap.get(countryName).setNumberOfSoldiers(infantoryNumber);
+        int newVal = GameModel.countryHashMap.get(countryName).getNumberOfSoldiers() + infantryNumber;
+        GameModel.countryHashMap.get(countryName).setNumberOfSoldiers(newVal);
     }
 
     /**
      * Calculating armies according to the risk rule that is  calculating using number of territories occupied
      */
     public static void armyCalculationDuringReinforcement(int playerId) {
-        Player temp = GameModel.playerHashMap.get(playerId);
-        int armyToAllocate = GameModel.playerHashMap.get(playerId).countriesOwned.size() / 3;
-        GameModel.playerHashMap.get(playerId).numberOfInfantry = +((armyToAllocate < 3) ? 3 : armyToAllocate);
+        Player temp = playerHashMap.get(playerId);
+        int armyToAllocate = playerHashMap.get(playerId).countriesOwned.size() / 3;
+        playerHashMap.get(playerId).numberOfInfantry = +((armyToAllocate < 3) ? 3 : armyToAllocate);
         for (String key : GameModel.continentHashMap.keySet()) {
             Continent tempContinent = GameModel.continentHashMap.get(key);
             if (temp.countriesOwned.containsAll(tempContinent.Countries)) {
-                GameModel.playerHashMap.get(playerId).numberOfInfantry = +tempContinent.controlValue;
+                playerHashMap.get(playerId).numberOfInfantry = +tempContinent.controlValue;
             }
         }
-
-
     }
 
-    public static void armyPlacementDuringReinforcemet(int playerId) {
+    public static void armyPlacementDuringReinforcement(int playerId) {
         Scanner sc = new Scanner(System.in);
-        System.out.println(" Infantory for the current players is : " + GameModel.playerHashMap.get(playerId).numberOfInfantry);
+        System.out.println(" Infantry for the current players is : " + playerHashMap.get(playerId).numberOfInfantry);
 
-        while (GameModel.playerHashMap.get(playerId).numberOfInfantry != 0) {
+        while (playerHashMap.get(playerId).numberOfInfantry != 0) {
             int i = 0;
-            for (String countryName : GameModel.playerHashMap.get(playerId).getCountriesOwned()) {
-                System.out.println(i + ":" + countryName);
+            for (String countryName : playerHashMap.get(playerId).getCountriesOwned()) {
+                System.out.println(i + ":" + countryName + "->" + GameModel.countryHashMap.get(countryName).getNumberOfSoldiers());
                 i = i + 1;
             }
             System.out.println("enter the number of armies to be allocated and the serial number of the country");
             int numOfArmies = sc.nextInt();
             int countrySerialNum = sc.nextInt();
-            addInfantoryToCountry(GameModel.playerHashMap.get(playerId).countriesOwned.get(countrySerialNum), playerId, numOfArmies);
-            GameModel.playerHashMap.get(playerId).numberOfInfantry = GameModel.playerHashMap.get(playerId).numberOfInfantry - numOfArmies;
+            addInfantryToCountry(playerHashMap.get(playerId).countriesOwned.get(countrySerialNum), playerId, numOfArmies);
+            playerHashMap.get(playerId).numberOfInfantry = playerHashMap.get(playerId).numberOfInfantry - numOfArmies;
         }
     }
 
@@ -210,11 +199,11 @@ public class GameController {
     public static void EditMap() {
         boolean exit = true;
         while (exit) {
-            System.out.println("1. Create Model.Continent");
-            System.out.println("2. Create Model.Country");
+            System.out.println("1. Create Continent");
+            System.out.println("2. Create Country");
             System.out.println("3. Add Neighbour");
-            System.out.println("4. Delete Model.Country");
-            System.out.println("5. Delete Model.Continent");
+            System.out.println("4. Delete Country");
+            System.out.println("5. Delete Continent");
             System.out.println("6. Exit");
             System.out.println("Enter the task you want to perform :");
             Scanner in = new Scanner(System.in);
@@ -267,7 +256,7 @@ public class GameController {
                     String name = input.next();
                     Player play = new Player(i, name);
                     GameModel.PlayerList.add(play);
-                    GameModel.playerHashMap.put(i, play);
+                    playerHashMap.put(i, play);
                 }
                 break;
             } else {
@@ -320,4 +309,80 @@ public class GameController {
             }
         }
     }
+
+
+    public static void fortificationPhase(int playerId) {
+        for (String countryName : GameModel.countryHashMap.keySet()) {
+            if (GameModel.countryHashMap.get(countryName).getPlayerId() == playerId) {
+                System.out.println(countryName + "->" + GameModel.countryHashMap.get(countryName).numberOfSoldiers);
+            }
+        }
+        System.out.println("Move Army from the available countries or type(skip) to skip this step:");
+        Scanner a = new Scanner(System.in);
+        boolean temp = true;
+
+        while (temp) {
+            String countryFrom = a.nextLine();
+            String countryTo;
+            List<String> toCountriesList = new ArrayList<>();
+            toCountriesList = dfsToFindNeighbouringCountryForPlayer(GameModel.countryHashMap.get(countryFrom), playerHashMap.get(playerId));
+            if (toCountriesList.size() != 1) {
+                System.out.println("Number of army to move:");
+                int armyToMove = a.nextInt();
+                if (armyToMove > 0 && armyToMove < GameModel.countryHashMap.get(countryFrom).numberOfSoldiers) {
+                    for (String cont : toCountriesList) {
+                        System.out.println(cont);
+                    }
+                    System.out.println("Country to Move to From Above List :");
+                    Scanner b = new Scanner(System.in);
+                    countryTo = b.nextLine();
+                    GameModel.countryHashMap.get(countryFrom).numberOfSoldiers -= armyToMove;
+                    GameModel.countryHashMap.get(countryTo).numberOfSoldiers += armyToMove;
+                    break;
+                }
+            } else {
+                System.out.println("The Countries do not have any Adjacent country, Please Select other Country :");
+            }
+        }
+        System.out.println("Updated List After Fortification");
+        for (String countryName : GameModel.countryHashMap.keySet()) {
+            if (GameModel.countryHashMap.get(countryName).getPlayerId() == playerId) {
+                System.out.println(countryName + "->" + GameModel.countryHashMap.get(countryName).numberOfSoldiers);
+            }
+        }
+    }
+
+
+    public static List<String> dfsToFindNeighbouringCountryForPlayer(Country countryModel, Player p) {
+        List<String> adjacentCountry = new ArrayList<>();
+        Stack<Country> stack = new Stack<Country>();
+        stack.add(countryModel);
+        countryModel.setVisited(true);
+        while (!stack.isEmpty()) {
+            Country element = stack.pop();
+            List<String> neighbourNames = element.getAdjacentCountries();
+            List<Country> neighbours = new ArrayList<>();
+            for (String neighbourName : neighbourNames) {
+                if (GameModel.countryHashMap.get(neighbourName).PlayerId == p.playerId)
+                    neighbours.add((GameModel.countryHashMap.get(neighbourName)));
+            }
+            for (int i = 0; i < neighbours.size(); i++) {
+                Country n = neighbours.get(i);
+                if (n != null && !n.isVisited()) {
+                    stack.add(n);
+                    n.setVisited(true);
+                }
+            }
+        }
+
+        for (String countryName : GameModel.countryHashMap.keySet()) {
+            if (GameModel.countryHashMap.get(countryName).isVisited()) {
+                GameModel.countryHashMap.get(countryName).setVisited(false);
+                adjacentCountry.add(countryName);
+            }
+        }
+        return adjacentCountry;
+    }
+
+
 }
