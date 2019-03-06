@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Country;
+
 import Model.Continent;
 import Model.CountryAdjacencyMatrix;
 import Model.GameModel;
@@ -25,7 +27,7 @@ public class GameController {
     public static void LoadMap() {
         Scanner sc = new Scanner(System.in);
         List<String> getFileName = new ArrayList<String>();
-        File[] filesName = new File("./RiskGame/assets/maps").listFiles();
+        File[] filesName = new File("./assets/maps").listFiles();
         //File[] filesName = new File(System.getProperty("user.dir") + "/RiskGame/assets/maps").listFiles();
 
         System.out.println(filesName.length);
@@ -40,7 +42,7 @@ public class GameController {
         }
         System.out.println("Enter the map name you want to load (Only name, without extension) :");
         String mapName = sc.nextLine();
-        if (ReadMap.readMap("./RiskGame/assets/maps/" + mapName + ".map")) {
+        if (ReadMap.readMap("./assets/maps/" + mapName + ".map")) {
             ValidateMap.validateMap();
         } else {
             System.out.println("Not able to read map successfully. Please check you Map Format");
@@ -91,6 +93,7 @@ public class GameController {
                 break;
                 case 4:
                     CountryAdjacencyMatrix.printGraph();
+                    System.out.println("Enter -1 to exit any time");
                     CountryAdjacencyMatrix.addNeighbour();
                     CountryAdjacencyMatrix.printGraph();
                     break;

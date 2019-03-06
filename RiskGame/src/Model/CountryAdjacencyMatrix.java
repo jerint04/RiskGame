@@ -1,13 +1,14 @@
 package Model;
+
 import Controller.CreateMap;
+
 import java.util.*;
 
 /**
  * @author Hemanshu
  * GraphName Class
  * Creation of Adjacency Matrix
- *
- * */
+ */
 public class CountryAdjacencyMatrix {
     public static int maxSize = 100;
     public static int[][] countryMatrix = new int[maxSize][maxSize];
@@ -29,16 +30,22 @@ public class CountryAdjacencyMatrix {
      */
     public static void addNeighbour() {
         Scanner in = new Scanner(System.in);
-        System.out.println("Enter x value to Make add neighbour :");
-        int x = in.nextInt();
-        System.out.println("Enter y value to Make add neighbour :");
-        int y = in.nextInt();
-        if (x <= Helper.getCountryCountId() && y <= Helper.getCountryCountId()) {
-            countryMatrix[x][y] = 1;
-        } else {
-            System.out.println("Enter Correct x and y values !");
+        boolean a = true;
+        while (a) {
+            System.out.println("Enter x value to Make add neighbour :");
+            int x = in.nextInt();
+            if (x == -1)
+                break;
+            System.out.println("Enter y value to Make add neighbour :");
+            int y = in.nextInt();
+            if (y == -1)
+                break;
+            if (x <= Helper.getCountryCountId() && y <= Helper.getCountryCountId()) {
+                countryMatrix[x][y] = 1;
+            } else {
+                System.out.println("Enter Correct x and y values !");
+            }
         }
-
     }
 
     /**
@@ -46,18 +53,25 @@ public class CountryAdjacencyMatrix {
      */
     public static void printGraph() {
         if (Helper.getCountryCountId() != 0) {
+
+            for (int i = 1; i <= Helper.getCountryCountId(); i++) {
+                System.out.print("(" + i + ")"+GameModel.countryIdHashMap.get(i)+ " ");
+                if(i%6==0){
+                    System.out.println("");
+                }
+            }System.out.println("");
             for (int i = 0; i <= Helper.getCountryCountId(); i++) {
                 for (int j = 0; j <= Helper.getCountryCountId(); j++) {
                     if (i == 0 && j == 0) {
-                        System.out.print("Country");
+                        System.out.print("    ");
                     } else if (i == 0) {
                         if (j != 0)
-                            System.out.print(GameModel.countryIdHashMap.get(j) + "(" + j + ") ");
+                            System.out.print("(" + j + ") ");
                     } else if (j == 0) {
                         if (i != 0)
-                            System.out.print(GameModel.countryIdHashMap.get(i) + "(" + i + ") ");
+                            System.out.print("(" + i + ") ");
                     } else {
-                        System.out.print(countryMatrix[j][i] + " ");
+                        System.out.print(" " + countryMatrix[j][i] + "  ");
                     }
                 }
                 System.out.println("");
@@ -108,7 +122,8 @@ public class CountryAdjacencyMatrix {
 
     /**
      * This method is used to add source and destination values to Model.Country Matrix
-     * @param source, int
+     *
+     * @param source,      int
      * @param destination, int
      */
     public void add(int source, int destination) {
@@ -118,6 +133,7 @@ public class CountryAdjacencyMatrix {
 
     /**
      * This method is used to find adjacent country
+     *
      * @param index, int
      * @return adjacent, returns list of adjacent country index
      */
@@ -132,7 +148,8 @@ public class CountryAdjacencyMatrix {
 
     /**
      * This method is used to check whether the country is connected or not
-     * @param source, int
+     *
+     * @param source,      int
      * @param destination, int
      * @return false, boolean
      */
@@ -144,6 +161,7 @@ public class CountryAdjacencyMatrix {
 
     /**
      * This method is used to get the neighbors of the Model.Country
+     *
      * @param v, id of the Model.Country
      * @return neighbours, lists the neighboring countries
      */
@@ -203,7 +221,6 @@ public class CountryAdjacencyMatrix {
         }
         return -1;
     }
-
 
 
 }

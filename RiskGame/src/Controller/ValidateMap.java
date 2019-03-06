@@ -30,7 +30,7 @@ public class ValidateMap {
             Continent currentContinent = GameModel.continentHashMap.get(name);
             if (currentContinent.getCountries().isEmpty() == true) {
                 emptyContinent = true;
-                System.out.println("Model.Continent " + name + " has no countries in it.");
+                System.out.println("Continent " + name + " has no countries in it.");
                 return false;
             }
         }

@@ -29,6 +29,7 @@ public class GameDriver {
         }
         /*TODO in loop (don't know the exit condition right now)  REINFORCEMENT PART*/
         /*start the loop*/
+//        GameController.armyCalculationDuringReinforcement(p1);
 /*        armyPlacementDuringReinforcemet(p1);
 
         fortificationPhase();*/

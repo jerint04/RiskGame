@@ -50,7 +50,7 @@ public class CreateMapFile {
         try {
             Scanner sc=new Scanner(System.in);
             //Delete temporary file
-            String currentDirectory = System.getProperty("user.dir"); /*TODO  take input of file name*/
+            String currentDirectory = System.getProperty("user.dir");
             System.out.println("Enter the name of the file you want to name");
             String mapName=sc.nextLine();
             Path tempFilePath = Paths.get( "./assets/maps/" + mapName + ".map");
