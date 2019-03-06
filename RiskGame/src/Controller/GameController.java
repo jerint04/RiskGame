@@ -90,7 +90,7 @@ public class GameController {
                     break;
                 case 3:
                     CreateMap.multipleCountryInput();
-                break;
+                    break;
                 case 4:
                     CountryAdjacencyMatrix.printGraph();
                     System.out.println("Enter -1 to exit any time");
@@ -131,7 +131,7 @@ public class GameController {
 
         for (int p : GameModel.playerHashMap.keySet()) {
             GameModel.playerHashMap.get(p).numberOfInfantry = GameModel.playerHashMap.get(p).numberOfInfantry - GameModel.playerHashMap.get(p).countriesOwned.size();
-            System.out.println("Countries owned by the player -->"+GameModel.playerHashMap.get(p).getCountriesOwned() + " Size of infantry after allocating -->" + GameModel.playerHashMap.get(p).numberOfInfantry + " Total country owned by the player -->" + GameModel.playerHashMap.get(p).countriesOwned.size());
+            System.out.println("Countries owned by the player -->" + GameModel.playerHashMap.get(p).getCountriesOwned() + " Size of infantry after allocating -->" + GameModel.playerHashMap.get(p).numberOfInfantry + " Total country owned by the player -->" + GameModel.playerHashMap.get(p).countriesOwned.size());
         }
 
 
@@ -180,7 +180,7 @@ public class GameController {
     public static void armyCalculationDuringReinforcement(int playerId) {
         Player temp = GameModel.playerHashMap.get(playerId);
         int armyToAllocate = GameModel.playerHashMap.get(playerId).countriesOwned.size() / 3;
-        GameModel.playerHashMap.get(playerId).numberOfInfantry = +((armyToAllocate<3)?3:armyToAllocate);
+        GameModel.playerHashMap.get(playerId).numberOfInfantry = +((armyToAllocate < 3) ? 3 : armyToAllocate);
         for (String key : GameModel.continentHashMap.keySet()) {
             Continent tempContinent = GameModel.continentHashMap.get(key);
             if (temp.countriesOwned.containsAll(tempContinent.Countries)) {
@@ -260,21 +260,25 @@ public class GameController {
      * This method is used to initialise the players into the game
      */
     public static void InitialisePlayers() {
-        System.out.println("Number of Players who want to play :");
+        System.out.println("Number of Players who want to play (3 - 6 players allowed):");
         Scanner input = new Scanner(System.in);
-        GameModel.playerNumber = input.nextInt();
-
-
-        for (int i = 0; i < GameModel.playerNumber; i++) {
-            System.out.println("Player " + (i + 1) + " name :");
-            String name = input.next();
-            Player play = new Player(i, name);
-            GameModel.PlayerList.add(play);
-            GameModel.playerHashMap.put(i, play);
-
+        boolean a = true;
+        while (a) {
+            int x = input.nextInt();
+            if (x > 2 && x < 7) {
+                GameModel.playerNumber = x;
+                for (int i = 0; i < GameModel.playerNumber; i++) {
+                    System.out.println("Player " + (i + 1) + " name :");
+                    String name = input.next();
+                    Player play = new Player(i, name);
+                    GameModel.PlayerList.add(play);
+                    GameModel.playerHashMap.put(i, play);
+                }
+                break;
+            } else {
+                System.out.println("Please enter Valid number of players !");
+            }
         }
-
-
     }
 
     /**
@@ -293,7 +297,7 @@ public class GameController {
         }
         for (int j : GameModel.countryIdHashMap.keySet()) {
             String countryName = GameModel.countryIdHashMap.get(j);
-            System.out.println( j + ":"+ " Player id -->" + GameModel.countryHashMap.get(countryName).getPlayerId() + " Country name owned by the player is  -->" + countryName + " Initial army allocated in the country -->" + GameModel.countryHashMap.get(countryName).getNumberOfSoldiers());
+            System.out.println(j + ":" + " Player id -->" + GameModel.countryHashMap.get(countryName).getPlayerId() + " Country name owned by the player is  -->" + countryName + " Initial army allocated in the country -->" + GameModel.countryHashMap.get(countryName).getNumberOfSoldiers());
         }
     }
 

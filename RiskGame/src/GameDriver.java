@@ -1,6 +1,8 @@
 import Controller.GameController;
 import Model.GameModel;
 
+import static Controller.ValidateMap.validationOfPlayersAndCountiesNumber;
+
 /**
  * GameDriver Class
  *
@@ -20,14 +22,17 @@ public class GameDriver {
     public static void main(String[] args) {
         GameController.StartOrLoadGame();
         GameController.InitialisePlayers();
-        /*TODO : validate player info*/
-        GameController.initialisationInfantry();
-        GameController.assigningCountries();
-        GameController.assigningCountriesToPlayers();
-        for (int playerId : GameModel.countryIdHashMap.keySet()) {
-            GameController.armyCalculationDuringReinforcement(playerId);
+        if(validationOfPlayersAndCountiesNumber()) {
+            GameController.initialisationInfantry();
+            GameController.assigningCountries();
+            GameController.assigningCountriesToPlayers();
+            for (int playerId : GameModel.countryIdHashMap.keySet()) {
+                GameController.armyCalculationDuringReinforcement(playerId);
+            }
+        }else{
+            System.out.println("Number of Countries are less than required number to start the game(number of player* 2)");
         }
-        /*TODO in loop (don't know the exit condition right now)  REINFORCEMENT PART*/
+
         /*start the loop*/
 //        GameController.armyCalculationDuringReinforcement(p1);
 /*        armyPlacementDuringReinforcemet(p1);
