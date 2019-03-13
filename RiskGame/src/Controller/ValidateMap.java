@@ -8,8 +8,10 @@ import Model.Player;
 import java.util.*;
 
 /**
+ * ValidateMap class
+ *
  * @author Hemanshu
- * @date 2019-03-05
+ * @version  1.0.0
  */
 public class ValidateMap {
 
