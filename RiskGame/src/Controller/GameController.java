@@ -143,6 +143,7 @@ public class GameController {
 
     /**
      * This method calculates infantry
+     * @return calculateInfanrty, int
      */
     public static int calculateInfantry() {
         int calculateInfanrty = 0;
@@ -154,6 +155,9 @@ public class GameController {
 
     /**
      * This method adds infantry to the Model.Country
+     * @param countryName, name of the country
+     * @param infantryNumber , infantry number
+     * @param playerId, player Id
      */
     public static void addInfantryToCountry(String countryName, int playerId, int infantryNumber) {
         GameModel.countryHashMap.get(countryName).setPlayerId(playerId);
