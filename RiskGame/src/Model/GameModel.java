@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * Game Model class
+ *
  * @author Hemanshu
  * @version 1.0.0
  */
