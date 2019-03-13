@@ -98,7 +98,7 @@ public class Continent {
     /**
      * This method Gets the list of Adjacent Countries
      *
-     * @return AdjacentContinents List<String>
+     * @return AdjacentContinents, list of adjacent countries
      */
     public List<String> getAdjacentContinents() {
         return AdjacentContinents;
@@ -107,7 +107,7 @@ public class Continent {
     /**
      * This method sets the list of Adjacent Countries
      *
-     * @param adjacentContinents
+     * @param adjacentContinents, lists adjacent countries
      */
     public void setAdjacentContinents(List<String> adjacentContinents) {
         AdjacentContinents = adjacentContinents;
