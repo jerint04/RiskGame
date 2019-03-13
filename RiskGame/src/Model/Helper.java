@@ -4,7 +4,6 @@ package Model;
  * Model.Helper Class
  * @author Hemanshu
  * @version 1.0.0
- * @date 2019-02-22
  */
 public class Helper {
     static int countryCountId = 0; // The count starts from 1 and not from 0.. Please pay attention to this and remember
