@@ -168,7 +168,7 @@ public class Player {
     /**
      * This method is used to set number of players
      *
-     * @param numberOfPlayers
+     * @param numberOfPlayers,  the number of players
      */
     public static void setNumberOfPlayers(int numberOfPlayers) {
         Player.numberOfPlayers = numberOfPlayers;
