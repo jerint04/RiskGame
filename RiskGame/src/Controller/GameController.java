@@ -9,8 +9,9 @@ import static Controller.CreateMapFile.createFile;
 import static Model.GameModel.playerHashMap;
 
 /**
+ * GameController class
  * @author Hemanshu
- * @date 2019-03-05
+ * @version 1.0.0
  */
 public class GameController {
 
