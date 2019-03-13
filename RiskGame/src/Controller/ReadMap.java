@@ -23,6 +23,7 @@ public class ReadMap {
      * This function loads the Map into the memory
      *
      * @param getFileName,
+     * @return true, boolean value
      */
     public static boolean readMap(String getFileName) {
         boolean didContinentsRead = false;
