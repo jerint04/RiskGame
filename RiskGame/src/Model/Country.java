@@ -56,7 +56,7 @@ public class Country {
     /**
      * This method sets x-coordinate
      *
-     * @param xCoordinate
+     * @param xCoordinate, x-co-ordinate of a Country
      */
     public void setxCoordinate(int xCoordinate) {
         this.xCoordinate = xCoordinate;
@@ -65,7 +65,7 @@ public class Country {
     /**
      * This method gets y-coordinate
      *
-     * @return yCoordinate int
+     * @return yCoordinate int, y-co-ordinate of a Country
      */
     public int getyCoordinate() {
         return yCoordinate;
@@ -74,7 +74,7 @@ public class Country {
     /**
      * This method sets y-coordinate
      *
-     * @param yCoordinate
+     * @param yCoordinate, y-co-ordinate of a Country
      */
     public void setyCoordinate(int yCoordinate) {
         this.yCoordinate = yCoordinate;
@@ -128,7 +128,7 @@ public class Country {
     /**
      * This method sets ParentContinent
      *
-     * @param parentContinent
+     * @param parentContinent,  parent continent
      */
     public void setParentContinent(String parentContinent) {
         ParentContinent = parentContinent;
