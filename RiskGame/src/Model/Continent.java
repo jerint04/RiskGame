@@ -71,7 +71,7 @@ public class Continent {
     /**
      * This method sets Model.Continent control value
      *
-     * @param controlValue
+     * @param controlValue, the control value of the continent
      */
     public void setControlValue(int controlValue) {
         this.controlValue = controlValue;
