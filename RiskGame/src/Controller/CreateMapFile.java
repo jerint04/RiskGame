@@ -15,7 +15,6 @@ import java.util.Scanner;
  * Controller.CreateMapFile Class
  * @author Hemanshu
  * @version 1.0.0
- * @date 2019-02-25
  */
 public class CreateMapFile {
     public static void createFile() {
