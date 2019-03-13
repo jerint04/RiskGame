@@ -8,7 +8,6 @@ import java.util.List;
  *
  * @author Vikram
  * @version 1.0.0
- * @date 2019-02-19
  */
 public class Continent {
     public int continentId;
