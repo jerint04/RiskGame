@@ -209,8 +209,9 @@ public class CountryAdjacencyMatrix {
     /**
      * This function gets the country value
      *
-     * @param hm,
-     * @param value ,
+     * @param hm, map type instance
+     * @param value, map key value
+     * @return Object type, gets the keyValue
      */
     public static Object getKeyFromValue(Map hm, String value) {
         Iterator it = hm.entrySet().iterator();
