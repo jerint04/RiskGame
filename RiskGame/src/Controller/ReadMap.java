@@ -11,7 +11,6 @@ import java.io.FileReader;
  *
  * @author Jerin
  * @version 1.0.0
- * @date 22-February-2019
  */
 public class ReadMap {
 
