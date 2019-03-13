@@ -181,6 +181,8 @@ public class CountryAdjacencyMatrix {
 
     /**
      * This function creates adjacent Countries
+     * @return boolean value, checks the map is valid or not,
+     *           if valid creates Adjacency matrix
      */
     public static boolean createAdjacentMatrix() {
         try {
