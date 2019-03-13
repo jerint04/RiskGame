@@ -8,7 +8,6 @@ import static Controller.ValidateMap.validationOfPlayersAndCountiesNumber;
  *
  * @author Hemanshu
  * @version 1.0.0
- * @date 2019-02-22
  * Includes main() method of the program
  */
 
