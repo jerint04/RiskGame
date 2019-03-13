@@ -167,6 +167,7 @@ public class GameController {
 
     /**
      * Calculating armies according to the risk rule that is  calculating using number of territories occupied
+     * @param playerId, id of the player
      */
     public static void armyCalculationDuringReinforcement(int playerId) {
         Player temp = playerHashMap.get(playerId);
@@ -180,6 +181,10 @@ public class GameController {
         }
     }
 
+    /**
+     * Placing the armies during reinforcement
+     * @param playerId, id of the player
+     */
     public static void armyPlacementDuringReinforcement(int playerId) {
         Scanner sc = new Scanner(System.in);
         System.out.println(" Infantry for the current players is : " + playerHashMap.get(playerId).numberOfInfantry);
