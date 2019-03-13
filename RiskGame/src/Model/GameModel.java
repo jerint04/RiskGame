@@ -7,7 +7,7 @@ import java.util.Random;
 
 /**
  * @author Hemanshu
- * @date 2019-03-05
+ * @version 1.0.0
  */
 public class GameModel {
 
