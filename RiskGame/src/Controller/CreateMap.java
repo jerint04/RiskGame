@@ -46,7 +46,7 @@ public class CreateMap {
         GameModel.countryHashMap.remove(countryNameToDelete);
         GameModel.countryIdHashMap.remove(countryKey);
         /*Removing the country from the continent*/
-        GameModel.ContinentList.remove(countryNameToDelete); /*todo : this line seems to be wrong*/
+//        GameModel.ContinentList.remove(countryNameToDelete);
         toDelete = null;
         GameModel.continentHashMap.get(continentBelongingTo).Countries.remove(countryNameToDelete);
         // Removing the country from the adjacent countries list
@@ -55,6 +55,7 @@ public class CreateMap {
                 GameModel.countryHashMap.get(key).getAdjacentCountries().remove(countryNameToDelete);
             }
         }
+
     }
 
 

@@ -10,6 +10,7 @@ import static Model.GameModel.playerHashMap;
 
 /**
  * GameController class
+ *
  * @author Hemanshu
  * @version 1.0.0
  */
@@ -38,7 +39,11 @@ public class GameController {
         } else {
             System.out.println("Not able to read map successfully. Please check you Map Format");
         }
-
+        System.out.println("Do you want to edit the map : Enter 1 to edit the map");
+        int a = sc.nextInt();
+        if (a == 1) {
+            editMap();
+        }
     }
 
     /**
@@ -143,6 +148,7 @@ public class GameController {
 
     /**
      * This method calculates infantry
+     *
      * @return calculateInfanrty, int
      */
     public static int calculateInfantry() {
@@ -155,9 +161,10 @@ public class GameController {
 
     /**
      * This method adds infantry to the Model.Country
-     * @param countryName, name of the country
+     *
+     * @param countryName,   name of the country
      * @param infantryNumber , infantry number
-     * @param playerId, player Id
+     * @param playerId,      player Id
      */
     public static void addInfantryToCountry(String countryName, int playerId, int infantryNumber) {
         GameModel.countryHashMap.get(countryName).setPlayerId(playerId);
@@ -167,6 +174,7 @@ public class GameController {
 
     /**
      * Calculating armies according to the risk rule that is  calculating using number of territories occupied
+     *
      * @param playerId, id of the player
      */
     public static void armyCalculationDuringReinforcement(int playerId) {
@@ -183,6 +191,7 @@ public class GameController {
 
     /**
      * Placing the armies during reinforcement
+     *
      * @param playerId, id of the player
      */
     public static void armyPlacementDuringReinforcement(int playerId) {
@@ -206,15 +215,15 @@ public class GameController {
     /**
      * This method will perform operations to edit a loaded map
      */
-    public static void EditMap() {
+    public static void editMap() {
         boolean exit = true;
         while (exit) {
             System.out.println("1. Create Continent");
             System.out.println("2. Create Country");
             System.out.println("3. Add Neighbour");
-            System.out.println("4. Delete Country");
-            System.out.println("5. Delete Continent");
-            System.out.println("6. Exit");
+//            System.out.println("4. Delete Country");
+//            System.out.println("5. Delete Continent");
+            System.out.println("4. Exit");
             System.out.println("Enter the task you want to perform :");
             Scanner in = new Scanner(System.in);
             int val = in.nextInt();
@@ -230,16 +239,16 @@ public class GameController {
                     CountryAdjacencyMatrix.addNeighbour();
                     CountryAdjacencyMatrix.printGraph();
                     break;
-                case 4:
-                    CreateMap.removeCountry(); /*TODO : Test this*/
+               /* case 4:
+                    CreateMap.removeCountry(); *//*TODO : Test this*//*
                     break;
                 case 5:
-                    CreateMap.removeContinent(); /* TODO : test this*/
-                    break;
-                case 6:
-                    /*TODO Validate the graph ..... Need to test this*/
+                    CreateMap.removeContinent(); *//* TODO : test this*//*
+                    break;*/
+                case 4:
+                    CountryAdjacencyMatrix.readFromGraph();
                     if (ValidateMap.validateMap()) {
-                        CountryAdjacencyMatrix.readFromGraph();
+                        createFile();
                         exit = false;
                     } else {
                         System.out.println("Map is invalid , Please correct the Map");
@@ -253,7 +262,7 @@ public class GameController {
     /**
      * This method is used to initialise the players into the game
      */
-    public static void InitialisePlayers() {
+    public static void initialisePlayers() {
         System.out.println("Number of Players who want to play (3 - 6 players allowed):");
         Scanner input = new Scanner(System.in);
         boolean a = true;
@@ -327,37 +336,40 @@ public class GameController {
                 System.out.println(countryName + "->" + GameModel.countryHashMap.get(countryName).numberOfSoldiers);
             }
         }
-        System.out.println("Move Army from the available countries or type(skip) to skip this step:");
+        System.out.println("Press -1 to skip the step (or any other number to continue):");
         Scanner a = new Scanner(System.in);
+        int escape = a.nextInt();
         boolean temp = true;
-
-        while (temp) {
-            String countryFrom = a.nextLine();
-            String countryTo;
-            List<String> toCountriesList = new ArrayList<>();
-            toCountriesList = dfsToFindNeighbouringCountryForPlayer(GameModel.countryHashMap.get(countryFrom), playerHashMap.get(playerId));
-            if (toCountriesList.size() != 1) {
-                System.out.println("Number of army to move:");
-                int armyToMove = a.nextInt();
-                if (armyToMove > 0 && armyToMove < GameModel.countryHashMap.get(countryFrom).numberOfSoldiers) {
-                    for (String cont : toCountriesList) {
-                        System.out.println(cont);
+        if (escape != (-1)) {
+            while (temp) {
+                System.out.println("Enter Country Name to move from or enter (-1) to exit:");
+                String countryFrom = a.nextLine();
+                String countryTo;
+                List<String> toCountriesList = new ArrayList<>();
+                toCountriesList = dfsToFindNeighbouringCountryForPlayer(GameModel.countryHashMap.get(countryFrom), playerHashMap.get(playerId));
+                if (toCountriesList.size() != 1) {
+                    System.out.println("Number of army to move:");
+                    int armyToMove = a.nextInt();
+                    if (armyToMove > 0 && armyToMove < GameModel.countryHashMap.get(countryFrom).numberOfSoldiers) {
+                        for (String cont : toCountriesList) {
+                            System.out.println(cont);
+                        }
+                        System.out.println("Write Country Name  :");
+                        Scanner b = new Scanner(System.in);
+                        countryTo = b.nextLine();
+                        GameModel.countryHashMap.get(countryFrom).numberOfSoldiers -= armyToMove;
+                        GameModel.countryHashMap.get(countryTo).numberOfSoldiers += armyToMove;
+                        break;
                     }
-                    System.out.println("Country to Move to From Above List :");
-                    Scanner b = new Scanner(System.in);
-                    countryTo = b.nextLine();
-                    GameModel.countryHashMap.get(countryFrom).numberOfSoldiers -= armyToMove;
-                    GameModel.countryHashMap.get(countryTo).numberOfSoldiers += armyToMove;
-                    break;
+                } else {
+                    System.out.println("The Countries do not have any Adjacent country, Please Select other Country :");
                 }
-            } else {
-                System.out.println("The Countries do not have any Adjacent country, Please Select other Country :");
             }
-        }
-        System.out.println("Updated List After Fortification");
-        for (String countryName : GameModel.countryHashMap.keySet()) {
-            if (GameModel.countryHashMap.get(countryName).getPlayerId() == playerId) {
-                System.out.println(countryName + "->" + GameModel.countryHashMap.get(countryName).numberOfSoldiers);
+            System.out.println("Updated List After Fortification");
+            for (String countryName : GameModel.countryHashMap.keySet()) {
+                if (GameModel.countryHashMap.get(countryName).getPlayerId() == playerId) {
+                    System.out.println(countryName + "->" + GameModel.countryHashMap.get(countryName).numberOfSoldiers);
+                }
             }
         }
     }

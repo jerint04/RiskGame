@@ -10,13 +10,13 @@ import java.util.*;
  */
 public class Player {
 
-    public static List<String> Cards = new ArrayList<>();
     public  List<String> countriesOwned = new ArrayList<>();
     public boolean alive;
-    public static String Name;
-    public static int playerId;
+    public String Name;
+    public int playerId;
     public int numberOfInfantry;
     public static int numberOfPlayers = GameModel.PlayerList.size();
+    public static List<String> Cards = new ArrayList<>();
 
     /**
      * This is a constructor of Model.Player Class which sets player Name
@@ -74,7 +74,7 @@ public class Player {
      *
      * @return name String
      */
-    public static String getName() {
+    public  String getName() {
 
         return Name;
     }
@@ -142,7 +142,7 @@ public class Player {
      *
      * @return playerId int
      */
-    public static int getPlayerId() {
+    public  int getPlayerId() {
         return playerId;
     }
 

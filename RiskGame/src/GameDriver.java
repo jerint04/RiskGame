@@ -22,7 +22,7 @@ public class GameDriver {
     public static void main(String[] args) {
         boolean playGame = true;
         GameController.StartOrLoadGame();
-        GameController.InitialisePlayers();
+        GameController.initialisePlayers();
         if (validationOfPlayersAndCountiesNumber()) {
             GameController.initialisationInfantry();
             GameController.assigningCountries();
