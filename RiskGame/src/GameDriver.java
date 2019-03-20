@@ -1,3 +1,4 @@
+import Controller.AttackPhase;
 import Controller.GameController;
 import Model.GameModel;
 
@@ -34,6 +35,8 @@ public class GameDriver {
                     System.out.println("-------- Reinforcement Phase --------------");
                     GameController.armyCalculationDuringReinforcement(playerId);
                     GameController.armyPlacementDuringReinforcement(playerId);
+                    System.out.println("-------- Attack Phase --------------");
+                    AttackPhase.PlayerAttackTurn(playerId);
                     System.out.println("-------- Fortification Phase --------------");
                     GameController.fortificationPhase(playerId);
                 }
