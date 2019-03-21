@@ -31,7 +31,7 @@ public class GameDriver {
             System.out.println("---------- Game Play Starts -------------");
             while (playGame) {
                 for (int playerId : GameModel.playerHashMap.keySet()) {
-                    System.out.println(" --------------  Player " +GameModel.playerHashMap.get(playerId).getName()+"'s Turn ----------");
+                    System.out.println(" --------------  Player " + GameModel.playerHashMap.get(playerId).getName() + "'s Turn ----------");
                     System.out.println("-------- Reinforcement Phase --------------");
                     GameController.armyCalculationDuringReinforcement(playerId);
                     GameController.armyPlacementDuringReinforcement(playerId);
@@ -39,8 +39,15 @@ public class GameDriver {
                     AttackPhase.PlayerAttackTurn(playerId);
                     System.out.println("-------- Fortification Phase --------------");
                     GameController.fortificationPhase(playerId);
+
                 }
             }
+            /*GameController.earnRiskCards(0);
+            GameController.earnRiskCards(0);
+            GameController.earnRiskCards(0);
+            GameController.earnRiskCards(0);
+            GameController.exchangeCardsForArmies(0);
+*/
         } else {
             System.out.println("Number of Countries are less than required number to start the game(number of player* 2)");
         }
