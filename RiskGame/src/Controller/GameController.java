@@ -4,6 +4,8 @@ import Model.*;
 
 import java.io.File;
 import java.util.*;
+import java.util.Observable;
+import java.util.Observer;
 
 import static Controller.CreateMapFile.createFile;
 import static Model.GameModel.playerHashMap;
@@ -14,7 +16,7 @@ import static Model.GameModel.playerHashMap;
  * @author Hemanshu
  * @version 1.0.0
  */
-public class GameController {
+public class GameController extends Observable {
 
     /**
      * This method will load a map
@@ -178,6 +180,12 @@ public class GameController {
      * @param playerId, id of the player
      */
     public static void armyCalculationDuringReinforcement(int playerId) {
+        Player play=playerHashMap.get(playerId);
+        play.GamePhase="Reinforcement";
+        ViewObserver VOb=new ViewObserver();
+        play.addObserver(VOb);
+        play.updatingObserver();
+        Scanner sc = new Scanner(System.in);
         Player temp = playerHashMap.get(playerId);
         int armyToAllocate = playerHashMap.get(playerId).countriesOwned.size() / 3;
         playerHashMap.get(playerId).numberOfInfantry = +((armyToAllocate < 3) ? 3 : armyToAllocate);
@@ -186,6 +194,21 @@ public class GameController {
             if (temp.countriesOwned.containsAll(tempContinent.Countries)) {
                 playerHashMap.get(playerId).numberOfInfantry = +tempContinent.controlValue;
             }
+        }
+
+        if (temp.Cards.size() == 3) {
+
+            System.out.println("You have 3 cards, press 1 to exchange cards for armies");
+            int choice = sc.nextInt();
+            if (choice == 1) {
+                exchangeCardsForArmies(playerId);
+            }
+
+        }
+        else if (temp.Cards.size() >= 5) {
+            System.out.println("You have to exchange cards to proceed");
+            exchangeCardsForArmies(playerId);
+
         }
     }
 
@@ -308,6 +331,11 @@ public class GameController {
      * This method is used to intialise infantary of the player
      */
     public static void initialisationInfantry() {
+        Player play=new Player();
+        play.GamePhase="Initialisation";
+        ViewObserver VOb=new ViewObserver();
+        play.addObserver(VOb);
+        play.updatingObserver();
         if (GameModel.PlayerList.size() == 3) {
             for (int i = 0; i < GameModel.PlayerList.size(); i++) {
                 GameModel.PlayerList.get(i).setNumberOfInfantry(35);
@@ -331,6 +359,11 @@ public class GameController {
 
 
     public static void fortificationPhase(int playerId) {
+        Player play=playerHashMap.get(playerId);
+        play.GamePhase="Fortification";
+        ViewObserver VOb=new ViewObserver();
+        play.addObserver(VOb);
+        play.updatingObserver();
         for (String countryName : GameModel.countryHashMap.keySet()) {
             if (GameModel.countryHashMap.get(countryName).getPlayerId() == playerId) {
                 System.out.println(countryName + "->" + GameModel.countryHashMap.get(countryName).numberOfSoldiers);
@@ -404,6 +437,55 @@ public class GameController {
             }
         }
         return adjacentCountry;
+    }
+
+
+    public static void earnRiskCards(int PlayerId) {
+        Player play = playerHashMap.get(PlayerId);
+        String[] RiskCards = {"infantry", "calvary", "artillery"};
+        int RiskCardId;
+        RiskCardId = play.Cards.size() % 3;
+        play.Cards.add(RiskCards[RiskCardId]);
+
+    }
+
+    public static void exchangeCardsForArmies(int PlayerId) {
+
+        Scanner sc = new Scanner(System.in);
+        Player play = playerHashMap.get(PlayerId);
+        UpdateFromObserver Ob = new UpdateFromObserver();
+        play.addObserver(Ob);
+        play.updatingObserver();
+        System.out.println("Enter the serial number of the cards to be exchanged(3 cards in a set)");
+        int cardIndexFirst = sc.nextInt();
+        int cardIndexsecond = sc.nextInt();
+        int cardIndexThird = sc.nextInt();
+        String cardNameFirst = play.Cards.get(cardIndexFirst);
+        String cardNameSecond = play.Cards.get(cardIndexsecond);
+        String cardNameThird = play.Cards.get(cardIndexThird);
+        if (play.Cards.get(cardIndexFirst) != play.Cards.get(cardIndexsecond) && play.Cards.get(cardIndexsecond) != play.Cards.get(cardIndexThird) && play.Cards.get(cardIndexThird) != play.Cards.get(cardIndexFirst)) {
+            play.Cards.remove(cardNameFirst);
+            play.Cards.remove(cardNameSecond);
+            play.Cards.remove(cardNameThird);
+            play.addObserver(Ob);
+            play.setArmiesInExcahngeOfcards(play.turn * 5);
+            play.numberOfInfantry += play.armiesInExcahngeOfcards;
+            play.turn++;
+            play.updatingObserver();
+
+
+            // notifyObservers();
+        } else if (play.Cards.get(cardIndexFirst).equals(play.Cards.get(cardIndexsecond)) && play.Cards.get(cardIndexFirst).equals(play.Cards.get(cardIndexThird))) {
+            play.Cards.remove(cardNameFirst);
+            play.Cards.remove(cardNameSecond);
+            play.Cards.remove(cardNameThird);
+            play.addObserver(Ob);
+            play.setArmiesInExcahngeOfcards(play.turn * 5);
+            play.numberOfInfantry += play.armiesInExcahngeOfcards;
+            play.turn++;
+            play.updatingObserver();
+            //notifyObservers();
+        }
     }
 
 

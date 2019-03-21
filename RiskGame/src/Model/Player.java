@@ -1,6 +1,9 @@
 package Model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Observable;
 
 /**
  * Model.Player Class
@@ -8,24 +11,62 @@ import java.util.*;
  * @author Hemanshu
  * @version 1.0.0
  */
-public class Player {
+public class Player extends Observable {
 
+    public  HashMap<Integer, String> cardsOwned=new HashMap<>();
+    public  List<String> Cards = new ArrayList<>();
     public  List<String> countriesOwned = new ArrayList<>();
     public boolean alive;
     public String Name;
     public int playerId;
     public int numberOfInfantry;
     public static int numberOfPlayers = GameModel.PlayerList.size();
-    public static List<String> Cards = new ArrayList<>();
+    public int turn=1;
+    public int armiesInExcahngeOfcards=0;
+    public boolean cardBooleanValue;
+    public static String GamePhase="";
+
+    public static String getGamePhase() {
+        return GamePhase;
+    }
+
+    public static void setGamePhase(String gamePhase) {
+        GamePhase = gamePhase;
+    }
+
+
+    public int getArmiesInExcahngeOfcards() {
+        return armiesInExcahngeOfcards;
+    }
+
+    public void setArmiesInExcahngeOfcards(int armiesInExcahngeOfcards) {
+        this.armiesInExcahngeOfcards = armiesInExcahngeOfcards;
+    }
+
 
     /**
      * This is a constructor of Model.Player Class which sets player Name
      *
      * @param name, name of the player
      */
+
+    private List<Observer> observers;
+
+    public Player(){
+        observers = new ArrayList<Observer>();
+    }
+
     public Player(String name) {
         this.alive = true;
         Name = name;
+    }
+
+    public HashMap<Integer, String> getCardsOwned() {
+        return cardsOwned;
+    }
+
+    public void setCardsOwned(HashMap<Integer, String> cardsOwned) {
+        this.cardsOwned = cardsOwned;
     }
 
     /**
@@ -45,7 +86,7 @@ public class Player {
      *
      * @return Cards, list of cards of player
      */
-    public static List<String> getCards() {
+    public  List<String> getCards() {
         return Cards;
     }
 
@@ -173,5 +214,15 @@ public class Player {
     public static void setNumberOfPlayers(int numberOfPlayers) {
         Player.numberOfPlayers = numberOfPlayers;
     }
+
+    public   void updatingObserver(){
+        System.out.println(" updating observer!!!");
+        setChanged();
+    notifyObservers(this);
+
+    }
+
+
+
 
 }
