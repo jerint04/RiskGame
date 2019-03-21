@@ -1,5 +1,11 @@
 import Controller.GameController;
 import Model.GameModel;
+import Model.TryFrame;
+
+import javax.swing.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import static Controller.ValidateMap.validationOfPlayersAndCountiesNumber;
 
@@ -14,15 +20,48 @@ import static Controller.ValidateMap.validationOfPlayersAndCountiesNumber;
 public class GameDriver {
 
 
+    private JButton loadGameButton;
+    private JButton startGameButton;
+
+    public GameDriver() {
+/*        startGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GameController.StartOrLoadGame();
+
+            }
+            /*
+            private void initComponents() {
+                                                /*  scrollPane1 = new JScrollPane();
+                                                  resultTextField = new JTextPane();
+                                                  startButton = new JButton();
+                                                  stopButton = new JButton();
+            }
+        }*/
+
+    }
+
     /**
      * This is the main() method of the program
      * Entry point of the Execution of the whole program
      * @param args, String array
      */
+
+
     public static void main(String[] args) {
+
+//        JFrame frame = new JFrame("GameDriver");
+    //    frame.setContentPane(new GameDriver().loadGameButton);
+//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  //      frame.pack();
+    //    frame.setVisible(true);
+
+        TryFrame tryFrame=new TryFrame();
+        tryFrame.loadPanel1();
+/*
         boolean playGame = true;
-        GameController.StartOrLoadGame();
-        GameController.initialisePlayers();
+    //    GameController.StartOrLoadGame();
+        GameController.InitialisePlayers();
         if (validationOfPlayersAndCountiesNumber()) {
             GameController.initialisationInfantry();
             GameController.assigningCountries();
@@ -49,5 +88,7 @@ public class GameDriver {
         fortificationPhase();*/
 //        end the loop
 
+
     }
+
 }
