@@ -1,10 +1,13 @@
 package Controller;
 import Model.GameModel;
 import Model.Player;
+import Model.ViewObserver;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static Model.GameModel.playerHashMap;
 
 /**
  * @author Hemanshu
@@ -13,6 +16,11 @@ import java.util.List;
 public class AttackPhase {
 
     public static void PlayerAttackTurn(int playerId){
+        Player play=playerHashMap.get(playerId);
+        play.GamePhase="Attack Phase";
+        ViewObserver VOb=new ViewObserver();
+        play.addObserver(VOb);
+        play.updatingObserver();
         List<String> countriesOwned = GameModel.playerHashMap.get(playerId).getCountriesOwned();
 //        List<String> countriesAllowedToAttack= new ArrayList<String>(){};
 //        List<String> countriesToAttack = new ArrayList<>();

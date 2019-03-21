@@ -5,6 +5,7 @@ import Model.*;
 import java.io.File;
 import java.util.*;
 import java.util.Observable;
+import java.util.Observer;
 
 import static Controller.CreateMapFile.createFile;
 import static Model.GameModel.playerHashMap;
@@ -179,6 +180,11 @@ public class GameController extends Observable {
      * @param playerId, id of the player
      */
     public static void armyCalculationDuringReinforcement(int playerId) {
+        Player play=playerHashMap.get(playerId);
+        play.GamePhase="Reinforcement";
+        ViewObserver VOb=new ViewObserver();
+        play.addObserver(VOb);
+        play.updatingObserver();
         Scanner sc = new Scanner(System.in);
         Player temp = playerHashMap.get(playerId);
         int armyToAllocate = playerHashMap.get(playerId).countriesOwned.size() / 3;
@@ -325,6 +331,11 @@ public class GameController extends Observable {
      * This method is used to intialise infantary of the player
      */
     public static void initialisationInfantry() {
+        Player play=new Player();
+        play.GamePhase="Initialisation";
+        ViewObserver VOb=new ViewObserver();
+        play.addObserver(VOb);
+        play.updatingObserver();
         if (GameModel.PlayerList.size() == 3) {
             for (int i = 0; i < GameModel.PlayerList.size(); i++) {
                 GameModel.PlayerList.get(i).setNumberOfInfantry(35);
@@ -348,6 +359,11 @@ public class GameController extends Observable {
 
 
     public static void fortificationPhase(int playerId) {
+        Player play=playerHashMap.get(playerId);
+        play.GamePhase="Fortification";
+        ViewObserver VOb=new ViewObserver();
+        play.addObserver(VOb);
+        play.updatingObserver();
         for (String countryName : GameModel.countryHashMap.keySet()) {
             if (GameModel.countryHashMap.get(countryName).getPlayerId() == playerId) {
                 System.out.println(countryName + "->" + GameModel.countryHashMap.get(countryName).numberOfSoldiers);

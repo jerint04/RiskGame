@@ -24,6 +24,16 @@ public class Player extends Observable {
     public int turn=1;
     public int armiesInExcahngeOfcards=0;
     public boolean cardBooleanValue;
+    public static String GamePhase="";
+
+    public static String getGamePhase() {
+        return GamePhase;
+    }
+
+    public static void setGamePhase(String gamePhase) {
+        GamePhase = gamePhase;
+    }
+
 
     public int getArmiesInExcahngeOfcards() {
         return armiesInExcahngeOfcards;
@@ -206,7 +216,8 @@ public class Player extends Observable {
     }
 
     public   void updatingObserver(){
-       setChanged();
+        System.out.println(" updating observer!!!");
+        setChanged();
     notifyObservers(this);
 
     }

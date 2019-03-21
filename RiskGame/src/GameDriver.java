@@ -32,12 +32,12 @@ public class GameDriver {
             while (playGame) {
                 for (int playerId : GameModel.playerHashMap.keySet()) {
                     System.out.println(" --------------  Player " + GameModel.playerHashMap.get(playerId).getName() + "'s Turn ----------");
-                    System.out.println("-------- Reinforcement Phase --------------");
+                    //System.out.println("-------- Reinforcement Phase --------------");
                     GameController.armyCalculationDuringReinforcement(playerId);
                     GameController.armyPlacementDuringReinforcement(playerId);
-                    System.out.println("-------- Attack Phase --------------");
+                   // System.out.println("-------- Attack Phase --------------");
                     AttackPhase.PlayerAttackTurn(playerId);
-                    System.out.println("-------- Fortification Phase --------------");
+                   // System.out.println("-------- Fortification Phase --------------");
                     GameController.fortificationPhase(playerId);
 
                 }
