@@ -14,13 +14,14 @@ import static Controller.ValidateMap.validationOfPlayersAndCountiesNumber;
 
 public class GameDriver {
 
-
+    //DisplayGuiHelp gui1 = new DisplayGuiHelp();
     /**
      * This is the main() method of the program
      * Entry point of the Execution of the whole program
      * @param args, String array
      */
     public static void main(String[] args) {
+
         boolean playGame = true;
         GameController.StartOrLoadGame();
         GameController.initialisePlayers();
@@ -29,6 +30,7 @@ public class GameDriver {
             GameController.assigningCountries();
             GameController.assigningCountriesToPlayers();
             System.out.println("---------- Game Play Starts -------------");
+
             while (playGame) {
                 for (int playerId : GameModel.playerHashMap.keySet()) {
                     System.out.println(" --------------  Player " + GameModel.playerHashMap.get(playerId).getName() + "'s Turn ----------");
@@ -55,5 +57,8 @@ public class GameDriver {
         fortificationPhase();*/
 //        end the loop
 
+    }
+
+    public void callMe(String str){
     }
 }

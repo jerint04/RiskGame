@@ -1,13 +1,9 @@
 package Controller;
-
-import Model.Country;
 import Model.GameModel;
 import Model.Player;
 import Model.ViewObserver;
 
 import java.util.*;
-
-import static Model.GameModel.playerHashMap;
 
 /**
  * @author Hemanshu
@@ -16,11 +12,11 @@ import static Model.GameModel.playerHashMap;
 public class AttackPhase {
 
     public static void PlayerAttackTurn(int playerId) {
-        Player play = playerHashMap.get(playerId);
-        play.GamePhase = "Attack Phase";
-        ViewObserver VOb = new ViewObserver();
-        play.addObserver(VOb);
-        play.updatingObserver();
+        Player playerView=GameModel.playerHashMap.get(playerId);
+        playerView.GamePhase="Attack Phase";
+        ViewObserver VOb=new ViewObserver();
+        playerView.addObserver(VOb);
+        playerView.updatingObserver();
 
         int playGame = 1;
         while (playGame != -1) {

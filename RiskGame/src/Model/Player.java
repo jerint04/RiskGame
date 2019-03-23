@@ -13,9 +13,10 @@ import java.util.Observable;
  */
 public class Player extends Observable {
 
-    public HashMap<Integer, String> cardsOwned = new HashMap<>();
-    public List<String> Cards = new ArrayList<>();
-    public List<String> countriesOwned = new ArrayList<>();
+    public  HashMap<Integer, String> cardsOwned=new HashMap<>();
+    public  List<String> Cards = new ArrayList<>();
+    public  List<String> countriesOwned = new ArrayList<>();
+    public String continentsOwned="";
     public boolean alive;
     public String Name;
     public int playerId;
@@ -124,7 +125,7 @@ public class Player extends Observable {
      *
      * @return name String
      */
-    public String getName() {
+    public  String getName() {
 
         return Name;
     }
@@ -180,7 +181,7 @@ public class Player extends Observable {
      * This method is used to get the number of infantary of the player
      *
      * @return numberOfInfantry,
-     * returning the number of the Infantary of the player
+     *                  returning the number of the Infantary of the player
      */
     public int getNumberOfInfantry() {
 
@@ -192,14 +193,15 @@ public class Player extends Observable {
      *
      * @return playerId int
      */
-    public int getPlayerId() {
+    public  int getPlayerId() {
         return playerId;
     }
 
     /**
      * This method is used to set player id
      *
-     * @param playerId, Id of the player
+     * @param playerId,
+     *          Id of the player
      */
     public void setPlayerId(int playerId) {
         this.playerId = playerId;
@@ -223,12 +225,14 @@ public class Player extends Observable {
         Player.numberOfPlayers = numberOfPlayers;
     }
 
-    public void updatingObserver() {
+    public   void updatingObserver(){
         System.out.println(" updating observer!!!");
         setChanged();
-        notifyObservers(this);
+    notifyObservers(this);
 
     }
+
+
 
 
 }

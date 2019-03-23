@@ -1,10 +1,10 @@
 package Controller;
 
 import Model.*;
+import View.DisplayGuiHelp;
 
 import java.io.File;
 import java.util.*;
-import java.util.Observable;
 
 import static Controller.CreateMapFile.createFile;
 import static Model.GameModel.playerHashMap;
@@ -15,7 +15,8 @@ import static Model.GameModel.playerHashMap;
  * @author Hemanshu
  * @version 1.0.0
  */
-public class GameController extends Observable {
+public class GameController  {
+    public  static DisplayGuiHelp gui1 = new DisplayGuiHelp();
 
     /**
      * This method will load a map
@@ -24,7 +25,7 @@ public class GameController extends Observable {
         Scanner sc = new Scanner(System.in);
         List<String> getFileName = new ArrayList<String>();
         File[] filesName = new File(Helper.pathName).listFiles();
-        System.out.println(filesName.length);
+       System.out.println(filesName.length);
         for (File getFilename : filesName) {
             if (getFilename.isFile()) {
                 getFileName.add(getFilename.getName());
@@ -179,9 +180,10 @@ public class GameController extends Observable {
      * @param playerId, id of the player
      */
     public static void armyCalculationDuringReinforcement(int playerId) {
-        Player play = playerHashMap.get(playerId);
-        play.GamePhase = "Reinforcement";
-        ViewObserver VOb = new ViewObserver();
+
+        Player play=playerHashMap.get(playerId);
+        play.GamePhase="Reinforcement";
+        ViewObserver VOb=new ViewObserver();
         play.addObserver(VOb);
         play.updatingObserver();
         Scanner sc = new Scanner(System.in);
@@ -212,6 +214,10 @@ public class GameController extends Observable {
             exchangeCardsForArmies(playerId);
 
         }
+        Player playerView=new Player();
+        PlayerDominationObserverView POb=new PlayerDominationObserverView();
+        playerView.addObserver(POb);
+        playerView.updatingObserver();
     }
 
     /**
@@ -333,9 +339,9 @@ public class GameController extends Observable {
      * This method is used to intialise infantary of the player
      */
     public static void initialisationInfantry() {
-        Player play = new Player();
-        play.GamePhase = "Initialisation";
-        ViewObserver VOb = new ViewObserver();
+        Player play=new Player();
+        play.GamePhase="Initialisation";
+        ViewObserver VOb=new ViewObserver();
         play.addObserver(VOb);
         play.updatingObserver();
         if (GameModel.PlayerList.size() == 3) {
@@ -361,9 +367,9 @@ public class GameController extends Observable {
 
 
     public static void fortificationPhase(int playerId) {
-        Player play = playerHashMap.get(playerId);
-        play.GamePhase = "Fortification";
-        ViewObserver VOb = new ViewObserver();
+        Player play=playerHashMap.get(playerId);
+        play.GamePhase="Fortification";
+        ViewObserver VOb=new ViewObserver();
         play.addObserver(VOb);
         play.updatingObserver();
         for (String countryName : GameModel.countryHashMap.keySet()) {
@@ -488,6 +494,13 @@ public class GameController extends Observable {
             play.updatingObserver();
             //notifyObservers();
         }
+    }
+    public static void MssageOnGUI(String strMessageOne){
+        gui1.printScreen(strMessageOne);
+    }
+
+    public static void MssageOnGUIThroughObsever(String strMessageOne){
+        gui1.printSecondScreen(strMessageOne);
     }
 
 
