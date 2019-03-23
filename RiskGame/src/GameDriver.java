@@ -42,12 +42,8 @@ public class GameDriver {
 
                 }
             }
-            /*GameController.earnRiskCards(0);
-            GameController.earnRiskCards(0);
-            GameController.earnRiskCards(0);
-            GameController.earnRiskCards(0);
-            GameController.exchangeCardsForArmies(0);
-*/
+
+//            GameController.exchangeCardsForArmies(0);
         } else {
             System.out.println("Number of Countries are less than required number to start the game(number of player* 2)");
         }

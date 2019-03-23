@@ -5,7 +5,6 @@ import Model.*;
 import java.io.File;
 import java.util.*;
 import java.util.Observable;
-import java.util.Observer;
 
 import static Controller.CreateMapFile.createFile;
 import static Model.GameModel.playerHashMap;
@@ -180,13 +179,17 @@ public class GameController extends Observable {
      * @param playerId, id of the player
      */
     public static void armyCalculationDuringReinforcement(int playerId) {
-        Player play=playerHashMap.get(playerId);
-        play.GamePhase="Reinforcement";
-        ViewObserver VOb=new ViewObserver();
+        Player play = playerHashMap.get(playerId);
+        play.GamePhase = "Reinforcement";
+        ViewObserver VOb = new ViewObserver();
         play.addObserver(VOb);
         play.updatingObserver();
         Scanner sc = new Scanner(System.in);
         Player temp = playerHashMap.get(playerId);
+        if (GameModel.playerHashMap.get(playerId).getShouldGetTheCard()) {
+            GameController.earnRiskCards(playerId);
+            GameModel.playerHashMap.get(playerId).setShouldGetTheCard(false);
+        }
         int armyToAllocate = playerHashMap.get(playerId).countriesOwned.size() / 3;
         playerHashMap.get(playerId).numberOfInfantry = +((armyToAllocate < 3) ? 3 : armyToAllocate);
         for (String key : GameModel.continentHashMap.keySet()) {
@@ -204,8 +207,7 @@ public class GameController extends Observable {
                 exchangeCardsForArmies(playerId);
             }
 
-        }
-        else if (temp.Cards.size() >= 5) {
+        } else if (temp.Cards.size() >= 5) {
             System.out.println("You have to exchange cards to proceed");
             exchangeCardsForArmies(playerId);
 
@@ -331,9 +333,9 @@ public class GameController extends Observable {
      * This method is used to intialise infantary of the player
      */
     public static void initialisationInfantry() {
-        Player play=new Player();
-        play.GamePhase="Initialisation";
-        ViewObserver VOb=new ViewObserver();
+        Player play = new Player();
+        play.GamePhase = "Initialisation";
+        ViewObserver VOb = new ViewObserver();
         play.addObserver(VOb);
         play.updatingObserver();
         if (GameModel.PlayerList.size() == 3) {
@@ -359,9 +361,9 @@ public class GameController extends Observable {
 
 
     public static void fortificationPhase(int playerId) {
-        Player play=playerHashMap.get(playerId);
-        play.GamePhase="Fortification";
-        ViewObserver VOb=new ViewObserver();
+        Player play = playerHashMap.get(playerId);
+        play.GamePhase = "Fortification";
+        ViewObserver VOb = new ViewObserver();
         play.addObserver(VOb);
         play.updatingObserver();
         for (String countryName : GameModel.countryHashMap.keySet()) {
