@@ -6,11 +6,16 @@ import Model.ViewObserver;
 import java.util.*;
 
 /**
+ * Class Attack Phase
  * @author Hemanshu
- * @date 2019-03-19
  */
 public class AttackPhase {
 
+    /**
+     * This method indicates the turn of the Player to attack
+     * @param playerId, int
+     *              id of the player
+     */
     public static void PlayerAttackTurn(int playerId) {
         Player playerView=GameModel.playerHashMap.get(playerId);
         playerView.GamePhase="Attack Phase";
@@ -110,6 +115,14 @@ public class AttackPhase {
 
     }
 
+    /**
+     * This method performs Dice Roll
+     * @param good , String
+     * @param goodArmy, int
+     * @param Bad, String
+     * @param badArmy, int
+     * @return int[], integer type array
+     */
     public static int[] RollDice(String good, int goodArmy, String Bad, int badArmy) {
         Scanner sc = new Scanner(System.in);
         while (goodArmy >= 1 && badArmy >= 1) {
@@ -193,6 +206,14 @@ public class AttackPhase {
         return val;
     }
 
+    /**
+     * This method is used to perform auto roll of the Dice
+     * @param good , String
+     * @param goodArmy, int
+     * @param Bad, String
+     * @param badArmy, int
+     * @return int[], integer type array
+     */
     public static int[] AutoRollDice(String good, int goodArmy, String Bad, int badArmy) {
         while (goodArmy >= 1 && badArmy >= 1) {
             int goodDice = 0;
