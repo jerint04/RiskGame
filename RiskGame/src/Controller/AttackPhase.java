@@ -1,12 +1,9 @@
 package Controller;
-import Model.Country;
 import Model.GameModel;
 import Model.Player;
 import Model.ViewObserver;
 
 import java.util.*;
-
-import static Model.GameModel.playerHashMap;
 
 /**
  * @author Hemanshu
@@ -15,16 +12,16 @@ import static Model.GameModel.playerHashMap;
 public class AttackPhase {
 
     public static void PlayerAttackTurn(int playerId) {
-        Player play=playerHashMap.get(playerId);
-        play.GamePhase="Attack Phase";
+        Player playerView=GameModel.playerHashMap.get(playerId);
+        playerView.GamePhase="Attack Phase";
         ViewObserver VOb=new ViewObserver();
-        play.addObserver(VOb);
-        play.updatingObserver();
+        playerView.addObserver(VOb);
+        playerView.updatingObserver();
 
         int playGame = 1;
         while (playGame != -1) {
             List<String> countriesOwned = GameModel.playerHashMap.get(playerId).getCountriesOwned();
-            HashMap<String, Integer> countriesAttackFrom = new HashMap<String, Integer>();
+            HashMap<String, Integer> countriesThatCanAttack = new HashMap<String, Integer>();
             List<String> countriesTemp = new ArrayList<>();
             boolean addCountryToOwn = false;
             HashMap<String, Integer> allCountriesAttackTo = new HashMap<String, Integer>();
@@ -41,68 +38,74 @@ public class AttackPhase {
                     }
                 }
                 if (addCountryToOwn) {
-                    countriesAttackFrom.put(Country, GameModel.countryHashMap.get(Country).getNumberOfSoldiers());
+                    countriesThatCanAttack.put(Country, GameModel.countryHashMap.get(Country).getNumberOfSoldiers());
                 }
             }
 
             System.out.println("Counties That Can Attack");
-            for (String country : countriesAttackFrom.keySet()) {
-                System.out.println(country + "->" + countriesAttackFrom.get(country));
+            for (String country : countriesThatCanAttack.keySet()) {
+                System.out.println(country + "->" + countriesThatCanAttack.get(country));
             }
-            System.out.println("Enter the Full Name of The country :");
-            Scanner sc = new Scanner(System.in);
-            String from = sc.nextLine();
-            countriesAttackTo = new HashMap<>();
-            countriesTemp = GameModel.countryHashMap.get(from).getAdjacentCountries();
-            for (String countryName : countriesTemp) {
-                if (GameModel.countryHashMap.get(countryName).PlayerId != playerId) {
-                    countriesAttackTo.put(countryName, GameModel.countryHashMap.get(countryName).getNumberOfSoldiers());
+            if (countriesThatCanAttack.size() != 0) {
+                System.out.println("Enter the Full Name of The country :");
+                Scanner sc = new Scanner(System.in);
+                String from = sc.nextLine();
+                countriesAttackTo = new HashMap<>();
+                countriesTemp = GameModel.countryHashMap.get(from).getAdjacentCountries();
+                for (String countryName : countriesTemp) {
+                    if (GameModel.countryHashMap.get(countryName).PlayerId != playerId) {
+                        countriesAttackTo.put(countryName, GameModel.countryHashMap.get(countryName).getNumberOfSoldiers());
+                    }
                 }
-            }
-            System.out.println("Counties Attack to");
-            for (String country : countriesAttackTo.keySet()) {
-                System.out.println(country + "->" + allCountriesAttackTo.get(country));
-            }
-            /*Todo : if this list is empty go to next Stage and give correct error*/
-            System.out.println("Enter the Full Name of The country :");
-            String to = sc.nextLine();
-            System.out.println("Number of Army to use :");
-            int fromArmy = sc.nextInt(); // todo : put a check if he does not use the whole army. should atleast have 1 behind
-            int toArmy = countriesAttackTo.get(to);
-            System.out.println("1.To roll Dice one after the other ");
-            System.out.println("2.To Auto Roll and get the output");
-            System.out.println("Enter Digit :");
-            int type = sc.nextInt();
-            int[] remainingArmy = new int[2];
-            if (type == 1) {
-                remainingArmy = RollDice(from, fromArmy, to, toArmy);
+                System.out.println("Counties Attack to");
+                for (String country : countriesAttackTo.keySet()) {
+                    System.out.println(country + "->" + allCountriesAttackTo.get(country));
+                }
+                /*if this list is empty go to next Stage and give correct error*/
+
+                System.out.println("Enter the Full Name of The country :");
+                String to = sc.nextLine();
+                System.out.println("Number of Army to use (Leave Atleast One Army behind):");
+                int fromArmy = sc.nextInt();
+                int toArmy = countriesAttackTo.get(to);
+                System.out.println("1.To roll Dice one after the other ");
+                System.out.println("2.To Auto Roll and get the output");
+                System.out.println("Enter Digit :");
+                int type = sc.nextInt();
+                int[] remainingArmy = new int[2];
+                if (type == 1) {
+                    remainingArmy = RollDice(from, fromArmy, to, toArmy);
+                } else {
+                    remainingArmy = AutoRollDice(from, fromArmy, to, toArmy);
+                }
+                int x = GameModel.countryHashMap.get(from).getNumberOfSoldiers();
+                if (remainingArmy[0] == 0) {
+                    System.out.println("Attacking Country " + from + " lost all its armies");
+                    GameModel.countryHashMap.get(from).setNumberOfSoldiers(x - fromArmy);
+                    GameModel.countryHashMap.get(to).setNumberOfSoldiers(remainingArmy[1]);
+                } else {
+                    System.out.println("Attacking Country " + from + " won " + to + " country");
+                    System.out.println("Remaining Armies :" + fromArmy);
+                    System.out.println("How many armies do you want to leave in " + to + ":");
+                    int leave = sc.nextInt();
+                    GameModel.countryHashMap.get(to).setNumberOfSoldiers(leave);
+                    GameModel.countryHashMap.get(from).setNumberOfSoldiers((x - fromArmy) + (remainingArmy[0] - leave));
+                    /*Updating modals for players */
+                    int defeatedPlayerId = GameModel.countryHashMap.get(to).getPlayerId();
+                    int wonPlayerId = playerId;
+                    Player defeated = GameModel.playerHashMap.get(defeatedPlayerId);
+                    defeated.countriesOwned.remove(to);
+                    Player won = GameModel.playerHashMap.get(wonPlayerId);
+                    won.countriesOwned.add(to);
+                    GameModel.countryHashMap.get(to).setPlayerId(wonPlayerId);
+                    GameModel.playerHashMap.get(wonPlayerId).setShouldGetTheCard(true);
+                }
+
+                System.out.println("Do you want too attack (Enter -1 to discontinue):");
+                playGame = sc.nextInt();
             } else {
-                remainingArmy = AutoRollDice(from, fromArmy, to, toArmy);
+                System.out.println("You do not have any country which is eligible to attack ! Going to next step..");
             }
-            int x = GameModel.countryHashMap.get(from).getNumberOfSoldiers();
-            if (remainingArmy[0] == 0) {
-                System.out.println("Attacking Country " + from + " lost all its armies");
-                GameModel.countryHashMap.get(from).setNumberOfSoldiers(x - fromArmy);
-                GameModel.countryHashMap.get(to).setNumberOfSoldiers(remainingArmy[1]);
-            } else {
-                System.out.println("Attacking Country " + from + " won " + to + " country");
-                System.out.println("Remaining Armies :" + fromArmy);
-                System.out.println("How many armies do you want to leave in " + to + ":");
-                int leave = sc.nextInt();
-                GameModel.countryHashMap.get(to).setNumberOfSoldiers(leave);
-                GameModel.countryHashMap.get(from).setNumberOfSoldiers((x - fromArmy) + (remainingArmy[0] - leave));
-                /*Updating modals for players */
-                int defeatedPlayerId = GameModel.countryHashMap.get(to).getPlayerId();
-                int wonPlayerId = playerId;
-                Player defeated = GameModel.playerHashMap.get(defeatedPlayerId);
-                defeated.countriesOwned.remove(to);
-                Player won = GameModel.playerHashMap.get(wonPlayerId);
-                won.countriesOwned.add(to);
-                GameModel.countryHashMap.get(to).setPlayerId(wonPlayerId);
-            }
-            /*todo : write the logic for consequesnces of the battle*/
-            System.out.println("Do you want too attack (Enter -1 to discontinue):");
-            playGame = sc.nextInt();
         }
 
     }

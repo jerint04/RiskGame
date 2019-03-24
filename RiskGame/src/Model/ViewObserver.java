@@ -1,27 +1,41 @@
 package Model;
 
-import View.DisplayGuiHelp;
+import Controller.GameController;
 
 import java.util.Observable;
 import java.util.Observer;
 
 public class ViewObserver implements Observer {
     String phaseView = "";
+    //DisplayGuiHelp gui1=new DisplayGuiHelp();
+
+
     @Override
     public void update(Observable o, Object arg) {
+
         // TODO Auto-generated method stub
         //TurnOrganizer turnOrganizer = (TurnOrganizer) o;
+
         Player player=(Player) o;
-        if (((Player) o).getGamePhase() != "Initialisation")
+
+            if (((Player) o).getGamePhase() != "Initialisation")
         {
             phaseView = "Current Phase: " + player.getGamePhase() + "\n" + "Current Player: "
                     + player.getName();
-            DisplayGuiHelp gui1 = new DisplayGuiHelp(phaseView);
+            GameController.MssageOnGUI(phaseView);
+
+//            gui1.theText.setText(phaseView);
+//            gui1.dispose();
+
 
         }
-        else
-        {phaseView = "Current Phase: " + player.getGamePhase();
-            DisplayGuiHelp gui1 = new DisplayGuiHelp(phaseView);
+        else{
+            phaseView = "Current Phase: " + player.getGamePhase();
+//                gui1.theText.setText(phaseView);
+                GameController.MssageOnGUI(phaseView);
+
+
+
         }
 
 

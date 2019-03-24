@@ -20,6 +20,7 @@ public class Country {
     public Integer PlayerId;
     public boolean isVisited;
 
+
     /**
      * This is a Constructor for Model.Country class which sets countryName, id and continentName
      *
@@ -217,7 +218,7 @@ public class Country {
     }
 
     /**
-     * This method sets the player Id
+     * This method sets the player Id which shows which player does the country belong to
      *
      * @param playerId, id of the Model.Player
      */

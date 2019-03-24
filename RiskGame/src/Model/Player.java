@@ -16,15 +16,25 @@ public class Player extends Observable {
     public  HashMap<Integer, String> cardsOwned=new HashMap<>();
     public  List<String> Cards = new ArrayList<>();
     public  List<String> countriesOwned = new ArrayList<>();
+    public String continentsOwned="";
     public boolean alive;
     public String Name;
     public int playerId;
     public int numberOfInfantry;
     public static int numberOfPlayers = GameModel.PlayerList.size();
-    public int turn=1;
-    public int armiesInExcahngeOfcards=0;
+    public int turn = 1;
+    public int armiesInExcahngeOfcards = 0;
     public boolean cardBooleanValue;
-    public static String GamePhase="";
+    public static String GamePhase = "";
+    public boolean shouldGetTheCard = false;
+
+    public boolean getShouldGetTheCard() {
+        return shouldGetTheCard;
+    }
+
+    public void setShouldGetTheCard(boolean shouldGetTheCard) {
+        this.shouldGetTheCard = shouldGetTheCard;
+    }
 
     public static String getGamePhase() {
         return GamePhase;
@@ -52,7 +62,7 @@ public class Player extends Observable {
 
     private List<Observer> observers;
 
-    public Player(){
+    public Player() {
         observers = new ArrayList<Observer>();
     }
 
@@ -72,7 +82,7 @@ public class Player extends Observable {
     /**
      * This is a constructor of Model.Player Class which sets player Id and player Name
      *
-     * @param name, name of the player
+     * @param name,     name of the player
      * @param playerId, id of the player
      */
     public Player(int playerId, String name) {
@@ -86,7 +96,7 @@ public class Player extends Observable {
      *
      * @return Cards, list of cards of player
      */
-    public  List<String> getCards() {
+    public List<String> getCards() {
         return Cards;
     }
 
@@ -209,7 +219,7 @@ public class Player extends Observable {
     /**
      * This method is used to set number of players
      *
-     * @param numberOfPlayers,  the number of players
+     * @param numberOfPlayers, the number of players
      */
     public static void setNumberOfPlayers(int numberOfPlayers) {
         Player.numberOfPlayers = numberOfPlayers;

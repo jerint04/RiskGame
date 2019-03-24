@@ -1,11 +1,10 @@
 package Controller;
 
 import Model.*;
+import View.DisplayGuiHelp;
 
 import java.io.File;
 import java.util.*;
-import java.util.Observable;
-import java.util.Observer;
 
 import static Controller.CreateMapFile.createFile;
 import static Model.GameModel.playerHashMap;
@@ -16,7 +15,8 @@ import static Model.GameModel.playerHashMap;
  * @author Hemanshu
  * @version 1.0.0
  */
-public class GameController extends Observable {
+public class GameController  {
+    public  static DisplayGuiHelp gui1 = new DisplayGuiHelp();
 
     /**
      * This method will load a map
@@ -25,7 +25,7 @@ public class GameController extends Observable {
         Scanner sc = new Scanner(System.in);
         List<String> getFileName = new ArrayList<String>();
         File[] filesName = new File(Helper.pathName).listFiles();
-        System.out.println(filesName.length);
+       System.out.println(filesName.length);
         for (File getFilename : filesName) {
             if (getFilename.isFile()) {
                 getFileName.add(getFilename.getName());
@@ -180,6 +180,7 @@ public class GameController extends Observable {
      * @param playerId, id of the player
      */
     public static void armyCalculationDuringReinforcement(int playerId) {
+
         Player play=playerHashMap.get(playerId);
         play.GamePhase="Reinforcement";
         ViewObserver VOb=new ViewObserver();
@@ -187,6 +188,10 @@ public class GameController extends Observable {
         play.updatingObserver();
         Scanner sc = new Scanner(System.in);
         Player temp = playerHashMap.get(playerId);
+        if (GameModel.playerHashMap.get(playerId).getShouldGetTheCard()) {
+            GameController.earnRiskCards(playerId);
+            GameModel.playerHashMap.get(playerId).setShouldGetTheCard(false);
+        }
         int armyToAllocate = playerHashMap.get(playerId).countriesOwned.size() / 3;
         playerHashMap.get(playerId).numberOfInfantry = +((armyToAllocate < 3) ? 3 : armyToAllocate);
         for (String key : GameModel.continentHashMap.keySet()) {
@@ -204,12 +209,15 @@ public class GameController extends Observable {
                 exchangeCardsForArmies(playerId);
             }
 
-        }
-        else if (temp.Cards.size() >= 5) {
+        } else if (temp.Cards.size() >= 5) {
             System.out.println("You have to exchange cards to proceed");
             exchangeCardsForArmies(playerId);
 
         }
+        Player playerView=new Player();
+        PlayerDominationObserverView POb=new PlayerDominationObserverView();
+        playerView.addObserver(POb);
+        playerView.updatingObserver();
     }
 
     /**
@@ -486,6 +494,13 @@ public class GameController extends Observable {
             play.updatingObserver();
             //notifyObservers();
         }
+    }
+    public static void MssageOnGUI(String strMessageOne){
+        gui1.printScreen(strMessageOne);
+    }
+
+    public static void MssageOnGUIThroughObsever(String strMessageOne){
+        gui1.printSecondScreen(strMessageOne);
     }
 
 

@@ -7,6 +7,7 @@ public class UpdateFromObserver implements Observer {
 
 
 
+
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("The name of the player is"+((Player)o).getName()+" and number of infantary is:"+((Player)o).getNumberOfInfantry());
