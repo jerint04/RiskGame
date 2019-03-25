@@ -1,42 +1,37 @@
 package View;
 
 import javax.swing.*;
-import java.util.ArrayList;
-/**
- * DisplayGuiHelp class
- *
- * @author Jerin
- * @version 1.0.0
- */
-public class DisplayGuiHelp {
 
-    /**
-     * constructor of the DisplayGuiHelp object that has the list passed to it on creation
-     * @param text, String
-     */
-    public DisplayGuiHelp(String text)
-    {
-        final JFrame theFrame = new JFrame();
-        theFrame.setTitle("Stack exchange help");
-        theFrame.setSize(500, 500);
+public class DisplayGuiHelp extends JFrame {
+     JFrame theFrame = new JFrame();
+    JPanel mainPanel = new JPanel();
+    JTextArea theText = new JTextArea(5,25); //create the text area
+    JTextArea theTextTwo = new JTextArea(5,25); //create the text area
+    public DisplayGuiHelp(){
+        theFrame.setTitle("Risk Game");
+        theFrame.setSize(500, 1000);
         theFrame.setLocation(550, 400);
-
-        JPanel mainPanel = new JPanel();
-
-        JTextArea theText = new JTextArea(5,25); //create the text area
-
-
-
-            theText.append(text + "\n"); //append the contents of the array list to the text area
-
-
-        mainPanel.removeAll();
-        mainPanel.updateUI();
-        mainPanel.add(theText); //add the text area to the panel
-
-        theFrame.getContentPane().add(mainPanel); //add the panel to the frame
-        theFrame.pack();
-        theFrame.setVisible(true);
-
     }
+
+
+public void printScreen(String text){
+   ;
+    //theText.append(text + "\n"); //append the contents of the array list to the text area
+    theText.setText(text);
+     mainPanel.add(theText);
+    theFrame.getContentPane().add(mainPanel); //add the panel to the frame
+    theFrame.pack();
+    theFrame.setVisible(true);
+
+}
+
+public void printSecondScreen(String text){
+    theTextTwo.setText(text);
+    mainPanel.add(theTextTwo);//add the text area to the panel
+    theFrame.getContentPane().add(mainPanel); //add the panel to the frame
+    theFrame.pack();
+    theFrame.setVisible(true);
+
+}
+
 }

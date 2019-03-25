@@ -84,10 +84,14 @@ public class Player extends Observable {
 
 
     /**
-     * Maintains ArrayList Of Observers
+     * This is a constructor of Model.Player Class which sets player Name
+     *
+     * @param name, name of the player
      */
+
     private List<Observer> observers;
-    {
+
+    public Player() {
         observers = new ArrayList<Observer>();
     }
 

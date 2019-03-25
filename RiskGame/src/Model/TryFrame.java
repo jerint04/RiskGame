@@ -1,3 +1,4 @@
+/*
 package Model;
 
 import Controller.GameController;
@@ -42,7 +43,7 @@ public class TryFrame extends JFrame implements ActionListener {
 
            dispose();
          //  GameController.StartOrLoadGame();
-           Frame2 frame2 = new Frame2();
+//           Frame2 frame2 = new Frame2();
            frame2.loadFrame2();
        }
        else if(e.getActionCommand()=="Load Game" || e.getActionCommand().equals("Load Game"))
@@ -61,3 +62,4 @@ public class TryFrame extends JFrame implements ActionListener {
 
     }
 }
+*/
