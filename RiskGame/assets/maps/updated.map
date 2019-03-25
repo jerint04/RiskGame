@@ -1,0 +1,20 @@
+[Map]
+author=Concordia Students
+image=
+wrap=yes
+scroll=horizontal
+warn=yes
+[Continents]
+as=6
+er=7
+
+[Territories]
+ind,0,0,as,pak,pak,rus,ger
+pak,0,0,as,ban,ban,nep,rus
+ban,0,0,as,nep,ind,nep,fran
+nep,0,0,as,china,pak,china,uk
+china,0,0,as,rus,pak,rus,fran
+rus,0,0,er,fran,ban,fran,uk
+fran,0,0,er,ger,pak,ban,ger
+ger,0,0,er,uk,uk
+uk,0,0,er,ind,ind,ban,nep,rus
