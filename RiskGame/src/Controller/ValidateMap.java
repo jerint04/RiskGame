@@ -115,6 +115,10 @@ public class ValidateMap {
         }
     }
 
+    /**
+     * This function performs validation of Players and Countries number
+     * @return countryValidation, boolean
+     */
     public static boolean validationOfPlayersAndCountiesNumber() {
         boolean countryValidation = false;
         if (GameModel.PlayerList.size() == 3 && GameModel.CountryList.size() >= 6) {
