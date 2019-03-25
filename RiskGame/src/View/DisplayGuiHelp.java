@@ -16,6 +16,8 @@ public class DisplayGuiHelp extends JFrame {
     /**
      * This is a Constructor for DisplayGuiHelp class which sets GUI title,size and location
      */
+
+
     public DisplayGuiHelp(){
         theFrame.setTitle("Risk Game");
         theFrame.setSize(500, 1000);
