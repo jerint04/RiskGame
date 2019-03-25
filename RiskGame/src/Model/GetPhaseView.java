@@ -12,6 +12,7 @@ public class GetPhaseView {
 
     /**
      * This method gets the view of the current Phase
+     * @return view, String
      */
     public String getView() {
         return view;
@@ -19,6 +20,7 @@ public class GetPhaseView {
 
     /**
      * This method sets the view of the current Phase
+     * @param view , String
      */
     public void setView(String view) {
         this.view = view;
