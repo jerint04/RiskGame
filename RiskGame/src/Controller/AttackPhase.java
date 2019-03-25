@@ -22,7 +22,7 @@ public class AttackPhase {
         ViewObserver VOb=new ViewObserver();
         playerView.addObserver(VOb);
         playerView.updatingObserver();
-
+        String infoOnActions= "";
         int playGame = 1;
         while (playGame != -1) {
             List<String> countriesOwned = GameModel.playerHashMap.get(playerId).getCountriesOwned();
@@ -72,6 +72,7 @@ public class AttackPhase {
                 String to = sc.nextLine();
                 System.out.println("Number of Army to use (Leave Atleast One Army behind):");
                 int fromArmy = sc.nextInt();
+                infoOnActions = "Player "+GameModel.playerHashMap.get(playerId).getName()+" attacks using country "+ from+" to "+ to+" using "+ fromArmy+" armies !" ;
                 int toArmy = countriesAttackTo.get(to);
                 System.out.println("1.To roll Dice one after the other ");
                 System.out.println("2.To Auto Roll and get the output");
