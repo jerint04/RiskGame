@@ -28,29 +28,67 @@ public class Player extends Observable {
     public static String GamePhase = "";
     public boolean shouldGetTheCard = false;
 
+    /**
+     * This method is gets the card
+     *
+     * @return shouldGetTheCard, boolean
+     */
     public boolean getShouldGetTheCard() {
         return shouldGetTheCard;
     }
 
+    /**
+     * This method is sets the card
+     *
+     * @param shouldGetTheCard, sets the card
+     */
     public void setShouldGetTheCard(boolean shouldGetTheCard) {
         this.shouldGetTheCard = shouldGetTheCard;
     }
 
+    /**
+     * This method is used to get the GamePhase
+     *
+     * @return GamePhase, String
+     */
     public static String getGamePhase() {
         return GamePhase;
     }
 
+    /**
+     * This method is used to set the Game Phase
+     *
+     * @param gamePhase, String
+     */
     public static void setGamePhase(String gamePhase) {
         GamePhase = gamePhase;
     }
 
-
+    /**
+     * This method is used to get the armies in exchange of Cards
+     *
+     * @return armiesInExcahngeOfcards , int
+     */
     public int getArmiesInExcahngeOfcards() {
         return armiesInExcahngeOfcards;
     }
 
+    /**
+     * This method is used to set the armies in exchange of Cards
+     *
+     * @param armiesInExcahngeOfcards, int
+     */
     public void setArmiesInExcahngeOfcards(int armiesInExcahngeOfcards) {
         this.armiesInExcahngeOfcards = armiesInExcahngeOfcards;
+    }
+
+
+    /**
+     * Maintains ArrayList Of Observers
+     */
+    private List<Observer> observers;
+    {
+        observers = new ArrayList<Observer>();
     }
 
 
@@ -59,22 +97,26 @@ public class Player extends Observable {
      *
      * @param name, name of the player
      */
-
-    private List<Observer> observers;
-
-    public Player() {
-        observers = new ArrayList<Observer>();
-    }
-
     public Player(String name) {
         this.alive = true;
         Name = name;
     }
 
+
+    /**
+     * This method is used to get the cards owned
+     *
+     * @return cardsOwned, HashMap
+     */
     public HashMap<Integer, String> getCardsOwned() {
         return cardsOwned;
     }
 
+    /**
+     * This method is used to set the cards owned
+     *
+     * @param cardsOwned, HashMap
+     */
     public void setCardsOwned(HashMap<Integer, String> cardsOwned) {
         this.cardsOwned = cardsOwned;
     }
@@ -225,6 +267,9 @@ public class Player extends Observable {
         Player.numberOfPlayers = numberOfPlayers;
     }
 
+    /**
+     * This method is used to update observers by notifying them the changes happened
+     */
     public   void updatingObserver(){
         System.out.println(" updating observer!!!");
         setChanged();
