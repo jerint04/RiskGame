@@ -189,6 +189,7 @@ public class GameController  {
         Scanner sc = new Scanner(System.in);
         Player temp = playerHashMap.get(playerId);
         if (GameModel.playerHashMap.get(playerId).getShouldGetTheCard()) {
+            System.out.println("Player "+playerId+" has earned the card as he Won a country in previous attack");
             GameController.earnRiskCards(playerId);
             GameModel.playerHashMap.get(playerId).setShouldGetTheCard(false);
         }
