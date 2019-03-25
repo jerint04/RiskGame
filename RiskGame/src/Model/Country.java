@@ -223,7 +223,7 @@ public class Country {
      * @param playerId, id of the Model.Player
      */
     public void setPlayerId(Integer playerId) {
-        PlayerId = playerId;
+        this.PlayerId = playerId;
     }
 
 }

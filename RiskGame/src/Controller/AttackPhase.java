@@ -74,6 +74,9 @@ public class AttackPhase {
                 int fromArmy = sc.nextInt();
                 infoOnActions = "Player "+GameModel.playerHashMap.get(playerId).getName()+" attacks using country "+ from+" to "+ to+" using "+ fromArmy+" armies !" ;
                 int toArmy = countriesAttackTo.get(to);
+                playerView.infoAboutAction=infoOnActions;
+                playerView.addObserver(VOb);
+                playerView.updatingObserver();
                 System.out.println("1.To roll Dice one after the other ");
                 System.out.println("2.To Auto Roll and get the output");
                 System.out.println("Enter Digit :");

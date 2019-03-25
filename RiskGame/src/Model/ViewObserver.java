@@ -27,7 +27,7 @@ public class ViewObserver implements Observer {
 
         if (((Player) o).getGamePhase() != "Initialisation") {
             phaseView = "Current Phase: " + player.getGamePhase() + "\n" + "Current Player: "
-                    + player.getName();
+                    + player.getName()+"\n" +"Information about the phase :"+player.infoAboutAction;
             GameController.MssageOnGUI(phaseView);
         }
         else

@@ -27,6 +27,7 @@ public class Player extends Observable {
     public boolean cardBooleanValue;
     public static String GamePhase = "";
     public boolean shouldGetTheCard = false;
+    public String infoAboutAction="";
 
     /**
      * This method is gets the card

@@ -3,7 +3,6 @@ package Controller;
 import Model.Continent;
 import Model.Country;
 import Model.GameModel;
-import Model.Player;
 
 import java.util.*;
 
@@ -120,7 +119,10 @@ public class ValidateMap {
      */
     public static boolean validationOfPlayersAndCountiesNumber() {
         boolean countryValidation = false;
-        if (GameModel.PlayerList.size() == 3 && GameModel.CountryList.size() >= 6) {
+        if (GameModel.PlayerList.size() == 2 && GameModel.CountryList.size() >= 4) {
+            countryValidation = true;
+        }
+         else if (GameModel.PlayerList.size() == 3 && GameModel.CountryList.size() >= 6) {
             countryValidation = true;
         } else if (GameModel.PlayerList.size() == 4 && GameModel.CountryList.size() >= 8) {
             countryValidation = true;

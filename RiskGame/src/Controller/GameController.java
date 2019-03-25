@@ -296,12 +296,12 @@ public class GameController  {
      * This method is used to initialise the players into the game
      */
     public static void initialisePlayers() {
-        System.out.println("Number of Players who want to play (3 - 6 players allowed):");
+        System.out.println("Number of Players who want to play (2 - 6 players allowed):");
         Scanner input = new Scanner(System.in);
         boolean a = true;
         while (a) {
             int x = input.nextInt();
-            if (x > 2 && x < 7) {
+            if (x > 1 && x < 7) {
                 GameModel.playerNumber = x;
                 for (int i = 0; i < GameModel.playerNumber; i++) {
                     System.out.println("Player " + (i + 1) + " name :");
@@ -346,7 +346,13 @@ public class GameController  {
         ViewObserver VOb=new ViewObserver();
         play.addObserver(VOb);
         play.updatingObserver();
-        if (GameModel.PlayerList.size() == 3) {
+        if (GameModel.PlayerList.size() == 2) {
+            for (int i = 0; i < GameModel.PlayerList.size(); i++) {
+                GameModel.PlayerList.get(i).setNumberOfInfantry(40);
+            }
+
+        }
+       else if (GameModel.PlayerList.size() == 3) {
             for (int i = 0; i < GameModel.PlayerList.size(); i++) {
                 GameModel.PlayerList.get(i).setNumberOfInfantry(35);
             }
