@@ -18,7 +18,7 @@ public class TestReinforcementArmies {
     public  void BeforeClass()
 
     {
-        ReadMap.readMap("E:/JavaPrograms/RiskGame/RiskGame/assets/maps/updated.map");
+        ReadMap.readMap("./assets/maps/updated.map");
         boolean value = ValidateMap.validateMap();
         //String s1 = Boolean.toString(value);
 
@@ -27,10 +27,10 @@ public class TestReinforcementArmies {
         playerHashMap.put(0, play);
         Player play1 = new Player(1, "Jerin");
         GameModel.PlayerList.add(play1);
-        playerHashMap.put(0, play1);
+        playerHashMap.put(1, play1);
         Player play2 = new Player(2, "Hemanshu");
         GameModel.PlayerList.add(play2);
-        playerHashMap.put(0, play2);
+        playerHashMap.put(2, play2);
         GameModel.PlayerList.get(0).setNumberOfInfantry(35);
         GameModel.PlayerList.get(1).setNumberOfInfantry(35);
         GameModel.PlayerList.get(2).setNumberOfInfantry(35);
