@@ -86,7 +86,6 @@ public class Player extends Observable {
     /**
      * This is a constructor of Model.Player Class which sets player Name
      *
-     * @param name, name of the player
      */
     private List<Observer> observers;
 
