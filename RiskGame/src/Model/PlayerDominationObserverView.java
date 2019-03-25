@@ -4,9 +4,19 @@ import Controller.GameController;
 
 import java.util.Observable;
 import java.util.Observer;
-
+/**
+ * PlayerDominationObserverView class
+ *
+ * @author Jerin
+ * @version 1.0.0
+ */
 public class PlayerDominationObserverView implements Observer {
     @Override
+    /**
+     * This method is used to update the changes
+     * @param o, Observable type
+     * @param arg, Object type
+     */
     public void update(Observable o, Object arg) {
         int countrySize=0;
         String dominationString="";
