@@ -17,7 +17,6 @@ public class ValidateMap {
 
     /*TODO : a function that checks at least all continent have minimum 2 countries in it*/
 
-
     /**
      * This function is used to validate the map
      *

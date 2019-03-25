@@ -88,7 +88,6 @@ public class Player extends Observable {
      *
      * @param name, name of the player
      */
-
     private List<Observer> observers;
 
     public Player() {

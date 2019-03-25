@@ -24,10 +24,5 @@ public class UpdateFromObserver implements Observer {
 
             System.out.println(i + " : " + ((Player)o).Cards.get(i));
         }
-
     }
-
-
-
-
 }
