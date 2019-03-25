@@ -236,8 +236,9 @@ public class GameController  {
                 System.out.println(i + ":" + countryName + "->" + GameModel.countryHashMap.get(countryName).getNumberOfSoldiers());
                 i = i + 1;
             }
-            System.out.println("enter the number of armies to be allocated and the serial number of the country");
+            System.out.println("Enter the number of armies to be allocated :");
             int numOfArmies = sc.nextInt();
+            System.out.println("Enter the serial number of the country :");
             int countrySerialNum = sc.nextInt();
             addInfantryToCountry(playerHashMap.get(playerId).countriesOwned.get(countrySerialNum), playerId, numOfArmies);
             playerHashMap.get(playerId).numberOfInfantry = playerHashMap.get(playerId).numberOfInfantry - numOfArmies;
