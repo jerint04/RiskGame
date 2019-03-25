@@ -18,7 +18,7 @@ public class TestReinforcementArmies {
     public  void BeforeClass()
 
     {
-        ReadMap.readMap("E:/APP/RiskGame/RiskGame/assets/maps/Asia.map");
+        ReadMap.readMap("E:/JavaPrograms/RiskGame/RiskGame/assets/maps/updated.map");
         boolean value = ValidateMap.validateMap();
         //String s1 = Boolean.toString(value);
 
@@ -34,8 +34,8 @@ public class TestReinforcementArmies {
         GameModel.PlayerList.get(0).setNumberOfInfantry(35);
         GameModel.PlayerList.get(1).setNumberOfInfantry(35);
         GameModel.PlayerList.get(2).setNumberOfInfantry(35);
-        GameModel.countryHashMap.get("in").setPlayerId(0);
-        GameModel.countryHashMap.get("in").setNumberOfSoldiers(1);
+        GameModel.countryHashMap.get("ind").setPlayerId(0);
+        GameModel.countryHashMap.get("ind").setNumberOfSoldiers(1);
         GameModel.countryHashMap.get("pak").setPlayerId(1);
         GameModel.countryHashMap.get("pak").setNumberOfSoldiers(1);
         GameModel.countryHashMap.get("ban").setPlayerId(2);
@@ -44,12 +44,14 @@ public class TestReinforcementArmies {
         GameModel.countryHashMap.get("uk").setNumberOfSoldiers(1);
         GameModel.countryHashMap.get("china").setPlayerId(1);
         GameModel.countryHashMap.get("china").setNumberOfSoldiers(1);
-        GameModel.countryHashMap.get("pol").setPlayerId(2);
-        GameModel.countryHashMap.get("pol").setNumberOfSoldiers(1);
-        GameModel.countryHashMap.get("fr").setPlayerId(0);
-        GameModel.countryHashMap.get("fr").setNumberOfSoldiers(1);
+        GameModel.countryHashMap.get("fran").setPlayerId(0);
+        GameModel.countryHashMap.get("fran").setNumberOfSoldiers(1);
         GameModel.countryHashMap.get("rus").setPlayerId(1);
         GameModel.countryHashMap.get("rus").setNumberOfSoldiers(1);
+        GameModel.countryHashMap.get("nep").setPlayerId(0);
+        GameModel.countryHashMap.get("nep").setNumberOfSoldiers(1);
+        GameModel.countryHashMap.get("ger").setPlayerId(2);
+        GameModel.countryHashMap.get("ger").setNumberOfSoldiers(1);
         for (String countryName : GameModel.countryHashMap.keySet()) {
             int playerId = GameModel.countryHashMap.get(countryName).getPlayerId();
             Player temp = playerHashMap.get(playerId);
@@ -68,7 +70,7 @@ public class TestReinforcementArmies {
         playerHashMap.get(2).numberOfInfantry = playerHashMap.get(2).numberOfInfantry - 33;
     }
 @Test
-    public static void TestCase(){
+    public  void TestCase(){
 
         assertEquals(0,playerHashMap.get(2).numberOfInfantry);
 }
