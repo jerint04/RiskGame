@@ -5,46 +5,44 @@ import Controller.GameController;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * ViewObserver class
+ *
+ * @author Jerin
+ * @version 1.0.0
+ */
 public class ViewObserver implements Observer {
     String phaseView = "";
-    //DisplayGuiHelp gui1=new DisplayGuiHelp();
-
 
     @Override
+    /**
+     * This method is used to update the changes to Observable Class
+     * @param o, Observable type
+     * @param arg, Object type
+     */
     public void update(Observable o, Object arg) {
 
         // TODO Auto-generated method stub
-        //TurnOrganizer turnOrganizer = (TurnOrganizer) o;
+        Player player = (Player) o;
 
-        Player player=(Player) o;
-
-            if (((Player) o).getGamePhase() != "Initialisation")
-        {
+        if (((Player) o).getGamePhase() != "Initialisation") {
             phaseView = "Current Phase: " + player.getGamePhase() + "\n" + "Current Player: "
                     + player.getName();
             GameController.MssageOnGUI(phaseView);
-
-//            gui1.theText.setText(phaseView);
-//            gui1.dispose();
-
-
         }
-        else{
+        else
+            {
             phaseView = "Current Phase: " + player.getGamePhase();
-//                gui1.theText.setText(phaseView);
-                GameController.MssageOnGUI(phaseView);
-
-
-
+            GameController.MssageOnGUI(phaseView);
         }
-
-
-
         System.out.println("_____Phase View_____");
         System.out.println(phaseView);
         System.out.println("_____End of Phase View_____");
     }
 
+    /**
+     * This method is used to get the Phase View
+     */
     public void GetPhaseView() {
         System.out.println(phaseView);
     }
