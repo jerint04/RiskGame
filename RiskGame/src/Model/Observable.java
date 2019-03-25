@@ -1,5 +1,11 @@
 package Model;
 
+/**
+ * Observable interface
+ *
+ * @author Jerin
+ * @version 1.0.0
+ */
 public interface Observable {
 
     public void registerObserver(Observer observer);
