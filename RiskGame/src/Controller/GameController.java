@@ -365,7 +365,10 @@ public class GameController  {
         }
     }
 
-
+    /**
+     * The method is used to perform fortification Phase
+     * @param playerId, id of the player
+     */
     public static void fortificationPhase(int playerId) {
         Player play=playerHashMap.get(playerId);
         play.GamePhase="Fortification";
@@ -415,7 +418,12 @@ public class GameController  {
         }
     }
 
-
+    /**
+     * This method performs dfs to find neighbouring Country of the player
+     * @param countryModel, Country
+     * @param p, Player
+     * @return adjacentCountry, List type
+     */
     public static List<String> dfsToFindNeighbouringCountryForPlayer(Country countryModel, Player p) {
         List<String> adjacentCountry = new ArrayList<>();
         Stack<Country> stack = new Stack<Country>();
@@ -447,7 +455,10 @@ public class GameController  {
         return adjacentCountry;
     }
 
-
+    /**
+     * This method show how the cards are earned
+     * @param PlayerId, id of the player
+     */
     public static void earnRiskCards(int PlayerId) {
         Player play = playerHashMap.get(PlayerId);
         String[] RiskCards = {"infantry", "calvary", "artillery"};
@@ -457,6 +468,11 @@ public class GameController  {
 
     }
 
+
+    /**
+     * This method show how the cards are exchanged for armies
+     * @param PlayerId, id of the player
+     */
     public static void exchangeCardsForArmies(int PlayerId) {
 
         Scanner sc = new Scanner(System.in);
@@ -495,10 +511,20 @@ public class GameController  {
             //notifyObservers();
         }
     }
+
+
+    /**
+     * This method shows the message on GUI
+     * @param strMessageOne, String
+     */
     public static void MssageOnGUI(String strMessageOne){
         gui1.printScreen(strMessageOne);
     }
 
+    /**
+     * This method indicates the message on GUI through Observer
+     * @param strMessageOne, String
+     */
     public static void MssageOnGUIThroughObsever(String strMessageOne){
         gui1.printSecondScreen(strMessageOne);
     }
