@@ -35,16 +35,16 @@ public class ViewObserver implements Observer {
             phaseView = "Current Phase: " + player.getGamePhase();
             GameController.MssageOnGUI(phaseView);
         }
-        System.out.println("_____Phase View_____");
+       /* System.out.println("_____Phase View_____");
         System.out.println(phaseView);
-        System.out.println("_____End of Phase View_____");
+        System.out.println("_____End of Phase View_____");*/
     }
 
     /**
      * This method is used to get the Phase View
      */
     public void GetPhaseView() {
-        System.out.println(phaseView);
+       // System.out.println(phaseView);
     }
 
 }

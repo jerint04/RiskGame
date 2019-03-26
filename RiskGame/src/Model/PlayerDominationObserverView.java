@@ -41,7 +41,7 @@ public class PlayerDominationObserverView implements Observer {
             double percentageOfMap=((double) (countryOwnedByPlayers)/countrySize)*100;
             System.out.println("Player Domination View");
             System.out.println(" Player Name is :"+GameModel.playerHashMap.get(playerId).getName() +" pecenatge of map controlled by the player :"+percentageOfMap+" total number of armies :"+ GameModel.playerHashMap.get(playerId).getNumberOfInfantry()+" continents owned by the player are "+continentsNameOwned);
-             dominationString=dominationString+" Player Name is :"+GameModel.playerHashMap.get(playerId).getName() +" pecenatge of map controlled by the player is :"+Math.round(percentageOfMap)+" total number of armies owned by player is:"+ GameModel.playerHashMap.get(playerId).getNumberOfInfantry()+" continents owned by the player are "+continentsNameOwned+ "\n";
+             dominationString=dominationString+" Player Name is :"+GameModel.playerHashMap.get(playerId).getName() +" pecenatge of map controlled by the player is :"+Math.round(percentageOfMap)+" %"+" total number of armies owned by player is:"+ GameModel.playerHashMap.get(playerId).getNumberOfInfantry()+" continents owned by the player are "+continentsNameOwned+ "\n";
 
 
         }

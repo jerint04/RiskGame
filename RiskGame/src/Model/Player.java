@@ -18,7 +18,7 @@ public class Player extends Observable {
     public  List<String> countriesOwned = new ArrayList<>();
     public String continentsOwned="";
     public boolean alive;
-    public static String Name;
+    public  String Name;
     public  int playerId;
     public int numberOfInfantry;
     public static int numberOfPlayers = GameModel.PlayerList.size();
@@ -238,7 +238,7 @@ public class Player extends Observable {
      *
      * @return playerId int
      */
-    public  int getPlayerId() {
+    public static int getPlayerId() {
         return playerId;
     }
 

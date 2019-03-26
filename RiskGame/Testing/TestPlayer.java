@@ -30,7 +30,7 @@ public class TestPlayer {
          player.setCountriesOwned(countriesOwned);
      }
     @Test
-    public void TestCase1()
+    public  void TestCase1()
     {
 
       int id=player.getPlayerId();
