@@ -1,4 +1,5 @@
 package Controller;
+
 import Model.GameModel;
 import Model.Player;
 import Model.ViewObserver;
@@ -7,14 +8,16 @@ import java.util.*;
 
 /**
  * Class Attack Phase
+ *
  * @author Hemanshu
  */
 public class AttackPhase {
 
     /**
      * This method indicates the turn of the Player to attack
+     *
      * @param playerId, int
-     *              id of the player
+     *                  id of the player
      */
     public static void PlayerAttackTurn(int playerId) {
         Player playerView=GameModel.playerHashMap.get(playerId);
@@ -22,7 +25,7 @@ public class AttackPhase {
         ViewObserver VOb=new ViewObserver();
         playerView.addObserver(VOb);
         playerView.updatingObserver();
-        String infoOnActions= "";
+        String infoOnActions = "";
         int playGame = 1;
         while (playGame != -1) {
             List<String> countriesOwned = GameModel.playerHashMap.get(playerId).getCountriesOwned();
@@ -72,9 +75,9 @@ public class AttackPhase {
                 String to = sc.nextLine();
                 System.out.println("Number of Army to use (Leave Atleast One Army behind):");
                 int fromArmy = sc.nextInt();
-                infoOnActions = "Player "+GameModel.playerHashMap.get(playerId).getName()+" attacks using country "+ from+" to "+ to+" using "+ fromArmy+" armies !" ;
+                infoOnActions = "Player " + GameModel.playerHashMap.get(playerId).getName() + " attacks using country " + from + " to " + to + " using " + fromArmy + " armies !";
                 int toArmy = countriesAttackTo.get(to);
-                playerView.infoAboutAction=infoOnActions;
+                playerView.infoAboutAction = infoOnActions;
                 playerView.addObserver(VOb);
                 playerView.updatingObserver();
                 System.out.println("1.To roll Dice one after the other ");
@@ -119,12 +122,15 @@ public class AttackPhase {
 
     }
 
+
+
     /**
      * This method performs Dice Roll
-     * @param good , String
+     *
+     * @param good      , String
      * @param goodArmy, int
-     * @param Bad, String
-     * @param badArmy, int
+     * @param Bad,      String
+     * @param badArmy,  int
      * @return int[], integer type array
      */
     public static int[] RollDice(String good, int goodArmy, String Bad, int badArmy) {
@@ -212,10 +218,11 @@ public class AttackPhase {
 
     /**
      * This method is used to perform auto roll of the Dice
-     * @param good , String
+     *
+     * @param good      , String
      * @param goodArmy, int
-     * @param Bad, String
-     * @param badArmy, int
+     * @param Bad,      String
+     * @param badArmy,  int
      * @return int[], integer type array
      */
     public static int[] AutoRollDice(String good, int goodArmy, String Bad, int badArmy) {
@@ -300,9 +307,9 @@ public class AttackPhase {
         return val;
     }
 
-    public static void main(String[] args) {
-        RollDice("yahoo", 10, "wow", 7);
-    }
+//    public static void main(String[] args) {
+//        RollDice("yahoo", 10, "wow", 7);
+//    }
 
 
 }
