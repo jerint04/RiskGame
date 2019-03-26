@@ -33,7 +33,7 @@ public class TestPlayer {
     public void TestCase1()
     {
 
-      int id=Player.getPlayerId();
+      int id=player.getPlayerId();
       assertEquals(1,id);
 
     }
@@ -42,7 +42,7 @@ public class TestPlayer {
     public void TestCase2()
     {
 
-        String name=Player.getName();
+        String name=player.getName();
         assertEquals("Vikram",name);
 
     }
