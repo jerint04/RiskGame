@@ -170,7 +170,7 @@ public class Player extends Observable {
      *
      * @return name String
      */
-    public static String getName() {
+    public  String getName() {
 
         return Name;
     }
