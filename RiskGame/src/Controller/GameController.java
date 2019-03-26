@@ -377,7 +377,7 @@ public class GameController  {
      * The method is used to perform fortification Phase
      * @param playerId, id of the player
      */
-    public static void fortificationPhase(int playerId) {
+    public static boolean fortificationPhase(int playerId) {
         Player play=playerHashMap.get(playerId);
         play.GamePhase="Fortification";
         ViewObserver VOb=new ViewObserver();
@@ -394,7 +394,8 @@ public class GameController  {
         boolean temp = true;
         if (escape != (-1)) {
             while (temp) {
-                System.out.println("Enter Country Name to move from or enter (-1) to exit:");
+                System.out.println("Enter Country Name to move :");
+                a.nextLine();
                 String countryFrom = a.nextLine();
                 String countryTo;
                 List<String> toCountriesList = new ArrayList<>();
@@ -424,6 +425,7 @@ public class GameController  {
                 }
             }
         }
+        return true;
     }
 
     /**
