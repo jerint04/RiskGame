@@ -5,6 +5,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -20,6 +23,7 @@ public class TestContinent {
 
 
     Model.Continent continent;
+    public List<String> Country = new ArrayList<>();
 
 /*
      * Test case Initialization for TestContinent
@@ -46,8 +50,10 @@ public class TestContinent {
 */
 
     @Before
-    public void BeforeTestContinent() {
+    public void BeforeTestContinent()
+    {
         continent = new Model.Continent("Asia", 5);
+
     }
 
 /*
@@ -75,6 +81,18 @@ public class TestContinent {
     public void TestGetControl() {
         int continentcontrol = continent.getControlValue();
         assertEquals(5, continentcontrol);
+    }
+
+    @Test
+    public void TestCase() {
+        int continentcontrol = continent.getControlValue();
+        assertEquals(5, continentcontrol);
+    }
+    @Test
+    public void TestCountryList() {
+       List<String> Countries = new ArrayList<>();
+        Countries = continent.getCountries();
+        assertEquals(Country, Countries);
     }
 }
 
