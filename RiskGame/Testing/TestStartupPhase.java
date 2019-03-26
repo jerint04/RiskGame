@@ -16,7 +16,7 @@ public class TestStartupPhase {
     @BeforeClass
     public static void beforeTest()
     {
-        ReadMap.readMap("./assets/maps/updated.map");
+        ReadMap.readMap("E:/Risk Game/RiskGame/assets/maps/updated.map");
         boolean value = ValidateMap.validateMap();
         //String s1 = Boolean.toString(value);
 
