@@ -238,7 +238,7 @@ public class Player extends Observable {
      *
      * @return playerId int
      */
-    public static int getPlayerId() {
+    public  int getPlayerId() {
         return playerId;
     }
 
