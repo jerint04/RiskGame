@@ -19,7 +19,7 @@ public class Player extends Observable {
     public String continentsOwned="";
     public boolean alive;
     public static String Name;
-    public static int playerId;
+    public  int playerId;
     public int numberOfInfantry;
     public static int numberOfPlayers = GameModel.PlayerList.size();
     public int turn = 1;
@@ -238,7 +238,7 @@ public class Player extends Observable {
      *
      * @return playerId int
      */
-    public static int getPlayerId() {
+    public  int getPlayerId() {
         return playerId;
     }
 
