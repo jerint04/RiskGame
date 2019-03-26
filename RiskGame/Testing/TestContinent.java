@@ -7,14 +7,14 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-/*
+/**
  * The class <code>TestContinent</code> contains tests for the class
  * <code> {@link Model.Continent}</code>
  *
  * @author Vikram
  * @version 1.0.0
- */
 
+*/
 
 public class TestContinent {
 

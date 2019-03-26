@@ -192,7 +192,7 @@ public class GameController  {
             System.out.println("Player "+playerId+" has earned the card as he Won a country in previous attack");
             GameController.earnRiskCards(playerId);
             GameModel.playerHashMap.get(playerId).setShouldGetTheCard(false);
-        }
+    }
         int armyToAllocate = playerHashMap.get(playerId).countriesOwned.size() / 3;
         playerHashMap.get(playerId).numberOfInfantry = +((armyToAllocate < 3) ? 3 : armyToAllocate);
         for (String key : GameModel.continentHashMap.keySet()) {
