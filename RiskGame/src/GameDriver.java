@@ -1,6 +1,6 @@
-import Controller.AttackPhase;
 import Controller.GameController;
 import Model.GameModel;
+import Model.Player;
 
 import static Controller.ValidateMap.validationOfPlayersAndCountiesNumber;
 
@@ -18,6 +18,7 @@ public class GameDriver {
     /**
      * This is the main() method of the program
      * Entry point of the Execution of the whole program
+     *
      * @param args, String array
      */
     public static void main(String[] args) {
@@ -32,32 +33,21 @@ public class GameDriver {
             while (playGame) {
                 for (int playerId : GameModel.playerHashMap.keySet()) {
                     System.out.println(" --------------  Player " + GameModel.playerHashMap.get(playerId).getName() + "'s Turn ----------");
-                    //System.out.println("-------- Reinforcement Phase --------------");
-                    GameController.armyCalculationDuringReinforcement(playerId);
-                    GameController.armyPlacementDuringReinforcement(playerId);
-                   // System.out.println("-------- Attack Phase --------------");
-                    AttackPhase.PlayerAttackTurn(playerId);
-                   // System.out.println("-------- Fortification Phase --------------");
-                    GameController.fortificationPhase(playerId);
+                    System.out.println("-------- Reinforcement Phase --------------");
+                    Player.armyCalculationDuringReinforcement(playerId);
+                    Player.armyPlacementDuringReinforcement(playerId);
+                    System.out.println("-------- Attack Phase --------------");
+                    Player.PlayerAttackTurn(playerId);
+                    System.out.println("-------- Fortification Phase --------------");
+                    Player.fortificationPhase(playerId);
 
                 }
             }
-            /*GameController.earnRiskCards(0);
-            GameController.earnRiskCards(0);
-            GameController.earnRiskCards(0);
-            GameController.earnRiskCards(0);
-            GameController.exchangeCardsForArmies(0);
-*/
+
         } else {
             System.out.println("Number of Countries are less than required number to start the game(number of player* 2)");
         }
 
-        /*start the loop*/
-//        GameController.armyCalculationDuringReinforcement(p1);
-/*        armyPlacementDuringReinforcement(p1);
-
-        fortificationPhase();*/
-//        end the loop
 
     }
 }

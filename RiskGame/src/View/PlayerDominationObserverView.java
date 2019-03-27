@@ -1,6 +1,7 @@
-package Model;
+package View;
 
 import Controller.GameController;
+import Model.GameModel;
 
 import java.util.Observable;
 import java.util.Observer;

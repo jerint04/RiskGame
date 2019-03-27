@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Model.Country Class
- * 
+ *
  * @author Hemanshu
  * @version 1.0.0
  */
@@ -129,7 +129,7 @@ public class Country {
     /**
      * This method sets ParentContinent
      *
-     * @param parentContinent,  parent continent
+     * @param parentContinent, parent continent
      */
     public void setParentContinent(String parentContinent) {
         ParentContinent = parentContinent;

@@ -7,6 +7,6 @@ package Model;
  * @version 1.0.0
  */
 public interface Observer {
-    public  void update(Player play);
+    public void update(Player play);
 
 }

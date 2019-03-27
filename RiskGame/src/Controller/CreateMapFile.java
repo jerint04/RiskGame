@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 /**
  * Controller.CreateMapFile Class
+ *
  * @author Hemanshu
  * @version 1.0.0
  */
@@ -28,11 +29,11 @@ public class CreateMapFile {
 
         fileData.append("[Continents]\r\n");
         for (String continentString : GameModel.ContinentList) {
-            fileData.append( GameModel.continentHashMap.get(continentString).getContinentName() + "=" + GameModel.continentHashMap.get(continentString).getControlValue()
+            fileData.append(GameModel.continentHashMap.get(continentString).getContinentName() + "=" + GameModel.continentHashMap.get(continentString).getControlValue()
                     + "\r\n");
         }
         fileData.append("\n[Territories]\r\n");
-        for (String continentString  : GameModel.ContinentList) {
+        for (String continentString : GameModel.ContinentList) {
             for (String countryName : GameModel.continentHashMap.get(continentString).getCountries()) {
                 Country temp = GameModel.countryHashMap.get(countryName);
                 fileData.append(temp.getCountryName() + "," + temp.getxCoordinate() + ","
@@ -44,19 +45,19 @@ public class CreateMapFile {
             }
         }
         /*
-        *Writing Map to disk on a specific file location
-        *
-        *
-        * */
+         *Writing Map to disk on a specific file location
+         *
+         *
+         * */
         Path path = Paths.get("./assets/maps");
         BufferedWriter writer = null;
         try {
-            Scanner sc=new Scanner(System.in);
+            Scanner sc = new Scanner(System.in);
             //Delete temporary file
             String currentDirectory = System.getProperty("user.dir");
             System.out.println("Enter the name of the file you want to name");
-            String mapName=sc.nextLine();
-            Path tempFilePath = Paths.get( "./assets/maps/" + mapName + ".map");
+            String mapName = sc.nextLine();
+            Path tempFilePath = Paths.get("./assets/maps/" + mapName + ".map");
             Files.deleteIfExists(tempFilePath);
             writer = Files.newBufferedWriter(tempFilePath, StandardCharsets.UTF_8);
             writer.write(new String(fileData));

@@ -55,11 +55,12 @@ public class CountryAdjacencyMatrix {
         if (Helper.getCountryCountId() != 0) {
 
             for (int i = 1; i <= Helper.getCountryCountId(); i++) {
-                System.out.print("(" + i + ")"+GameModel.countryIdHashMap.get(i)+ " ");
-                if(i%6==0){
+                System.out.print("(" + i + ")" + GameModel.countryIdHashMap.get(i) + " ");
+                if (i % 6 == 0) {
                     System.out.println("");
                 }
-            }System.out.println("");
+            }
+            System.out.println("");
             for (int i = 0; i <= Helper.getCountryCountId(); i++) {
                 for (int j = 0; j <= Helper.getCountryCountId(); j++) {
                     if (i == 0 && j == 0) {
@@ -181,8 +182,9 @@ public class CountryAdjacencyMatrix {
 
     /**
      * This function creates adjacent Countries
+     *
      * @return boolean value, checks the map is valid or not,
-     *           if valid creates Adjacency matrix
+     * if valid creates Adjacency matrix
      */
     public static boolean createAdjacentMatrix() {
         try {
@@ -209,7 +211,7 @@ public class CountryAdjacencyMatrix {
     /**
      * This function gets the country value
      *
-     * @param hm, map type instance
+     * @param hm,    map type instance
      * @param value, map key value
      * @return Object type, gets the keyValue
      */

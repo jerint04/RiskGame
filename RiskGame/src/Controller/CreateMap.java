@@ -101,17 +101,18 @@ public class CreateMap {
         GameModel.countryHashMap.put(countryName, temp);
         addCountriesInContinent(countryName, continentBelongsTo);
     }
+
     /**
      * This method helps in taking input of multiple countries in single line seprated by comma
      */
-    public static void multipleCountryInput(){
+    public static void multipleCountryInput() {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter counties using in single line using comma seprated");
-        String multipleCountry=input.nextLine();
+        String multipleCountry = input.nextLine();
         System.out.println("Please Enter Continent it Belongs :");
         String continentBelongsTo = input.nextLine();
-        String countrySplit[]=multipleCountry.split(",");
-        for(String splitingCountryName:countrySplit){
+        String countrySplit[] = multipleCountry.split(",");
+        for (String splitingCountryName : countrySplit) {
             int id = Helper.getNewCountryCountId();
             Country temp = new Country(id, splitingCountryName, continentBelongsTo);
             GameModel.CountryList.add(splitingCountryName);
@@ -141,7 +142,7 @@ public class CreateMap {
     /**
      * This method adds adjacent neighbour Countries using their names
      *
-     * @param Source, String
+     * @param Source,      String
      * @param Destination, String
      */
     public static void addAdjacentNeighbourCountriesUsingNames(String Source, String Destination) {
@@ -157,7 +158,7 @@ public class CreateMap {
      * This method adds Countries in Continent
      *
      * @param countryName, name of the Country
-     * @param Continent, name of the Continent to be added
+     * @param Continent,   name of the Continent to be added
      */
     public static void addCountriesInContinent(String countryName, String Continent) {
         Model.Continent temp = GameModel.continentHashMap.get(Continent);

@@ -47,7 +47,7 @@ public class ReadMap {
                     continue;
                 } else if ((readLine.trim()).equals("[Territories]")) {
                     readContinentsFromFile = false;
-                    didCountriesRead  = true;
+                    didCountriesRead = true;
                     readCountriesFromFile = true;
                     continue;
                 }
@@ -83,15 +83,15 @@ public class ReadMap {
             System.out.println(e);
             return false;
         }
-        if(didContinentsRead && didCountriesRead) {
+        if (didContinentsRead && didCountriesRead) {
             CountryAdjacencyMatrix.initializeCountryMatrix();
             boolean adjacencyMatrixCreation = CountryAdjacencyMatrix.createAdjacentMatrix();
             if (adjacencyMatrixCreation)
                 CountryAdjacencyMatrix.printGraph();
-        }else{
-            if(didContinentsRead)
+        } else {
+            if (didContinentsRead)
                 System.out.println("Error in Map File Read: Did not Parse Continents List");
-            if(didCountriesRead)
+            if (didCountriesRead)
                 System.out.println("Error in Map File Read: Did not Parse Countries List");
             return false;
         }

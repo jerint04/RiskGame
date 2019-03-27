@@ -2,6 +2,7 @@ package Controller;
 
 import Model.*;
 import View.DisplayGuiHelp;
+import View.PlayerDominationObserverView;
 
 import java.io.File;
 import java.util.*;
@@ -15,8 +16,8 @@ import static Model.GameModel.playerHashMap;
  * @author Hemanshu
  * @version 1.0.0
  */
-public class GameController  {
-    public  static DisplayGuiHelp gui1 = new DisplayGuiHelp();
+public class GameController {
+    public static DisplayGuiHelp gui1 = new DisplayGuiHelp();
 
     /**
      * This method will load a map
@@ -25,7 +26,7 @@ public class GameController  {
         Scanner sc = new Scanner(System.in);
         List<String> getFileName = new ArrayList<String>();
         File[] filesName = new File(Helper.pathName).listFiles();
-       System.out.println(filesName.length);
+        System.out.println(filesName.length);
         for (File getFilename : filesName) {
             if (getFilename.isFile()) {
                 getFileName.add(getFilename.getName());
@@ -175,77 +176,6 @@ public class GameController  {
     }
 
     /**
-     * Calculating armies according to the risk rule that is  calculating using number of territories occupied
-     *
-     * @param playerId, id of the player
-     */
-    public static void armyCalculationDuringReinforcement(int playerId) {
-
-        Player play=playerHashMap.get(playerId);
-        play.GamePhase="Reinforcement";
-        ViewObserver VOb=new ViewObserver();
-        play.addObserver(VOb);
-        play.updatingObserver();
-        Scanner sc = new Scanner(System.in);
-        Player temp = playerHashMap.get(playerId);
-        if (GameModel.playerHashMap.get(playerId).getShouldGetTheCard()) {
-            System.out.println("Player "+playerId+" has earned the card as he Won a country in previous attack");
-            GameController.earnRiskCards(playerId);
-            GameModel.playerHashMap.get(playerId).setShouldGetTheCard(false);
-    }
-        int armyToAllocate = playerHashMap.get(playerId).countriesOwned.size() / 3;
-        playerHashMap.get(playerId).numberOfInfantry = +((armyToAllocate < 3) ? 3 : armyToAllocate);
-        for (String key : GameModel.continentHashMap.keySet()) {
-            Continent tempContinent = GameModel.continentHashMap.get(key);
-            if (temp.countriesOwned.containsAll(tempContinent.Countries)) {
-                playerHashMap.get(playerId).numberOfInfantry = +tempContinent.controlValue;
-            }
-        }
-
-        if (temp.Cards.size() == 3) {
-
-            System.out.println("You have 3 cards, press 1 to exchange cards for armies");
-            int choice = sc.nextInt();
-            if (choice == 1) {
-                exchangeCardsForArmies(playerId);
-            }
-
-        } else if (temp.Cards.size() >= 5) {
-            System.out.println("You have to exchange cards to proceed");
-            exchangeCardsForArmies(playerId);
-
-        }
-        Player playerView=new Player();
-        PlayerDominationObserverView POb=new PlayerDominationObserverView();
-        playerView.addObserver(POb);
-        playerView.updatingObserver();
-    }
-
-    /**
-     * Placing the armies during reinforcement
-     *
-     * @param playerId, id of the player
-     */
-    public static void armyPlacementDuringReinforcement(int playerId) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println(" Infantry for the current players is : " + playerHashMap.get(playerId).numberOfInfantry);
-
-        while (playerHashMap.get(playerId).numberOfInfantry != 0) {
-            int i = 0;
-            for (String countryName : playerHashMap.get(playerId).getCountriesOwned()) {
-                System.out.println(i + ":" + countryName + "->" + GameModel.countryHashMap.get(countryName).getNumberOfSoldiers());
-                i = i + 1;
-            }
-            System.out.println("Enter the number of armies to be allocated :");
-            int numOfArmies = sc.nextInt();
-            System.out.println("Enter the serial number of the country :");
-            int countrySerialNum = sc.nextInt();
-            addInfantryToCountry(playerHashMap.get(playerId).countriesOwned.get(countrySerialNum), playerId, numOfArmies);
-            playerHashMap.get(playerId).numberOfInfantry = playerHashMap.get(playerId).numberOfInfantry - numOfArmies;
-        }
-    }
-
-    /**
      * This method will perform operations to edit a loaded map
      */
     public static void editMap() {
@@ -341,9 +271,9 @@ public class GameController  {
      * This method is used to intialise infantary of the player
      */
     public static void initialisationInfantry() {
-        Player play=new Player();
-        play.GamePhase="Initialisation";
-        ViewObserver VOb=new ViewObserver();
+        Player play = new Player();
+        play.GamePhase = "Initialisation";
+        ViewObserver VOb = new ViewObserver();
         play.addObserver(VOb);
         play.updatingObserver();
         if (GameModel.PlayerList.size() == 2) {
@@ -351,8 +281,7 @@ public class GameController  {
                 GameModel.PlayerList.get(i).setNumberOfInfantry(40);
             }
 
-        }
-       else if (GameModel.PlayerList.size() == 3) {
+        } else if (GameModel.PlayerList.size() == 3) {
             for (int i = 0; i < GameModel.PlayerList.size(); i++) {
                 GameModel.PlayerList.get(i).setNumberOfInfantry(35);
             }
@@ -374,64 +303,10 @@ public class GameController  {
     }
 
     /**
-     * The method is used to perform fortification Phase
-     * @param playerId, id of the player
-     */
-    public static boolean fortificationPhase(int playerId) {
-        Player play=playerHashMap.get(playerId);
-        play.GamePhase="Fortification";
-        ViewObserver VOb=new ViewObserver();
-        play.addObserver(VOb);
-        play.updatingObserver();
-        for (String countryName : GameModel.countryHashMap.keySet()) {
-            if (GameModel.countryHashMap.get(countryName).getPlayerId() == playerId) {
-                System.out.println(countryName + "->" + GameModel.countryHashMap.get(countryName).numberOfSoldiers);
-            }
-        }
-        System.out.println("Press -1 to skip the step (or any other number to continue):");
-        Scanner a = new Scanner(System.in);
-        int escape = a.nextInt();
-        boolean temp = true;
-        if (escape != (-1)) {
-            while (temp) {
-                System.out.println("Enter Country Name to move :");
-                a.nextLine();
-                String countryFrom = a.nextLine();
-                String countryTo;
-                List<String> toCountriesList = new ArrayList<>();
-                toCountriesList = dfsToFindNeighbouringCountryForPlayer(GameModel.countryHashMap.get(countryFrom), playerHashMap.get(playerId));
-                if (toCountriesList.size() != 1) {
-                    System.out.println("Number of army to move:");
-                    int armyToMove = a.nextInt();
-                    if (armyToMove > 0 && armyToMove < GameModel.countryHashMap.get(countryFrom).numberOfSoldiers) {
-                        for (String cont : toCountriesList) {
-                            System.out.println(cont);
-                        }
-                        System.out.println("Write Country Name  :");
-                        Scanner b = new Scanner(System.in);
-                        countryTo = b.nextLine();
-                        GameModel.countryHashMap.get(countryFrom).numberOfSoldiers -= armyToMove;
-                        GameModel.countryHashMap.get(countryTo).numberOfSoldiers += armyToMove;
-                        break;
-                    }
-                } else {
-                    System.out.println("The Countries do not have any Adjacent country, Please Select other Country :");
-                }
-            }
-            System.out.println("Updated List After Fortification");
-            for (String countryName : GameModel.countryHashMap.keySet()) {
-                if (GameModel.countryHashMap.get(countryName).getPlayerId() == playerId) {
-                    System.out.println(countryName + "->" + GameModel.countryHashMap.get(countryName).numberOfSoldiers);
-                }
-            }
-        }
-        return true;
-    }
-
-    /**
      * This method performs dfs to find neighbouring Country of the player
+     *
      * @param countryModel, Country
-     * @param p, Player
+     * @param p,            Player
      * @return adjacentCountry, List type
      */
     public static List<String> dfsToFindNeighbouringCountryForPlayer(Country countryModel, Player p) {
@@ -467,6 +342,7 @@ public class GameController  {
 
     /**
      * This method show how the cards are earned
+     *
      * @param PlayerId, id of the player
      */
     public static void earnRiskCards(int PlayerId) {
@@ -481,6 +357,7 @@ public class GameController  {
 
     /**
      * This method show how the cards are exchanged for armies
+     *
      * @param PlayerId, id of the player
      */
     public static void exchangeCardsForArmies(int PlayerId) {
@@ -525,17 +402,19 @@ public class GameController  {
 
     /**
      * This method shows the message on GUI
+     *
      * @param strMessageOne, String
      */
-    public static void MssageOnGUI(String strMessageOne){
+    public static void MssageOnGUI(String strMessageOne) {
         gui1.printScreen(strMessageOne);
     }
 
     /**
      * This method indicates the message on GUI through Observer
+     *
      * @param strMessageOne, String
      */
-    public static void MssageOnGUIThroughObsever(String strMessageOne){
+    public static void MssageOnGUIThroughObsever(String strMessageOne) {
         gui1.printSecondScreen(strMessageOne);
     }
 

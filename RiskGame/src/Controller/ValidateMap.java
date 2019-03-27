@@ -10,7 +10,7 @@ import java.util.*;
  * ValidateMap class
  *
  * @author Hemanshu
- * @version  1.0.0
+ * @version 1.0.0
  */
 public class ValidateMap {
 
@@ -115,14 +115,14 @@ public class ValidateMap {
 
     /**
      * This function performs validation of Players and Countries number
+     *
      * @return countryValidation, boolean
      */
     public static boolean validationOfPlayersAndCountiesNumber() {
         boolean countryValidation = false;
         if (GameModel.PlayerList.size() == 2 && GameModel.CountryList.size() >= 4) {
             countryValidation = true;
-        }
-         else if (GameModel.PlayerList.size() == 3 && GameModel.CountryList.size() >= 6) {
+        } else if (GameModel.PlayerList.size() == 3 && GameModel.CountryList.size() >= 6) {
             countryValidation = true;
         } else if (GameModel.PlayerList.size() == 4 && GameModel.CountryList.size() >= 8) {
             countryValidation = true;
@@ -137,7 +137,6 @@ public class ValidateMap {
 
         return countryValidation;
     }
-
 
 
 }
