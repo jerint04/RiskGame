@@ -8,6 +8,7 @@ import static junit.framework.TestCase.assertEquals;
 
 /**
  * This class validates the map
+ *
  * @author Vikram
  * @version 1.0.0
  */
@@ -15,11 +16,10 @@ import static junit.framework.TestCase.assertEquals;
 public class TestValidateMap {
 
 
-
     @Before
     public void BeforeTestCase() {
 
-        ReadMap.readMap("E:/Risk Game/RiskGame/assets/maps/Asia.map");
+        ReadMap.readMap("./assets/maps/Asia.map");
     }
 
     @Test

@@ -15,9 +15,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class TestReinforcementArmies {
     @Before
-    public  void BeforeClass()
-
-    {
+    public void BeforeClass() {
         ReadMap.readMap("./assets/maps/updated.map");
         boolean value = ValidateMap.validateMap();
         //String s1 = Boolean.toString(value);
@@ -69,11 +67,12 @@ public class TestReinforcementArmies {
         GameController.addInfantryToCountry(playerHashMap.get(2).countriesOwned.get(1), 0, 33);
         playerHashMap.get(2).numberOfInfantry = playerHashMap.get(2).numberOfInfantry - 33;
     }
-@Test
-    public  void TestCase(){
 
-        assertEquals(0,playerHashMap.get(2).numberOfInfantry);
-}
+    @Test
+    public void TestCase() {
 
-
+        assertEquals(0, playerHashMap.get(2).numberOfInfantry);
     }
+
+
+}

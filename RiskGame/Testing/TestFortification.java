@@ -66,9 +66,9 @@ public class TestFortification {
         playerHashMap.get(1).numberOfInfantry = playerHashMap.get(1).numberOfInfantry - 32;
         GameController.addInfantryToCountry(playerHashMap.get(2).countriesOwned.get(1), 0, 33);
         playerHashMap.get(2).numberOfInfantry = playerHashMap.get(2).numberOfInfantry - 33;
-        GameController.armyCalculationDuringReinforcement(0);
-        GameController.armyCalculationDuringReinforcement(1);
-        GameController.armyCalculationDuringReinforcement(2);
+        Player.armyCalculationDuringReinforcement(0);
+        Player.armyCalculationDuringReinforcement(1);
+        Player.armyCalculationDuringReinforcement(2);
         AutoRollDice("ind", 40, "pak", 2);
         String countryFrom = "ind";
         String countryTo;
@@ -87,10 +87,10 @@ public class TestFortification {
 
         }
     }
+
     @Test
-    public void TestCase ()
-    {
-        assertEquals(1,GameModel.countryHashMap.get("ind").numberOfSoldiers );
+    public void TestCase() {
+        assertEquals(1, GameModel.countryHashMap.get("ind").numberOfSoldiers);
     }
 
 }

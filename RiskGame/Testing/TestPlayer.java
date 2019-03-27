@@ -7,12 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
-/**
 
+/**
  * @author Vikram
  * @version 1.0.0
  */
-
 
 
 public class TestPlayer {
@@ -20,55 +19,53 @@ public class TestPlayer {
     public List<String> cards = new ArrayList<>();
     public List<String> countriesOwned = new ArrayList<>();
 
-     @Before
-     public void BeforeTestCase()
-     {
+    @Before
+    public void BeforeTestCase() {
 
-          player=new Player(1,"Vikram");
-         Player.setGamePhase("Fortification");
-         player.setCards(cards);
-         player.setCountriesOwned(countriesOwned);
-     }
+        player = new Player(1, "Vikram");
+        Player.setGamePhase("Fortification");
+        player.setCards(cards);
+        player.setCountriesOwned(countriesOwned);
+    }
+
     @Test
-    public  void TestCase1()
-    {
+    public void TestCase1() {
 
-      int id=player.getPlayerId();
-      assertEquals(1,id);
+        int id = player.getPlayerId();
+        assertEquals(1, id);
 
     }
 
     @Test
-    public void TestCase2()
-    {
+    public void TestCase2() {
 
-        String name=player.getName();
-        assertEquals("Vikram",name);
-
-    }
-    @Test
-    public void TestGamePhase()
-    {
-
-        String val= Player.getGamePhase();
-        assertEquals("Fortification",val);
+        String name = player.getName();
+        assertEquals("Vikram", name);
 
     }
+
     @Test
-    public void TestCards()
-    {
+    public void TestGamePhase() {
+
+        String val = Player.getGamePhase();
+        assertEquals("Fortification", val);
+
+    }
+
+    @Test
+    public void TestCards() {
         List<String> Cards = new ArrayList<>();
-        Cards=player.getCards();
-        assertEquals(Cards,cards);
+        Cards = player.getCards();
+        assertEquals(Cards, cards);
 
     }
+
     @Test
-    public void TestCountriesOwned()
-    {
+    public void TestCountriesOwned() {
 
         List<String> CountriesOwned = new ArrayList<>();
-        CountriesOwned =player.getCountriesOwned();
-        assertEquals(CountriesOwned ,countriesOwned );
+        CountriesOwned = player.getCountriesOwned();
+        assertEquals(CountriesOwned, countriesOwned);
     }
 
 }

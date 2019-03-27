@@ -3,8 +3,6 @@ import Controller.ReadMap;
 import Controller.ValidateMap;
 import Model.GameModel;
 import Model.Player;
-import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -14,9 +12,8 @@ import static junit.framework.TestCase.assertEquals;
 public class TestStartupPhase {
 
     @BeforeClass
-    public static void beforeTest()
-    {
-        ReadMap.readMap("E:/Risk Game/RiskGame/assets/maps/updated.map");
+    public static void beforeTest() {
+        ReadMap.readMap("./assets/maps/updated.map");
         boolean value = ValidateMap.validateMap();
         //String s1 = Boolean.toString(value);
 
@@ -66,13 +63,12 @@ public class TestStartupPhase {
         playerHashMap.get(1).numberOfInfantry = playerHashMap.get(1).numberOfInfantry - 32;
         GameController.addInfantryToCountry(playerHashMap.get(2).countriesOwned.get(1), 0, 33);
         playerHashMap.get(2).numberOfInfantry = playerHashMap.get(2).numberOfInfantry - 33;
-        GameController.armyCalculationDuringReinforcement(0);
+        Player.armyCalculationDuringReinforcement(0);
     }
 
     @Test
-    public void TestCase()
-    {
-        assertEquals(3,playerHashMap.get(0).numberOfInfantry);
+    public void TestCase() {
+        assertEquals(3, playerHashMap.get(0).numberOfInfantry);
 
 
     }

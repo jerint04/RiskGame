@@ -20,13 +20,11 @@ public class TestAttackPhase {
     static int[] val;
 
 
-
     @BeforeClass
-    public static void BeforeClass()
-    {
+    public static void BeforeClass() {
 
         //AttackPhase.PlayerAttackTurn(0);
-       val = AutoRollDice("ind",40,"pak",2);
+        val = AutoRollDice("ind", 40, "pak", 2);
 
     }
 
@@ -40,18 +38,16 @@ public class TestAttackPhase {
     }
 
     @Test
-    public void TestCase1()
-    {
-   assertEquals(2,val.length);
+    public void TestCase1() {
+        assertEquals(2, val.length);
 
 
     }
 
-   @Test
-    public void TestCase2()
-   {
-   assertEquals(0,val[1]);
-   }
+    @Test
+    public void TestCase2() {
+        assertEquals(0, val[1]);
+    }
 }
 
 

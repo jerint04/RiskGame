@@ -6,13 +6,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 /**
- *
  * The class <code>TestCountry</code> contains tests for the class
  * <code> {@link Model.Country}</code>
  *
  * @author Vikram
  * @version 1.0.0
- *
  */
 
 
@@ -23,19 +21,18 @@ public class TestCountry {
     Model.Continent continent;
 
 
-/**
+    /**
      * Test case Initialization for TestCountry
      */
 
 
     @Before
-    public void beforeTestCountry()
-    {
-        country = new Model.Country(1,"India","Asia");
+    public void beforeTestCountry() {
+        country = new Model.Country(1, "India", "Asia");
     }
 
 
-/**
+    /**
      * Test case to tests x value is correct
      */
 
@@ -49,25 +46,23 @@ public class TestCountry {
     }
 
     @Test
-    public void TestCountryName()
-    {
+    public void TestCountryName() {
         String name = country.getCountryName();
         System.out.print(name);
-        assertEquals("India",name);
+        assertEquals("India", name);
 
     }
-      @Test
-    public void TestContinentName()
-    {
+
+    @Test
+    public void TestContinentName() {
         String name = country.getParentContinent();
         System.out.print(name);
-        assertEquals("Asia",name);
+        assertEquals("Asia", name);
 
     }
 
 
-
-/**
+    /**
      * Test case to tests x value is correct
      */
 
@@ -89,7 +84,7 @@ public class TestCountry {
         assertEquals(1, id);
     }
 
-/**
+    /**
      * returning in int
      */
 
@@ -102,12 +97,10 @@ public class TestCountry {
     }
 
 
-
-/**
+    /**
      * Perform post-test clean-up.
      *
-     * @throws Exception
-     *             if the clean-up fails for some reason
+     * @throws Exception if the clean-up fails for some reason
      */
 
 
