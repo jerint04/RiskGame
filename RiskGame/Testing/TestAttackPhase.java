@@ -21,7 +21,6 @@ public class TestAttackPhase {
 
     /*
      * This method runs after all test cases were ran
-
      */
     @AfterClass
     public static void AfterClass() {

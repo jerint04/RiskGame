@@ -440,7 +440,7 @@ public class Player extends Observable {
                     GameModel.countryHashMap.get(to).setNumberOfSoldiers(remainingArmy[1]);
                 } else {
                     System.out.println("Attacking Country " + from + " won " + to + " country");
-                    System.out.println("Remaining Armies :" + fromArmy);
+                    System.out.println("Remaining Armies :" + remainingArmy[0]);
                     System.out.println("How many armies do you want to leave in " + to + ":");
                     int leave = sc.nextInt();
                     GameModel.countryHashMap.get(to).setNumberOfSoldiers(leave);
