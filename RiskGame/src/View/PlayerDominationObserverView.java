@@ -46,7 +46,7 @@ public class PlayerDominationObserverView implements Observer {
 
 
         }
-        GameController.MssageOnGUIThroughObsever(dominationString);
+        GameController.mssageOnGUIThroughObsever(dominationString);
 
 
     }

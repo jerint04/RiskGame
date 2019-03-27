@@ -8,7 +8,7 @@ import Model.Helper;
 import java.util.*;
 
 /**
- * Controller.CreateMap Class
+ * Controller.createMap Class
  *
  * @author Vikram
  * @version 1.0.0

@@ -1,7 +1,7 @@
 package View;
 
 /**
- * GetPhaseView class
+ * getPhaseView class
  *
  * @author Jerin
  * @version 1.0.0
@@ -12,6 +12,7 @@ public class GetPhaseView {
 
     /**
      * This method gets the view of the current Phase
+     *
      * @return view, String
      */
     public String getView() {
@@ -20,6 +21,7 @@ public class GetPhaseView {
 
     /**
      * This method sets the view of the current Phase
+     *
      * @param view , String
      */
     public void setView(String view) {

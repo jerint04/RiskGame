@@ -6,7 +6,7 @@ import Model.Player;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static Controller.AttackPhase.AutoRollDice;
+import static Controller.AttackPhase.autoRollDice;
 import static Model.GameModel.playerHashMap;
 import static org.junit.Assert.assertEquals;
 
@@ -69,7 +69,7 @@ public class TestFortification {
         Player.armyCalculationDuringReinforcement(0);
         Player.armyCalculationDuringReinforcement(1);
         Player.armyCalculationDuringReinforcement(2);
-        AutoRollDice("ind", 40, "pak", 2);
+        autoRollDice("ind", 40, "pak", 2);
         String countryFrom = "ind";
         String countryTo;
 

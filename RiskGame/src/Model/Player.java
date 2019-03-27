@@ -362,7 +362,7 @@ public class Player extends Observable {
      * @param playerId, int
      *                  id of the player
      */
-    public static void PlayerAttackTurn(int playerId) {
+    public static void playerAttackTurn(int playerId) {
         Player playerView = playerHashMap.get(playerId);
         playerView.GamePhase = "Attack Phase";
         ViewObserver VOb = new ViewObserver();
@@ -429,9 +429,9 @@ public class Player extends Observable {
                 int type = sc.nextInt();
                 int[] remainingArmy = new int[2];
                 if (type == 1) {
-                    remainingArmy = AttackPhase.RollDice(from, fromArmy, to, toArmy);
+                    remainingArmy = AttackPhase.rollDice(from, fromArmy, to, toArmy);
                 } else {
-                    remainingArmy = AttackPhase.AutoRollDice(from, fromArmy, to, toArmy);
+                    remainingArmy = AttackPhase.autoRollDice(from, fromArmy, to, toArmy);
                 }
                 int x = GameModel.countryHashMap.get(from).getNumberOfSoldiers();
                 if (remainingArmy[0] == 0) {

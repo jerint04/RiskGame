@@ -23,7 +23,7 @@ public class AttackPhase {
      * @param badArmy,  int
      * @return int[], integer type array
      */
-    public static int[] RollDice(String good, int goodArmy, String Bad, int badArmy) {
+    public static int[] rollDice(String good, int goodArmy, String Bad, int badArmy) {
         Scanner sc = new Scanner(System.in);
         while (goodArmy >= 1 && badArmy >= 1) {
             int goodDice = 0;
@@ -115,7 +115,7 @@ public class AttackPhase {
      * @param badArmy,  int
      * @return int[], integer type array
      */
-    public static int[] AutoRollDice(String good, int goodArmy, String Bad, int badArmy) {
+    public static int[] autoRollDice(String good, int goodArmy, String Bad, int badArmy) {
         while (goodArmy >= 1 && badArmy >= 1) {
             int goodDice = 0;
             int badDice = 0;
@@ -198,7 +198,7 @@ public class AttackPhase {
     }
 
 //    public static void main(String[] args) {
-//        RollDice("yahoo", 10, "wow", 7);
+//        rollDice("yahoo", 10, "wow", 7);
 //    }
 
 

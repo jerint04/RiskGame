@@ -2,7 +2,6 @@ package Controller;
 
 import Model.*;
 import View.DisplayGuiHelp;
-import View.PlayerDominationObserverView;
 
 import java.io.File;
 import java.util.*;
@@ -22,7 +21,7 @@ public class GameController {
     /**
      * This method will load a map
      */
-    public static void LoadMap() {
+    public static void loadMap() {
         Scanner sc = new Scanner(System.in);
         List<String> getFileName = new ArrayList<String>();
         File[] filesName = new File(Helper.pathName).listFiles();
@@ -52,15 +51,15 @@ public class GameController {
     /**
      * This method will perform operation required to start or load a game
      */
-    public static void StartOrLoadGame() {
+    public static void startOrLoadGame() {
         System.out.println("Select 1 to Start the game and create map, Select 2 to Load the Game :");
         int localvariable;
         Scanner input1 = new Scanner(System.in);
         localvariable = input1.nextInt();
         if (localvariable == 1) {
-            CreateMap();
+            createMap();
         } else if (localvariable == 2) {
-            LoadMap();
+            loadMap();
         } else {
             System.out.println("Please enter Relevant option");
         }
@@ -69,7 +68,7 @@ public class GameController {
     /**
      * This method will perform operation to create a map
      */
-    public static void CreateMap() {
+    public static void createMap() {
         boolean exit = true;
         while (exit) {
             System.out.println("1. Create Continent");
@@ -203,10 +202,10 @@ public class GameController {
                     CountryAdjacencyMatrix.printGraph();
                     break;
                /* case 4:
-                    CreateMap.removeCountry(); *//*TODO : Test this*//*
+                    createMap.removeCountry(); *//*TODO : Test this*//*
                     break;
                 case 5:
-                    CreateMap.removeContinent(); *//* TODO : test this*//*
+                    createMap.removeContinent(); *//* TODO : test this*//*
                     break;*/
                 case 4:
                     CountryAdjacencyMatrix.readFromGraph();
@@ -405,7 +404,7 @@ public class GameController {
      *
      * @param strMessageOne, String
      */
-    public static void MssageOnGUI(String strMessageOne) {
+    public static void mssageOnGUI(String strMessageOne) {
         gui1.printScreen(strMessageOne);
     }
 
@@ -414,7 +413,7 @@ public class GameController {
      *
      * @param strMessageOne, String
      */
-    public static void MssageOnGUIThroughObsever(String strMessageOne) {
+    public static void mssageOnGUIThroughObsever(String strMessageOne) {
         gui1.printSecondScreen(strMessageOne);
     }
 

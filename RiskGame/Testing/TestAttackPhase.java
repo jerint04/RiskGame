@@ -1,18 +1,9 @@
 
-import Controller.AttackPhase;
-import Controller.GameController;
-import Controller.ReadMap;
-import Controller.ValidateMap;
-import Model.GameModel;
-import Model.Player;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static Controller.AttackPhase.AutoRollDice;
-import static Controller.AttackPhase.RollDice;
-import static Model.GameModel.playerHashMap;
+import static Controller.AttackPhase.autoRollDice;
 import static org.junit.Assert.assertEquals;
 
 
@@ -23,8 +14,8 @@ public class TestAttackPhase {
     @BeforeClass
     public static void BeforeClass() {
 
-        //AttackPhase.PlayerAttackTurn(0);
-        val = AutoRollDice("ind", 40, "pak", 2);
+        //AttackPhase.playerAttackTurn(0);
+        val = autoRollDice("ind", 40, "pak", 2);
 
     }
 

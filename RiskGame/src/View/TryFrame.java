@@ -42,13 +42,13 @@ public class TryFrame extends JFrame implements ActionListener {
        {
 
            dispose();
-         //  GameController.StartOrLoadGame();
+         //  GameController.startOrLoadGame();
 //           Frame2 frame2 = new Frame2();
            frame2.loadFrame2();
        }
        else if(e.getActionCommand()=="Load Game" || e.getActionCommand().equals("Load Game"))
        {
-           GameController.LoadMap();
+           GameController.loadMap();
        }
        else
        {
@@ -56,7 +56,7 @@ public class TryFrame extends JFrame implements ActionListener {
        }
 
 
-      // GameController.StartOrLoadGame();
+      // GameController.startOrLoadGame();
    //}
    //
 

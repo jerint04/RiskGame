@@ -28,10 +28,10 @@ public class ViewObserver implements Observer {
         if (((Player) o).getGamePhase() != "Initialisation") {
             phaseView = "Current Phase: " + player.getGamePhase() + "\n" + "Current Player: "
                     + player.getName() + "\n" + "Information about the phase :" + player.infoAboutAction;
-            GameController.MssageOnGUI(phaseView);
+            GameController.mssageOnGUI(phaseView);
         } else {
             phaseView = "Current Phase: " + player.getGamePhase();
-            GameController.MssageOnGUI(phaseView);
+            GameController.mssageOnGUI(phaseView);
         }
        /* System.out.println("_____Phase View_____");
         System.out.println(phaseView);
@@ -41,7 +41,7 @@ public class ViewObserver implements Observer {
     /**
      * This method is used to get the Phase View
      */
-    public void GetPhaseView() {
+    public void getPhaseView() {
         // System.out.println(phaseView);
     }
 

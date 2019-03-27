@@ -23,7 +23,7 @@ public class GameDriver {
      */
     public static void main(String[] args) {
         boolean playGame = true;
-        GameController.StartOrLoadGame();
+        GameController.startOrLoadGame();
         GameController.initialisePlayers();
         if (validationOfPlayersAndCountiesNumber()) {
             GameController.initialisationInfantry();
@@ -37,7 +37,7 @@ public class GameDriver {
                     Player.armyCalculationDuringReinforcement(playerId);
                     Player.armyPlacementDuringReinforcement(playerId);
                     System.out.println("-------- Attack Phase --------------");
-                    Player.PlayerAttackTurn(playerId);
+                    Player.playerAttackTurn(playerId);
                     System.out.println("-------- Fortification Phase --------------");
                     Player.fortificationPhase(playerId);
 
