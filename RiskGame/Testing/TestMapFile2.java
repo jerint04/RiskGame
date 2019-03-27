@@ -5,17 +5,11 @@ import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
 
-
 /**
- * This class read the map file and tells whether it's whether
- * the map file is valid or invaild
- *
- * @author Vikram
- * @version 1.0.0
+ * @author Hemanshu
+ * @date 2019-03-27
  */
-
-
-public class TestMapFile {
+public class TestMapFile2 {
 
     static String filename;
     static boolean value;
@@ -28,20 +22,20 @@ public class TestMapFile {
 
     @Before
     public void BeforeTestCase() {
-        filename = "./assets/maps/trial.map";
+        filename = "./assets/maps/updated.map";
         value = ReadMap.readMap(filename);
     }
 
-    @Test
-    public void TestCase1() {
-        //String mapName="trial";
 
+
+
+    @Test
+    public void TestCase2() {
+        //String mapName="trial";
         //boolean value= ValidateMap.validateMap();
         String s1 = Boolean.toString(value);
-
-        assertEquals("false", s1);
+        assertEquals("true", s1);
     }
-
 
 
 }

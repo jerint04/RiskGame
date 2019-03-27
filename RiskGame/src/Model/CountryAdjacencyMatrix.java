@@ -10,7 +10,7 @@ import java.util.*;
  * Creation of Adjacency Matrix
  */
 public class CountryAdjacencyMatrix {
-    public static int maxSize = 100;
+    public static int maxSize = 150;
     public static int[][] countryMatrix = new int[maxSize][maxSize];
     public static int size;
 

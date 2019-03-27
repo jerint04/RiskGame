@@ -26,4 +26,12 @@ public class GameModel {
     public static int playerNumber;
     public static ArrayList<Player> PlayerList = new ArrayList<Player>();
 
+
+    public static void reInitializeVariables(){
+        ContinentList = new ArrayList<>();
+        continentHashMap = new HashMap<>();
+        CountryList = new ArrayList<>();
+        countryIdHashMap = new HashMap<>();
+        countryHashMap = new HashMap<>();
+    }
 }

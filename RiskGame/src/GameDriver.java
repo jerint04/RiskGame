@@ -2,6 +2,7 @@ import Controller.GameController;
 import Model.GameModel;
 import Model.Player;
 
+import static Controller.GameController.checkWinner;
 import static Controller.ValidateMap.validationOfPlayersAndCountiesNumber;
 
 /**
@@ -30,7 +31,7 @@ public class GameDriver {
             GameController.assigningCountries();
             GameController.assigningCountriesToPlayers();
             System.out.println("---------- Game Play Starts -------------");
-            while (playGame) {
+            while (checkWinner()) {
                 for (int playerId : GameModel.playerHashMap.keySet()) {
                     System.out.println(" --------------  Player " + GameModel.playerHashMap.get(playerId).getName() + "'s Turn ----------");
                     System.out.println("-------- Reinforcement Phase --------------");
@@ -40,10 +41,8 @@ public class GameDriver {
                     Player.playerAttackTurn(playerId);
                     System.out.println("-------- Fortification Phase --------------");
                     Player.fortificationPhase(playerId);
-
                 }
             }
-
         } else {
             System.out.println("Number of Countries are less than required number to start the game(number of player* 2)");
         }

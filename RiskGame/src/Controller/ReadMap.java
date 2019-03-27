@@ -28,6 +28,8 @@ public class ReadMap {
     public static boolean readMap(String getFileName) {
         boolean didContinentsRead = false;
         boolean didCountriesRead = false;
+        GameModel.reInitializeVariables();
+        CountryAdjacencyMatrix.initializeCountryMatrix();
         try {
             boolean readContinentsFromFile = false;
             boolean readCountriesFromFile = false;

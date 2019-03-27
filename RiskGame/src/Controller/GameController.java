@@ -18,6 +18,36 @@ import static Model.GameModel.playerHashMap;
 public class GameController {
     public static DisplayGuiHelp gui1 = new DisplayGuiHelp();
 
+    public static boolean checkWinner(){
+        int numberOfPlayers = playerHashMap.keySet().size();
+        int[] playersInGame = new int[numberOfPlayers];
+        for(int i =0 ; i <numberOfPlayers;i++){
+            playersInGame[i]=1;
+        }
+        for( int each : playerHashMap.keySet()){
+            if(playerHashMap.get(each).countriesOwned.size()==0){
+                playersInGame[each]=0;
+                playerHashMap.get(each).alive = false;
+            }
+        }
+        int total = 0;
+        int winner = -1;
+        for(int i =0 ; i <numberOfPlayers;i++){
+            total = total +  playersInGame[i];
+            if(playersInGame[i] ==1 ){
+                winner = i;
+            }
+        }
+        if(total > 1){
+            return true;
+        }else if(total == 1){
+            System.out.println("Winner Winner Chicken Dinner !! Player "+playerHashMap.get(winner).getName()+" has won all the countries !");
+            return  false;
+        }
+        return true;
+    }
+
+
     /**
      * This method will load a map
      */

@@ -19,7 +19,7 @@ public class TestValidateMap {
     @Before
     public void BeforeTestCase() {
 
-        ReadMap.readMap("./assets/maps/Asia.map");
+        ReadMap.readMap("./assets/maps/updated.map");
     }
 
     @Test
