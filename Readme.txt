@@ -3,5 +3,4 @@ Creators:
 Jerin 
 Hemanshu
 Manushree
-Suraj
 Vikram
