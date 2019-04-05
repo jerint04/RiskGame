@@ -14,7 +14,7 @@ public class TestAttackPhase {
     @BeforeClass
     public static void BeforeClass() {
 
-        //AttackPhase.playerAttackTurn(0);
+        //AttackPhase.playerAttackTurnHumanPlayer(0);
         val = autoRollDice("ind", 40, "pak", 2);
 
     }

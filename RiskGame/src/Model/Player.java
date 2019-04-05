@@ -288,7 +288,7 @@ public class Player extends Observable {
      *
      * @param playerId, id of the player
      */
-    public static void armyCalculationDuringReinforcement(int playerId) {
+    public static void armyCalculationDuringReinforcementHumanPlayer(int playerId) {
 
         Player play = playerHashMap.get(playerId);
         play.GamePhase = "Reinforcement";
@@ -318,12 +318,12 @@ public class Player extends Observable {
             System.out.println("You have 3 cards, press 1 to exchange cards for armies");
             int choice = sc.nextInt();
             if (choice == 1) {
-                GameController.exchangeCardsForArmies(playerId);
+                GameController.exchangeCardsForArmiesHumanPlayer(playerId);
             }
 
         } else if (temp.Cards.size() >= 5) {
             System.out.println("You have to exchange cards to proceed");
-            GameController.exchangeCardsForArmies(playerId);
+            GameController.exchangeCardsForArmiesHumanPlayer(playerId);
 
         }
         Player playerView = new Player();
@@ -337,7 +337,7 @@ public class Player extends Observable {
      *
      * @param playerId, id of the player
      */
-    public static void armyPlacementDuringReinforcement(int playerId) {
+    public static void armyPlacementDuringReinforcementHumanPlayer(int playerId) {
         Scanner sc = new Scanner(System.in);
         System.out.println(" Infantry for the current players is : " + playerHashMap.get(playerId).numberOfInfantry);
 
@@ -362,7 +362,7 @@ public class Player extends Observable {
      * @param playerId, int
      *                  id of the player
      */
-    public static void playerAttackTurn(int playerId) {
+    public static void playerAttackTurnHumanPlayer(int playerId) {
         Player playerView = playerHashMap.get(playerId);
         playerView.GamePhase = "Attack Phase";
         ViewObserver VOb = new ViewObserver();
@@ -471,7 +471,7 @@ public class Player extends Observable {
      *
      * @param playerId, id of the player
      */
-    public static boolean fortificationPhase(int playerId) {
+    public static boolean fortificationPhaseHumanPlayer(int playerId) {
         Player play = playerHashMap.get(playerId);
         play.GamePhase = "Fortification";
         ViewObserver VOb = new ViewObserver();

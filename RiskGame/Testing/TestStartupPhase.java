@@ -63,7 +63,7 @@ public class TestStartupPhase {
         playerHashMap.get(1).numberOfInfantry = playerHashMap.get(1).numberOfInfantry - 32;
         GameController.addInfantryToCountry(playerHashMap.get(2).countriesOwned.get(1), 0, 33);
         playerHashMap.get(2).numberOfInfantry = playerHashMap.get(2).numberOfInfantry - 33;
-        Player.armyCalculationDuringReinforcement(0);
+        Player.armyCalculationDuringReinforcementHumanPlayer(0);
     }
 
     @Test

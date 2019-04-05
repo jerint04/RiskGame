@@ -66,9 +66,9 @@ public class TestFortification {
         playerHashMap.get(1).numberOfInfantry = playerHashMap.get(1).numberOfInfantry - 32;
         GameController.addInfantryToCountry(playerHashMap.get(2).countriesOwned.get(1), 0, 33);
         playerHashMap.get(2).numberOfInfantry = playerHashMap.get(2).numberOfInfantry - 33;
-        Player.armyCalculationDuringReinforcement(0);
-        Player.armyCalculationDuringReinforcement(1);
-        Player.armyCalculationDuringReinforcement(2);
+        Player.armyCalculationDuringReinforcementHumanPlayer(0);
+        Player.armyCalculationDuringReinforcementHumanPlayer(1);
+        Player.armyCalculationDuringReinforcementHumanPlayer(2);
         autoRollDice("ind", 40, "pak", 2);
         String countryFrom = "ind";
         String countryTo;

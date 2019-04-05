@@ -179,6 +179,51 @@ public class GameController {
     }
 
     /**
+     * TODO : Test this function
+     * This method Auto assigns Countries to the players
+     */
+    public static void assigningCountriesToPlayersAuto() {
+//        Scanner sc = new Scanner(System.in);
+
+//      Assigning All the Countries to corresponding Players
+        for (String countryName : GameModel.countryHashMap.keySet()) {
+            int playerId = GameModel.countryHashMap.get(countryName).getPlayerId();
+            Player temp = playerHashMap.get(playerId);
+            temp.countriesOwned.add(countryName);
+        }
+
+        for (int p : playerHashMap.keySet()) {
+            playerHashMap.get(p).numberOfInfantry = playerHashMap.get(p).numberOfInfantry - playerHashMap.get(p).countriesOwned.size();
+            System.out.println("Countries owned by the player -->" + playerHashMap.get(p).getCountriesOwned() + " Size of infantry after allocating -->" + playerHashMap.get(p).numberOfInfantry + " Total country owned by the player -->" + playerHashMap.get(p).countriesOwned.size());
+        }
+
+
+        while (calculateInfantry() != 0) {
+            for (int p : playerHashMap.keySet()) {
+                System.out.println("Name of the players :" + playerHashMap.get(p).getName() + " size of remaining infantry :" + playerHashMap.get(p).numberOfInfantry + " number of country owned" + playerHashMap.get(p).countriesOwned.size());
+                int i = 0;
+                if (playerHashMap.get(p).numberOfInfantry != 0) {
+                    for (String countryName : playerHashMap.get(p).getCountriesOwned()) {
+                        System.out.println(i + ":" + countryName + "->" + GameModel.countryHashMap.get(countryName).getNumberOfSoldiers());
+                        i = i + 1;
+                    }
+                    Random rand = new Random();
+
+
+//                    System.out.println("Enter the number of armies to be allocated :");
+                    int numOfArmies = rand.nextInt(playerHashMap.get(p).numberOfInfantry) + 1;
+//                    System.out.println("Enter the serial number of the country");
+                    int countrySerialNum = rand.nextInt(playerHashMap.get(p).getCountriesOwned().size());
+                    addInfantryToCountry(playerHashMap.get(p).countriesOwned.get(countrySerialNum), p, numOfArmies);
+                    playerHashMap.get(p).numberOfInfantry = playerHashMap.get(p).numberOfInfantry - numOfArmies;
+                }
+            }
+        }
+    }
+
+
+
+    /**
      * This method calculates infantry
      *
      * @return calculateInfanrty, int
@@ -389,7 +434,7 @@ public class GameController {
      *
      * @param PlayerId, id of the player
      */
-    public static void exchangeCardsForArmies(int PlayerId) {
+    public static void exchangeCardsForArmiesHumanPlayer(int PlayerId) {
 
         Scanner sc = new Scanner(System.in);
         Player play = playerHashMap.get(PlayerId);
