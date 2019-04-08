@@ -3,19 +3,22 @@ package Controller;
 import Model.*;
 import View.PlayerDominationObserverView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import static Model.GameModel.playerHashMap;
 
 /**
  * @author Hemanshu
- * @date 2019-04-05
+ * @date 2019-04-08
  */
-public class AggressivePlayer implements Strategy {
+public class BenevolentPlayer implements Strategy  {
+
 
     @Override
     public void armyCalculationDuringReinforcement(int playerId) {
-        System.out.println("Aggressive Player working fine.....");
+        System.out.println("Benevolent Player working fine.....");
 
         Player play = playerHashMap.get(playerId);
         play.GamePhase = "Reinforcement";
@@ -57,19 +60,20 @@ public class AggressivePlayer implements Strategy {
         playerView.updatingObserver();
     }
 
-    @Override
+
+
     public void armyPlacementDuringReinforcement(int playerId) {
 //        Scanner sc = new Scanner(System.in);
         System.out.println(" Infantry for the current players is : " + playerHashMap.get(playerId).numberOfInfantry);
 
         while (playerHashMap.get(playerId).numberOfInfantry != 0) {
             int i = 0;
-            int maxArmies = 0;
+            int minArmies = 50;
             int countryIndex = -1;
             for (String countryName : playerHashMap.get(playerId).getCountriesOwned()) {
                 System.out.println(i + ":" + countryName + "->" + GameModel.countryHashMap.get(countryName).getNumberOfSoldiers());
-                if (GameModel.countryHashMap.get(countryName).getNumberOfSoldiers() > maxArmies) {
-                    maxArmies = GameModel.countryHashMap.get(countryName).getNumberOfSoldiers();
+                if (GameModel.countryHashMap.get(countryName).getNumberOfSoldiers() < minArmies) {
+                    minArmies= GameModel.countryHashMap.get(countryName).getNumberOfSoldiers();
                     countryIndex = i;
                 }
                 i = i + 1;
@@ -206,6 +210,7 @@ public class AggressivePlayer implements Strategy {
         }
 
     }
+
 
 
     @Override

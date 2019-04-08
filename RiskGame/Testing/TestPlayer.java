@@ -22,7 +22,7 @@ public class TestPlayer {
     @Before
     public void BeforeTestCase() {
 
-        player = new Player(1, "Vikram");
+        player = new Player(1, "Vikram","human");
         Player.setGamePhase("Fortification");
         player.setCards(cards);
         player.setCountriesOwned(countriesOwned);

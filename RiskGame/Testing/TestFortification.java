@@ -20,13 +20,13 @@ public class TestFortification {
         boolean value = ValidateMap.validateMap();
         //String s1 = Boolean.toString(value);
 
-        Player play = new Player(0, "Vikram");
+        Player play = new Player(0, "Vikram","human");
         GameModel.PlayerList.add(play);
         playerHashMap.put(0, play);
-        Player play1 = new Player(1, "Jerin");
+        Player play1 = new Player(1, "Jerin","human");
         GameModel.PlayerList.add(play1);
         playerHashMap.put(1, play1);
-        Player play2 = new Player(2, "Hemanshu");
+        Player play2 = new Player(2, "Hemanshu","human");
         GameModel.PlayerList.add(play2);
         playerHashMap.put(2, play2);
         GameModel.PlayerList.get(0).setNumberOfInfantry(35);

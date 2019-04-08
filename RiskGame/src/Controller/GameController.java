@@ -310,7 +310,9 @@ public class GameController {
                 for (int i = 0; i < GameModel.playerNumber; i++) {
                     System.out.println("Player " + (i + 1) + " name :");
                     String name = input.next();
-                    Player play = new Player(i, name);
+                    System.out.println("Player " + (i + 1) + " type (human) and (aggressive):");
+                    String type = input.next();
+                    Player play = new Player(i, name , type);
                     GameModel.PlayerList.add(play);
                     playerHashMap.put(i, play);
                 }
