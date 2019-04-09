@@ -172,7 +172,7 @@ public class RandomPlayer implements Strategy {
                         int[] remainingArmy = new int[2];
                         int a = rand.nextInt(countriesAttack.size());
                         String to = countriesAttack.get(a);
-                        int toArmy = playerHashMap.get(to).numberOfInfantry;
+                        int toArmy =  GameModel.countryHashMap.get(to).numberOfSoldiers;
                         remainingArmy = AttackPhase.autoRollDice(from, fromArmy, to, toArmy);
                         if (remainingArmy[0] == 0) {
                             System.out.println("Attacking Country " + from + " lost all its armies");
