@@ -1,9 +1,5 @@
-import Controller.AggressivePlayer;
-import Controller.Context;
-import Controller.GameController;
-import Controller.HumanPlayer;
+import Controller.*;
 import Model.GameModel;
-import Model.Player;
 
 import static Controller.GameController.checkWinner;
 import static Controller.ValidateMap.validationOfPlayersAndCountiesNumber;
@@ -40,7 +36,16 @@ public class GameDriver {
                     if( GameModel.playerHashMap.get(playerId).getPlayerType().equals("human")){
                         Context context = new Context(new HumanPlayer());
                         context.executeArmyCalculation(playerId);
-                    }else if(GameModel.playerHashMap.get(playerId).getPlayerType().equals("aggressive")){
+                    }else if( GameModel.playerHashMap.get(playerId).getPlayerType().equals("cheater")){
+                        Context context = new Context(new CheaterPlayer());
+                        context.executeArmyCalculation(playerId);
+                        context.executeArmyPlacement(playerId);
+                        context.executePlayerAttack(playerId);
+                        context.executeExchangeCards(playerId);
+                        context.executeFortificationPhase(playerId);
+
+                    }
+                    else if(GameModel.playerHashMap.get(playerId).getPlayerType().equals("aggressive")){
                         Context context = new Context(new AggressivePlayer());
                         context.executeArmyCalculation(playerId);
                     }

@@ -156,27 +156,54 @@ public class GameController {
             System.out.println("Countries owned by the player -->" + playerHashMap.get(p).getCountriesOwned() + " Size of infantry after allocating -->" + playerHashMap.get(p).numberOfInfantry + " Total country owned by the player -->" + playerHashMap.get(p).countriesOwned.size());
         }
 
-
         while (calculateInfantry() != 0) {
             for (int p : playerHashMap.keySet()) {
-                System.out.println("Name of the players :" + playerHashMap.get(p).getName() + " size of remaining infantry :" + playerHashMap.get(p).numberOfInfantry + " number of country owned" + playerHashMap.get(p).countriesOwned.size());
-                int i = 0;
-                if (playerHashMap.get(p).numberOfInfantry != 0) {
-                    for (String countryName : playerHashMap.get(p).getCountriesOwned()) {
-                        System.out.println(i + ":" + countryName + "->" + GameModel.countryHashMap.get(countryName).getNumberOfSoldiers());
-                        i = i + 1;
-                    }
+                if (playerHashMap.get(p).playerType.equals("human")) {
 
-                    System.out.println("Enter the number of armies to be allocated :");
-                    int numOfArmies = sc.nextInt();
-                    System.out.println("Enter the serial number of the country");
-                    int countrySerialNum = sc.nextInt();
-                    addInfantryToCountry(playerHashMap.get(p).countriesOwned.get(countrySerialNum), p, numOfArmies);
-                    playerHashMap.get(p).numberOfInfantry = playerHashMap.get(p).numberOfInfantry - numOfArmies;
+                    System.out.println("Name of the players :" + playerHashMap.get(p).getName() + " size of remaining infantry :" + playerHashMap.get(p).numberOfInfantry + " number of country owned" + playerHashMap.get(p).countriesOwned.size());
+                    int i = 0;
+                    if (playerHashMap.get(p).numberOfInfantry != 0) {
+                        for (String countryName : playerHashMap.get(p).getCountriesOwned()) {
+                            System.out.println(i + ":" + countryName + "->" + GameModel.countryHashMap.get(countryName).getNumberOfSoldiers());
+                            i = i + 1;
+                        }
+
+                        System.out.println("Enter the number of armies to be allocated :");
+                        int numOfArmies = sc.nextInt();
+                        System.out.println("Enter the serial number of the country");
+                        int countrySerialNum = sc.nextInt();
+                        addInfantryToCountry(playerHashMap.get(p).countriesOwned.get(countrySerialNum), p, numOfArmies);
+                        playerHashMap.get(p).numberOfInfantry = playerHashMap.get(p).numberOfInfantry - numOfArmies;
+                    }
+                }
+
+                else
+                {
+                    assigningCountriesToPlayersAutoCustom(p);
                 }
             }
         }
     }
+
+    public static void assigningCountriesToPlayersAutoCustom(int playerId) {
+
+
+        while (playerHashMap.get(playerId).numberOfInfantry != 0) {
+                    Random rand = new Random();
+            System.out.println("player id: "+playerId+" number of infantry: "+playerHashMap.get(playerId).numberOfInfantry);
+
+//                    System.out.println("Enter the number of armies to be allocated :");
+                    int numOfArmies = rand.nextInt(playerHashMap.get(playerId).numberOfInfantry) + 1;
+//                    System.out.println("Enter the serial number of the country");
+                    int countrySerialNum = rand.nextInt(playerHashMap.get(playerId).getCountriesOwned().size());
+                    addInfantryToCountry(playerHashMap.get(playerId).countriesOwned.get(countrySerialNum), playerId, numOfArmies);
+                    playerHashMap.get(playerId).numberOfInfantry = playerHashMap.get(playerId).numberOfInfantry - numOfArmies;
+                }
+
+        }
+
+
+
 
     /**
      * TODO : Test this function
@@ -310,7 +337,7 @@ public class GameController {
                 for (int i = 0; i < GameModel.playerNumber; i++) {
                     System.out.println("Player " + (i + 1) + " name :");
                     String name = input.next();
-                    System.out.println("Player " + (i + 1) + " type (human) and (aggressive):");
+                    System.out.println("Player " + (i + 1) + " type (human) and (aggressive) or cheater");
                     String type = input.next();
                     Player play = new Player(i, name , type);
                     GameModel.PlayerList.add(play);

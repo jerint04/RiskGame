@@ -4,7 +4,6 @@ import Model.*;
 import View.PlayerDominationObserverView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import static Model.GameModel.playerHashMap;
@@ -16,7 +15,7 @@ import static Model.GameModel.playerHashMap;
 public class CheaterPlayer implements Strategy {
     @Override
     public void armyCalculationDuringReinforcement(int playerId) {
-        System.out.println("Aggressive Player working fine.....");
+        System.out.println("Cheater Player working fine.....");
 
         Player play = playerHashMap.get(playerId);
         play.GamePhase = "Reinforcement";
@@ -31,7 +30,7 @@ public class CheaterPlayer implements Strategy {
             GameModel.playerHashMap.get(playerId).setShouldGetTheCard(false);
         }
         int armyToAllocate = playerHashMap.get(playerId).countriesOwned.size() / 3;
-        playerHashMap.get(playerId).numberOfInfantry = +((armyToAllocate < 3) ? 3 : armyToAllocate);
+        playerHashMap.get(playerId).numberOfInfantry = +((armyToAllocate < 3) ? 3 : armyToAllocate);//doubling the army
         for (String key : GameModel.continentHashMap.keySet()) {
             Continent tempContinent = GameModel.continentHashMap.get(key);
             if (temp.countriesOwned.containsAll(tempContinent.Countries)) {
@@ -61,7 +60,7 @@ public class CheaterPlayer implements Strategy {
     @Override
     public void armyPlacementDuringReinforcement(int playerId) {
 //        Scanner sc = new Scanner(System.in);
-        System.out.println(" Infantry for the current players is : " + playerHashMap.get(playerId).numberOfInfantry);
+        /*System.out.println(" Infantry for the current players is : " + playerHashMap.get(playerId).numberOfInfantry);
 
         while (playerHashMap.get(playerId).numberOfInfantry != 0) {
             int i = 0;
@@ -81,10 +80,18 @@ public class CheaterPlayer implements Strategy {
             System.out.println("Enter the serial number of the country :");
             int countrySerialNum = countryIndex;
             GameController.addInfantryToCountry(playerHashMap.get(playerId).countriesOwned.get(countrySerialNum), playerId, numOfArmies);
-            playerHashMap.get(playerId).numberOfInfantry = playerHashMap.get(playerId).numberOfInfantry - numOfArmies;
-        }
-    }
+            playerHashMap.get(playerId).numberOfInfantry = playerHashMap.get(playerId).numberOfInfantry - numOfArmies;*/
+        for (String countryName : playerHashMap.get(playerId).getCountriesOwned()) {
+            GameModel.countryHashMap.get(countryName).numberOfSoldiers = GameModel.countryHashMap.get(countryName).numberOfSoldiers * 2;
 
+        }
+        for (String countryName : playerHashMap.get(playerId).getCountriesOwned()) {
+
+            System.out.println("number of soldier:" + GameModel.countryHashMap.get(countryName).numberOfSoldiers);
+        }
+
+
+    }
 
 
     @Override
@@ -130,7 +137,7 @@ public class CheaterPlayer implements Strategy {
 
     @Override
     public void playerAttack(int playerId) {
-        Player playerView = playerHashMap.get(playerId);
+      /*  Player playerView = playerHashMap.get(playerId);
         playerView.GamePhase = "Attack Phase";
         ViewObserver VOb = new ViewObserver();
         playerView.addObserver(VOb);
@@ -138,7 +145,7 @@ public class CheaterPlayer implements Strategy {
         String infoOnActions = "";
         int playGame = 1;
 
-        /*Finding the Country with the highest army to attack too*/
+        *//*Finding the Country with the highest army to attack too*//*
         List<String> countriesOwned = playerHashMap.get(playerId).getCountriesOwned();
         int maxArmy = 0;
         String countryWithMaxArmy = "";
@@ -205,13 +212,34 @@ public class CheaterPlayer implements Strategy {
 
             }
         }
+*/
 
+        List<String> countriesOwnedab = new ArrayList<>();
+        countriesOwnedab  = playerHashMap.get(playerId).getCountriesOwned();
+        List<String> countriesToAdd = new ArrayList<>();
+//        List<String> countryToAdd =
+        for (String Country : countriesOwnedab) {
+            for (String countryAdjascent : GameModel.countryHashMap.get(Country).adjacentCountries) {
+
+                if (GameModel.countryHashMap.get(countryAdjascent).getPlayerId() != playerId) {
+                    int previousPlayerId = GameModel.countryHashMap.get(countryAdjascent).getPlayerId();
+                    GameModel.countryHashMap.get(countryAdjascent).setPlayerId(playerId);
+                    GameModel.countryHashMap.get(countryAdjascent).numberOfSoldiers = 1;
+                    playerHashMap.get(previousPlayerId).countriesOwned.remove(countryAdjascent);
+                    countriesToAdd.add(countryAdjascent);
+//                    playerHashMap.get(playerId).countriesOwned.add(countryAdjascent);
+                }
+            }
+        }
+        playerHashMap.get(playerId).countriesOwned.addAll(countriesToAdd);
+
+        System.out.println("countries owned:" + playerHashMap.get(playerId).getCountriesOwned());
     }
 
 
     @Override
     public boolean fortificationPhase(int playerId) {
-        /*TODO : Test this  Function*/
+        /*TODO : Test this  Function*//*
         Player play = playerHashMap.get(playerId);
         play.GamePhase = "Fortification";
         ViewObserver VOb = new ViewObserver();
@@ -272,7 +300,33 @@ public class CheaterPlayer implements Strategy {
                 GameModel.countryHashMap.get(countryWithMaxArmy).numberOfSoldiers = 1;
             }
         }
-        return true;
     }
+*/
 
+        Player play = playerHashMap.get(playerId);
+
+        List<String> countryToFortifyList = new ArrayList<>();
+        for (String countryOwn : play.countriesOwned) {
+            if (GameModel.countryHashMap.get(countryOwn).getNumberOfSoldiers() >= 1) {
+                boolean toAdd = false;
+                for (String country : GameModel.countryHashMap.get(countryOwn).getAdjacentCountries()) {
+                    if (GameModel.countryHashMap.get(country).PlayerId != playerId) {
+                        toAdd = true;
+                    }
+                }
+                if (toAdd) {
+                    countryToFortifyList.add(countryOwn);
+                }
+
+
+            }
+
+
+            for (String countryName : countryToFortifyList) {
+                GameModel.countryHashMap.get(countryName).numberOfSoldiers = GameModel.countryHashMap.get(countryName).numberOfSoldiers * 2;
+            }
+        }
+        return true;
+
+    }
 }
