@@ -26,6 +26,8 @@ public class GameModel {
     public static int playerNumber;
     public static ArrayList<Player> PlayerList = new ArrayList<Player>();
 
+    public static boolean draw = false;
+    public static String winner = "";
 
     public static void reInitializeVariables(){
         ContinentList = new ArrayList<>();
