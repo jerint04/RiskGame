@@ -78,6 +78,18 @@ public class GameController {
         }
     }
 
+    public static void tournamentLoadMap(String mapName){
+        GameModel.reInitializeVariables();
+        CountryAdjacencyMatrix.initializeCountryMatrix();
+        if (ReadMap.readMap(Helper.pathName + "/" + mapName + ".map")) {
+            ValidateMap.validateMap();
+        } else {
+            System.out.println("Not able to read map "+ mapName +" successfully. Please check you Map Format");
+        }
+    }
+
+
+
     /**
      * This method will perform operation required to start or load a game
      */
