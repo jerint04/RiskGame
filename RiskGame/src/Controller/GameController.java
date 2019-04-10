@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.*;
 
 import static Controller.CreateMapFile.createFile;
+import static Model.GameModel.draw;
 import static Model.GameModel.playerHashMap;
 
 /**
@@ -17,6 +18,77 @@ import static Model.GameModel.playerHashMap;
  */
 public class GameController {
     public static DisplayGuiHelp gui1 = new DisplayGuiHelp();
+
+
+    /**
+     * This method is to run the Tournament
+     * It accepts all the parameters required to run the tournament
+     * @return Array of string which contains the results of all the matches played
+     */
+    public static String[] tournamentGame(int mapsCount, String[] mapName, int numberOfGames, int numberOfPlayers, String[] playerName, String[] playerType, int maxTurns) {
+        String[] winnerRecord = new String[mapsCount * numberOfGames];
+        int s = 0;
+        for (String map : mapName) {
+            for (int game = 0; game < numberOfGames; game++) {
+                tournamentLoadMap(map);
+                initialisePlayerForTournament(numberOfPlayers, playerName, playerType);
+                GameController.initialisationInfantry();
+                GameController.assigningCountries();
+                assigningCountriesToPlayersAuto();
+                int turn = 0;
+                draw = false;
+                GameModel.winner = "";
+                /*Logic for Turns and winner*/
+                while (checkMaxTurnsOrDeclareWinner(turn, maxTurns)) {
+                    for (int playerId : GameModel.playerHashMap.keySet()) {
+                        updatePlayerModalForWinner();
+                        if (GameModel.playerHashMap.get(playerId).alive) {
+                            if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("cheater")) {
+                                Context context = new Context(new CheaterPlayer());
+                                context.executeArmyCalculation(playerId);
+                                context.executeArmyPlacement(playerId);
+                                context.executePlayerAttack(playerId);
+                                context.executeFortificationPhase(playerId);
+                            } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("aggressive")) {
+                                Context context = new Context(new AggressivePlayer());
+                                context.executeArmyCalculation(playerId);
+                                context.executeArmyPlacement(playerId);
+                                context.executePlayerAttack(playerId);
+                                context.executeFortificationPhase(playerId);
+
+                            } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("benevolent")) {
+                                Context context = new Context(new BenevolentPlayer());
+                                context.executeArmyCalculation(playerId);
+                                context.executeArmyPlacement(playerId);
+                                context.executePlayerAttack(playerId);
+                                context.executeFortificationPhase(playerId);
+
+                            } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("random")) {
+                                Context context = new Context(new RandomPlayer());
+                                context.executeArmyCalculation(playerId);
+                                context.executeArmyPlacement(playerId);
+                                context.executePlayerAttack(playerId);
+                                context.executeFortificationPhase(playerId);
+
+                            }
+                        }
+                    }
+                    turn++;
+                }
+
+                if (!draw) {
+                    winnerRecord[s] = "Map : " + map + " Game Count:" + game + " Winner is :" + GameModel.winner;
+                    System.out.println("We have a winner"); /*TODO push this winner*/
+                } else {
+                    winnerRecord[s] = "Map : " + map + " Game Count:" + game + " Winner is : Draw";
+                    System.out.println("Its a draw"); /*TODO Push this draw*/
+                }
+                s++;
+            }
+        }
+        return winnerRecord;
+    }
+
 
     /**
      * This method is used to check the winner of the game
