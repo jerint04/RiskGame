@@ -47,7 +47,6 @@ public class AttackPhase {
                 badDice = 1;
             }
 
-
             Random rand = new Random();
             Integer[] goodArmyRolls = new Integer[3];
             Integer[] badArmyRolls = new Integer[2];

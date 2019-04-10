@@ -29,6 +29,9 @@ public class GameModel {
     public static boolean draw = false;
     public static String winner = "";
 
+    /**
+     * This method is used to re-initialize variables
+     */
     public static void reInitializeVariables(){
         ContinentList = new ArrayList<>();
         continentHashMap = new HashMap<>();

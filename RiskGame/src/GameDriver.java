@@ -104,7 +104,9 @@ public class GameDriver {
         }
     }
 
-
+    /**
+     * This method is used to perform tournament Driver
+     */
     public static void tournamentDriver() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Number of Maps to use : 1 to 5 ");

@@ -17,6 +17,11 @@ import static Model.GameModel.playerHashMap;
  */
 public class GameController {
     public static DisplayGuiHelp gui1 = new DisplayGuiHelp();
+
+    /**
+     * This method is used to check the winner of the game
+     * @return true, boolean type
+     */
     public static boolean checkWinner() {
         int numberOfPlayers = playerHashMap.keySet().size();
         int[] playersInGame = new int[numberOfPlayers];
@@ -46,7 +51,12 @@ public class GameController {
         return true;
     }
 
-
+    /**
+     * This method is used to check the maximum turns of the player or winner of the game
+     * @param turn , interger type
+     * @param maxTurn , integer type
+     * @return true/false, boolean type
+     */
     public static boolean checkMaxTurnsOrDeclareWinner(int turn, int maxTurn) {
         if (turn < maxTurn) {
             int numberOfPlayers = playerHashMap.keySet().size();
@@ -121,6 +131,10 @@ public class GameController {
         }
     }
 
+    /**
+     * This method is used to load tournament map
+     * @param mapName , name of the map
+     */
     public static void tournamentLoadMap(String mapName) {
         GameModel.reInitializeVariables();
         CountryAdjacencyMatrix.initializeCountryMatrix();
@@ -236,6 +250,10 @@ public class GameController {
         }
     }
 
+    /**
+     * This method is used to auto assign countries to Players
+     * @param playerId, id of the player
+     */
     public static void assigningCountriesToPlayersAutoCustom(int playerId) {
 
 
@@ -398,6 +416,12 @@ public class GameController {
         }
     }
 
+    /**
+     * This method is used to initialise player for Tournament
+     * @param number, integer
+     * @param nameArray , String array
+     * @param typeArray, String array
+     */
     public static void initialisePlayerForTournament(int number, String[] nameArray, String[] typeArray) {
         GameModel.PlayerList = new ArrayList<Player>();
         playerHashMap = new HashMap<>();
