@@ -35,5 +35,12 @@ public class GameModel {
         CountryList = new ArrayList<>();
         countryIdHashMap = new HashMap<>();
         countryHashMap = new HashMap<>();
+        CountryList.clear();
+        ContinentList.clear();
+        continentHashMap.clear();
+        countryIdHashMap.clear();
+        countryHashMap.clear();
+        Helper.countryCountId = 0; // The count starts from 1 and not from 0.. Please pay attention to this and remember
+        Helper.continentCountId = 0;
     }
 }

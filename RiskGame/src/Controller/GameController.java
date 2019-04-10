@@ -77,10 +77,18 @@ public class GameController {
             }
             return true;
         }else{
-            GameModel.draw = false;
+            GameModel.draw = true;
             return false;
         }
 
+    }
+
+    public static void updatePlayerModalForWinner(){
+        for (int each : playerHashMap.keySet()) {
+            if (playerHashMap.get(each).countriesOwned.size() == 0) {
+                playerHashMap.get(each).alive = false;
+            }
+        }
     }
 
     /**

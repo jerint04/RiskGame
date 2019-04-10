@@ -30,58 +30,64 @@ public class GameDriver {
      */
     public static void main(String[] args) {
         boolean playGame = true;
-        GameController.startOrLoadGame();
-        GameController.initialisePlayers();
-        if (validationOfPlayersAndCountiesNumber()) {
-            GameController.initialisationInfantry();
-            GameController.assigningCountries();
-            GameController.assigningCountriesToPlayers();
-            System.out.println("---------- Game Play Starts -------------");
-            while (checkWinner()) {
-                for (int playerId : GameModel.playerHashMap.keySet()) {
+        Scanner a = new Scanner(System.in);
+        System.out.println("Enter 1 for Tournament and 2 for Human match");
+        int mode = a.nextInt();
+        if(mode == 1){
+            tournamentDriver();
+        }else {
+            GameController.startOrLoadGame();
+            GameController.initialisePlayers();
+            if (validationOfPlayersAndCountiesNumber()) {
+                GameController.initialisationInfantry();
+                GameController.assigningCountries();
+                GameController.assigningCountriesToPlayers();
+                System.out.println("---------- Game Play Starts -------------");
+                while (checkWinner()) {
+                    for (int playerId : GameModel.playerHashMap.keySet()) {
 //                   /*Todo : this alive this*/
-                    if (GameModel.playerHashMap.get(playerId).alive) {
-                        if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("human")) {
-                            Context context = new Context(new HumanPlayer());
-                            System.out.println(" --------------  Player " + GameModel.playerHashMap.get(playerId).getName() + "'s Turn ----------");
-                            System.out.println("-------- Reinforcement Phase --------------");
-                            context.executeArmyCalculation(playerId);
-                            context.executeArmyPlacement(playerId);
-                            System.out.println("-------- Attack Phase --------------");
-                            context.executePlayerAttack(playerId);
-                            System.out.println("-------- Fortification Phase --------------");
-                            context.executeFortificationPhase(playerId);
+                        if (GameModel.playerHashMap.get(playerId).alive) {
+                            if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("human")) {
+                                Context context = new Context(new HumanPlayer());
+                                System.out.println(" --------------  Player " + GameModel.playerHashMap.get(playerId).getName() + "'s Turn ----------");
+                                System.out.println("-------- Reinforcement Phase --------------");
+                                context.executeArmyCalculation(playerId);
+                                context.executeArmyPlacement(playerId);
+                                System.out.println("-------- Attack Phase --------------");
+                                context.executePlayerAttack(playerId);
+                                System.out.println("-------- Fortification Phase --------------");
+                                context.executeFortificationPhase(playerId);
 
-                        } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("cheater")) {
-                            Context context = new Context(new CheaterPlayer());
-                            context.executeArmyCalculation(playerId);
-                            context.executeArmyPlacement(playerId);
-                            context.executePlayerAttack(playerId);
-                            context.executeFortificationPhase(playerId);
+                            } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("cheater")) {
+                                Context context = new Context(new CheaterPlayer());
+                                context.executeArmyCalculation(playerId);
+                                context.executeArmyPlacement(playerId);
+                                context.executePlayerAttack(playerId);
+                                context.executeFortificationPhase(playerId);
 
-                        } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("aggressive")) {
-                            Context context = new Context(new AggressivePlayer());
-                            context.executeArmyCalculation(playerId);
-                            context.executeArmyPlacement(playerId);
-                            context.executePlayerAttack(playerId);
-                            context.executeFortificationPhase(playerId);
+                            } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("aggressive")) {
+                                Context context = new Context(new AggressivePlayer());
+                                context.executeArmyCalculation(playerId);
+                                context.executeArmyPlacement(playerId);
+                                context.executePlayerAttack(playerId);
+                                context.executeFortificationPhase(playerId);
 
-                        } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("benevolent")) {
-                            Context context = new Context(new BenevolentPlayer());
-                            context.executeArmyCalculation(playerId);
-                            context.executeArmyPlacement(playerId);
-                            context.executePlayerAttack(playerId);
-                            context.executeFortificationPhase(playerId);
+                            } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("benevolent")) {
+                                Context context = new Context(new BenevolentPlayer());
+                                context.executeArmyCalculation(playerId);
+                                context.executeArmyPlacement(playerId);
+                                context.executePlayerAttack(playerId);
+                                context.executeFortificationPhase(playerId);
 
-                        } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("random")) {
-                            Context context = new Context(new RandomPlayer());
-                            context.executeArmyCalculation(playerId);
-                            context.executeArmyPlacement(playerId);
-                            context.executePlayerAttack(playerId);
-                            context.executeFortificationPhase(playerId);
+                            } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("random")) {
+                                Context context = new Context(new RandomPlayer());
+                                context.executeArmyCalculation(playerId);
+                                context.executeArmyPlacement(playerId);
+                                context.executePlayerAttack(playerId);
+                                context.executeFortificationPhase(playerId);
 
+                            }
                         }
-                    }
 //                    System.out.println(" --------------  Player " + GameModel.playerHashMap.get(playerId).getName() + "'s Turn ----------");
 //                    System.out.println("-------- Reinforcement Phase --------------");
 //                    Player.armyCalculationDuringReinforcementHumanPlayer(playerId);
@@ -90,13 +96,12 @@ public class GameDriver {
 //                    Player.playerAttackTurnHumanPlayer(playerId);
 //                    System.out.println("-------- Fortification Phase --------------");
 //                    Player.fortificationPhaseHumanPlayer(playerId);
+                    }
                 }
+            } else {
+                System.out.println("Number of Countries are less than required number to start the game(number of player* 2)");
             }
-        } else {
-            System.out.println("Number of Countries are less than required number to start the game(number of player* 2)");
         }
-
-
     }
 
 
@@ -104,6 +109,7 @@ public class GameDriver {
         Scanner sc = new Scanner(System.in);
         System.out.println("Number of Maps to use : 1 to 5 ");
         int mapsCount = sc.nextInt();
+        sc.nextLine();
         List<String> getFileName = new ArrayList<String>();
         File[] filesName = new File(Helper.pathName).listFiles();
         System.out.println(filesName.length);
@@ -123,6 +129,7 @@ public class GameDriver {
 //        startOrLoadGame();
         System.out.println("Number of Players to play (2 to 4) : ");
         int numberOfPlayers = sc.nextInt();
+        sc.nextLine();
         String[] playerName = new String[numberOfPlayers];
         String[] playerType = new String[numberOfPlayers];
         for (int i = 0; i < numberOfPlayers; i++) {
@@ -142,12 +149,16 @@ public class GameDriver {
             for (int game = 0; game < numberOfGames; game++) {
                 tournamentLoadMap(map);
                 initialisePlayerForTournament(numberOfPlayers, playerName, playerType);
+                GameController.initialisationInfantry();
+                GameController.assigningCountries();
+                assigningCountriesToPlayersAuto();
                 int turn = 0;
                 draw = false;
                 GameModel.winner = "";
                 /*Logic for Turns and winner*/
                 while (checkMaxTurnsOrDeclareWinner(turn, maxTurns)) {
                     for (int playerId : GameModel.playerHashMap.keySet()) {
+                        updatePlayerModalForWinner();
                         if (GameModel.playerHashMap.get(playerId).alive) {
                             if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("cheater")) {
                                 Context context = new Context(new CheaterPlayer());
@@ -179,9 +190,10 @@ public class GameDriver {
                             }
                         }
                     }
+                    turn++;
                 }
 
-                if (draw) {
+                if (!draw) {
                     winnerRecord[s] = "Map : " + map + " Game Count:" + game + " Winner is :" + GameModel.winner;
                     System.out.println("We have a winner"); /*TODO push this winner*/
                 } else {
