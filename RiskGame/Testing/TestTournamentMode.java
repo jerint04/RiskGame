@@ -93,7 +93,7 @@ public class TestTournamentMode {
         String mapName[]={"updated"};
 
         initialisePlayerForTournament(2,name,playerType);
-        String winner[]=tournamentGame(1, mapName,1,2,name,playerType,10);
+        String winner[]=tournamentGame(1, mapName,1,2,name,playerType,5);
         System.out.println(winner[0]);
         compareString=winner[0].contains("Its a Draw");
         System.out.println("cmpareString "+compareString);
