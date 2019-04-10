@@ -77,10 +77,10 @@ public class GameController {
                 }
 
                 if (!draw) {
-                    winnerRecord[s] = "Map : " + map + " Game Count:" + game + " Winner is :" + GameModel.winner;
+                    winnerRecord[s] = "Map : " + map + " Game Count:" + game + " Result: Winner is :" + GameModel.winner;
                     System.out.println("We have a winner"); /*TODO push this winner*/
                 } else {
-                    winnerRecord[s] = "Map : " + map + " Game Count:" + game + " Winner is : Draw";
+                    winnerRecord[s] = "Map : " + map + " Game Count:" + game + " Result: Its a Draw";
                     System.out.println("Its a draw"); /*TODO Push this draw*/
                 }
                 s++;
