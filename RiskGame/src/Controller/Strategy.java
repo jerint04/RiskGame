@@ -11,8 +11,8 @@ import java.util.Scanner;
 import static Model.GameModel.playerHashMap;
 
 /**
+ * Strategy interface
  * @author Hemanshu
- * @date 2019-04-07
  */
 public interface  Strategy {
 

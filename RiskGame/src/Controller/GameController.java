@@ -18,35 +18,92 @@ import static Model.GameModel.playerHashMap;
 public class GameController {
     public static DisplayGuiHelp gui1 = new DisplayGuiHelp();
 
-    public static boolean checkWinner(){
+    /**
+     * This method is used to check the winner of the game
+     * @return true, boolean type
+     */
+    public static boolean checkWinner() {
         int numberOfPlayers = playerHashMap.keySet().size();
         int[] playersInGame = new int[numberOfPlayers];
-        for(int i =0 ; i <numberOfPlayers;i++){
-            playersInGame[i]=1;
+        for (int i = 0; i < numberOfPlayers; i++) {
+            playersInGame[i] = 1;
         }
-        for( int each : playerHashMap.keySet()){
-            if(playerHashMap.get(each).countriesOwned.size()==0){
-                playersInGame[each]=0;
+        for (int each : playerHashMap.keySet()) {
+            if (playerHashMap.get(each).countriesOwned.size() == 0) {
+                playersInGame[each] = 0;
                 playerHashMap.get(each).alive = false;
             }
         }
         int total = 0;
         int winner = -1;
-        for(int i =0 ; i <numberOfPlayers;i++){
-            total = total +  playersInGame[i];
-            if(playersInGame[i] ==1 ){
+        for (int i = 0; i < numberOfPlayers; i++) {
+            total = total + playersInGame[i];
+            if (playersInGame[i] == 1) {
                 winner = i;
             }
         }
-        if(total > 1){
+        if (total > 1) {
             return true;
-        }else if(total == 1){
-            System.out.println("Winner Winner Chicken Dinner !! Player "+playerHashMap.get(winner).getName()+" has won all the countries !");
-            return  false;
+        } else if (total == 1) {
+            System.out.println("Winner Winner Chicken Dinner !! Player " + playerHashMap.get(winner).getName() + " has won all the countries !");
+            return false;
         }
         return true;
     }
 
+    /**
+     * This method is used to check the maximum turns of the player or winner of the game
+     * @param turn , interger type
+     * @param maxTurn , integer type
+     * @return true/false, boolean type
+     */
+    public static boolean checkMaxTurnsOrDeclareWinner(int turn, int maxTurn) {
+        if (turn < maxTurn) {
+            int numberOfPlayers = playerHashMap.keySet().size();
+            int[] playersInGame = new int[numberOfPlayers];
+            for (int i = 0; i < numberOfPlayers; i++) {
+                playersInGame[i] = 1;
+            }
+            for (int each : playerHashMap.keySet()) {
+                if (playerHashMap.get(each).countriesOwned.size() == 0) {
+                    playersInGame[each] = 0;
+                    playerHashMap.get(each).alive = false;
+                }
+            }
+            int total = 0;
+            int winner = -1;
+            for (int i = 0; i < numberOfPlayers; i++) {
+                total = total + playersInGame[i];
+                if (playersInGame[i] == 1) {
+                    winner = i;
+                }
+            }
+            if (total > 1) {
+                return true;
+            } else if (total == 1) {
+                System.out.println("Winner Winner Chicken Dinner !! Player " + playerHashMap.get(winner).getName() + " has won all the countries !");
+                GameModel.winner = playerHashMap.get(winner).playerType;
+                return false;
+            }
+            return true;
+        }else{
+            GameModel.draw = true;
+            return false;
+        }
+
+    }
+
+    /**
+    * Updates the Modal of the player after every turn
+    * Those player who are out of the game will be marked as false
+    * */
+    public static void updatePlayerModalForWinner(){
+        for (int each : playerHashMap.keySet()) {
+            if (playerHashMap.get(each).countriesOwned.size() == 0) {
+                playerHashMap.get(each).alive = false;
+            }
+        }
+    }
 
     /**
      * This method will load a map
@@ -78,18 +135,19 @@ public class GameController {
         }
     }
 
-    public static boolean tournamentLoadMap(String mapName){
+    /**
+     * This method is used to load tournament map
+     * @param mapName , name of the map
+     */
+    public static void tournamentLoadMap(String mapName) {
         GameModel.reInitializeVariables();
         CountryAdjacencyMatrix.initializeCountryMatrix();
         if (ReadMap.readMap(Helper.pathName + "/" + mapName + ".map")) {
-           Boolean value= ValidateMap.validateMap();
-           return value;
+            ValidateMap.validateMap();
         } else {
-            System.out.println("Not able to read map "+ mapName +" successfully. Please check you Map Format");
-            return false;
+            System.out.println("Not able to read map " + mapName + " successfully. Please check you Map Format");
         }
     }
-
 
 
     /**
@@ -189,34 +247,33 @@ public class GameController {
                         addInfantryToCountry(playerHashMap.get(p).countriesOwned.get(countrySerialNum), p, numOfArmies);
                         playerHashMap.get(p).numberOfInfantry = playerHashMap.get(p).numberOfInfantry - numOfArmies;
                     }
-                }
-
-                else
-                {
+                } else {
                     assigningCountriesToPlayersAutoCustom(p);
                 }
             }
         }
     }
 
+    /**
+     * This method is used to auto assign countries to Players
+     * @param playerId, id of the player
+     */
     public static void assigningCountriesToPlayersAutoCustom(int playerId) {
 
 
         while (playerHashMap.get(playerId).numberOfInfantry != 0) {
-                    Random rand = new Random();
-            System.out.println("player id: "+playerId+" number of infantry: "+playerHashMap.get(playerId).numberOfInfantry);
+            Random rand = new Random();
+            System.out.println("player id: " + playerId + " number of infantry: " + playerHashMap.get(playerId).numberOfInfantry);
 
 //                    System.out.println("Enter the number of armies to be allocated :");
-                    int numOfArmies = rand.nextInt(playerHashMap.get(playerId).numberOfInfantry) + 1;
+            int numOfArmies = rand.nextInt(playerHashMap.get(playerId).numberOfInfantry) + 1;
 //                    System.out.println("Enter the serial number of the country");
-                    int countrySerialNum = rand.nextInt(playerHashMap.get(playerId).getCountriesOwned().size());
-                    addInfantryToCountry(playerHashMap.get(playerId).countriesOwned.get(countrySerialNum), playerId, numOfArmies);
-                    playerHashMap.get(playerId).numberOfInfantry = playerHashMap.get(playerId).numberOfInfantry - numOfArmies;
-                }
-
+            int countrySerialNum = rand.nextInt(playerHashMap.get(playerId).getCountriesOwned().size());
+            addInfantryToCountry(playerHashMap.get(playerId).countriesOwned.get(countrySerialNum), playerId, numOfArmies);
+            playerHashMap.get(playerId).numberOfInfantry = playerHashMap.get(playerId).numberOfInfantry - numOfArmies;
         }
 
-
+    }
 
 
     /**
@@ -261,7 +318,6 @@ public class GameController {
             }
         }
     }
-
 
 
     /**
@@ -353,7 +409,7 @@ public class GameController {
                     String name = input.next();
                     System.out.println("Player " + (i + 1) + " type (human) and (aggressive) or cheater");
                     String type = input.next();
-                    Player play = new Player(i, name , type);
+                    Player play = new Player(i, name, type);
                     GameModel.PlayerList.add(play);
                     playerHashMap.put(i, play);
                 }
@@ -361,6 +417,22 @@ public class GameController {
             } else {
                 System.out.println("Please enter Valid number of players !");
             }
+        }
+    }
+
+    /**
+     * This method is used to initialise player for Tournament
+     * @param number, integer
+     * @param nameArray , String array
+     * @param typeArray, String array
+     */
+    public static void initialisePlayerForTournament(int number, String[] nameArray, String[] typeArray) {
+        GameModel.PlayerList = new ArrayList<Player>();
+        playerHashMap = new HashMap<>();
+        for (int i = 0; i < number; i++) {
+            Player play = new Player(i, nameArray[i], typeArray[i]);
+            GameModel.PlayerList.add(play);
+            playerHashMap.put(i, play);
         }
     }
 

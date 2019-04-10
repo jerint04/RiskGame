@@ -11,8 +11,8 @@ import java.util.Scanner;
 import static Model.GameModel.playerHashMap;
 
 /**
+ * Human Player class
  * @author Hemanshu
- * @date 2019-04-07
  */
 public class HumanPlayer implements Strategy {
 
@@ -91,16 +91,9 @@ public class HumanPlayer implements Strategy {
         }
     }
 
-    /**
-     * This method indicates the turn of the Player to attack
-     *
-     * @param playerId, int
-     *                  id of the player
-     */
 
     /**
      * This method show how the cards are exchanged for armies
-     *
      * @param PlayerId, id of the player
      */
     @Override
@@ -146,7 +139,6 @@ public class HumanPlayer implements Strategy {
 
     /**
      * This method indicates the turn of the Player to attack
-     *
      * @param playerId, int
      *                  id of the player
      */

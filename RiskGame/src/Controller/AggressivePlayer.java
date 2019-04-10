@@ -8,12 +8,16 @@ import java.util.*;
 import static Model.GameModel.playerHashMap;
 
 /**
+ * Aggressive Player class
  * @author Hemanshu
- * @date 2019-04-05
  */
 public class AggressivePlayer implements Strategy {
 
     @Override
+    /**
+     * This method is used to calculate army during reinforcement phase
+     * @param playerId, id of the player
+     */
     public void armyCalculationDuringReinforcement(int playerId) {
         System.out.println("Aggressive Player working fine.....");
 
@@ -58,6 +62,10 @@ public class AggressivePlayer implements Strategy {
     }
 
     @Override
+    /**
+     * This method is used to place army during reinforcement phase
+     * @param playerId, id of the player
+     */
     public void armyPlacementDuringReinforcement(int playerId) {
 //        Scanner sc = new Scanner(System.in);
         System.out.println(" Infantry for the current players is : " + playerHashMap.get(playerId).numberOfInfantry);
@@ -87,6 +95,10 @@ public class AggressivePlayer implements Strategy {
 
 
     @Override
+    /**
+     * This method is used to exchange cards for armies
+     * @param playerId, id of the player
+     */
     public void exchangeCardsForArmies(int PlayerId) {
 
 //        Scanner sc = new Scanner(System.in);
@@ -128,6 +140,10 @@ public class AggressivePlayer implements Strategy {
 
 
     @Override
+    /**
+     * This method is used to perform player attack phase
+     * @param playerId, id of the player
+     */
     public void playerAttack(int playerId) {
         Player playerView = playerHashMap.get(playerId);
         playerView.GamePhase = "Attack Phase";
@@ -209,6 +225,11 @@ public class AggressivePlayer implements Strategy {
 
 
     @Override
+    /**
+     * This method is used to perform fortification phase
+     * @param playerId, id of the player
+     * @return true, boolean
+     */
     public boolean fortificationPhase(int playerId) {
         /*TODO : Test this  Function*/
         Player play = playerHashMap.get(playerId);

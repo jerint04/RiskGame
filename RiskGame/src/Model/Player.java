@@ -142,6 +142,7 @@ public class Player extends Observable {
      *
      * @param name,     name of the player
      * @param playerId, id of the player
+     * @param playerType, type of the player
      */
     public Player(int playerId, String name, String playerType) {
         this.playerId = playerId;
@@ -480,6 +481,7 @@ public class Player extends Observable {
      * The method is used to perform fortification Phase
      *
      * @param playerId, id of the player
+     * @return true, boolean
      */
     public static boolean fortificationPhaseHumanPlayer(int playerId) {
         Player play = playerHashMap.get(playerId);
