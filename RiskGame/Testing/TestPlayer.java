@@ -68,5 +68,13 @@ public class TestPlayer {
         assertEquals(CountriesOwned, countriesOwned);
     }
 
+
+    @Test
+    public void TestPlayerType() {
+
+         String Type= player.getPlayerType();
+        assertEquals(Type, "human");
+    }
+
 }
 
