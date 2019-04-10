@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 import static Controller.GameController.*;
 import static Controller.ValidateMap.validationOfPlayersAndCountiesNumber;
-import static Model.GameModel.draw;
 
 /**
  * GameDriver Class
@@ -33,9 +32,9 @@ public class GameDriver {
         Scanner a = new Scanner(System.in);
         System.out.println("Enter 1 for Tournament and 2 for Human match");
         int mode = a.nextInt();
-        if(mode == 1){
+        if (mode == 1) {
             tournamentDriver();
-        }else {
+        } else {
             GameController.startOrLoadGame();
             GameController.initialisePlayers();
             if (validationOfPlayersAndCountiesNumber()) {
@@ -105,7 +104,7 @@ public class GameDriver {
     }
 
     /**
-     * This method is used to perform tournament Driver
+     * This method is used to start tournament mode
      */
     public static void tournamentDriver() {
         Scanner sc = new Scanner(System.in);
@@ -145,71 +144,15 @@ public class GameDriver {
         int numberOfGames = sc.nextInt();
         System.out.println("Turns Every Player get before Draw :(10 to 50) :");
         int maxTurns = sc.nextInt();
-        String[] winnerRecord = new String[mapsCount * numberOfGames];
-        int s = 0;
-        for (String map : mapName) {
-            for (int game = 0; game < numberOfGames; game++) {
-                tournamentLoadMap(map);
-                initialisePlayerForTournament(numberOfPlayers, playerName, playerType);
-                GameController.initialisationInfantry();
-                GameController.assigningCountries();
-                assigningCountriesToPlayersAuto();
-                int turn = 0;
-                draw = false;
-                GameModel.winner = "";
-                /*Logic for Turns and winner*/
-                while (checkMaxTurnsOrDeclareWinner(turn, maxTurns)) {
-                    for (int playerId : GameModel.playerHashMap.keySet()) {
-                        updatePlayerModalForWinner();
-                        if (GameModel.playerHashMap.get(playerId).alive) {
-                            if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("cheater")) {
-                                Context context = new Context(new CheaterPlayer());
-                                context.executeArmyCalculation(playerId);
-                                context.executeArmyPlacement(playerId);
-                                context.executePlayerAttack(playerId);
-                                context.executeFortificationPhase(playerId);
-                            } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("aggressive")) {
-                                Context context = new Context(new AggressivePlayer());
-                                context.executeArmyCalculation(playerId);
-                                context.executeArmyPlacement(playerId);
-                                context.executePlayerAttack(playerId);
-                                context.executeFortificationPhase(playerId);
 
-                            } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("benevolent")) {
-                                Context context = new Context(new BenevolentPlayer());
-                                context.executeArmyCalculation(playerId);
-                                context.executeArmyPlacement(playerId);
-                                context.executePlayerAttack(playerId);
-                                context.executeFortificationPhase(playerId);
-
-                            } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("random")) {
-                                Context context = new Context(new RandomPlayer());
-                                context.executeArmyCalculation(playerId);
-                                context.executeArmyPlacement(playerId);
-                                context.executePlayerAttack(playerId);
-                                context.executeFortificationPhase(playerId);
-
-                            }
-                        }
-                    }
-                    turn++;
-                }
-
-                if (!draw) {
-                    winnerRecord[s] = "Map : " + map + " Game Count:" + game + " Winner is :" + GameModel.winner;
-                    System.out.println("We have a winner"); /*TODO push this winner*/
-                } else {
-                    winnerRecord[s] = "Map : " + map + " Game Count:" + game + " Winner is : Draw";
-                    System.out.println("Its a draw"); /*TODO Push this draw*/
-                }
-                s++;
-            }
-        }
+        String[] winnerRecord = tournamentGame(mapsCount, mapName, numberOfGames, numberOfPlayers, playerName, playerType, maxTurns);
 
         System.out.println("Summary of Tournament");
-        for(int i=0; i<s;i++){
+        for (int i = 0; i < winnerRecord.length; i++) {
             System.out.println(winnerRecord[i]);
         }
 
     }
+
+
 }
