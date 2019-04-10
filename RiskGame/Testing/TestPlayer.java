@@ -43,6 +43,31 @@ public class TestPlayer {
         assertEquals("Vikram", name);
 
     }
+    @Test
+    public void TestCase3() {
+
+        boolean value = player.getShouldGetTheCard();
+        String s1 = Boolean.toString(value);
+
+        assertEquals("false", s1);
+
+    }
+
+    @Test
+    public void TestCase5() {
+
+        String name = player.getName();
+        assertEquals("Vikram", name);
+
+    }
+
+    @Test
+    public void TestCase4() {
+
+        String name = player.getName();
+        assertEquals("Vikram", name);
+
+    }
 
     @Test
     public void TestGamePhase() {
