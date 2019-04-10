@@ -136,7 +136,8 @@ public class GameDriver {
         int numberOfGames = sc.nextInt();
         System.out.println("Turns Every Player get before Draw :(10 to 50) :");
         int maxTurns = sc.nextInt();
-
+        String[] winnerRecord = new String[mapsCount * numberOfGames];
+        int s = 0;
         for (String map : mapName) {
             for (int game = 0; game < numberOfGames; game++) {
                 tournamentLoadMap(map);
@@ -180,14 +181,20 @@ public class GameDriver {
                     }
                 }
 
-                if(draw){
+                if (draw) {
+                    winnerRecord[s] = "Map : " + map + " Game Count:" + game + " Winner is :" + GameModel.winner;
                     System.out.println("We have a winner"); /*TODO push this winner*/
-                }else{
+                } else {
+                    winnerRecord[s] = "Map : " + map + " Game Count:" + game + " Winner is : Draw";
                     System.out.println("Its a draw"); /*TODO Push this draw*/
                 }
+                s++;
             }
+        }
 
-
+        System.out.println("Summary of Tournament");
+        for(int i=0; i<s;i++){
+            System.out.println(winnerRecord[i]);
         }
 
     }
