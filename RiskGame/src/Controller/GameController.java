@@ -93,6 +93,10 @@ public class GameController {
 
     }
 
+    /**
+    * Updates the Modal of the player after every turn
+    * Those player who are out of the game will be marked as false
+    * */
     public static void updatePlayerModalForWinner(){
         for (int each : playerHashMap.keySet()) {
             if (playerHashMap.get(each).countriesOwned.size() == 0) {
