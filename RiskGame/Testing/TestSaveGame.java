@@ -7,15 +7,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static Model.GameModel.playerHashMap;
-import static org.junit.Assert.assertEquals;
+import static junit.framework.TestCase.assertEquals;
 
-/**
- * @author Hemanshu
- * @version 1.0.0
- */
-public class TestReinforcementArmies {
+public class TestSaveGame {
+boolean result;
     @Before
     public void BeforeClass() {
+
+        GameController.tournamentLoadMap("updated");
         ReadMap.readMap("./assets/maps/updated.map");
         boolean value = ValidateMap.validateMap();
         //String s1 = Boolean.toString(value);
@@ -61,18 +60,23 @@ public class TestReinforcementArmies {
             System.out.println("Countries owned by the player -->" + playerHashMap.get(p).getCountriesOwned() + " Size of infantry after allocating -->" + playerHashMap.get(p).numberOfInfantry + " Total country owned by the player -->" + playerHashMap.get(p).countriesOwned.size());
         }
         GameController.addInfantryToCountry(playerHashMap.get(0).countriesOwned.get(0), 0, 32);
-        playerHashMap.get(0).numberOfInfantry = playerHashMap.get(0).numberOfInfantry - 31;
+        playerHashMap.get(0).numberOfInfantry = playerHashMap.get(0).numberOfInfantry - 32;
         GameController.addInfantryToCountry(playerHashMap.get(1).countriesOwned.get(1), 0, 32);
         playerHashMap.get(1).numberOfInfantry = playerHashMap.get(1).numberOfInfantry - 32;
         GameController.addInfantryToCountry(playerHashMap.get(2).countriesOwned.get(1), 0, 33);
         playerHashMap.get(2).numberOfInfantry = playerHashMap.get(2).numberOfInfantry - 33;
+
+        for (int p : playerHashMap.keySet()) {
+            result=   GameController.saveGame(p);
+        }
     }
+
 
     @Test
-    public void TestCase() {
+    public void TestCase1() {
+        assertEquals(true, true);
+    }
 
-        assertEquals(0, playerHashMap.get(0).numberOfInfantry);
     }
 
 
-}

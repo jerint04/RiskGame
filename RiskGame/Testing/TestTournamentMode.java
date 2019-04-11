@@ -148,5 +148,20 @@ public class TestTournamentMode {
 
     }
 
+    @Test
+    public void TestingPartSix(){
+
+        String [] name={"Roby","Vijay"};
+        String[] playerType={"random","cheater"};
+        String mapName[]={"updated"};
+
+        initialisePlayerForTournament(2,name,playerType);
+        String winner[]=tournamentGame(1, mapName,1,2,name,playerType,10);
+        System.out.println(winner[0]);
+        compareString=winner[0].contains("cheater");
+        System.out.println("cmpareString "+compareString);
+        assertEquals(true,compareString );
+
+    }
 
 }
