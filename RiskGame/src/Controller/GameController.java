@@ -3,12 +3,15 @@ package Controller;
 import Model.*;
 import View.DisplayGuiHelp;
 
-import java.io.File;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 import static Controller.CreateMapFile.createFile;
-import static Model.GameModel.draw;
-import static Model.GameModel.playerHashMap;
+import static Model.GameModel.*;
 
 /**
  * GameController class
@@ -23,6 +26,7 @@ public class GameController {
     /**
      * This method is to run the Tournament
      * It accepts all the parameters required to run the tournament
+     *
      * @return Array of string which contains the results of all the matches played
      */
     public static String[] tournamentGame(int mapsCount, String[] mapName, int numberOfGames, int numberOfPlayers, String[] playerName, String[] playerType, int maxTurns) {
@@ -78,10 +82,10 @@ public class GameController {
 
                 if (!draw) {
                     winnerRecord[s] = "Map : " + map + " Game Count:" + game + " Result: Winner is :" + GameModel.winner;
-                    System.out.println("We have a winner"); /*TODO push this winner*/
+                    System.out.println("We have a winner");
                 } else {
                     winnerRecord[s] = "Map : " + map + " Game Count:" + game + " Result: Its a Draw";
-                    System.out.println("Its a draw"); /*TODO Push this draw*/
+                    System.out.println("Its a draw");
                 }
                 s++;
             }
@@ -90,8 +94,119 @@ public class GameController {
     }
 
 
+    public static void normalGame() {
+        Scanner input = new Scanner(System.in);
+        while (checkWinner()) {
+            for (int playerId : GameModel.playerHashMap.keySet()) {
+
+                System.out.println("Do you want to save the game :(yes to save)");
+                String saveGame = input.nextLine();
+                if (saveGame.equals("yes")) {
+
+                    StringBuffer fileData = new StringBuffer();
+                    fileData.append("[Map]\r\n");
+                    fileData.append(mapname + "%");
+                    fileData.append(playerId + "\r\n");
+
+
+                    fileData.append("[PlayerInformation]\r\n");
+                    for (int playerIdNumber : GameModel.playerHashMap.keySet()) {
+                        Player playerData = GameModel.playerHashMap.get(playerIdNumber);
+//                        fileData.append("player**" + playerData.playerId + "%");
+
+                        fileData.append(playerData.getPlayerId() + "%");
+                        fileData.append(playerData.getName() + "%");
+                        fileData.append(playerData.playerType + "%");
+                        fileData.append(playerData.alive + "%");
+                        for (String names : playerData.countriesOwned) {
+                            fileData.append(names + ",");
+                        }
+                        fileData.append("%");
+                        fileData.append(playerData.numberOfInfantry + "%");
+                        fileData.append(playerData.cardBooleanValue + "%");
+                        fileData.append(playerData.turn + "%");
+                        fileData.append(playerData.armiesInExcahngeOfcards + "%");
+                        fileData.append(playerData.getShouldGetTheCard() + "\r\n");
+//                        fileData.append(playerData.infoAboutAction+);
+
+
+//                        fileData.append("continentsOwned=" + playerData.co + "%");
+//                        fileData.append("GamePhase=" +  + "%");
+                    }
+
+                    fileData.append("[CountriesInformation]\r\n");
+                    for (String country : countryHashMap.keySet()) {
+                        fileData.append(country + "=" + countryHashMap.get(country).getPlayerId() + "=" + countryHashMap.get(country).numberOfSoldiers + "%");
+                    }
+
+
+                    Path path = Paths.get("./assets/saved");
+                    BufferedWriter writer = null;
+                    try {
+                        Scanner sc = new Scanner(System.in);
+                        //Delete temporary file
+                        String currentDirectory = System.getProperty("user.dir");
+                        Path tempFilePath = Paths.get("./assets/saved/SavedFile.map");
+                        Files.deleteIfExists(tempFilePath);
+                        writer = Files.newBufferedWriter(tempFilePath, StandardCharsets.UTF_8);
+                        writer.write(new String(fileData));
+                        writer.close();
+                    } catch (Exception e) {
+                        System.out.println("Exception :" + e);
+                    }
+
+
+                }
+                updatePlayerModalForWinner();
+                if (GameModel.playerHashMap.get(playerId).alive) {
+                    if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("human")) {
+                        Context context = new Context(new HumanPlayer());
+                        System.out.println(" --------------  Player " + GameModel.playerHashMap.get(playerId).getName() + "'s Turn ----------");
+                        System.out.println("-------- Reinforcement Phase --------------");
+                        context.executeArmyCalculation(playerId);
+                        context.executeArmyPlacement(playerId);
+                        System.out.println("-------- Attack Phase --------------");
+                        context.executePlayerAttack(playerId);
+                        System.out.println("-------- Fortification Phase --------------");
+                        context.executeFortificationPhase(playerId);
+
+                    } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("cheater")) {
+                        Context context = new Context(new CheaterPlayer());
+                        context.executeArmyCalculation(playerId);
+                        context.executeArmyPlacement(playerId);
+                        context.executePlayerAttack(playerId);
+                        context.executeFortificationPhase(playerId);
+
+                    } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("aggressive")) {
+                        Context context = new Context(new AggressivePlayer());
+                        context.executeArmyCalculation(playerId);
+                        context.executeArmyPlacement(playerId);
+                        context.executePlayerAttack(playerId);
+                        context.executeFortificationPhase(playerId);
+
+                    } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("benevolent")) {
+                        Context context = new Context(new BenevolentPlayer());
+                        context.executeArmyCalculation(playerId);
+                        context.executeArmyPlacement(playerId);
+                        context.executePlayerAttack(playerId);
+                        context.executeFortificationPhase(playerId);
+
+                    } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("random")) {
+                        Context context = new Context(new RandomPlayer());
+                        context.executeArmyCalculation(playerId);
+                        context.executeArmyPlacement(playerId);
+                        context.executePlayerAttack(playerId);
+                        context.executeFortificationPhase(playerId);
+                    }
+                }
+            }
+        }
+    }
+
+
     /**
      * This method is used to check the winner of the game
+     *
      * @return true, boolean type
      */
     public static boolean checkWinner() {
@@ -125,7 +240,8 @@ public class GameController {
 
     /**
      * This method is used to check the maximum turns of the player or winner of the game
-     * @param turn , interger type
+     *
+     * @param turn    , interger type
      * @param maxTurn , integer type
      * @return true/false, boolean type
      */
@@ -158,7 +274,7 @@ public class GameController {
                 return false;
             }
             return true;
-        }else{
+        } else {
             GameModel.draw = true;
             return false;
         }
@@ -166,10 +282,10 @@ public class GameController {
     }
 
     /**
-    * Updates the Modal of the player after every turn
-    * Those player who are out of the game will be marked as false
-    * */
-    public static void updatePlayerModalForWinner(){
+     * Updates the Modal of the player after every turn
+     * Those player who are out of the game will be marked as false
+     */
+    public static void updatePlayerModalForWinner() {
         for (int each : playerHashMap.keySet()) {
             if (playerHashMap.get(each).countriesOwned.size() == 0) {
                 playerHashMap.get(each).alive = false;
@@ -195,6 +311,7 @@ public class GameController {
         }
         System.out.println("Enter the map name you want to load (Only name, without extension) :");
         String mapName = sc.nextLine();
+        mapname = mapName;
         if (ReadMap.readMap(Helper.pathName + "/" + mapName + ".map")) {
             ValidateMap.validateMap();
         } else {
@@ -209,6 +326,7 @@ public class GameController {
 
     /**
      * This method is used to load tournament map
+     *
      * @param mapName , name of the map
      */
     public static void tournamentLoadMap(String mapName) {
@@ -328,6 +446,7 @@ public class GameController {
 
     /**
      * This method is used to auto assign countries to Players
+     *
      * @param playerId, id of the player
      */
     public static void assigningCountriesToPlayersAutoCustom(int playerId) {
@@ -494,8 +613,9 @@ public class GameController {
 
     /**
      * This method is used to initialise player for Tournament
-     * @param number, integer
-     * @param nameArray , String array
+     *
+     * @param number,    integer
+     * @param nameArray  , String array
      * @param typeArray, String array
      */
     public static void initialisePlayerForTournament(int number, String[] nameArray, String[] typeArray) {
@@ -680,4 +800,76 @@ public class GameController {
     }
 
 
+    public static void loadSavedGame() {
+        try {
+            boolean readMapName = false;
+            boolean readPlayerInfo = false;
+            boolean readCountryInfo = false;
+            String filePath = "./assets/saved/SavedFile.map";
+            File file = new File(filePath);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            String readLine;
+
+            while ((readLine = bufferedReader.readLine()) != null) {
+                if (readLine.trim().length() == 0)
+                    continue;
+                else if ((readLine.trim()).equals("[Map]")) {
+                    readMapName = true;
+                    readPlayerInfo = false;
+                    readCountryInfo = false;
+                    continue;
+                } else if ((readLine.trim()).equals("[PlayerInformation]")) {
+                    readMapName = false;
+                    readPlayerInfo = true;
+                    readCountryInfo = false;
+                    continue;
+                } else if ((readLine.trim()).equals("[CountriesInformation]")) {
+                    readMapName = false;
+                    readPlayerInfo = false;
+                    readCountryInfo = true;
+                    continue;
+                }
+                if (readMapName) {
+                    String[] info = readLine.split("%");
+                    String mapName = info[0];
+                    String playerTurn = info[1];
+                    tournamentLoadMap(mapName);
+                } else if (readPlayerInfo) {
+                    String[] parsedPlayerInfo = readLine.split("%");
+                    Player a = new Player();
+                    a.playerId = Integer.parseInt(parsedPlayerInfo[0]);
+                    a.setName(parsedPlayerInfo[1]);
+                    a.playerType = parsedPlayerInfo[2];
+                    a.alive = (parsedPlayerInfo[3].equals("true") ? true : false);
+                    String countriesOwned = parsedPlayerInfo[4];
+                    a.numberOfInfantry = Integer.parseInt(parsedPlayerInfo[5]);
+                    a.cardBooleanValue = (parsedPlayerInfo[6].equals("true") ? true : false);
+                    a.turn = Integer.parseInt(parsedPlayerInfo[7]);
+                    a.armiesInExcahngeOfcards = Integer.parseInt(parsedPlayerInfo[8]);
+                    a.setShouldGetTheCard(parsedPlayerInfo[9].equals("true") ? true : false);
+//                    a.infoAboutAction = parsedPlayerInfo[10];
+                    for(String val : countriesOwned.split(",")){
+                        if (val.trim().length() != 0) {
+                            a.countriesOwned.add(val);
+                        }
+                    }
+                    playerHashMap.put(a.playerId,a);
+                } else if (readCountryInfo) {
+                    String[] parsedPlayerInfo = readLine.split("%");
+                    for (int i = 0; i < parsedPlayerInfo.length; i++) {
+                        if (parsedPlayerInfo[i].trim().length() != 0) {
+                            String[] countryDetail = parsedPlayerInfo[i].split("=");
+                            Country val = countryHashMap.get(countryDetail[0]);
+                            val.setPlayerId(Integer.parseInt(countryDetail[1]));
+                            val.setNumberOfSoldiers(Integer.parseInt(countryDetail[2]));
+                        }
+                    }
+                }
+            }
+            bufferedReader.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }

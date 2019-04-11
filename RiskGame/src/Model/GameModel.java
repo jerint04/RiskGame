@@ -28,6 +28,7 @@ public class GameModel {
 
     public static boolean draw = false;
     public static String winner = "";
+    public static String mapname="";
 
     /**
      * This method is used to re-initialize variables

@@ -1,6 +1,5 @@
 import Controller.*;
-import Model.GameModel;
-import Model.Helper;
+import Model.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,13 +27,12 @@ public class GameDriver {
      * @param args, String array
      */
     public static void main(String[] args) {
-        boolean playGame = true;
         Scanner a = new Scanner(System.in);
-        System.out.println("Enter 1 for Tournament and 2 for Human match");
+        System.out.println("Enter 1 for Tournament and 2 for Human match and 3 to Resume game :");
         int mode = a.nextInt();
         if (mode == 1) {
             tournamentDriver();
-        } else {
+        } else if (mode == 2) {
             GameController.startOrLoadGame();
             GameController.initialisePlayers();
             if (validationOfPlayersAndCountiesNumber()) {
@@ -42,66 +40,16 @@ public class GameDriver {
                 GameController.assigningCountries();
                 GameController.assigningCountriesToPlayers();
                 System.out.println("---------- Game Play Starts -------------");
-                while (checkWinner()) {
-                    for (int playerId : GameModel.playerHashMap.keySet()) {
-//                   /*Todo : this alive this*/
-                        if (GameModel.playerHashMap.get(playerId).alive) {
-                            if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("human")) {
-                                Context context = new Context(new HumanPlayer());
-                                System.out.println(" --------------  Player " + GameModel.playerHashMap.get(playerId).getName() + "'s Turn ----------");
-                                System.out.println("-------- Reinforcement Phase --------------");
-                                context.executeArmyCalculation(playerId);
-                                context.executeArmyPlacement(playerId);
-                                System.out.println("-------- Attack Phase --------------");
-                                context.executePlayerAttack(playerId);
-                                System.out.println("-------- Fortification Phase --------------");
-                                context.executeFortificationPhase(playerId);
-
-                            } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("cheater")) {
-                                Context context = new Context(new CheaterPlayer());
-                                context.executeArmyCalculation(playerId);
-                                context.executeArmyPlacement(playerId);
-                                context.executePlayerAttack(playerId);
-                                context.executeFortificationPhase(playerId);
-
-                            } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("aggressive")) {
-                                Context context = new Context(new AggressivePlayer());
-                                context.executeArmyCalculation(playerId);
-                                context.executeArmyPlacement(playerId);
-                                context.executePlayerAttack(playerId);
-                                context.executeFortificationPhase(playerId);
-
-                            } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("benevolent")) {
-                                Context context = new Context(new BenevolentPlayer());
-                                context.executeArmyCalculation(playerId);
-                                context.executeArmyPlacement(playerId);
-                                context.executePlayerAttack(playerId);
-                                context.executeFortificationPhase(playerId);
-
-                            } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("random")) {
-                                Context context = new Context(new RandomPlayer());
-                                context.executeArmyCalculation(playerId);
-                                context.executeArmyPlacement(playerId);
-                                context.executePlayerAttack(playerId);
-                                context.executeFortificationPhase(playerId);
-
-                            }
-                        }
-//                    System.out.println(" --------------  Player " + GameModel.playerHashMap.get(playerId).getName() + "'s Turn ----------");
-//                    System.out.println("-------- Reinforcement Phase --------------");
-//                    Player.armyCalculationDuringReinforcementHumanPlayer(playerId);
-//                    Player.armyPlacementDuringReinforcementHumanPlayer(playerId);
-//                    System.out.println("-------- Attack Phase --------------");
-//                    Player.playerAttackTurnHumanPlayer(playerId);
-//                    System.out.println("-------- Fortification Phase --------------");
-//                    Player.fortificationPhaseHumanPlayer(playerId);
-                    }
-                }
+                normalGame();
             } else {
                 System.out.println("Number of Countries are less than required number to start the game(number of player* 2)");
             }
+        } else if (mode == 3) {
+            loadSavedGame();
+            normalGame();
         }
     }
+
 
     /**
      * This method is used to start tournament mode
@@ -147,10 +95,12 @@ public class GameDriver {
 
         String[] winnerRecord = tournamentGame(mapsCount, mapName, numberOfGames, numberOfPlayers, playerName, playerType, maxTurns);
 
-        System.out.println("Summary of Tournament");
+        System.out.println("*******************************************************************************************");
+        System.out.println("*********************************TOURNAMENT RESULT*****************************************");
         for (int i = 0; i < winnerRecord.length; i++) {
             System.out.println(winnerRecord[i]);
         }
+        System.out.println("*******************************************************************************************");
 
     }
 
