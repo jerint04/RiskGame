@@ -45,8 +45,11 @@ public class GameDriver {
                 System.out.println("Number of Countries are less than required number to start the game(number of player* 2)");
             }
         } else if (mode == 3) {
-            loadSavedGame();
-            normalGame();
+            if (loadSavedGame()) {
+                normalGame();
+            } else {
+                System.out.println("Unable to load the saved game");
+            }
         }
     }
 

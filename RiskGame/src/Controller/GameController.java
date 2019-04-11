@@ -102,60 +102,7 @@ public class GameController {
                 System.out.println("Do you want to save the game :(yes to save)");
                 String saveGame = input.nextLine();
                 if (saveGame.equals("yes")) {
-
-                    StringBuffer fileData = new StringBuffer();
-                    fileData.append("[Map]\r\n");
-                    fileData.append(mapname + "%");
-                    fileData.append(playerId + "\r\n");
-
-
-                    fileData.append("[PlayerInformation]\r\n");
-                    for (int playerIdNumber : GameModel.playerHashMap.keySet()) {
-                        Player playerData = GameModel.playerHashMap.get(playerIdNumber);
-//                        fileData.append("player**" + playerData.playerId + "%");
-
-                        fileData.append(playerData.getPlayerId() + "%");
-                        fileData.append(playerData.getName() + "%");
-                        fileData.append(playerData.playerType + "%");
-                        fileData.append(playerData.alive + "%");
-                        for (String names : playerData.countriesOwned) {
-                            fileData.append(names + ",");
-                        }
-                        fileData.append("%");
-                        fileData.append(playerData.numberOfInfantry + "%");
-                        fileData.append(playerData.cardBooleanValue + "%");
-                        fileData.append(playerData.turn + "%");
-                        fileData.append(playerData.armiesInExcahngeOfcards + "%");
-                        fileData.append(playerData.getShouldGetTheCard() + "\r\n");
-//                        fileData.append(playerData.infoAboutAction+);
-
-
-//                        fileData.append("continentsOwned=" + playerData.co + "%");
-//                        fileData.append("GamePhase=" +  + "%");
-                    }
-
-                    fileData.append("[CountriesInformation]\r\n");
-                    for (String country : countryHashMap.keySet()) {
-                        fileData.append(country + "=" + countryHashMap.get(country).getPlayerId() + "=" + countryHashMap.get(country).numberOfSoldiers + "%");
-                    }
-
-
-                    Path path = Paths.get("./assets/saved");
-                    BufferedWriter writer = null;
-                    try {
-                        Scanner sc = new Scanner(System.in);
-                        //Delete temporary file
-                        String currentDirectory = System.getProperty("user.dir");
-                        Path tempFilePath = Paths.get("./assets/saved/SavedFile.map");
-                        Files.deleteIfExists(tempFilePath);
-                        writer = Files.newBufferedWriter(tempFilePath, StandardCharsets.UTF_8);
-                        writer.write(new String(fileData));
-                        writer.close();
-                    } catch (Exception e) {
-                        System.out.println("Exception :" + e);
-                    }
-
-
+                    saveGame(playerId);
                 }
                 updatePlayerModalForWinner();
                 if (GameModel.playerHashMap.get(playerId).alive) {
@@ -799,8 +746,12 @@ public class GameController {
         gui1.printSecondScreen(strMessageOne);
     }
 
-
-    public static void loadSavedGame() {
+    /**
+     * Resumes a saved game From the File and loads it in game memory
+     *
+     * @return boolean
+     */
+    public static boolean loadSavedGame() {
         try {
             boolean readMapName = false;
             boolean readPlayerInfo = false;
@@ -848,12 +799,12 @@ public class GameController {
                     a.armiesInExcahngeOfcards = Integer.parseInt(parsedPlayerInfo[8]);
                     a.setShouldGetTheCard(parsedPlayerInfo[9].equals("true") ? true : false);
 //                    a.infoAboutAction = parsedPlayerInfo[10];
-                    for(String val : countriesOwned.split(",")){
+                    for (String val : countriesOwned.split(",")) {
                         if (val.trim().length() != 0) {
                             a.countriesOwned.add(val);
                         }
                     }
-                    playerHashMap.put(a.playerId,a);
+                    playerHashMap.put(a.playerId, a);
                 } else if (readCountryInfo) {
                     String[] parsedPlayerInfo = readLine.split("%");
                     for (int i = 0; i < parsedPlayerInfo.length; i++) {
@@ -867,9 +818,69 @@ public class GameController {
                 }
             }
             bufferedReader.close();
+            return true;
 
         } catch (Exception e) {
             System.out.println(e);
+            return false;
+        }
+    }
+
+
+    /**
+     * Save Game Logic, Saves the game in a file , all the player and country states
+     */
+    public static void saveGame(int playerId) {
+        StringBuffer fileData = new StringBuffer();
+        fileData.append("[Map]\r\n");
+        fileData.append(mapname + "%");
+        fileData.append(playerId + "\r\n");
+
+
+        fileData.append("[PlayerInformation]\r\n");
+        for (int playerIdNumber : GameModel.playerHashMap.keySet()) {
+            Player playerData = GameModel.playerHashMap.get(playerIdNumber);
+//                        fileData.append("player**" + playerData.playerId + "%");
+
+            fileData.append(playerData.getPlayerId() + "%");
+            fileData.append(playerData.getName() + "%");
+            fileData.append(playerData.playerType + "%");
+            fileData.append(playerData.alive + "%");
+            for (String names : playerData.countriesOwned) {
+                fileData.append(names + ",");
+            }
+            fileData.append("%");
+            fileData.append(playerData.numberOfInfantry + "%");
+            fileData.append(playerData.cardBooleanValue + "%");
+            fileData.append(playerData.turn + "%");
+            fileData.append(playerData.armiesInExcahngeOfcards + "%");
+            fileData.append(playerData.getShouldGetTheCard() + "\r\n");
+//                        fileData.append(playerData.infoAboutAction+);
+
+
+//                        fileData.append("continentsOwned=" + playerData.co + "%");
+//                        fileData.append("GamePhase=" +  + "%");
+        }
+
+        fileData.append("[CountriesInformation]\r\n");
+        for (String country : countryHashMap.keySet()) {
+            fileData.append(country + "=" + countryHashMap.get(country).getPlayerId() + "=" + countryHashMap.get(country).numberOfSoldiers + "%");
+        }
+
+
+        Path path = Paths.get("./assets/saved");
+        BufferedWriter writer = null;
+        try {
+            Scanner sc = new Scanner(System.in);
+            //Delete temporary file
+            String currentDirectory = System.getProperty("user.dir");
+            Path tempFilePath = Paths.get("./assets/saved/SavedFile.map");
+            Files.deleteIfExists(tempFilePath);
+            writer = Files.newBufferedWriter(tempFilePath, StandardCharsets.UTF_8);
+            writer.write(new String(fileData));
+            writer.close();
+        } catch (Exception e) {
+            System.out.println("Exception :" + e);
         }
     }
 }
