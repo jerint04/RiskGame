@@ -46,7 +46,7 @@ public class GameDriver {
             }
         } else if (mode == 3) {
             if (loadSavedGame()) {
-                normalGame();
+                normalGameCustom(Helper.currentPlayerTurn,true);
             } else {
                 System.out.println("Unable to load the saved game");
             }

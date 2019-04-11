@@ -9,6 +9,7 @@ public class Helper {
     static int countryCountId = 0; // The count starts from 1 and not from 0.. Please pay attention to this and remember
     static  int continentCountId = 0; // The count starts from 1 and not from 0.. Please pay attention to this and remember
     public static String pathName="./assets/maps";
+    public static int currentPlayerTurn=0;
 
     /**
      * This function returns the continent ID of the continent.

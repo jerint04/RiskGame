@@ -93,7 +93,9 @@ public class GameController {
         return winnerRecord;
     }
 
-
+    /**
+     * This method Loads a Game in normal mode starting from the player 0
+     * */
     public static void normalGame() {
         Scanner input = new Scanner(System.in);
         while (checkWinner()) {
@@ -149,6 +151,77 @@ public class GameController {
             }
         }
     }
+
+    /**
+     * This method Loads a Game in Normal mode starting from the player passed in the parameter
+     * */
+    public static void normalGameCustom(int playerIdToStartWith , boolean skip) {
+        Scanner input = new Scanner(System.in);
+        while (checkWinner()) {
+            for (int playerId : GameModel.playerHashMap.keySet()) {
+
+                if(playerId == playerIdToStartWith){
+                    skip=false;
+                }
+
+                if (!skip) {
+                    System.out.println("Do you want to save the game :(yes to save)");
+                    String saveGame = input.nextLine();
+                    if (saveGame.equals("yes")) {
+                        saveGame(playerId);
+                    }
+                    updatePlayerModalForWinner();
+                    if (GameModel.playerHashMap.get(playerId).alive) {
+                        if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("human")) {
+                            Context context = new Context(new HumanPlayer());
+                            System.out.println(" --------------  Player " + GameModel.playerHashMap.get(playerId).getName() + "'s Turn ----------");
+                            System.out.println("-------- Reinforcement Phase --------------");
+                            context.executeArmyCalculation(playerId);
+                            context.executeArmyPlacement(playerId);
+                            System.out.println("-------- Attack Phase --------------");
+                            context.executePlayerAttack(playerId);
+                            System.out.println("-------- Fortification Phase --------------");
+                            context.executeFortificationPhase(playerId);
+
+                        } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("cheater")) {
+                            Context context = new Context(new CheaterPlayer());
+                            context.executeArmyCalculation(playerId);
+                            context.executeArmyPlacement(playerId);
+                            context.executePlayerAttack(playerId);
+                            context.executeFortificationPhase(playerId);
+
+                        } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("aggressive")) {
+                            Context context = new Context(new AggressivePlayer());
+                            context.executeArmyCalculation(playerId);
+                            context.executeArmyPlacement(playerId);
+                            context.executePlayerAttack(playerId);
+                            context.executeFortificationPhase(playerId);
+
+                        } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("benevolent")) {
+                            Context context = new Context(new BenevolentPlayer());
+                            context.executeArmyCalculation(playerId);
+                            context.executeArmyPlacement(playerId);
+                            context.executePlayerAttack(playerId);
+                            context.executeFortificationPhase(playerId);
+
+                        } else if (GameModel.playerHashMap.get(playerId).getPlayerType().equals("random")) {
+                            Context context = new Context(new RandomPlayer());
+                            context.executeArmyCalculation(playerId);
+                            context.executeArmyPlacement(playerId);
+                            context.executePlayerAttack(playerId);
+                            context.executeFortificationPhase(playerId);
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+
+
+
+
 
 
     /**
@@ -783,7 +856,7 @@ public class GameController {
                 if (readMapName) {
                     String[] info = readLine.split("%");
                     String mapName = info[0];
-                    String playerTurn = info[1];
+                    Helper.currentPlayerTurn = Integer.parseInt(info[1]);
                     tournamentLoadMap(mapName);
                 } else if (readPlayerInfo) {
                     String[] parsedPlayerInfo = readLine.split("%");
@@ -857,11 +930,6 @@ public class GameController {
             fileData.append(playerData.turn + "%");
             fileData.append(playerData.armiesInExcahngeOfcards + "%");
             fileData.append(playerData.getShouldGetTheCard() + "\r\n");
-//                        fileData.append(playerData.infoAboutAction+);
-
-
-//                        fileData.append("continentsOwned=" + playerData.co + "%");
-//                        fileData.append("GamePhase=" +  + "%");
         }
 
         fileData.append("[CountriesInformation]\r\n");
