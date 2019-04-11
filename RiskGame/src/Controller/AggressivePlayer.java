@@ -9,6 +9,7 @@ import static Model.GameModel.playerHashMap;
 
 /**
  * Aggressive Player class
+ *
  * @author Hemanshu
  */
 public class AggressivePlayer implements Strategy {
@@ -26,7 +27,6 @@ public class AggressivePlayer implements Strategy {
         ViewObserver VOb = new ViewObserver();
         play.addObserver(VOb);
         play.updatingObserver();
-//        Scanner sc = new Scanner(System.in);
         Player temp = playerHashMap.get(playerId);
         if (GameModel.playerHashMap.get(playerId).getShouldGetTheCard()) {
             System.out.println("Player " + playerId + " has earned the card as he Won a country in previous attack");
@@ -93,7 +93,6 @@ public class AggressivePlayer implements Strategy {
     }
 
 
-
     @Override
     /**
      * This method is used to exchange cards for armies
@@ -101,7 +100,6 @@ public class AggressivePlayer implements Strategy {
      */
     public void exchangeCardsForArmies(int PlayerId) {
 
-//        Scanner sc = new Scanner(System.in);
         Player play = playerHashMap.get(PlayerId);
         UpdateFromObserver Ob = new UpdateFromObserver();
         play.addObserver(Ob);
@@ -124,7 +122,6 @@ public class AggressivePlayer implements Strategy {
             play.updatingObserver();
 
 
-            // notifyObservers();
         } else if (play.Cards.get(cardIndexFirst).equals(play.Cards.get(cardIndexsecond)) && play.Cards.get(cardIndexFirst).equals(play.Cards.get(cardIndexThird))) {
             play.Cards.remove(cardNameFirst);
             play.Cards.remove(cardNameSecond);
@@ -134,7 +131,6 @@ public class AggressivePlayer implements Strategy {
             play.numberOfInfantry += play.armiesInExcahngeOfcards;
             play.turn++;
             play.updatingObserver();
-            //notifyObservers();
         }
     }
 
@@ -166,7 +162,6 @@ public class AggressivePlayer implements Strategy {
 
         List<String> countriesTemp = new ArrayList<>();
         HashMap<String, Integer> allCountriesAttackTo = new HashMap<String, Integer>();
-//            HashMap<String, Integer> countriesThatCanAttack = new HashMap<String, Integer>();
         boolean addCountryToOwn = false;
 
         if (GameModel.countryHashMap.get(countryWithMaxArmy).getNumberOfSoldiers() > 1) {
@@ -179,7 +174,6 @@ public class AggressivePlayer implements Strategy {
             }
         }
 
-//        TODO Test this Debug it
         if (allCountriesAttackTo.size() != 0) {
             String from = countryWithMaxArmy;
 
@@ -247,13 +241,13 @@ public class AggressivePlayer implements Strategy {
                         toAdd = true;
                     }
                 }
-                if(toAdd){
+                if (toAdd) {
                     countryToFortifyList.add(countryOwn);
                 }
             }
         }
 
-        if(countryToFortifyList.size()>0 && play.countriesOwned.size()>1) {
+        if (countryToFortifyList.size() > 0 && play.countriesOwned.size() > 1) {
             int fortifyArmy = 0;
             String countryToFortify = "";
             for (String Country : countryToFortifyList) {
