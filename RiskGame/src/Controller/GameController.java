@@ -95,7 +95,7 @@ public class GameController {
 
     /**
      * This method Loads a Game in normal mode starting from the player 0
-     * */
+     */
     public static void normalGame() {
         Scanner input = new Scanner(System.in);
         while (checkWinner()) {
@@ -154,14 +154,14 @@ public class GameController {
 
     /**
      * This method Loads a Game in Normal mode starting from the player passed in the parameter
-     * */
-    public static void normalGameCustom(int playerIdToStartWith , boolean skip) {
+     */
+    public static void normalGameCustom(int playerIdToStartWith, boolean skip) {
         Scanner input = new Scanner(System.in);
         while (checkWinner()) {
             for (int playerId : GameModel.playerHashMap.keySet()) {
 
-                if(playerId == playerIdToStartWith){
-                    skip=false;
+                if (playerId == playerIdToStartWith) {
+                    skip = false;
                 }
 
                 if (!skip) {
@@ -217,11 +217,6 @@ public class GameController {
             }
         }
     }
-
-
-
-
-
 
 
     /**

@@ -1,10 +1,9 @@
 package Controller;
 
-import Model.GameModel;
-import Model.Player;
-import Model.ViewObserver;
-
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Class Attack Phase
@@ -196,9 +195,6 @@ public class AttackPhase {
         return val;
     }
 
-//    public static void main(String[] args) {
-//        rollDice("yahoo", 10, "wow", 7);
-//    }
 
 
 }

@@ -12,6 +12,7 @@ import static Model.GameModel.playerHashMap;
 
 /**
  * Random Player class
+ *
  * @author Hemanshu
  */
 public class RandomPlayer implements Strategy {
@@ -127,7 +128,6 @@ public class RandomPlayer implements Strategy {
             play.updatingObserver();
 
 
-            // notifyObservers();
         } else if (play.Cards.get(cardIndexFirst).equals(play.Cards.get(cardIndexsecond)) && play.Cards.get(cardIndexFirst).equals(play.Cards.get(cardIndexThird))) {
             play.Cards.remove(cardNameFirst);
             play.Cards.remove(cardNameSecond);
@@ -137,7 +137,6 @@ public class RandomPlayer implements Strategy {
             play.numberOfInfantry += play.armiesInExcahngeOfcards;
             play.turn++;
             play.updatingObserver();
-            //notifyObservers();
         }
     }
 
@@ -192,7 +191,7 @@ public class RandomPlayer implements Strategy {
                         int[] remainingArmy = new int[2];
                         int a = rand.nextInt(countriesAttack.size());
                         String to = countriesAttack.get(a);
-                        int toArmy =  GameModel.countryHashMap.get(to).numberOfSoldiers;
+                        int toArmy = GameModel.countryHashMap.get(to).numberOfSoldiers;
                         remainingArmy = AttackPhase.autoRollDice(from, fromArmy, to, toArmy);
                         if (remainingArmy[0] == 0) {
                             System.out.println("Attacking Country " + from + " lost all its armies");

@@ -12,6 +12,7 @@ import static Model.GameModel.playerHashMap;
 
 /**
  * Human Player class
+ *
  * @author Hemanshu
  */
 public class HumanPlayer implements Strategy {
@@ -22,11 +23,11 @@ public class HumanPlayer implements Strategy {
      * @param playerId, id of the player
      */
     @Override
-    public  void armyCalculationDuringReinforcement(int playerId) {
+    public void armyCalculationDuringReinforcement(int playerId) {
         System.out.println("Human Player working fine.....");
         Player play = playerHashMap.get(playerId);
         play.GamePhase = "Reinforcement";
-        play.infoAboutAction="example";
+        play.infoAboutAction = "example";
         ViewObserver VOb = new ViewObserver();
         play.addObserver(VOb);
         play.updatingObserver();
@@ -48,7 +49,7 @@ public class HumanPlayer implements Strategy {
             }
         }
 
-        play.infoAboutAction = "Player has total of "+  playerHashMap.get(playerId).numberOfInfantry +" soldiers";
+        play.infoAboutAction = "Player has total of " + playerHashMap.get(playerId).numberOfInfantry + " soldiers";
         play.addObserver(VOb);
         play.updatingObserver();
 
@@ -77,7 +78,7 @@ public class HumanPlayer implements Strategy {
      * @param playerId, id of the player
      */
     @Override
-    public  void armyPlacementDuringReinforcement(int playerId) {
+    public void armyPlacementDuringReinforcement(int playerId) {
         Scanner sc = new Scanner(System.in);
         System.out.println(" Infantry for the current players is : " + playerHashMap.get(playerId).numberOfInfantry);
 
@@ -99,10 +100,11 @@ public class HumanPlayer implements Strategy {
 
     /**
      * This method show how the cards are exchanged for armies
+     *
      * @param PlayerId, id of the player
      */
     @Override
-    public  void exchangeCardsForArmies(int PlayerId) {
+    public void exchangeCardsForArmies(int PlayerId) {
 
         Scanner sc = new Scanner(System.in);
         Player play = playerHashMap.get(PlayerId);
@@ -127,7 +129,6 @@ public class HumanPlayer implements Strategy {
             play.updatingObserver();
 
 
-            // notifyObservers();
         } else if (play.Cards.get(cardIndexFirst).equals(play.Cards.get(cardIndexsecond)) && play.Cards.get(cardIndexFirst).equals(play.Cards.get(cardIndexThird))) {
             play.Cards.remove(cardNameFirst);
             play.Cards.remove(cardNameSecond);
@@ -137,18 +138,18 @@ public class HumanPlayer implements Strategy {
             play.numberOfInfantry += play.armiesInExcahngeOfcards;
             play.turn++;
             play.updatingObserver();
-            //notifyObservers();
         }
     }
 
 
     /**
      * This method indicates the turn of the Player to attack
+     *
      * @param playerId, int
      *                  id of the player
      */
     @Override
-    public  void playerAttack(int playerId) {
+    public void playerAttack(int playerId) {
         Player playerView = playerHashMap.get(playerId);
         playerView.GamePhase = "Attack Phase";
         ViewObserver VOb = new ViewObserver();
@@ -257,10 +258,10 @@ public class HumanPlayer implements Strategy {
      * @param playerId, id of the player
      */
     @Override
-    public  boolean fortificationPhase(int playerId) {
+    public boolean fortificationPhase(int playerId) {
         Player play = playerHashMap.get(playerId);
-        String countryFrom="";
-        String countryTo="";
+        String countryFrom = "";
+        String countryTo = "";
         play.GamePhase = "Fortification";
         //play.infoAboutAction="example";
         ViewObserver VOb = new ViewObserver();
@@ -279,7 +280,7 @@ public class HumanPlayer implements Strategy {
             while (temp) {
                 System.out.println("Enter Country Name to move from:");
                 a.nextLine();
-                 countryFrom = a.nextLine();
+                countryFrom = a.nextLine();
 
                 List<String> toCountriesList = new ArrayList<>();
                 toCountriesList = GameController.dfsToFindNeighbouringCountryForPlayer(GameModel.countryHashMap.get(countryFrom), playerHashMap.get(playerId));
@@ -302,7 +303,7 @@ public class HumanPlayer implements Strategy {
                 }
             }
 
-            play.infoAboutAction=" Player moves army from country "+countryFrom + "to country "+countryTo;
+            play.infoAboutAction = " Player moves army from country " + countryFrom + "to country " + countryTo;
             play.addObserver(VOb);
             play.updatingObserver();
             System.out.println("Updated List After Fortification");

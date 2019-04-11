@@ -10,6 +10,7 @@ import static Model.GameModel.playerHashMap;
 
 /**
  * Cheater Player class
+ *
  * @author Hemanshu
  */
 public class CheaterPlayer implements Strategy {
@@ -26,7 +27,6 @@ public class CheaterPlayer implements Strategy {
         ViewObserver VOb = new ViewObserver();
         play.addObserver(VOb);
         play.updatingObserver();
-//        Scanner sc = new Scanner(System.in);
         Player temp = playerHashMap.get(playerId);
         if (GameModel.playerHashMap.get(playerId).getShouldGetTheCard()) {
             System.out.println("Player " + playerId + " has earned the card as he Won a country in previous attack");
@@ -72,7 +72,7 @@ public class CheaterPlayer implements Strategy {
             GameModel.countryHashMap.get(countryName).numberOfSoldiers = GameModel.countryHashMap.get(countryName).numberOfSoldiers * 2;
 
         }
-        for (String countryName :playerHashMap.get(playerId).getCountriesOwned()) {
+        for (String countryName : playerHashMap.get(playerId).getCountriesOwned()) {
 
             System.out.println("number of soldier:" + GameModel.countryHashMap.get(countryName).numberOfSoldiers);
         }
@@ -110,7 +110,6 @@ public class CheaterPlayer implements Strategy {
             play.updatingObserver();
 
 
-            // notifyObservers();
         } else if (play.Cards.get(cardIndexFirst).equals(play.Cards.get(cardIndexsecond)) && play.Cards.get(cardIndexFirst).equals(play.Cards.get(cardIndexThird))) {
             play.Cards.remove(cardNameFirst);
             play.Cards.remove(cardNameSecond);
@@ -120,7 +119,6 @@ public class CheaterPlayer implements Strategy {
             play.numberOfInfantry += play.armiesInExcahngeOfcards;
             play.turn++;
             play.updatingObserver();
-            //notifyObservers();
         }
     }
 
@@ -133,7 +131,7 @@ public class CheaterPlayer implements Strategy {
     public void playerAttack(int playerId) {
 
         List<String> countriesOwnedab = new ArrayList<>();
-        countriesOwnedab  = playerHashMap.get(playerId).getCountriesOwned();
+        countriesOwnedab = playerHashMap.get(playerId).getCountriesOwned();
         List<String> countriesToAdd = new ArrayList<>();
 //        List<String> countryToAdd =
         for (String Country : countriesOwnedab) {

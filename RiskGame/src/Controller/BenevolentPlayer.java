@@ -4,13 +4,13 @@ import Model.*;
 import View.PlayerDominationObserverView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import static Model.GameModel.playerHashMap;
 
 /**
  * Benevolent Player Class
+ *
  * @author Hemanshu
  */
 public class BenevolentPlayer implements Strategy {
@@ -29,7 +29,6 @@ public class BenevolentPlayer implements Strategy {
         ViewObserver VOb = new ViewObserver();
         play.addObserver(VOb);
         play.updatingObserver();
-//        Scanner sc = new Scanner(System.in);
         Player temp = playerHashMap.get(playerId);
         if (GameModel.playerHashMap.get(playerId).getShouldGetTheCard()) {
             System.out.println("Player " + playerId + " has earned the card as he Won a country in previous attack");
@@ -71,7 +70,6 @@ public class BenevolentPlayer implements Strategy {
      * @param playerId, id of the player
      */
     public void armyPlacementDuringReinforcement(int playerId) {
-//        Scanner sc = new Scanner(System.in);
         System.out.println(" Infantry for the current players is : " + playerHashMap.get(playerId).numberOfInfantry);
 
         while (playerHashMap.get(playerId).numberOfInfantry != 0) {
@@ -104,7 +102,6 @@ public class BenevolentPlayer implements Strategy {
      */
     public void exchangeCardsForArmies(int PlayerId) {
 
-//        Scanner sc = new Scanner(System.in);
         Player play = playerHashMap.get(PlayerId);
         UpdateFromObserver Ob = new UpdateFromObserver();
         play.addObserver(Ob);
@@ -127,7 +124,6 @@ public class BenevolentPlayer implements Strategy {
             play.updatingObserver();
 
 
-            // notifyObservers();
         } else if (play.Cards.get(cardIndexFirst).equals(play.Cards.get(cardIndexsecond)) && play.Cards.get(cardIndexFirst).equals(play.Cards.get(cardIndexThird))) {
             play.Cards.remove(cardNameFirst);
             play.Cards.remove(cardNameSecond);
@@ -137,7 +133,6 @@ public class BenevolentPlayer implements Strategy {
             play.numberOfInfantry += play.armiesInExcahngeOfcards;
             play.turn++;
             play.updatingObserver();
-            //notifyObservers();
         }
     }
 
@@ -200,8 +195,8 @@ public class BenevolentPlayer implements Strategy {
         }
 
         int transferFrom = GameModel.countryHashMap.get(countryWithMaxArmy).numberOfSoldiers;
-        GameModel.countryHashMap.get(countryWithMinimumArmy).numberOfSoldiers += (int)(transferFrom/2);
-        GameModel.countryHashMap.get(countryWithMaxArmy).numberOfSoldiers = GameModel.countryHashMap.get(countryWithMaxArmy).numberOfSoldiers - (int)(transferFrom/2);
+        GameModel.countryHashMap.get(countryWithMinimumArmy).numberOfSoldiers += (int) (transferFrom / 2);
+        GameModel.countryHashMap.get(countryWithMaxArmy).numberOfSoldiers = GameModel.countryHashMap.get(countryWithMaxArmy).numberOfSoldiers - (int) (transferFrom / 2);
         return true;
     }
 
