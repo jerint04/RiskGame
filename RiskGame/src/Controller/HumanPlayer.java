@@ -26,6 +26,7 @@ public class HumanPlayer implements Strategy {
         System.out.println("Human Player working fine.....");
         Player play = playerHashMap.get(playerId);
         play.GamePhase = "Reinforcement";
+        play.infoAboutAction="example";
         ViewObserver VOb = new ViewObserver();
         play.addObserver(VOb);
         play.updatingObserver();
@@ -46,6 +47,10 @@ public class HumanPlayer implements Strategy {
                 playerHashMap.get(playerId).numberOfInfantry = +tempContinent.controlValue;
             }
         }
+
+        play.infoAboutAction = "Player has total of "+  playerHashMap.get(playerId).numberOfInfantry +" soldiers";
+        play.addObserver(VOb);
+        play.updatingObserver();
 
         if (temp.Cards.size() == 3) {
 
@@ -254,7 +259,10 @@ public class HumanPlayer implements Strategy {
     @Override
     public  boolean fortificationPhase(int playerId) {
         Player play = playerHashMap.get(playerId);
+        String countryFrom="";
+        String countryTo="";
         play.GamePhase = "Fortification";
+        //play.infoAboutAction="example";
         ViewObserver VOb = new ViewObserver();
         play.addObserver(VOb);
         play.updatingObserver();
@@ -271,8 +279,8 @@ public class HumanPlayer implements Strategy {
             while (temp) {
                 System.out.println("Enter Country Name to move from:");
                 a.nextLine();
-                String countryFrom = a.nextLine();
-                String countryTo;
+                 countryFrom = a.nextLine();
+
                 List<String> toCountriesList = new ArrayList<>();
                 toCountriesList = GameController.dfsToFindNeighbouringCountryForPlayer(GameModel.countryHashMap.get(countryFrom), playerHashMap.get(playerId));
                 if (toCountriesList.size() != 1) {
@@ -293,6 +301,10 @@ public class HumanPlayer implements Strategy {
                     System.out.println("The Countries do not have any Adjacent country, Please Select other Country :");
                 }
             }
+
+            play.infoAboutAction=" Player moves army from country "+countryFrom + "to country "+countryTo;
+            play.addObserver(VOb);
+            play.updatingObserver();
             System.out.println("Updated List After Fortification");
             for (String countryName : GameModel.countryHashMap.keySet()) {
                 if (GameModel.countryHashMap.get(countryName).getPlayerId() == playerId) {
