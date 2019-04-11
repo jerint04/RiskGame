@@ -16,25 +16,34 @@ public class TestHelper {
 
     @Before
     public void BeforeTestCase() {
-        setContinentCountId(7);
-        setCountryCountId(45);
+
+
 
 
     }
+
 
     @Test
     public void TestCase1() {
+        setContinentCountId(7);
+    }
+    @Test
+    public void TestCase2() {
         continents = getContinentCountId();
         assertEquals(7, continents);
     }
+    @Test
+    public void TestCase3() {
+        setCountryCountId(45);
+    }
+
 
     @Test
-    public void TestCase2() {
+    public void TestCase4() {
         countries = getCountryCountId();
         assertEquals(45, countries);
     }
 
-
-}
+    }
 
 

@@ -61,6 +61,12 @@ public class TestContinent {
 
 
     @Test
+    public void TestSetContinentName() {
+
+       continent.setContinentName("Asia");
+    }
+
+    @Test
     public void TestGetContinentName() {
 
         String name = continent.getContinentName();
