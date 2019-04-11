@@ -829,8 +829,10 @@ public class GameController {
 
     /**
      * Save Game Logic, Saves the game in a file , all the player and country states
+     *
+     * @return boolean , if the map is saved successfully return true else false
      */
-    public static void saveGame(int playerId) {
+    public static boolean saveGame(int playerId) {
         StringBuffer fileData = new StringBuffer();
         fileData.append("[Map]\r\n");
         fileData.append(mapname + "%");
@@ -879,8 +881,10 @@ public class GameController {
             writer = Files.newBufferedWriter(tempFilePath, StandardCharsets.UTF_8);
             writer.write(new String(fileData));
             writer.close();
+            return true;
         } catch (Exception e) {
             System.out.println("Exception :" + e);
+            return false;
         }
     }
 }
